@@ -1,21 +1,62 @@
-(function() {
+$(document).ready(function(){
+
+	$(window).resize(function(){
+		var cnt_hig = $(window).height();
+		var nav_hig = $(".nav").height();
+		//$(window).width() <= 768 
+		if (window.matchMedia('(max-width: 768px)').matches) {
+			$(".cnt").css({"min-height" : cnt_hig});
+		} else {
+			$(".cnt").css({"min-height" : cnt_hig})
+		}
+	}).resize();
+
+
+	$(window).scroll(function(){
+		$(".lst_nav li").each(function(idx){
+
+			if ( parseInt($(window).scrollTop()) >= parseInt($(".cnt").eq(idx).offset().top) ) {
+				$(this).addClass("on").siblings().removeClass();
+			}
+		// $(".cnt").eq(idx).text(parseInt($(".cnt").eq(idx).offset().top));
+		// $(".view").html(parseInt($(window).scrollTop()));
+		});
+	});
+		
+	$(".nav ul li a").click(function(){
+		event.preventDefault();
+		$("html").animate({scrollTop:$(this.hash).offset().top},300,"linear",function(){
+			$(this).parent().addClass("on").siblings().removeClass();
+		});		
+	});
+
+
+
+// $(".movetab li a").click(function(event){
+// event.preventDefault();
+// $('html,body').animate({scrollTop:$(this.hash).offset().top}, "slow");
+// });
+
+
 
     var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
 
     // Main
-    initHeader();
-    initAnimation();
-    addListeners();
+    //initHeader();
+   // initAnimation();
+   // addListeners();
 
     function initHeader() {
-        width = window.innerWidth;
-        height = window.innerHeight;
+        width = $(".cnt_skill").innerWidth();
+        height = $(".cnt_skill").innerHeight();
+        // width = window.innerWidth;
+        // height = window.innerHeight;
         target = {x: width/2, y: height/2};
 
-        largeHeader = document.getElementById('large-header');
+        largeHeader = document.getElementById('wrap_canvas');
         largeHeader.style.height = height+'px';
 
-        canvas = document.getElementById('demo-canvas');
+        canvas = document.getElementById('canvas');
         canvas.width = width;
         canvas.height = height;
         ctx = canvas.getContext('2d');
@@ -80,13 +121,19 @@
     function mouseMove(e) {
         var posx = posy = 0;
         if (e.pageX || e.pageY) {
-            posx = e.pageX;
-            posy = e.pageY;
+            // posx = e.offsetX;
+            // posy = e.offsetY;
+            posx = e.clientX;
+            posy = e.clientY;
         }
-        else if (e.clientX || e.clientY)    {
-            posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-            posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-        }
+        // if (e.pageX || e.pageY) {
+        //     posx = e.pageX;
+        //     posy = e.pageY;
+        // }
+        // else if (e.clientX || e.clientY)    {
+        //     posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        //     posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        // }
         target.x = posx;
         target.y = posy;
     }
@@ -97,8 +144,10 @@
     }
 
     function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
+        // width = window.innerWidth;
+        // height = window.innerHeight;
+        width = $(".cnt_skill").innerWidth();
+        height = $(".cnt_skill").innerHeight();
         largeHeader.style.height = height+'px';
         canvas.width = width;
         canvas.height = height;

@@ -2,22 +2,55 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	
+	<title>test portfolio</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700" rel="stylesheet">
+
 </head>
 <body>
-
-<div class="container demo-1">
-	<div class="content">
-		<div id="large-header" class="large-header" style="height: 743px;">
-			<canvas id="demo-canvas" width="767" height="743"></canvas>
-			<h1 class="main-title">Connect <span class="thin">Three</span></h1>
+	<div class="wrap">
+		<div class="view" style="position:fixed; top:20px; left:0; font-size:30px; z-index: 10"></div>
+		<div class="container">
+			<div class="cnt cnt_about" id="n1">
+				<div class="chr_body">
+					<img src="img/body2.pn" alt="" class="img_body">
+				</div>
+				<div class="chr_info">
+					<img src="img/head.png" alt="" class="img_head">
+					<dl>
+						<dt>Blank</dt>
+						<dd>male / 2600</dd>
+						<dd>블라브라블라븗라브랍브랍르바릅를라블라블라블라브라블라븗라브랍브랍르바릅를라블라블라</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="cnt cnt_skill" id="n2">
+				<div id="wrap_canvas" class="large-header">
+					<canvas id="canvas"></canvas>
+					skill
+				</div>
+			</div>
+			<div class="cnt cnt_port" id="n3">portfolio
+				http://sweetdolphin.tistory.com/entry/
+			</div>
+		</div>
+		<div class="nav">
+			<ul class="lst_nav">
+				<li class="on">
+					<a href="#n1" class="lnk">about me</a>
+				</li>
+				<li class="">
+					<a href="#n2" class="lnk">skill</a>
+				</li>
+				<li class="">
+					<a href="#n3" class="lnk">portfolio</a>
+				</li>
+			</ul>
 		</div>
 	</div>
-</div>
-<script type="text/javascript" src="js/demo1.js"></script>
-
+<script type="text/javascript" src="js/ui.js"></script>
+<script src="js/TweenLite.min.js"></script>
+<script src="js/EasePack.min.js"></script>
 </body>
 </html>
