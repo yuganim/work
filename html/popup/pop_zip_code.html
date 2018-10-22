@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('ul.tabs li').click(function(){
+  var tab_id = $(this).attr('data-tab');
+
+  $('ul.tabs li').removeClass('current');
+  $('.tab-content').removeClass('current');
+
+  $(this).addClass('current');
+  $("#"+tab_id).addClass('current');
+})
+
+})
+</script>
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>우편번호 찾기</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+				<div class="popup_info">
+					<!--Tab menu-->
+					<ul class="tabs">
+				    	<li class="tab-link current" data-tab="tab-1">지번검색</li>
+				    	<li class="tab-link" data-tab="tab-2">도로명검색</li>
+				  	</ul>
+					<!--//Tab menu-->
+					<div id="tab-1" class="tab-content current">
+						<p>동(읍/면/리)를 입력해주세요(예:도곡동, 동산면)</p>
+						<input class="ipt size_sml" type="text" placeholder="">
+						<button class="btn btn_grn size_sml">검색</button>
+						<div class="result_area">검색결과가 없습니다.</div>
+					</div>
+					<div id="tab-2" class="tab-content">
+						<p>도로명을 입력해주세요(예:서오릉로)</p>
+						<input class="ipt size_sml" type="text" placeholder="">
+						<button class="btn btn_grn size_sml">검색</button>
+						<div class="result_area">검색결과가 없습니다.</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- 하단버튼 -->
+			<div class="btns">
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<header class="wrap_gnb">
+		<nav class="gnbbar">
+			<a class="brand" href="#">ADMIN</a>
+			<span class="user"><strong>"티웨이에"</strong>님(IP:129.000.000.00)</span>
+			<button class="btn_menu" type="button">
+				<span class="bars">
+					<span class="bar_line line1"></span>
+					<span class="bar_line line2"></span>
+					<span class="bar_line line3"></span>
+				</span>
+			</button>
+			<form class="form_btns">
+				<button type="button" class="btn btn_white">로그아웃</button>
+				<button type="button" class="btn">사용자정보</button>
+			</form>
+		</nav>
+		<nav class="gnb">
+			<ul class="lst_gnb">
+				<li class="nav_item active">
+					<p class="depth1"><a href="#">부가서비스관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li class="on">
+							<p class="depth2"><a href="#">SSR관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3 on"><a href="#">SSR관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">번들관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">번들관리</a></p>
+								<p class="depth3"><a href="#">번들 판매 제외관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">기내식관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">기내식관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">수하물관리</a></p>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">사전좌석관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">좌석배치도 관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">사전좌석요금관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">사전좌석요금관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">운임관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">운임관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운임관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">운임규정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운임규정관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#"">노선관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">언어지역관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">언어지역관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">통화관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">통화관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">국가관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">국가관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">도시관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">도시관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공항관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공항관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">노선관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">노선관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">프로모션관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">이벤트관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">이벤트관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">메인배너관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메인배너관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">APP인트로관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">APP인트로관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">결제수단관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">결제수단관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">쿠폰관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">쿠폰관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">쿠폰관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">쿠폰사용제한기간</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">쿠폰사용제한기간</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">고객센터</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">고객문의</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">고객문의</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">제휴문의</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">제휴문의</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">Ustory</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">Ustory</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">FAQ</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">FAQ</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">유실물찾기</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">유실물찾기</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">서식자료관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">서식자료관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">게시판필터링</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">게시판필터링</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">공지관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">공지사항</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공지사항</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">띠배너관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">띠배너관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">투자정보관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">투자정보관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">규정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">규정관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">광고홍보영상</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">광고홍보영상</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">기내지</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">기내지</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">보도자료</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">보도자료</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">콘텐츠관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">공항카운터관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공항카운터관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">콘텐츠관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">콘텐츠관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">파일업로드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">파일업로드</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">UMS탬플릿</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">UMS탬플릿</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">운항스케줄</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운항스케줄</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">다국어캘린더</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">다국어캘린더</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">회원관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">회원관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">예약내역</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">예약내역</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">PNR이력조회</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">PNR이력조회</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">예매확인증발송</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">예매확인증발송</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">접속통계</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">회원통계</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원통계</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">방문자통계</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">방문자통계</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">티에이전시관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">환불요청</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">환불요청</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">현금영수증발급</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">현금영수증발급</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">문의/요청</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">문의/요청</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공지관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공지관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">여행사</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">여행사</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">Queue코드관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">Queue코드관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">SSM관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">SSM관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">시스템관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">메뉴관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메뉴관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">폐쇄망IP관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">폐쇄망IP관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">결제수단설정</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">결제수단설정</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">메모리(RELOAD)</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메모리(RELOAD)</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">배치관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">배치관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">에러이력조회</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">에러이력조회</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">AgentBookingAPI</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">AgentBookingAPI</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">시스템코드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">시스템코드</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">회원ID필터링</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원ID필터링</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">회원정보조회이력</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원정보조회이력</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공통코드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공통코드</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">어드민관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">계정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">계정관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">그룹권한관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">그룹권한관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">부서관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">부서관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<div class="wrap_lnb">
+			<div class="area_tit">
+				<button class="btn_menu" type="button">
+					<span class="bars">
+						<span class="bar_line line1"></span>
+						<span class="bar_line line2"></span>
+						<span class="bar_line line3"></span>
+					</span>
+				</button>
+				시스템관리
+			</div>
+			<div class="lnb">
+				<ul class="lst_lnb">
+					<li class="nav_item active">
+						<p class="depth1"><a href="#">depth1</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+						<dl>
+							<dt><a href="#">depth2</a></dt>
+							<dd><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+					</li>
+					<li class="nav_item">
+						<p class="depth1"><a href="#">depth1</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+					</li>
+					<li class="nav_item">
+						<p class="depth1"><a href="#">Agency Booking API</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+						<dl>
+							<dt><a href="#">Agency Booking API</a></dt>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 컨텐츠 영역 -->
+		<div class="contents">
+			<div class="tit_area">
+				<h2 class="tit_point">공지사항</h2>
+				<p class="nav_history">
+					<span><a href="#">ADMIN</a></span>
+					<span><a href="#">공지사항</a></span>
+					<span><a href="#">공지사항</a></span>
+				</p>
+			</div>
+			<div class="cnt_area">
+				<!-- 상단 컨텐츠 영역 -->
+				<section>
+					<div class="info_area">
+                        <table class="info_list bt_dg">
+                            <caption></caption>
+                            <colgroup>
+                                <col width="165px"/>
+                                <col width=""/>
+                            </colgroup>
+                            <tbody>
+                            	<tr>
+                                    <th>공지유형</th>
+                                    <td colspan="3">
+                                    	<div class="lbl_units">
+											<input type="radio" name="rdio" id="rdio1" class="radio" checked="true"><label for="rdio1" class="lbl_rdio">전체</label>
+											<input type="radio" name="rdio" id="rdio2" class="radio"><label for="rdio2" class="lbl_rdio">일반</label>
+											<input type="radio" name="rdio" id="rdio3" class="radio"><label for="rdio3" class="lbl_rdio">비정상운항</label>
+											<input type="radio" name="rdio" id="rdio4" class="radio"><label for="rdio4" class="lbl_rdio">유류할증료</label>
+											<input type="radio" name="rdio" id="rdio5" class="radio"><label for="rdio5" class="lbl_rdio">이벤트당첨자</label>
+										</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>제목</th>
+                                    <td colspan="3">
+                                    	<input class="ipt size_sml" type="text" style="width:60%;" placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>전시여부</th>
+                                    <td colspan="3">
+                                    	<div class="lbl_units">
+											<input type="radio" name="rdio1" id="rdio6" class="radio" checked="true"><label for="rdio6" class="lbl_rdio">전체</label>
+											<input type="radio" name="rdio1" id="rdio7" class="radio"><label for="rdio7" class="lbl_rdio">Y</label>
+											<input type="radio" name="rdio1" id="rdio8" class="radio"><label for="rdio8" class="lbl_rdio">N</label>
+										</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>지역언어구분</th>
+                                    <td colspan="3">
+                                    	<div class="lbl_wrap">
+											<div class="lbl_all">
+												<input class="chk" id="chk0" type="checkbox" checked="true"><label for="chk0" class="lbl_chk">전체</label>
+											</div>
+											<div class="lbl_units">
+												<input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">대한민국-한국어</label>
+												<input class="chk" id="chk2" type="checkbox" checked="true"><label for="chk2" class="lbl_chk">괌/사이판-영어</label>
+												<input class="chk" id="chk3" type="checkbox" checked="true"><label for="chk3" class="lbl_chk">일본-일본어</label>
+												<input class="chk" id="chk4" type="checkbox" checked="true"><label for="chk4" class="lbl_chk">중국-중국어(간체)</label>
+												<input class="chk" id="chk5" type="checkbox" checked="true"><label for="chk5" class="lbl_chk cr_b">중국-중국어(번체)</label>
+												<input class="chk" id="chk6" type="checkbox" checked="true"><label for="chk6" class="lbl_chk">태국-태국어</label>
+												<input class="chk" id="chk7" type="checkbox" checked="true"><label for="chk7" class="lbl_chk">러시아-러시아어</label>
+												<input class="chk" id="chk8" type="checkbox" checked="true"><label for="chk8" class="lbl_chk">베트남-베트남어</label>
+											</div>
+										</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+					<div class="btns">
+						<div class="f_rig">
+							<button class="btn btn_grn size_nor">검색</button>
+							<button class="btn size_nor">초기화</button>
+						</div>
+					</div>
+				</section>
+				<!-- 상단 컨텐츠 영역 -->
+
+				<!-- 하단 리스트 영역 -->
+				<section class="list">
+					<div class="tbl_info">
+						<div class="f_lft">
+							<select class="select size_nor">
+								<option>15개씩</option>
+								<option>30개씩</option>
+								<option>50개씩</option>
+							</select>
+							<span class="select_info">(총 200건, 총6건)</span>
+						</div>
+						<div class="f_rig"><button class="btn btn_red size_nor">등록</button></div>
+					</div>
+					<table class="tbl">
+						<colgroup>
+							<col width="4%">
+							<col width="10%">
+							<col width="12%">
+							<col width="12%">
+							<col width="8%">
+							<col width="8%">
+							<col width="18%">
+							<col width="18%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>공지유형</th>
+								<th>제목</th>
+								<th>지역언어구분</th>
+								<th>조회수</th>
+								<th>전시여부</th>
+								<th>등록</th>
+								<th>수정</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 검색 결과가 없는 경우 -->
+							<tr>
+								<td colspan="8">검색된 데이터가 없습니다.</td> 
+							</tr>
+							<!-- 검색 결과가 있는 경우 -->
+							<tr>
+								<td>공지</td> 
+								<td>비정상운항</td>
+								<td><a href="#">운항스케줄 변경안내</a></td>
+								<td>대한민국-한국어</td>
+								<td>100</td>
+								<td>Y</td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+							</tr>
+							<tr>
+								<td>2</td> 
+								<td>유류할증료</td>
+								<td><a href="#">`18 1월 유류할증료</a></td>
+								<td>대한민국-한국어</td>
+								<td>100</td>
+								<td>Y</td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+							</tr>
+							<tr>
+								<td>1</td> 
+								<td>이벤트당첨자</td>
+								<td><a href="#">当選者発表</a></td>
+								<td>일본-일본어</td>
+								<td>100</td>
+								<td>Y</td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+								<td>YYYY-MM-DD HH:MM:SS<p>adm*****</p></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="tbl_info">
+						<div class="f_lft">
+							<div class="paging">
+								<a href="#" class="prev">«</a>
+								<a href="#">1</a>
+								<strong>2</strong>
+								<a href="#">3</a>
+								<a href="#" class="next">»</a>
+							</div>
+						</div>
+						<div class="f_rig"><button class="btn btn_red size_big">등록</button></div>
+					</div>
+				</section>
+				<!-- //하단 리스트 영역 -->
+			</div>
+		</div>
+		<!-- //컨텐츠 영역 -->
+	</div> 
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body class="login">
+	<div class="login_area" style="width:1000px">
+		<h2>관리자 계정발급 신청</h2>
+		<section>
+			<table class="info_list bt_dg">
+				<caption></caption>
+				<colgroup>
+					<col width="165px"/>
+					<col width=""/>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>사번</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:200px;" placeholder="">
+							<p class="msg"><span>사번을 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:200px;" placeholder="">
+							<p class="msg"><span>이름을 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>아이디</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:200px;" placeholder="">
+							<p class="msg"><span>아이디를 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>회사 이메일</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:200px;" placeholder="">
+							<lable class="lable">@ twayair.com</lable>
+							<p class="msg"><span>회사 이메일을 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>부서명</th>
+						<td>
+							<button class="btn size_sml btn_lgry">검색</button>
+							<input class="ipt size_sml" type="text" style="width:200px;" placeholder="">
+						</td>
+					</tr>
+					<tr>
+						<th>휴대폰</th>
+						<td>
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;"> -
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;"> -
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;">
+							<p class="msg"><span>휴대폰 번호를 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td>
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;"> -
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;"> -
+							<input class="ipt size_sml" type="text" placeholder="" style="width:100px;">
+							<p class="msg"><span>전화 번호를 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>비밀번호 입력</th>
+						<td>
+							<input class="ipt size_sml" type="password" style="width:200px;" placeholder="">
+							<p class="msg"><span>영문, 숫자, 특수문자 중 2종류 이상 조합하여 최소 10자리 이상 또는 3종류 이상 조합하여 최소 8자리 이상의 길이로 작성하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>비밀번호 확인</th>
+						<td>
+							<input class="ipt size_sml" type="password" style="width:200px;" placeholder="">
+							<p class="msg"><span>변경할 비밀번호화 비밀번호 확인이 일치하지 않습니다.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>요청사유</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:100%;" placeholder="">
+							<p class="msg"><span>요청 사유를 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>요청권한</th>
+						<td>
+							<input class="ipt size_sml" type="text" style="width:100%;" placeholder="">
+							<p class="msg"><span>요청 권한을 입력하세요.</span></p>
+						</td>
+					</tr>
+					<tr>
+						<th>고객서비스 담당여부</th>
+						<td>
+							<select class="select size_sml">
+								<option>N</option>
+								<option>Y</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<div class="btns">
+			<button class="btn size_big" onclick="alert('정말 취소하시겠습니까?')">취소</button>
+			<button class="btn btn_grn size_big" onclick="alert('해당 내용으로 신청 하시겠습니까?')">계정신청</button>
+		</div>
+	</div> 
+</body>
+</html>

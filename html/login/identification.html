@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body class="login">
+	<div class="login_area">
+		<h2>잘못된 접근으로 인한 본인 확인</h2>
+		<div class="cnt_login1 ta_c">
+			<ul class="id_ipt">
+				<li>이메일 본인 인증</li>
+				<li><input class="ipt size_sml" style="width:280px" type="text" placeholder=""></li>
+				<li>@tway.com</li>
+			</ul>
+			<p class="msg"><span>회사 이메일을 입력 하세요.</span></p>
+		</div>
+		<!-- 경우1 -->
+		<div class="btns">
+			<button class="btn btn_grn size_big" onclick="alert('임시 비밀번호가 해당 메일로 발송됩니다.')">발송</button>
+			<p class="subinfo">※ 회사 이메일 입력 후 발송 버튼을 클릭 하시면 입력한 메일로 임시비밀번호가 발송 됩니다.</p>
+		</div>
+		<!-- 경우2 -->
+		<div class="btns">
+			<button class="btn btn_grn size_big" onclick="alert('임시 비밀번호가 해당 메일로 발송됩니다.')">로그인</button>
+			<button class="btn btn_gry size_big" onclick="alert('임시비밀번호가 재 발송 되었습니다.')">재발송 하기</button>
+			<div class="cnt_login2 ta_c">
+				유효시간 <span class="col_red">04:59</span>
+				<button class="btn btn_file">연장하기</button>
+			</div>
+			<p class="subinfo">
+				※ 회사 이메일 입력 후 발송 버튼을 클릭 하시면 입력한 메일로 임시비밀번호가 발송 됩니다.<br>
+				※ 유효시간이 경과하면 로그인이 불가합니다. 재발송 버튼을 클릭 하세요.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

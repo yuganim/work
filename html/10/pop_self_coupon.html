@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>쿠폰지급</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+            <section>
+                <div class="subtit_area">
+                    <h3 class="f_lft">· 조회</h3>
+                </div>
+                <div class="popup_info">
+                    <table class="info_list bt_dg">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="165px"/>
+                            <col width=""/>
+                            <col width="165px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th class="bg_gray">쿠폰 유형</th>
+                                <td colspan="3">수동지급쿠폰</td>
+                            </tr>
+                            <tr>
+                                <th class="bg_gray">쿠폰명</th>
+                                <td><input class="ipt size_sml" type="text" style="width:100px;" placeholder=""></td>
+                                <th class="bg_gray">쿠폰번호</th>
+                                <td><input class="ipt size_sml" type="text" style="width:100px;" placeholder=""></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btns">
+                    <div class="f_rig">
+                        <button class="btn btn_grn size_nor">검색</button>
+                        <button class="btn size_nor">초기화</button>
+                    </div>
+                </div>
+            </section>
+            <!-- 리스트 -->
+            <section class="list mt10">
+                    <h3 class="f_lft">· 목록</h3>
+                    <div class="tbl_info cr_b">
+                        <div class="f_lft">
+                            <select class="select size_nor">
+                                <option>15개씩</option>
+                                <option>30개씩</option>
+                                <option>50개씩</option>
+                            </select>
+                            <span class="select_info">(총 200건, 총6건)</span>
+                        </div>
+                    </div>
+                    <table class="tbl">
+                        <colgroup>
+                            <col width="4%">
+                            <col width="12%">
+                            <col width="20%">
+                            <col width="16%">
+                            <col width="16%">
+                            <col width="12%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <th>유형</th>
+                                <th>쿠폰번호</th>
+                                <th>쿠폰명</th>
+                                <th>지급가능수량</th>
+                                <th>금액</th>
+                                <th>지급기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7">검색된 데이터가 없습니다.</td> 
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td> 
+                                <td>수동지급쿠폰</td>
+                                <td><a href="">ABCD1234</a></td>
+                                <td>VIP쿠폰</td>
+                                <td>99</td>
+                                <td>5,000<p>(KRW)</p></td>
+                                <td>YYYY-MM-DD<p>HH:MM:SS</p></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td> 
+                                <td>수동지급쿠폰</td>
+                                <td><a href="">ABCD1234</a></td>
+                                <td>VIP쿠폰</td>
+                                <td>99</td>
+                                <td>5,000<p>(KRW)</p></td>
+                                <td>YYYY-MM-DD<p>HH:MM:SS</p></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td> 
+                                <td>수동지급쿠폰</td>
+                                <td><a href="">ABCD1234</a></td>
+                                <td>VIP쿠폰</td>
+                                <td>99</td>
+                                <td>5,000<p>(KRW)</p></td>
+                                <td>YYYY-MM-DD<p>HH:MM:SS</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="tbl_info">
+                        <div class="f_lft">
+                            <div class="paging">
+                                <a href="#" class="prev">«</a>
+                                <a href="#">1</a>
+                                <strong>2</strong>
+                                <a href="#">3</a>
+                                <a href="#" class="next">»</a>
+                            </div>
+                            <button class="btn lin_red size_big" onclick="alert('정말 쿠폰을 지급 하시겠습니까?')">쿠폰지급</button>
+                        </div>
+                        <div class="f_rig">
+                            <button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+                        </div>
+                    </div>
+                </section>
+            <!-- //리스트 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

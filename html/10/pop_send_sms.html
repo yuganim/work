@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>SMS 발송</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+				<div class="popup_info">
+					<table class="info_list bt_dg">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="165px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th class="bg_gray">발신 번호</th>
+                                <td>1688-8686</td>
+                            </tr>
+                            <tr>
+                                <th class="bg_gray">받는 분 번호</th>
+                                <td>
+                                    <select class="select size_sml f_lft mr4">
+                                        <option>대한민국(82)</option>
+                                        <option></option>
+                                        <option></option>
+                                    </select>
+                                    <input class="ipt size_sml" type="text" style="width:70px;" placeholder="010"> - 
+                                    <input class="ipt size_sml" type="text" style="width:70px;" placeholder="1234"> - 
+                                    <input class="ipt size_sml" type="text" style="width:70px;" placeholder="1234">
+                                	<p class="msg ml0"><span>받으시는 분 번호를 입력하세요.</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="bg_gray">내용 (0/90)</th>
+                                <td>
+                                    <input class="ipt size_sml" type="text" style="width:99%;height:250px;" placeholder="SMS 발송 공통 팝업 미정">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</section>
+			<!-- 하단버튼 -->
+			<div class="btns">
+				<div class="f_lft"><button class="btn lin_red size_big" onClick="alert('정말 SMS를 발송하시겠습니까?')">발송</button></div>
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

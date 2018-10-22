@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.5.0/styles/androidstudio.min.css">
+<script src="https://cdn.jsdelivr.net/highlight.js/9.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+	<header class="wrap_gnb">
+		<nav class="gnbbar">
+			<a class="brand" href="#">ADMIN</a>
+			<span class="user"><strong>"티웨이에"</strong>님(IP:129.000.000.00)</span>
+			<button class="btn_menu" type="button">
+				<span class="bars">
+					<span class="bar_line line1"></span>
+					<span class="bar_line line2"></span>
+					<span class="bar_line line3"></span>
+				</span>
+			</button>
+			<form class="form_btns">
+				<button type="button" class="btn btn_white">로그아웃</button>
+				<button type="button" class="btn">사용자정보</button>
+			</form>
+		</nav>
+		<nav class="gnb">
+			<ul class="lst_gnb">
+				<li class="nav_item active">
+					<p class="depth1"><a href="#">부가서비스관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li class="on">
+							<p class="depth2"><a href="#">SSR관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3 on"><a href="#">SSR관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">번들관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">번들관리</a></p>
+								<p class="depth3"><a href="#">번들 판매 제외관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">기내식관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">기내식관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">수하물관리</a></p>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">사전좌석관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">좌석배치도 관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">사전좌석요금관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">사전좌석요금관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">운임관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">운임관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운임관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">운임규정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운임규정관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#"">노선관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">언어지역관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">언어지역관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">통화관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">통화관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">국가관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">국가관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">도시관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">도시관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공항관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공항관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">노선관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">노선관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">프로모션관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">이벤트관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">이벤트관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">메인배너관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메인배너관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">APP인트로관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">APP인트로관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">결제수단관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">결제수단관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">쿠폰관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">쿠폰관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">쿠폰관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">쿠폰사용제한기간</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">쿠폰사용제한기간</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">고객센터</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">고객문의</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">고객문의</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">제휴문의</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">제휴문의</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">Ustory</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">Ustory</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">FAQ</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">FAQ</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">유실물찾기</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">유실물찾기</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">서식자료관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">서식자료관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">게시판필터링</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">게시판필터링</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">공지관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">공지사항</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공지사항</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">띠배너관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">띠배너관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">투자정보관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">투자정보관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">규정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">규정관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">광고홍보영상</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">광고홍보영상</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">기내지</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">기내지</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">보도자료</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">보도자료</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">콘텐츠관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">공항카운터관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공항카운터관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">콘텐츠관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">콘텐츠관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">파일업로드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">파일업로드</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">UMS탬플릿</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">UMS탬플릿</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">운항스케줄</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">운항스케줄</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">다국어캘린더</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">다국어캘린더</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">회원관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">회원관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">예약내역</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">예약내역</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">PNR이력조회</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">PNR이력조회</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">예매확인증발송</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">예매확인증발송</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">접속통계</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">회원통계</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원통계</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">방문자통계</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">방문자통계</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">티에이전시관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">환불요청</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">환불요청</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">현금영수증발급</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">현금영수증발급</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">문의/요청</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">문의/요청</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공지관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공지관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">여행사</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">여행사</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">Queue코드관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">Queue코드관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">SSM관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">SSM관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">시스템관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">메뉴관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메뉴관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">폐쇄망IP관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">폐쇄망IP관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">결제수단설정</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">결제수단설정</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">메모리(RELOAD)</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">메모리(RELOAD)</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">배치관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">배치관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">에러이력조회</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">에러이력조회</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">AgentBookingAPI</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">AgentBookingAPI</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">시스템코드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">시스템코드</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">회원ID필터링</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원ID필터링</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">회원정보조회이력</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">회원정보조회이력</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">공통코드</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">공통코드</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav_item ">
+					<p class="depth1"><a href="#">어드민관리</a></p>
+					<div class="dropdown">
+						<ul>
+						<li>
+							<p class="depth2"><a href="#">계정관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">계정관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">그룹권한관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">그룹권한관리</a></p>
+							</div>
+						</li>
+						<li>
+							<p class="depth2"><a href="#">부서관리</a></p>
+							<div class="bx_dpth">
+								<p class="depth3"><a href="#">부서관리</a></p>
+							</div>
+						</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<div class="wrap_lnb">
+			<div class="area_tit">
+				<button class="btn_menu" type="button">
+					<span class="bars">
+						<span class="bar_line line1"></span>
+						<span class="bar_line line2"></span>
+						<span class="bar_line line3"></span>
+					</span>
+				</button>
+				시스템관리
+			</div>
+			<div class="lnb">
+				<ul class="lst_lnb">
+					<li class="nav_item active">
+						<p class="depth1"><a href="#">depth1</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+						<dl>
+							<dt><a href="#">depth2</a></dt>
+							<dd><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+					</li>
+					<li class="nav_item">
+						<p class="depth1"><a href="#">depth1</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+					</li>
+					<li class="nav_item">
+						<p class="depth1"><a href="#">Agency Booking API</a></p>
+						<dl>
+							<dt class="on"><a href="#">depth2</a></dt>
+							<dd class="on"><a href="#">depth3</a></dd>
+							<dd><a href="#">depth3</a></dd>
+						</dl>
+						<dl>
+							<dt><a href="#">Agency Booking API</a></dt>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="contents">
+			<style>
+				.contents dl {margin:20px 0; }
+				.contents dt {color:#202020; font-size:18px; font-weight:600;}
+				.contents dd {margin-top:5px;}
+				.contents pre {margin-bottom:30px;}
+			</style>
+
+			<dl>
+				<dt>STATE : NORMAL/HOVER/PRESS</dt>
+				<dd>
+					<input class="ipt size_big" type="text" placeholder="스타일1">
+				</dd>
+				<dd>
+					<input class="ipt size_nor" type="text" placeholder="스타일2">
+				</dd>
+				<dd>
+					<input class="ipt size_sml" type="text" placeholder="스타일3">
+				</dd>
+			</dl>
+<pre><code>&lt;input class="ipt size_big" type="text" placeholder="스타일1"&gt;
+&lt;input class="ipt size_nor" type="text" placeholder="스타일2"&gt;
+&lt;input class="ipt size_sml" type="text" placeholder="스타일3"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>STATE : ERROE</dt>
+				<dd>
+					<input class="ipt err size_big" type="text" placeholder="스타일1">
+				</dd>
+				<dd>
+					<input class="ipt err size_nor" type="text" placeholder="스타일2">
+				</dd>
+				<dd>
+					<input class="ipt err size_sml" type="text" placeholder="스타일3">
+				</dd>
+			</dl>
+<pre><code>&lt;input class="ipt err size_big" type="text" placeholder="스타일1"&gt;
+&lt;input class="ipt err size_nor" type="text" placeholder="스타일2"&gt;
+&lt;input class="ipt err size_sml" type="text" placeholder="스타일3"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>STATE : DISABLED</dt>
+				<dd>
+					<input class="ipt size_big" type="text" disabled placeholder="스타일1">
+				</dd>
+				<dd>
+					<input class="ipt size_nor" type="text" disabled placeholder="스타일2">
+				</dd>
+				<dd>
+					<input class="ipt size_sml" type="text" disabled placeholder="스타일3">
+				</dd>
+			</dl>
+<pre><code>&lt;input class="ipt size_big" type="text" disabled placeholder="스타일1"&gt;
+&lt;input class="ipt size_nor" type="text" disabled placeholder="스타일2"&gt;
+&lt;input class="ipt size_sml" type="text" disabled placeholder="스타일3"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>STATE : SUCCESS</dt>
+				<dd>
+					<input class="ipt suc size_big" type="text" placeholder="스타일1">
+				</dd>
+				<dd>
+					<input class="ipt suc size_nor" type="text" placeholder="스타일2">
+				</dd>
+				<dd>
+					<input class="ipt suc size_sml" type="text" placeholder="스타일3">
+				</dd>
+			</dl>
+<pre><code>&lt;input class="ipt suc size_big" type="text" placeholder="스타일1"&gt;
+&lt;input class="ipt suc size_nor" type="text" placeholder="스타일2"&gt;
+&lt;input class="ipt suc size_sml" type="text" placeholder="스타일3"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>LABLE</dt>
+				<dd>
+					<lable class="lable">레이블</lable>
+					<input class="ipt size_sml" type="text" placeholder="input">
+				</dd>
+				<dd>
+					<lable class="lable col_red">레이블 RED</lable>
+					<input class="ipt size_sml" type="text" placeholder="input">
+				</dd>
+			</dl>
+<pre><code>&lt;lable class="lable"&gt;레이블&lt;/lable&gt;
+&lt;input class="ipt size_sml" type="text" placeholder="input"&gt;
+
+&lt;lable class="lable col_red"&gt;레이블 RED&lt;/lable&gt;
+&lt;input class="ipt size_sml" type="text" placeholder="input"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>DATE</dt>
+				<dd>
+					<script>
+						$( function() {
+							$( "#datepicker, #datepicker2" ).datepicker({
+								showOn: "button",
+								buttonImage: "https://image-dev.twayair.com/dev/renewal/admin/common/ico_calendar.png",
+								buttonImageOnly: true,
+								buttonText: "Select date"
+							});
+						} );
+					</script>
+					<input class="ipt size_sml" type="text" style="width:100px;" id="datepicker"> ~
+					<input class="ipt size_sml" type="text" style="width:100px;" id="datepicker2">
+				</dd>
+			</dl>
+<pre><code>// ui jquery 스크립트 선언 필요
+&lt;script&gt;
+	$( function() {
+		$( "#datepicker, #datepicker2" ).datepicker({
+			showOn: "button",
+			buttonImage: "https://image-dev.twayair.com/dev/renewal/admin/common/ico_calendar.png",
+			buttonImageOnly: true,
+			buttonText: "Select date"
+		});
+	} );
+&lt;/script&gt;
+&lt;input class="ipt size_sml" type="text" style="width:100px;" id="datepicker"&gt; ~
+&lt;input class="ipt size_sml" type="text" style="width:100px;" id="datepicker2"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>TEXTAREA</dt>
+				<dd>
+					<textarea style="width:100%;"></textarea>
+				</dd>
+			</dl>
+<pre><code>&lt;textarea style=""&gt;&lt;/textarea&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>ERROR MASSAGE</dt>
+				<dd>
+					<input class="ipt size_sml" type="text" placeholder="input">
+					<p class="msg"><span>필수입력값입니다.</span></p>
+				</dd>
+			</dl>
+<pre><code>&lt;input class="ipt size_sml" type="text" placeholder="input"&gt;
+&lt;p class="msg"&gt;&lt;span&gt;필수입력값입니다.&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>FILE UPLOAD</dt>
+				<dd><input type="file" class="ipt size_sml" style="width:265px"></dd>
+			</dl>
+<pre><code>&lt;input type="file" class="ipt size_sml" style="width:265px"&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>SELECT</dt>
+				<dd>
+					<select class="select size_big">
+						<option>15개씩</option>
+						<option>30개씩</option>
+						<option>50개씩</option>
+					</select>
+				</dd>
+				<dd>
+					<select class="select size_nor">
+						<option>15개씩</option>
+						<option>30개씩</option>
+						<option>50개씩</option>
+					</select>
+				</dd>
+				<dd>
+					<select class="select size_sml">
+						<option>15개씩</option>
+						<option>30개씩</option>
+						<option>50개씩</option>
+					</select>
+				</dd>
+				<dd>
+					<select class="select_mul" multiple="multiple">
+						<option>15KG 위탁수하물</option>
+						<option>20KG 위탁수하물</option>
+						<option>25KG 위탁수하물</option>
+						<option>2PC 위탁수하물</option>
+						<option>30KG 위탁수하물</option>
+						<option>ALML4 기내식</option>
+						<option>ALML5 기내식</option>
+						<option>ALML6 기내식</option>
+					</select>
+				</dd>
+			</dl>
+<pre><code>//select
+&lt;select class="select size_big"&gt;
+	&lt;option&gt;15개씩&lt;/option&gt;
+	&lt;option&gt;30개씩&lt;/option&gt;
+	&lt;option&gt;50개씩&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select class="select size_nor"&gt;
+	&lt;option&gt;15개씩&lt;/option&gt;
+	&lt;option&gt;30개씩&lt;/option&gt;
+	&lt;option&gt;50개씩&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select class="select size_sml"&gt;
+	&lt;option&gt;15개씩&lt;/option&gt;
+	&lt;option&gt;30개씩&lt;/option&gt;
+	&lt;option&gt;50개씩&lt;/option&gt;
+&lt;/select&gt;
+//select multiple
+&lt;select class="select_mul" multiple="multiple"&gt;
+	&lt;option&gt;15KG 위탁수하물&lt;/option&gt;
+	&lt;option&gt;20KG 위탁수하물&lt;/option&gt;
+	&lt;option&gt;25KG 위탁수하물&lt;/option&gt;
+	&lt;option&gt;2PC 위탁수하물&lt;/option&gt;
+	&lt;option&gt;30KG 위탁수하물&lt;/option&gt;
+	&lt;option&gt;ALML4 기내식&lt;/option&gt;
+	&lt;option&gt;ALML5 기내식&lt;/option&gt;
+	&lt;option&gt;ALML6 기내식&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>BUTTON</dt>
+				<dd>
+					<button class="btn size_big">등록</button>
+					<button class="btn size_nor">등록</button>
+					<button class="btn size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn lin_grn size_big">등록</button>
+					<button class="btn lin_grn size_nor">등록</button>
+					<button class="btn lin_grn size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn lin_red size_big">등록</button>
+					<button class="btn lin_red size_nor">등록</button>
+					<button class="btn lin_red size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_red size_big">등록</button>
+					<button class="btn btn_red size_nor">등록</button>
+					<button class="btn btn_red size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_grn size_big">등록</button>
+					<button class="btn btn_grn size_nor">등록</button>
+					<button class="btn btn_grn size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_blk size_big">등록</button>
+					<button class="btn btn_blk size_nor">등록</button>
+					<button class="btn btn_blk size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_gry size_big">등록</button>
+					<button class="btn btn_gry size_nor">등록</button>
+					<button class="btn btn_gry size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_lgry size_big">등록</button>
+					<button class="btn btn_lgry size_nor">등록</button>
+					<button class="btn btn_lgry size_sml">등록</button>
+				</dd>
+				<dd>
+					<button class="btn btn_file">파일다운</button>
+				</dd>
+			</dl>
+<pre><code>&lt;button class="btn size_big"&gt;등록&lt;/button&gt;
+&lt;button class="btn size_nor"&gt;등록&lt;/button&gt;
+&lt;button class="btn size_sml"&gt;등록&lt;/button&gt;
+//class="lin_grn"
+&lt;button class="btn lin_grn size_nor"&gt;등록&lt;/button&gt;
+//class="lin_red"
+&lt;button class="btn lin_red size_nor"&gt;등록&lt;/button&gt;
+//class="btn_red"
+&lt;button class="btn btn_red size_nor"&gt;등록&lt;/button&gt;
+//class="btn_grn"
+&lt;button class="btn btn_grn size_nor"&gt;등록&lt;/button&gt;
+//class="btn_blk"
+&lt;button class="btn btn_blk size_nor"&gt;등록&lt;/button&gt;
+//class="btn_gry"
+&lt;button class="btn btn_gry size_nor"&gt;등록&lt;/button&gt;
+//class="btn_lgry"
+&lt;button class="btn btn_lgry size_nor"&gt;등록&lt;/button&gt;
+//class="btn_file"
+&lt;button class="btn btn_file"&gt;파일다운&lt;/button&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>CHECK BOX / RADIO</dt>
+				<dd>
+					<input class="chk" id="chk" type="checkbox"><label for="chk" class="lbl_chk">체크박스</label>
+					<br><br>
+					<div class="lbl_wrap">
+						<div class="lbl_all">
+							<input class="chk" id="chk0" type="checkbox"><label for="chk0" class="lbl_chk">전체</label>
+						</div>
+						<div class="lbl_units">
+							<input class="chk" id="chk1" type="checkbox"><label for="chk1" class="lbl_chk">체크박스1</label>
+							<input class="chk" id="chk2" type="checkbox"><label for="chk2" class="lbl_chk">체크박스2</label>
+							<input class="chk" id="chk3" type="checkbox"><label for="chk3" class="lbl_chk">체크박스3</label>
+						</div>
+					</div>
+					<br>
+					<div class="lbl_wrap">
+						<div class="lbl_all">
+							<input class="chk" id="chk_0" type="checkbox"><label for="chk_0" class="lbl_chk">전체</label>
+						</div>
+						<div class="lbl_units">
+							<span class="lbl_unit">
+								<input class="chk" id="chk_1" type="checkbox"><label for="chk_1" class="lbl_chk">KRW</label><input class="ipt size_sml" type="text" style="width:80px;" placeholder="">
+							</span>
+							<span class="lbl_unit">
+								<input class="chk" id="chk_1" type="checkbox"><label for="chk_1" class="lbl_chk">KRW</label><input class="ipt size_sml" type="text" style="width:80px;" placeholder="">
+							</span>
+						</div>
+					</div>					
+					<br>
+					<input type="radio" name="rdio" id="rdio_1" class="radio"><label for="rdio_1" class="lbl_rdio">라디오</label>			
+					<br><br>
+					<div class="lbl_units">
+						<input type="radio" name="rdio" id="rdio1" class="radio"><label for="rdio1" class="lbl_rdio">라디오</label>
+						<input type="radio" name="rdio" id="rdio2" class="radio" checked=true><label for="rdio2" class="lbl_rdio">라디오 선택</label>
+					</div>
+				</dd>
+			</dl>
+<pre><code>//체크박스
+&lt;input class="chk" id="chk1" type="checkbox"&gt;&lt;label for="chk1" class="lbl_chk"&gt;체크박스&lt;/label&gt;
+
+&lt;div class="lbl_wrap"&gt;
+	&lt;div class="lbl_all"&gt;
+		&lt;input class="chk" id="chk0" type="checkbox"&gt;&lt;label for="chk0" class="lbl_chk"&gt;전체&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;div class="lbl_units"&gt;
+		&lt;input class="chk" id="chk1" type="checkbox"&gt;&lt;label for="chk1" class="lbl_chk"&gt;체크박스1&lt;/label&gt;
+		&lt;input class="chk" id="chk2" type="checkbox"&gt;&lt;label for="chk2" class="lbl_chk"&gt;체크박스2&lt;/label&gt;
+		&lt;input class="chk" id="chk3" type="checkbox"&gt;&lt;label for="chk3" class="lbl_chk"&gt;체크박스3&lt;/label&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="lbl_wrap"&gt;
+	&lt;div class="lbl_all"&gt;
+		&lt;input class="chk" id="chk_0" type="checkbox"&gt;&lt;label for="chk_0" class="lbl_chk"&gt;전체&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;div class="lbl_units"&gt;
+		&lt;span class="lbl_unit"&gt;
+			&lt;input class="chk" id="chk_1" type="checkbox"&gt;&lt;label for="chk_1" class="lbl_chk"&gt;KRW&lt;/label&gt;&lt;input class="ipt size_sml" type="text" style="width:80px;" placeholder=""&gt;
+		&lt;/span&gt;
+		&lt;span class="lbl_unit"&gt;
+			&lt;input class="chk" id="chk_1" type="checkbox"&gt;&lt;label for="chk_1" class="lbl_chk"&gt;KRW&lt;/label&gt;&lt;input class="ipt size_sml" type="text" style="width:80px;" placeholder=""&gt;
+		&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+//라디오
+&lt;input type="radio" name="rdio" id="rdio_1" class="radio"&gt;&lt;label for="rdio_1" class="lbl_rdio"&gt;라디오&lt;/label&gt;
+&lt;div class="lbl_units"&gt;
+	&lt;input type="radio" name="rdio" id="rdio1" class="radio"&gt;&lt;label for="rdio1" class="lbl_rdio"&gt;라디오&lt;/label&gt;
+	&lt;input type="radio" name="rdio" id="rdio2" class="radio" checked=true&gt;&lt;label for="rdio2" class="lbl_rdio"&gt;라디오 선택&lt;/label&gt;
+&lt;/div&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>PAGINATION</dt>
+				<dd>
+					<div class="paging">
+						<a href="#" class="prev">&laquo;</a>
+						<a href="#">1</a>
+						<strong>2</strong>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#" class="next">&raquo;</a>
+					</div>
+				</dd>
+			</dl>
+<pre><code>&lt;div class="paging"&gt;
+	&lt;a href="#" class="prev"&gt;&laquo;&lt;/a&gt;
+	&lt;a href="#"&gt;1&lt;/a&gt;
+	&lt;strong&gt;2&lt;/strong&gt;
+	&lt;a href="#"&gt;3&lt;/a&gt;
+	&lt;a href="#"&gt;4&lt;/a&gt;
+	&lt;a href="#" class="next"&gt;&raquo;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>TITLE & TEXT</dt>
+				<dd>
+					<h2 class="tit_point">도시관리</h2>
+					<h3>· 도시관리</h3>
+					<h4 class="col_red">도시관리</h4>
+					<h5 class="bg_red">도시관리</h5>
+					<p class="txt_info"><strong>*</strong> 항목은 필수 입력 값입니다.</p>
+				</dd>
+			</dl>
+<pre><code>&lt;h2 class="tit_point"&gt;도시관리&lt;/h2&gt;
+&lt;h3&gt;· 도시관리&lt;/h3&gt;
+&lt;h4 class="col_red"&gt;도시관리&lt;/h4&gt;
+&lt;h5 class="bg_red"&gt;도시관리&lt;/h5&gt;
+&lt;p class="txt_info"&gt;&lt;strong&gt;*&lt;/strong&gt; 항목은 필수 입력 값입니다.&lt;/p&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>DEPTH HISTORY</dt>
+				<dd>
+					<p class="nav_history">
+						<span><a href="#">ADMIN</a></span>
+						<span><a href="#">노선관리</a></span>
+						<span><a href="#">도시관리</a></span>
+					</p>
+				</dd>
+			</dl>
+<pre><code>&lt;p class="nav_history"&gt;
+	&lt;span&gt;&lt;a href="#"&gt;ADMIN&lt;/a&gt;&lt;/span&gt;
+	&lt;span&gt;&lt;a href="#"&gt;노선관리&lt;/a&gt;&lt;/span&gt;
+	&lt;span&gt;&lt;a href="#"&gt;도시관리&lt;/a&gt;&lt;/span&gt;
+&lt;/p&gt;
+</code></pre>
+			<hr>
+			<dl>
+				<dt>TABLE</dt>
+				<dd>
+					<table class="tbl">
+						<colgroup>
+							<col width="4%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="*">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>대륙</th>
+								<th>국가</th>
+								<th>도시</th>
+								<th>코드</th>
+								<th>사용</th>
+								<th>등록일/등록자</th>
+								<th>수정일/수정자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>15</td> 
+								<td>대한민국</td>
+								<td>대한민국</td>
+								<td>서울</td>
+								<td>KR</td>
+								<td>사용</td>
+								<td>admin123456789<p>YYYYMMDD HHMM0000</p></td>
+								<td>admin123456789<p>YYYYMMDD HHMM0000</p></td>
+							</tr>
+							<tr>
+								<td>14</td> 
+								<td>대한민국</td>
+								<td>대한민국</td>
+								<td>서울</td>
+								<td>KR</td>
+								<td>사용</td>
+								<td>admin123456789<p>YYYYMMDD HHMM0000</p></td>
+								<td>admin123456789<p>YYYYMMDD HHMM0000</p></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<br><br>
+					<table class="info_list bt_dg">
+						<caption></caption>
+						<colgroup>
+							<col width="165px"/>
+							<col width=""/>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>연도</th>
+								<td>
+									<select class="select size_sml">
+										<option>전체</option>
+										<option></option>
+										<option></option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>국가코드</th>
+								<td><button class="btn size_sml btn_lgry mr4 f_lft">국가검색</button><input class="ipt size_sml" type="text" placeholder="" style="width:200px;"></td>
+							</tr>
+							<tr>
+								<th>설명</th>
+								<td><textarea style="width:100%;"></textarea></td>
+							</tr>
+							<tr>
+								<th>사용여부</th>
+								<td>
+									<div class="lbl_units">
+										<input type="radio" id="rdio1" class="radio"><label for="rdio1" class="lbl_rdio">전체</label>
+										<input type="radio" id="rdio2" class="radio"><label for="rdio2" class="lbl_rdio">Y</label>
+										<input type="radio" id="rdio3" class="radio"><label for="rdio3" class="lbl_rdio">N</label>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</dd>
+			</dl>
+<pre><code>//테이블 타입1
+&lt;table class="tbl"&gt;
+	&lt;colgroup&gt;
+		&lt;col width="4%"&gt;
+		&lt;col width="10%"&gt;
+		&lt;col width="10%"&gt;
+		&lt;col width="10%"&gt;
+		&lt;col width="10%"&gt;
+		&lt;col width="*"&gt;
+		&lt;col width="20%"&gt;
+		&lt;col width="20%"&gt;
+	&lt;/colgroup&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;NO&lt;/th&gt;
+			&lt;th&gt;대륙&lt;/th&gt;
+			&lt;th&gt;국가&lt;/th&gt;
+			&lt;th&gt;도시&lt;/th&gt;
+			&lt;th&gt;코드&lt;/th&gt;
+			&lt;th&gt;사용&lt;/th&gt;
+			&lt;th&gt;등록일/등록자&lt;/th&gt;
+			&lt;th&gt;수정일/수정자&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;15&lt;/td&gt; 
+			&lt;td&gt;대한민국&lt;/td&gt;
+			&lt;td&gt;대한민국&lt;/td&gt;
+			&lt;td&gt;서울&lt;/td&gt;
+			&lt;td&gt;KR&lt;/td&gt;
+			&lt;td&gt;사용&lt;/td&gt;
+			&lt;td&gt;admin123456789&lt;p&gt;YYYYMMDD HHMM0000&lt;/p&gt;&lt;/td&gt;
+			&lt;td&gt;admin123456789&lt;p&gt;YYYYMMDD HHMM0000&lt;/p&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+
+//테이블 타입2
+&lt;table class="info_list bt_dg"&gt;
+	&lt;caption&gt;&lt;/caption&gt;
+	&lt;colgroup&gt;
+		&lt;col width="165px"/&gt;
+		&lt;col width=""/&gt;
+	&lt;/colgroup&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;th&gt;연도&lt;/th&gt;
+			&lt;td&gt;
+				&lt;select class="select size_sml"&gt;
+					&lt;option&gt;전체&lt;/option&gt;
+					&lt;option&gt;&lt;/option&gt;
+					&lt;option&gt;&lt;/option&gt;
+				&lt;/select&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th&gt;국가코드&lt;/th&gt;
+			&lt;td&gt;&lt;button class="btn size_sml btn_lgry mr4 f_lft"&gt;국가검색&lt;/button&gt;&lt;input class="ipt size_sml" type="text" placeholder="" style="width:200px;"&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th&gt;설명&lt;/th&gt;
+			&lt;td&gt;&lt;textarea style="width:100%;"&gt;&lt;/textarea&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th&gt;사용여부&lt;/th&gt;
+			&lt;td&gt;
+				&lt;div class="lbl_units"&gt;
+					&lt;input type="radio" id="rdio1" class="radio"&gt;&lt;label for="rdio1" class="lbl_rdio"&gt;전체&lt;/label&gt;
+					&lt;input type="radio" id="rdio2" class="radio"&gt;&lt;label for="rdio2" class="lbl_rdio"&gt;Y&lt;/label&gt;
+					&lt;input type="radio" id="rdio3" class="radio"&gt;&lt;label for="rdio3" class="lbl_rdio"&gt;N&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+
+		</div>
+	</div> 
+</body>
+</html>

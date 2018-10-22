@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>도시검색</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+				<div class="popup_info">
+					<table class="info_list bt_dg">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="165px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>도시코드</th>
+                                <td>
+                                    <input class="ipt size_sml" type="text" placeholder="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>도시명</th>
+                                <td>
+                                    <input class="ipt size_sml" type="text" placeholder="제주">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+				<div class="btns">
+					<div class="f_rig">
+						<button class="btn btn_grn size_nor">검색</button>
+						<button class="btn size_nor">초기화</button>
+					</div>
+				</div>
+			</section>
+			<!-- 리스트 -->
+			<section class="list">
+					<div class="tbl_info">
+						<div class="f_lft">
+							<select class="select size_nor">
+								<option>15개씩</option>
+								<option>30개씩</option>
+								<option>50개씩</option>
+							</select>
+							<span class="select_info">(총 200건, 총6건)</span>
+						</div>
+					</div>
+					<table class="tbl">
+						<colgroup>
+							<col width="15%">
+							<col width="40%">
+							<col width="40%">
+							<col width="25%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>도시코드</th>
+								<th>도시명</th>
+								<th>선택</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="4">검색된 데이터가 없습니다.</td> 
+							</tr>
+							<tr>
+								<td>1</td> 
+								<td>CJU</td>
+								<td>제주</td>
+								<td><input type="radio" name="rdio" id="rdio_1" class="radio"><label for="rdio_1" class="lbl_rdio"></label></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="tbl_info">
+						<div class="f_lft">
+							<div class="paging">
+								<a href="#" class="prev">«</a>
+								<a href="#">1</a>
+								<strong>2</strong>
+								<a href="#">3</a>
+								<a href="#" class="next">»</a>
+							</div>
+						</div>
+						<div class="f_rig">
+							<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+						</div>
+					</div>
+				</section>
+			<!-- //리스트 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

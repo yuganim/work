@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>단어관리 콘텐츠 리소스 수정</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+                <div class="subtit_area f_rig">
+                    <button class="btn lin_red size_nor" onClick="alert('정말 등록을 하시겠습니까?')">등록</button>
+                </div>
+				<div class="popup_info">
+					<table class="info_list bt_dg">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="165px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>리소스 프리픽스</th>
+                                <td>booking.availability</td>
+                            </tr>
+                            <tr>
+                                <th>리소스 ID <strong>*</strong></th>
+                                <td>booking.availability <input class="ipt size_sml ml10" type="text" style="width:60%;" placeholder=""></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="info_list bt_dg mt20">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="165px"/>
+                            <col width="185px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th rowspan="11">지역-언어별<br>메뉴 명</th>
+                                <th colspan="2"><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">전체</label></th>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">대한민국(한국어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder=""></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox checked="true""><label for="chk1" class="lbl_chk">괌/사이판(영어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="round trip"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">일본(일본어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="往復"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">중국(중국어,간체)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="往返"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">대만(중국어,번체)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="往返"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">홍콩(중국어,번체)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="往返"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">마카오(중국어,번체)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="往返"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">태국(태국어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="การไปกลับ"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">베트남(베트남어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="Hai chiều"></td>
+                            </tr>
+                            <tr>
+                                <th><input class="chk" id="chk1" type="checkbox" checked="true"><label for="chk1" class="lbl_chk">러시아(러시아어)</label></th>
+                                <td><input class="ipt size_sml" type="text" style="width:98%;" placeholder="Вернуться"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</section>
+			<!-- 하단버튼 -->
+			<div class="btns">
+				<div class="f_lft"><button class="btn size_big" onClick="alert('정말 등록을 취소하시겠습니까?')">취소</button></div>
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

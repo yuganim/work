@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<script>
+		$( function() {
+			$( "#datepicker, #datepicker2" ).datepicker({
+				showOn: "button",
+				buttonImage: "https://image-dev.twayair.com/dev/renewal/admin/common/ico_calendar.png",
+				buttonImageOnly: true,
+				buttonText: "Select date"
+			});
+		} );
+	</script>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>적용기간 변경 콘텐츠 등록</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+				<div class="subtit_area f_rig">
+					<button class="btn lin_red size_nor" onClick="alert('정말 해당기간으로 등록 하시겠습니까?')">등록</button>
+				</div>
+				<div class="popup_info cr_b">
+					<table class="info_list bt_dg">
+						<caption></caption>
+						<colgroup>
+							<col width="165px"/>
+							<col width=""/>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th class="bg_gray">리소스 ID</th>
+								<td>H00001.A00001</td>
+							</tr>
+							<tr>
+								<th class="bg_gray">적용기간</th>
+								<td>
+									<input class="ipt size_sml" type="text" style="width:100px;" id="datepicker"> ~
+									<input class="ipt size_sml" type="text" style="width:100px;" id="datepicker2">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</section>
+			<!-- 하단버튼 -->
+			<div class="btns">
+				<div class="f_lft"><button class="btn size_big" onClick="alert('정말 등록을 취소하시겠습니까?')">취소</button></div>
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

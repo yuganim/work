@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<script type="text/javascript" src="../../js/jquery.ztree.core.js"></script>
+<script type="text/javascript">
+    <!--
+    var setting = { };
+
+    var zNodes =[
+        { name:"pNode 01", open:true,
+            children: [
+                { name:"pNode 11",
+                    children: [
+                        { name:"leaf node 111"},
+                        { name:"leaf node 112"},
+                        { name:"leaf node 113"},
+                        { name:"leaf node 114"}
+                    ]},
+                { name:"pNode 12",
+                    children: [
+                        { name:"leaf node 121"},
+                        { name:"leaf node 122"},
+                        { name:"leaf node 123"},
+                        { name:"leaf node 124"}
+                    ]},
+                { name:"pNode 13 - no child", isParent:true}
+            ]},
+        { name:"pNode 02",
+            children: [
+                { name:"pNode 21", open:true,
+                    children: [
+                        { name:"leaf node 211"},
+                        { name:"leaf node 212"},
+                        { name:"leaf node 213"},
+                        { name:"leaf node 214"}
+                    ]},
+                { name:"pNode 22",
+                    children: [
+                        { name:"leaf node 221"},
+                        { name:"leaf node 222"},
+                        { name:"leaf node 223"},
+                        { name:"leaf node 224"}
+                    ]},
+                { name:"pNode 23",
+                    children: [
+                        { name:"leaf node 231"},
+                        { name:"leaf node 232"},
+                        { name:"leaf node 233"},
+                        { name:"leaf node 234"}
+                    ]}
+            ]},
+        { name:"pNode 3 - no child", isParent:true}
+
+    ];
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+    //-->
+</script>
+<body>
+
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>메뉴위치 추가</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+                <div class="subtit_area">
+                    <h3 class="f_lft">· 메뉴선택</h3>
+                    <div class="btn_area f_rig">
+                        <button class="btn lin_red size_nor">적용</button>
+                    </div>
+                </div>
+				<div class="popup_info">
+                    <table class="info_list f_lft">
+                        <caption></caption>
+                        <colgroup>
+                            <col width="340px"/>
+                            <col width=""/>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>
+                                     <div class="treeview">
+                                        <ul id="treeDemo" class="ztree"></ul>
+                                    </div>
+                                </th>
+                                <td>
+                                    <p>
+                                        <input class="ipt size_nor ml10" type="text" style="width:70%;" placeholder="항공권예매">
+                                        <button class="btn size_nor">삭제</button>
+                                    </p>
+                                    <p class="mt10">
+                                        <input class="ipt size_nor ml10" type="text" style="width:70%;" placeholder="항공권예매 > 항공편선택">
+                                        <button class="btn size_nor">삭제</button>
+                                    </p>
+                                    <p class="mt10">
+                                        <input class="ipt size_nor ml10" type="text" style="width:70%;" placeholder="항공권예매 > 부가서비스선택">
+                                        <button class="btn size_nor">삭제</button>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</section>
+			<!-- 하단버튼 -->
+			<div class="btns cr_b">
+				<div class="f_lft"><button class="btn size_big" onClick="alert('정말 등록을 취소하시겠습니까?')">취소</button></div>
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>

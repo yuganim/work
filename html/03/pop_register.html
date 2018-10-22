@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title> 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- customize -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/ui_layout.js"></script> 
+	<link href="../../css/jquery-ui.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
+</head> 
+<body>
+	<div class="popup_area">
+		<!-- 타이틀 -->
+		<div class="popup_tit">
+			<h1>수수료 관리</h1>
+		</div>
+		<!-- //타이틀 -->
+		<!-- 컨텐츠 -->
+		<div class="popup_cnt">
+			<section>
+				<!-- 상단버튼 -->
+				<div class="btns">
+					<div class="f_lft">
+						<button class="btn btn_file mt10" style="width:85px;">엑셀업로드</button>
+					</div>
+					<div class="f_rig">
+						<button class="btn lin_red size_nor">저장</button>
+					</div>
+				</div>
+				<!-- //상단버튼 -->
+				<div class="popup_info">
+                    <table class="tbl">
+			            <caption>수정</caption>
+			            <colgroup>
+			                <col width="74px"/>
+			                <col width=""/>
+			                <col width=""/>
+			                <col width=""/>
+			            </colgroup>
+			            <thead>
+			                <tr>
+			                    <th rowspan="2">통화코드</th>
+			                    <th colspan="2">온라인</th>
+			                    <th colspan="2">오프라인</th>
+			                </tr>
+			                <tr>
+			                    <th>취소 수수료</th>
+			                    <th>변경 수수료</th>
+			                    <th>취소 수수료</th>
+			                    <th>변경 수수료</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <tr>
+			                    <th>KRW</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>USD</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>JPY</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>CNY</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>HKD</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>MOP</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>THB</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>TWD</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>LAK</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>VND</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>EUR</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			                <tr>
+			                    <th>MYR</th>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                    <td><input class="ipt size_sml" type="text" placeholder=""></td>
+			                </tr>
+			            </tbody>
+			        </table>
+				</div>
+			</section>
+			<!-- 하단버튼 -->
+			<div class="btns">
+				<div class="f_lft"><button class="btn size_big">취소</button></div>
+				<div class="f_rig">
+					<button class="btn btn_gry size_big" onclick="self.close()">닫기</button>
+				</div>
+			</div>
+			<!-- 하단버튼 -->
+		</div>
+		<!-- //컨텐츠 -->
+	</div>
+</body>
+</html>
