@@ -33,6 +33,8 @@ window.onload = function () {
 			$('.gnb').removeClass('scroll');
 		}
 
+	}).resize();
+
 		// GNB mediaquery 기능
 		if (window.matchMedia('(max-width: 1200px)').matches) {
 			$('.gnb').addClass('gnb_fold').removeClass('gnb').removeClass('scroll');
@@ -50,8 +52,6 @@ window.onload = function () {
 			// GNB 높이값 이슈로 한번씩 선언
 			$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
 		}
-	}).resize();
-
 	// textarea 높이 자동 변경
 	if ($('body').has('textarea').length > 0) {
 		setTimeout(function() {
@@ -78,7 +78,6 @@ window.onload = function () {
 		}
 	});
 
-alert('적용 됨');
 
 	// $(document).click(function(e){
 	// 	var a = e.target;
