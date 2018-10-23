@@ -78,7 +78,7 @@ window.onload = function () {
 		}
 	});
 
-
+alert('적용 됨');
 
 	// $(document).click(function(e){
 	// 	var a = e.target;
