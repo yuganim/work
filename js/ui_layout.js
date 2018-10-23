@@ -37,11 +37,13 @@ window.onload = function () {
 		if (window.matchMedia('(max-width: 1200px)').matches) {
 			$('.gnb').addClass('gnb_fold').removeClass('gnb').removeClass('scroll');
 			$('.contents').css({'top': 0});
-			$('.gnb_fold').css({'max-height':'none','display':'none'});	
+			$('.gnb_fold').removeAttr('style');
+			$('.wrap_gnb').css({'height':'50','overflow':'hidden'});
 			$('.gnb_fold .dropdown').css({'height': 'auto'});
 			// GNB 높이값 이슈로 중복 선언
 			$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
 		} else {
+		    $('.wrap_gnb').removeAttr('style');
 		    $('.gnb_fold').addClass('gnb').removeClass('gnb_fold');
 			$('.gnb').css({'display':'block','height':'auto'});
 			$('.gnb .dropdown').css({'height':0});
@@ -61,34 +63,21 @@ window.onload = function () {
 	};
 
 	// GNB 미니모드 일 때 접기/펼침
-	$(document).click(function(e) {
-		if(e.target.ontouchstart !== undefined) {
-			//console.log( "touch" );
-			// Handle touch click.
-			var a = e.target;
-			if($(a).closest('.btn_menu').length === 1) {
-				if ($('.gnb_fold').css('display') == 'none') {
-					$('.gnb_fold').css({'display':'block'});
-				} else {
-					$('.gnb_fold').css({'display':'none'});
-				}
-			} else if ($(a).closest('.gnbbar').length === 1) {
-				$('.gnb_fold').css({'display':'none'});
-			}
-			return;
-		}
-		//console.log( "no touch" );
-		var a = e.target;
-		if($(a).closest('.btn_menu').length === 1 || $(a).closest('.lst_gnb').length === 1) {
-			if ($('.gnb_fold').css('display') == 'none') {
-				$('.gnb_fold').css({'display':'block'});
-			} else {
-				$('.gnb_fold').css({'display':'none'});
-			}
-		} else if ($(a).closest('.container').length === 1 || $(a).closest('.gnbbar').length === 1) {
-			$('.gnb_fold').css({'display':'none'});
+	$('.btn_menu').on('click', function() {
+		var wrapHei = $('.wrap_gnb').height();
+		var gnbHei = $('.gnb_fold').height();
+		if( wrapHei < 51 ){
+			$('.wrap_gnb').animate({'height': gnbHei + 50 + 'px'}, 750, function(){
+				$(this).removeAttr('style');
+			});
+		}else {
+			$('.gnb_fold').animate({'height': 0}, 750, function(){
+				$(this).removeAttr('style');
+				$('.wrap_gnb').css({'height':'50','overflow':'hidden'});
+			});
 		}
 	});
+
 
 
 	// $(document).click(function(e){
