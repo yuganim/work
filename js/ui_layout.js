@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
 
 	//gnb 2depth height
 	function gnb() {
@@ -33,34 +33,29 @@ window.onload = function () {
 			$('.gnb').removeClass('scroll');
 		}
 
-	}).resize();
-
 		// GNB mediaquery 기능
 		if (window.matchMedia('(max-width: 1200px)').matches) {
-			$('.gnb').addClass('gnb_fold').removeClass('gnb').removeClass('scroll');
-			$('.contents').css({'top': 0});
+			//태블릿모드
+			$('.gnb').addClass('gnb_fold').removeClass('gnb').removeClass('scroll').closest('.wrap_gnb').css({'height':'50','overflow':'hidden'});
+			//$('.wrap_gnb').css({'height':'50','overflow':'hidden'});
+			$('.wrap_gnb').css({'overflow':'hidden'});
 			$('.gnb_fold').removeAttr('style');
-			$('.wrap_gnb').css({'height':'50','overflow':'hidden'});
-			$('.gnb_fold .dropdown').css({'height': 'auto'});
+			$('.gnb_fold .dropdown').removeAttr('style');
+			$('.contents').removeAttr('style');
+			//$('.contents').css({'top': 0});
 			// GNB 높이값 이슈로 중복 선언
-			$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
+			//$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
 		} else {
-		    $('.wrap_gnb').removeAttr('style');
+			//pc모드
 		    $('.gnb_fold').addClass('gnb').removeClass('gnb_fold');
+		    $('.wrap_gnb').removeAttr('style');
 			$('.gnb').css({'display':'block','height':'auto'});
 			$('.gnb .dropdown').css({'height':0});
-			// GNB 높이값 이슈로 한번씩 선언
 			$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
+
+			$('wrap_gnb').removeAttr('style');
 		}
-	// textarea 높이 자동 변경
-	if ($('body').has('textarea').length > 0) {
-		setTimeout(function() {
-			$("textarea").each(function() {
-				var $this = $(this)
-				$this.css({'height': $this[0].scrollHeight + 8});
-			});
-		}, 1);
-	};
+	}).resize();
 
 	// GNB 미니모드 일 때 접기/펼침
 	$('.btn_menu').on('click', function() {
@@ -77,7 +72,11 @@ window.onload = function () {
 			});
 		}
 	});
-
+	// $(window).resize(function(){
+	// 	if ( $(this).width() > 625) {
+	// 		$('nav').removeAttr('style');
+	// 	}
+	// });
 
 	// $(document).click(function(e){
 	// 	var a = e.target;
@@ -160,6 +159,16 @@ window.onload = function () {
 			$(this).next('dd').addClass('on').parent('dl').siblings('dl').children().removeClass();
 		}
 	});
+
+	// textarea 높이 자동 변경
+	if ($('body').has('textarea').length > 0) {
+		setTimeout(function() {
+			$("textarea").each(function() {
+				var $this = $(this)
+				$this.css({'height': $this[0].scrollHeight + 8});
+			});
+		}, 1);
+	};
 }
 //tab type1
 jQuery(function($){
