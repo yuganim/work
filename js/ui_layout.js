@@ -37,14 +37,9 @@ window.onload = function() {
 		if (window.matchMedia('(max-width: 1200px)').matches) {
 			//태블릿모드
 			$('.gnb').addClass('gnb_fold').removeClass('gnb').removeClass('scroll').closest('.wrap_gnb').css({'height':'50','overflow':'hidden'});
-			//$('.wrap_gnb').css({'height':'50','overflow':'hidden'});
-			$('.wrap_gnb').css({'overflow':'hidden'});
 			$('.gnb_fold').removeAttr('style');
 			$('.gnb_fold .dropdown').removeAttr('style');
 			$('.contents').removeAttr('style');
-			//$('.contents').css({'top': 0});
-			// GNB 높이값 이슈로 중복 선언
-			//$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
 		} else {
 			//pc모드
 		    $('.gnb_fold').addClass('gnb').removeClass('gnb_fold');
@@ -52,8 +47,6 @@ window.onload = function() {
 			$('.gnb').css({'display':'block','height':'auto'});
 			$('.gnb .dropdown').css({'height':0});
 			$('.contents').css({'top': $('.gnb').innerHeight() + $('.gnbbar').innerHeight()});
-
-			$('wrap_gnb').removeAttr('style');
 		}
 	}).resize();
 
