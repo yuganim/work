@@ -139,4 +139,10 @@ $(document).ready(function(){
 			$('#container').css({'padding-top' : $gnbHei})
 		}
 	});
+
+	//main height
+	$(window).resize(function(){
+		var h = $(window).outerHeight();
+		$('#wrap_idx').css({'height' : h});
+	}).resize();
 });
