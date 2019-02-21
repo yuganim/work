@@ -142,7 +142,8 @@ $(document).ready(function(){
 
 	//main height
 	$(window).resize(function(){
+		var w = $(window).outerWidth();
 		var h = $(window).outerHeight();
-		$('#wrap_idx').css({'height' : h});
+		$('#wrap_idx').css({'height' : h, 'width' : w});
 	}).resize();
 });
