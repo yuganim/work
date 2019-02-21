@@ -1,0 +1,110 @@
+/*reset*/
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+a{color:#666;text-decoration:none}
+button{border:none;cursor:pointer}
+table{border-collapse:collapse;border-spacing:0}
+
+/*common*/
+html{font-size:62.5%}
+html,body{width:100%;height:100%}
+body{line-height:1;overflow-x:hidden;font-family:'Nanum Gothic','Malgun Gothic',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#1a1a1a; word-break:normal;-webkit-text-size-adjust:none;vertical-align:baseline}
+img{vertical-align:top;max-width:100%;}
+a:focus {outline:0}
+.blind {position:absolute; top:-2000em; left:-2000em; width:0; height:0; font-size:0; text-indent:-2000em;}
+
+#wrap:before{content:'';position:fixed;top:0;left:0;width:100%;height:3px;background:#d22c26 url(../images/bg_sub_bar.gif) 100% 0 no-repeat;background-size:50px 3px; z-index:100;}
+
+/*gnb*/
+#header {width:100%; padding-top:3px; background-color:#fff; border-bottom:1px solid #ccc;}
+#header.fixed {position:fixed; right:0; z-index:99;}
+#header .gnb {display:flex; margin-bottom:-1px;}
+.gnb li {display:flex; box-sizing:border-box; height:50px; white-space:nowrap; padding:15px; justify-content:center; line-height:1.2; font-size:1.6rem;}
+.gnb li.swiper-slide-thumb-active {border-bottom:2px solid #d22c26; font-weight:bold; color:#d22c26;}
+.gnb li.swiper-slide-thumb-active a {color:#d22c26;}
+
+/*content*/
+#container {}
+#container .content {overflow:hidden;}
+#container .content h2 {margin:0 20px 10px 20px; font-size:1.2rem;}
+.tab_cnt {float:left; box-sizing:border-box;}
+.cnt_head {padding:30px 20px; text-align:center; word-break:keep-all; line-height:1.3; font-size:1.4rem; color:#4d4d4d; background-color:#f5f5f5;}
+.cnt_head .logo {height:32px; margin-bottom:10px;}
+.cnt_head .tit {font-weight:normal; color:#1a1a1a;}
+.cnt_head .tit strong {display:block; line-height:1.5; font-size:1.8rem;}
+.cnt_head .btn {margin-top:20px;}
+.cnt_head .img_photo {margin:30px 0 15px 0;}
+.cnt {font-size:1.4rem; padding:30px 0; word-break:keep-all;}
+.cnt.pad {padding-left:20px; padding-right:20px;}
+.cnt .accordion {border-bottom:1px solid #e0e0e0;}
+.cnt .accordion dt {position:relative; border-top:1px solid #e0e0e0; padding:20px; font-size:1.6rem; color:#1a1a1a;}
+.cnt .accordion dt:after {display:block; position:absolute; top:50%; right:20px; content:""; background:no-repeat 0 0/100% url(../images/ico_arrow_black.png); width:12px; height:7px; transform:translate(0,-50%);}
+.cnt .accordion dt.on {border-bottom:0; font-weight:bold;}
+.cnt .accordion dt.on:after {background:no-repeat 0 0/100% url(../images/ico_arrow_accordion_on.png);}
+.cnt .accordion dd {overflow:hidden; padding:0 20px 20px 20px; display:none;}
+.cnt .accordion dd .tit {display:block;}
+.cnt .accordion .tit+.lst {margin-top:8px;} 
+.cnt .accordion .lst+.tit {margin-top:8px;}
+.home {background:#f5f5f5; text-align:center; padding:50px 0;}
+
+/*color variation*/
+.point {color:#d22c26;}
+
+/*list*/
+.lst li {padding-left:10px; margin-bottom:5px; position:relative; line-height:1.3; color:#4d4d4d;}
+.lst li:before {display:block; content:""; position:absolute; top:7px; left:0; width:3px; height:3px; background-color:#4d4d4d; border-radius:100%;}
+.lst_thum {}
+.lst_thum li {margin-bottom:30px; line-height:1.3;}
+.lst_thum li .tit {display:block; margin-bottom:15px; font-size:1.6rem; color:#1a1a1a;}
+.lst_thum li p+p {margin-top:10px;}
+.lst_thum .img_thum {margin-bottom:15px;}
+.lst_step li {line-height:1.3; margin-bottom:20px;}
+.lst+.btn {margin-top:15px;}
+
+/*button*/
+.btn {display:block; height:40px; vertical-align:middle; text-align:center; line-height:40px; font-size:1.4rem; color:#fff; background-color:#7d756d; border-radius:3px;}
+
+/*icon*/
+.noti {position:relative; padding-left:23px;}
+.noti:before {display:block; content:"!"; position:absolute; top:4px; left:0; width:15px; height:15px; text-align:center; font-size:1.4rem; color:#fff; border-radius:100%; background-color:#1a1a1a;}
+.ico_chant {box-sizing:border-box; position:relative; min-height:55px; padding:5px 0 5px 80px;}
+.ico_chant:before {display:block; content:""; position:absolute; top:0; left:0; width:55px; height:55px; border-radius:100%; background-color:#f5f5f5; background-repeat:no-repeat; background-position:50% 50%;}
+.ico_chant.chn1:before {background-image:url(../images/ico_broadcast.png); background-size:30px 30px;}
+.ico_chant.chn2:before {background-image:url(../images/ico_mobile_wifi.png); background-size:25px 35px;}
+.ico_chant.chn3:before {background-image:url(../images/ico_chnnel_t.png); background-size:36px 35px;}
+.ico_chant.chn4:before {background-image:url(../images/ico_moblie_web.png); background-size:25px 35px;}
+
+/*index*/
+.idx {background:#d7e7ef;}
+#wrap_idx {height:100%; background:no-repeat 50% 50%/cover url(../images/bg_airplane.jpg);}
+.idx_logo {width:58px; height:24px; padding-top:15px; background:no-repeat 0 100%/100% url(../images/logo.png); margin:0 auto;}
+.txt_idx {margin-top:35px; margin-bottom:160px; text-align:center; line-height:1.4; color:#fff; font-size:1.8rem; position:relative;}
+.txt_idx strong {display:block; margin-bottom:5px; font-size:2.3rem;}
+.txt_idx:after {display:block; content:""; position:absolute; bottom:-120px; left:0; width:293px; height:84px; background:no-repeat 0 0/100% url(../images/bu_air.png);}
+.nav {overflow:hidden; padding:0 20px;}
+.nav ul {overflow:hidden; display:flex; flex-wrap:wrap; padding-bottom:20px;}
+.nav li {float:left; width:47%; margin:1.5%;}
+.nav li a {display:block; box-sizing:border-box; height:100%; padding:70px 20px 20px 20px; text-align:center; border-radius:6px; box-shadow:0px 0px 10px 1px rgba(0,0,0,0.2); font-size:1.4rem; background-color:#fff; background-repeat:no-repeat;}
+.nav li.nav_tshop a {background-image:url(../images/ico_tshop.png); background-size:39px 45px; background-position:50% 15px;}
+.nav li.nav_duty a {background-image:url(../images/ico_duty.png); background-size:43px 40px; background-position:50% 20px;}
+.nav li.nav_svc a {background-image:url(../images/ico_svc.png); background-size:43px 40px; background-position:50% 20px;}
+.nav li.nav_cnlt a {background-image:url(../images/ico_cnlt.png); background-size:43px 40px; background-position:50% 20px;}
+
+
+
+/*.idx {background:#d7e7ef;}
+#wrap_idx {background:no-repeat 50% 50%/cover url(../images/bg_airplane.jpg);}
+.idx_logo {width:74px; height:35px; padding-top:20px; background:no-repeat 0 100%/100% url(../images/logo.png); margin:0 auto;}
+.txt_idx {padding:0 20px; margin-top:7vh; margin-bottom:30vh; text-align:center; line-height:1.3; color:#fff; font-size:2.2rem;}
+.txt_idx strong {display:block; margin-bottom:5px; font-size:2.8rem;}
+.nav {overflow:hidden; width:100%; padding:0 20px 60px 20px; box-sizing:border-box;}
+.nav ul {overflow:hidden; display:flex; flex-wrap:wrap;}
+.nav li {float:left; width:47%; margin:1.5%;}
+.nav li a {display:block; box-sizing:border-box; height:100%; padding:98px 20px 20px 25px; text-align:center; border-radius:6px; box-shadow:0px 0px 10px 1px rgba(0,0,0,0.2); font-weight:bold; font-size:1.8rem; color:#1a1a1a; background-color:#fff; background-repeat:no-repeat;}
+.nav li.nav_tshop a {background-image:url(../images/ico_tshop.png); background-size:55px 63px; background-position:50% 25px;}
+.nav li.nav_duty a {background-image:url(../images/ico_duty.png); background-size:60px 56px; background-position:50% 31px;}
+.nav li.nav_svc a {background-image:url(../images/ico_svc.png); background-size:63px 57px; background-position:50% 25px;}
+.nav li.nav_cnlt a {background-image:url(../images/ico_cnlt.png); background-size:63px 63px; background-position:50% 25px;}*/
