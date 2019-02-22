@@ -63,6 +63,8 @@ $(document).ready(function(){
 				autoHeight: true,
 				initialSlide:initSlide,
 				noSwipingClass: 'stop-swiping',
+				preventClicks : false,
+				preventClicksPropagation : false,
 				thumbs: {
 					swiper: swipeMenu
 				},
