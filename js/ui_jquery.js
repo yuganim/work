@@ -63,8 +63,9 @@ $(document).ready(function(){
 				autoHeight: true,
 				initialSlide:initSlide,
 				noSwipingClass: 'stop-swiping',
-				//shortSwipes : false,
-				threshold: 60,
+				shortSwipes : false,
+				longSwipes : false,
+				//threshold: 60,
 				thumbs: {
 					swiper: swipeMenu
 				},
