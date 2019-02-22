@@ -108,7 +108,7 @@ $(document).ready(function(){
 	$('.tab_cnt.swiper-slide').each(function(i){
 		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
 	});
-	//alert(cntHig[2])
+	alert(cntHig[4])
 
 	$('.accordion dt a').on('click', function(e){
 
