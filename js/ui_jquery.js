@@ -6,6 +6,42 @@ $(document).ready(function(){
 		initSlide = 1;
 	}
 
+
+	// accordion
+	if($('.cnt .accordion > dd').hasClass('on')){
+		$('.cnt .accordion > dd.on').css({'display':'block'});
+	}
+	$(window).resize(function(){
+		$('.accordion > dt').on('click', function() {
+			$this = $(this);
+			$target =  $this.next('dd');
+			$targetSilbTit = $this.siblings('dt');
+			$targetSilbCnt = $this.siblings('dd');
+			if(!$this.hasClass('on')){
+				$targetSilbTit.removeClass('on');
+				$targetSilbCnt.removeClass('on').slideUp();
+				$this.addClass('on');
+				$target.addClass('on').slideDown();
+				return false;
+			}
+
+		});
+	}).resize();
+
+	var targetHei = $('.accordion dd').outerHeight();
+	var targetHei2 = $('.accordion dd').html();
+	console.log(targetHei2);
+	console.log(targetHei);
+
+	// $(window).scroll(function(){
+	// 	var $scroll = $(window).scrollTop();
+	// 	var $gnbHei = $('#header').outerHeight();
+	// 	if ($scroll > $gnbHei) {
+	// 		$('#header').addClass('fixed')
+	// 		$('#container').css({'padding-top' : $gnbHei})
+	// 	}
+	// });
+	
 	$.fn.category = function(){
 		var spv = 'auto';
 		var gnbTotalWid = 0;
@@ -111,41 +147,6 @@ $(document).ready(function(){
 		}
 	}
 	$.fn.category();
-
-	// accordion
-	if($('.cnt .accordion > dd').hasClass('on')){
-		$('.cnt .accordion > dd.on').css({'display':'block'});
-	}
-	$(window).resize(function(){
-		$('.accordion > dt').on('click', function() {
-			$this = $(this);
-			$target =  $this.next('dd');
-			$targetSilbTit = $this.siblings('dt');
-			$targetSilbCnt = $this.siblings('dd');
-			if(!$this.hasClass('on')){
-				$targetSilbTit.removeClass('on');
-				$targetSilbCnt.removeClass('on').slideUp();
-				$this.addClass('on');
-				$target.addClass('on').slideDown();
-				return false;
-			}
-
-		});
-	}).resize();
-
-	var targetHei = $('.accordion dd').outerHeight();
-	var targetHei2 = $('.accordion dd').html();
-	console.log(targetHei2);
-	console.log(targetHei);
-
-	// $(window).scroll(function(){
-	// 	var $scroll = $(window).scrollTop();
-	// 	var $gnbHei = $('#header').outerHeight();
-	// 	if ($scroll > $gnbHei) {
-	// 		$('#header').addClass('fixed')
-	// 		$('#container').css({'padding-top' : $gnbHei})
-	// 	}
-	// });
 
 	//main height
 	$(window).resize(function(){
