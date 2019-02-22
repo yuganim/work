@@ -106,7 +106,7 @@ $(document).ready(function(){
 
 	var cntHig = new Array();
 	$('.tab_cnt').each(function(i){
-		cntHig[i] = $('.tab_cnt').eq(i).height();
+		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
 	});
 	//alert(cntHig[2])
 
@@ -121,9 +121,9 @@ $(document).ready(function(){
 
 		var ddHig = $this.next('dd').height();
 		var idx = $(e.target).closest('.tab_cnt').index();
-		alert('ddHig / '+ddHig);
-		alert('cntHig[idx] / '+cntHig[idx]);
-		alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
+		// alert('ddHig / '+ddHig);
+		// alert('cntHig[idx] / '+cntHig[idx]);
+		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
 		$('.content').height(ddHig + cntHig[idx]);
 
 	});	
