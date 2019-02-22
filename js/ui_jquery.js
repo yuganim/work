@@ -6,42 +6,6 @@ $(document).ready(function(){
 		initSlide = 1;
 	}
 
-
-	// accordion
-	if($('.cnt .accordion > dd').hasClass('on')){
-		$('.cnt .accordion > dd.on').css({'display':'block'});
-	}
-	$(window).resize(function(){
-		$('.accordion > dt').on('click', function() {
-			$this = $(this);
-			$target =  $this.next('dd');
-			$targetSilbTit = $this.siblings('dt');
-			$targetSilbCnt = $this.siblings('dd');
-			if(!$this.hasClass('on')){
-				$targetSilbTit.removeClass('on');
-				$targetSilbCnt.removeClass('on').slideUp();
-				$this.addClass('on');
-				$target.addClass('on').slideDown();
-				return false;
-			}
-
-		});
-	}).resize();
-
-	var targetHei = $('.accordion dd').outerHeight();
-	var targetHei2 = $('.accordion dd').html();
-	console.log(targetHei2);
-	console.log(targetHei);
-
-	// $(window).scroll(function(){
-	// 	var $scroll = $(window).scrollTop();
-	// 	var $gnbHei = $('#header').outerHeight();
-	// 	if ($scroll > $gnbHei) {
-	// 		$('#header').addClass('fixed')
-	// 		$('#container').css({'padding-top' : $gnbHei})
-	// 	}
-	// });
-	
 	$.fn.category = function(){
 		var spv = 'auto';
 		var gnbTotalWid = 0;
@@ -128,13 +92,20 @@ $(document).ready(function(){
 							swipeCnt.slideTo(1);
 						}
 					},
-					click: function(){
-						var clickHig = swipeCnt.clickedSlide.offsetHeight;
-						if ($('#header .fixed')) {
-							var clickHigFix = clickHig + $('#header').height();
-							$('.content.swiper-wrapper').animate({'height':clickHigFix}, 500);
-						} else {
-							$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
+					click: function(e){
+						// accordion
+						if ($('.accordion dt').is(e.target)) {
+							var $this = $(e.target);
+							$this.addClass('on');
+							$this.next('dd').addClass('on').css({'display': 'block'});
+							$this.siblings('dt').removeClass('on');
+							$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
+
+							if ($this.next('dd').css('display') == 'block') {
+								var clickHig = this.clickedSlide.clientHeight;
+								$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
+								
+							}
 						}
 					},
 					resize: function(){
@@ -147,6 +118,16 @@ $(document).ready(function(){
 		}
 	}
 	$.fn.category();
+
+
+	$(window).scroll(function(){
+		var $scroll = $(window).scrollTop();
+		var $gnbHei = $('#header').outerHeight();
+		if ($scroll > $gnbHei) {
+			$('#header').addClass('fixed')
+			$('#container').css({'padding-top' : $gnbHei})
+		}
+	});
 
 	//main height
 	$(window).resize(function(){
