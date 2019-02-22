@@ -106,7 +106,8 @@ $(document).ready(function(){
 
 	var cntHig = new Array();
 	$('.tab_cnt.swiper-slide').each(function(i){
-		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
+		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).offsetParent().height();
+		//$('.tab_cnt.swiper-slide').eq(i).outerHeight()
 	});
 	alert(cntHig[4])
 
