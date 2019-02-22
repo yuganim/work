@@ -63,8 +63,6 @@ $(document).ready(function(){
 				autoHeight: true,
 				initialSlide:initSlide,
 				noSwipingClass: 'stop-swiping',
-				preventClicks : false,
-				preventClicksPropagation : false,
 				thumbs: {
 					swiper: swipeMenu
 				},
@@ -93,21 +91,6 @@ $(document).ready(function(){
 							swipeCnt.slideTo(1);
 						}
 					},
-					click: function(){
-						// accordion
-						// if ($('.accordion dt a').is(e.target)) {
-						// 	var $this = $(e.target).parent('dt');
-						// 	$this.addClass('on');
-						// 	$this.next('dd').addClass('on').css({'display': 'block'});
-						// 	$this.siblings('dt').removeClass('on');
-						// 	$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
-						// }
-
-
-		clickHig = swipeCnt.clickedSlide.clientHeight;
-		alert(clickHig)
-		$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
-					},
 					resize: function(){
 						var secWid = swipeCnt.el.parentElement.clientWidth;
 						$('#container .tab_cnt').css({'width':secWid});
@@ -115,18 +98,32 @@ $(document).ready(function(){
 					}
 				}
 			});
-$(window).resize(function(){
+		}
+
+
+	var cntHig = new Array();
+	$('.tab_cnt').each(function(i){
+		cntHig[i] = $('.tab_cnt').eq(i).height();
+	});
+	//alert(cntHig[2])
+
 	$('.accordion dt a').on('click', function(e){
-		clickHig = $();
+
 		//alert(clickHig)
 		var $this = $(e.target).parent('dt');
 		$this.addClass('on');
 		$this.next('dd').addClass('on').css({'display': 'block'});
 		$this.siblings('dt').removeClass('on');
 		$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
-		return false;
+
+		var ddHig = $this.next('dd').height();
+		var idx = $(e.target).closest('.tab_cnt').index();
+		// alert('ddHig / '+ddHig);
+		// alert('cntHig[idx] / '+cntHig[idx]);
+		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
+		$('.content').height(ddHig + cntHig[idx]);
+
 	});	
-}).resize();
 
 
 	$(window).scroll(function(){
@@ -137,9 +134,6 @@ $(window).resize(function(){
 			$('#container').css({'padding-top' : $gnbHei})
 		}
 	});
-		}
-
-
 
 
 	//main height
