@@ -115,7 +115,7 @@ $(document).ready(function(){
 					}
 				}
 			});
-
+$(window).resize(function(){
 	$('.accordion dt a').on('click', function(e){
 		clickHig = $();
 		//alert(clickHig)
@@ -125,7 +125,9 @@ $(document).ready(function(){
 		$this.siblings('dt').removeClass('on');
 		$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
 		return false;
-	});
+	});	
+}).resize();
+
 
 	$(window).scroll(function(){
 		var $scroll = $(window).scrollTop();
