@@ -95,6 +95,7 @@ $(document).ready(function(){
 					click: function(e){
 						// accordion
 						if ($('.accordion dt').is(e.target)) {
+							alert('d')
 							var $this = $(e.target);
 							$this.addClass('on');
 							$this.next('dd').addClass('on').css({'display': 'block'});
