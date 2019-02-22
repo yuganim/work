@@ -94,23 +94,20 @@ $(document).ready(function(){
 					},
 					click: function(e){
 						// accordion
-						if($('.cnt .accordion > dd').hasClass('on')){
-							$('.cnt .accordion > dd.on').css({'display':'block'});
-						}
-						if ($('.accordion dt a').is(e.target)) {
+						// if ($('.accordion dt a').is(e.target)) {
+						// 	var $this = $(e.target).parent('dt');
+						// 	$this.addClass('on');
+						// 	$this.next('dd').addClass('on').css({'display': 'block'});
+						// 	$this.siblings('dt').removeClass('on');
+						// 	$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
+						// }
 							var $this = $(e.target).parent('dt');
-							$this.addClass('on');
-							$this.next('dd').addClass('on').css({'display': 'block'});
-							$this.siblings('dt').removeClass('on');
-							$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
-
 							if ($this.next('dd').css('display') == 'block') {
-								var clickHig = this.clickedSlide.clientHeight;
+								var clickHig = swipeCnt.clickedSlide.clientHeight;
 								$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
 
 								
 							}
-						}
 					},
 					resize: function(){
 						var secWid = swipeCnt.el.parentElement.clientWidth;
@@ -123,6 +120,13 @@ $(document).ready(function(){
 	}
 	$.fn.category();
 
+	$('.accordion dt a').on('click', function(e){
+		var $this = $(e.target).parent('dt');
+		$this.addClass('on');
+		$this.next('dd').addClass('on').css({'display': 'block'});
+		$this.siblings('dt').removeClass('on');
+		$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
+	});
 
 	$(window).scroll(function(){
 		var $scroll = $(window).scrollTop();
