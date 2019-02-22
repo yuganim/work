@@ -94,9 +94,9 @@ $(document).ready(function(){
 					},
 					click: function(e){
 						// accordion
-						if ($('.accordion dt').is(e.target)) {
+						if ($('.accordion dt a').is(e.target)) {
 							alert('d')
-							var $this = $(e.target);
+							var $this = $(e.target).parent('dt');
 							$this.addClass('on');
 							$this.next('dd').addClass('on').css({'display': 'block'});
 							$this.siblings('dt').removeClass('on');
