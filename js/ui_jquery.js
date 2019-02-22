@@ -94,8 +94,10 @@ $(document).ready(function(){
 					},
 					click: function(e){
 						// accordion
+						if($('.cnt .accordion > dd').hasClass('on')){
+							$('.cnt .accordion > dd.on').css({'display':'block'});
+						}
 						if ($('.accordion dt a').is(e.target)) {
-							alert('d')
 							var $this = $(e.target).parent('dt');
 							$this.addClass('on');
 							$this.next('dd').addClass('on').css({'display': 'block'});
@@ -105,6 +107,7 @@ $(document).ready(function(){
 							if ($this.next('dd').css('display') == 'block') {
 								var clickHig = this.clickedSlide.clientHeight;
 								$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
+
 								
 							}
 						}
