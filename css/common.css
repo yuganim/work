@@ -41,7 +41,7 @@ a:focus {outline:0}
 .cnt.pad {padding-left:20px; padding-right:20px;}
 .cnt .accordion {border-bottom:1px solid #e0e0e0;}
 .cnt .accordion dt {position:relative; border-top:1px solid #e0e0e0; font-size:1.6rem; color:#1a1a1a;}
-.cnt .accordion dt a {border:1px solid red; display:block; padding:20px;}
+.cnt .accordion dt a {display:block; padding:20px;}
 .cnt .accordion dt a.noti {padding-left:40px;}
 .cnt .accordion dt a.noti:before {display:block; content:"!"; position:absolute; top:20px; left:20px; width:15px; height:15px; text-align:center; font-size:1.4rem; color:#fff; border-radius:100%; background-color:#1a1a1a;}
 .cnt .accordion dt:after {display:block; position:absolute; top:50%; right:20px; content:""; background:no-repeat 0 0/100% url(../images/ico_arrow_black.png); width:12px; height:7px; transform:translate(0,-50%);}

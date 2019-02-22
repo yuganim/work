@@ -121,9 +121,9 @@ $(document).ready(function(){
 
 		var ddHig = $this.next('dd').height();
 		var idx = $(e.target).closest('.tab_cnt').index();
-		// alert('ddHig / '+ddHig);
-		// alert('cntHig[idx] / '+cntHig[idx]);
-		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
+		alert('ddHig / '+ddHig);
+		alert('cntHig[idx] / '+cntHig[idx]);
+		alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
 		$('.content').height(ddHig + cntHig[idx]);
 
 	});	
