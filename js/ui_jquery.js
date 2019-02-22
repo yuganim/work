@@ -117,28 +117,35 @@ $(document).ready(function(){
 		$('.cnt .accordion > dd.on').css({'display':'block'});
 	}
 	$(window).resize(function(){
-		var winHei = $(document).height();
 		$('.accordion > dt').on('click', function() {
 			$this = $(this);
 			$target =  $this.next('dd');
-			$targetSilbTit = $this.siblings('dt')
-			$targetSilbCnt = $this.siblings('dd')
+			$targetSilbTit = $this.siblings('dt');
+			$targetSilbCnt = $this.siblings('dd');
 			if(!$this.hasClass('on')){
 				$targetSilbTit.removeClass('on');
 				$targetSilbCnt.removeClass('on').slideUp();
 				$this.addClass('on');
 				$target.addClass('on').slideDown();
+				return false;
 			}
+
 		});
 	}).resize();
-	$(window).scroll(function(){
-		var $scroll = $(window).scrollTop();
-		var $gnbHei = $('#header').outerHeight();
-		if ($scroll > $gnbHei) {
-			$('#header').addClass('fixed')
-			$('#container').css({'padding-top' : $gnbHei})
-		}
-	});
+
+	var targetHei = $('.accordion dd').outerHeight();
+	var targetHei2 = $('.accordion dd').html();
+	console.log(targetHei2);
+	console.log(targetHei);
+
+	// $(window).scroll(function(){
+	// 	var $scroll = $(window).scrollTop();
+	// 	var $gnbHei = $('#header').outerHeight();
+	// 	if ($scroll > $gnbHei) {
+	// 		$('#header').addClass('fixed')
+	// 		$('#container').css({'padding-top' : $gnbHei})
+	// 	}
+	// });
 
 	//main height
 	$(window).resize(function(){
