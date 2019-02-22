@@ -6,7 +6,6 @@ $(document).ready(function(){
 		initSlide = 1;
 	}
 
-	$.fn.category = function(){
 		var spv = 'auto';
 		var gnbTotalWid = 0;
 		var gnbWidth = $(window).width();
@@ -92,7 +91,7 @@ $(document).ready(function(){
 							swipeCnt.slideTo(1);
 						}
 					},
-					click: function(e){
+					click: function(){
 						// accordion
 						// if ($('.accordion dt a').is(e.target)) {
 						// 	var $this = $(e.target).parent('dt');
@@ -101,13 +100,11 @@ $(document).ready(function(){
 						// 	$this.siblings('dt').removeClass('on');
 						// 	$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
 						// }
-							var $this = $(e.target).parent('dt');
-							if ($this.next('dd').css('display') == 'block') {
-								var clickHig = swipeCnt.clickedSlide.clientHeight;
-								$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
 
-								
-							}
+
+		clickHig = swipeCnt.clickedSlide.clientHeight;
+		alert(clickHig)
+		$('.content.swiper-wrapper').animate({'height':clickHig}, 500);
 					},
 					resize: function(){
 						var secWid = swipeCnt.el.parentElement.clientWidth;
@@ -116,16 +113,16 @@ $(document).ready(function(){
 					}
 				}
 			});
-		}
-	}
-	$.fn.category();
 
 	$('.accordion dt a').on('click', function(e){
+		clickHig = $();
+		//alert(clickHig)
 		var $this = $(e.target).parent('dt');
 		$this.addClass('on');
 		$this.next('dd').addClass('on').css({'display': 'block'});
 		$this.siblings('dt').removeClass('on');
 		$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
+		return false;
 	});
 
 	$(window).scroll(function(){
@@ -136,6 +133,10 @@ $(document).ready(function(){
 			$('#container').css({'padding-top' : $gnbHei})
 		}
 	});
+		}
+
+
+
 
 	//main height
 	$(window).resize(function(){
