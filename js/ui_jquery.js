@@ -120,15 +120,15 @@ $(document).ready(function(){
 	}).resize();
 
 
+
+
+	$('.accordion dt a').on('click', function(e){
 	var cntHig = new Array();
 	$('.tab_cnt.swiper-slide').each(function(i){
 		//cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).offsetParent().height();
 		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
+		alert(cntHig[i])
 	});
-	alert(cntHig[4])
-
-	$('.accordion dt a').on('click', function(e){
-
 		//alert(clickHig)
 		var $this = $(e.target).parent('dt');
 		$this.addClass('on');
