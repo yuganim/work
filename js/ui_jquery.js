@@ -114,14 +114,11 @@ $(window).on('load', function(){
 
 	var cntHig = new Array();
 	$('.tab_cnt.swiper-slide').each(function(i){
-		//cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).offsetParent().height();
 		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
 	});
 		alert(cntHig[4])
 
 	$('.accordion dt a').on('click', function(e){
-
-		//alert(clickHig)
 		var $this = $(e.target).parent('dt');
 		$this.addClass('on');
 		$this.next('dd').addClass('on').css({'display': 'block'});
@@ -130,9 +127,9 @@ $(window).on('load', function(){
 
 		var ddHig = $this.next('dd').height();
 		var idx = $(e.target).closest('.tab_cnt').index();
-		alert('ddHig / '+ddHig);
-		alert('cntHig[idx] / '+cntHig[idx]);
-		alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
+		// alert('ddHig / '+ddHig);
+		// alert('cntHig[idx] / '+cntHig[idx]);
+		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
 		$('.content').height(ddHig + cntHig[idx]);
 
 	});	
