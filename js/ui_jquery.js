@@ -140,8 +140,9 @@ $(window).on('load', function(){
 	$(window).resize(function(){
 		var w = $(window).outerWidth();
 		var h = $(window).outerHeight();
-		if (h <= 690) {
-			$('#wrap_idx').css({'height' : h, 'width' : w});
-		}
+		$('#wrap_idx').css({'height' : h, 'width' : w});
+		// if (h <= 700) {
+			
+		// }
 	}).resize();
 });
