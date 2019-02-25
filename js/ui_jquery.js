@@ -137,13 +137,11 @@ $(window).on('load', function(){
 	});	
 
 	//main height
-		var w = $(window).outerWidth();
-		var h = $(window).outerHeight();
-		$('#wrap_idx').css({'height' : h, 'width' : w});
 	$(window).resize(function(){
 		var w = $(window).outerWidth();
 		var h = $(window).outerHeight();
-		$('#wrap_idx').css({'height' : h, 'width' : w});
-		alert(h)
-	});
+		if (h <= 690) {
+			$('#wrap_idx').css({'height' : h, 'width' : w});
+		}
+	}).resize();
 });
