@@ -116,7 +116,6 @@ $(window).on('load', function(){
 	$('.tab_cnt.swiper-slide').each(function(i){
 		cntHig[i] = $('.tab_cnt.swiper-slide').eq(i).outerHeight();
 	});
-		alert(cntHig[4])
 
 	$('.accordion dt a').on('click', function(e){
 		var $this = $(e.target).parent('dt');
@@ -126,11 +125,14 @@ $(window).on('load', function(){
 		$this.next('dd').siblings('dd').removeClass('on').css({'display': 'none'});
 
 		var ddHig = $this.next('dd').height();
+		var ddofset = $this.next('dd').offset().top;
 		var idx = $(e.target).closest('.tab_cnt').index();
 		// alert('ddHig / '+ddHig);
 		// alert('cntHig[idx] / '+cntHig[idx]);
 		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
 		$('.content').height(ddHig + cntHig[idx]);
+		//alert(ddofset+ddHig);
+		$(window).scrollTop(ddofset + ddHig);
 
 	});	
 
