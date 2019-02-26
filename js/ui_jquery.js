@@ -65,7 +65,7 @@ $(window).on('load', function(){
 			noSwipingClass: 'stop-swiping',
 			shortSwipes : false,
 			longSwipes : false,
-			//threshold: 60,
+			threshold: 500,
 			thumbs: {
 				swiper: swipeMenu
 			},
@@ -127,11 +127,7 @@ $(window).on('load', function(){
 		var ddHig = $this.next('dd').height();
 		var ddofset = $this.next('dd').offset().top;
 		var idx = $(e.target).closest('.tab_cnt').index();
-		// alert('ddHig / '+ddHig);
-		// alert('cntHig[idx] / '+cntHig[idx]);
-		// alert('ddHig+cntHig[idx] / '+(ddHig+cntHig[idx]));
 		$('.content').height(ddHig + cntHig[idx]);
-		//alert(ddofset+ddHig);
 		$(window).scrollTop(ddofset + ddHig);
 
 	});	
@@ -141,8 +137,5 @@ $(window).on('load', function(){
 		var w = $(window).outerWidth();
 		var h = $(window).outerHeight();
 		$('#wrap_idx').css({'height' : h, 'width' : w});
-		// if (h <= 700) {
-			
-		// }
 	}).resize();
 });
