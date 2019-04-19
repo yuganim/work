@@ -48,32 +48,22 @@
 <div class="day" style="font-size:20px;"></div>
 </div>
     <script type="text/javascript">
-        var CountDdayDate = new Date("April 22, 2019 10:00:00").getTime();
-        var TimerDday = setInterval(function() { 
-          var countNowDate = new Date().getTime(); 
-          var countDistance = CountDdayDate - countNowDate; 
-          var countDay = Math.floor(countDistance / (1000 * 60 * 60 * 24 ) * 24); 
-          var countHour = Math.floor((countDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
-          var countMinute = Math.floor((countDistance % (1000 * 60 * 60)) / (1000 * 60)); 
-          var countSecond = Math.floor((countDistance % (1000 * 60)) / 1000); 
-          var strDay = countDay;
-          if(countDay < 0) { strDay = "00"; }
-          else if(countDay < 10) { strDay = "0" + strDay; }
-          var strHour = countHour;
-          if(countHour < 0) { strHour = "00";  }
-          else if(countHour < 10) { strHour = "0" + strHour; }
-          var strMinute = countMinute;
-          if(countMinute < 0) { strMinute = "00";  }
-          else if(countMinute < 10) { strMinute = "0" + strMinute; }
-          var strSecond = countSecond;
-          if(countSecond < 0) { strSecond = "00";  }
-          else if(countSecond < 10) { strSecond = "0" + strSecond; }
-          $(".dDay").html(strDay);
-          $(".dHour").html(strHour + strDay);
-          $(".dMinute").html(strMinute);
-          $(".dSecond").html(strSecond);
-        //  document.getElementById("d-day").innerHTML = "디데이까지 " + strHour + "시간 " + strMinute + "분 " + strSecond + "초 남았습니다."; 
-        },1000);
+       var countDownDate = new Date("April 22, 2019 10:00:00").getTime(); 
+      var x = setInterval(function() { 
+        var now = new Date().getTime(); 
+        var distance = countDownDate - now; 
+        var d = Math.floor(distance / (1000 * 60 * 60 * 24 )); 
+        var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+        var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
+        var s = Math.floor((distance % (1000 * 60)) / 1000); 
+        var sumh = h + (d * 24);
+        if(sumh < 10) { sumh = "0" + sumh;}
+        if(m < 10) { m = "0" + m;}
+        if(s < 10) { s = "0" + s;}
+       $(".dHour").html(sumh);
+       $(".dMinute").html(m);
+       $(".dSecond").html(s);
+      });
     </script>
 </body>
 </html>
