@@ -1,7 +1,11 @@
 $(window).on('load', function(){
 	var hash = window.location.hash.slice(1);
 	if (hash > 0) {
+		hash = Number(hash);
 		initSlide = hash;
+		initSlideCnt = initSlide + 1;
+		$('.gnb .tab:nth-child('+ initSlideCnt +')').addClass('on').siblings('.tab').removeClass('on');
+		$('.content .tab_cnt:nth-child('+ initSlideCnt +')').addClass('on').siblings('.tab_cnt').removeClass('on');
 	} else {
 		initSlide = 1;
 	}
@@ -25,6 +29,7 @@ $(window).on('load', function(){
 			spv = gnbLeng;
 		}	
 	}slideSpv();
+	
 
 	if($('#header').length > 0){
 		var $swipeMenu = $('#header li');
@@ -46,62 +51,65 @@ $(window).on('load', function(){
 				click: function(){
 					var offset = swipeMenu.clickedSlide.clientWidth + swipeMenu.clickedSlide.offsetLeft;
 					var tabIndex = swipeMenu.clickedIndex;
+					var tabIndexCnt = tabIndex + 1;
 					if(gnbWidth < offset){
 						swipeMenu.slideTo(tabIndex);
 					} else {
 						swipeMenu.slideTo(tabIndex-1);
 					}
 					$('html').animate({scrollTop : 0}, 500);
+					$('.gnb .tab:nth-child('+ tabIndexCnt +')').addClass('on').siblings('.tab').removeClass('on');
+					$('.content .tab_cnt:nth-child('+ tabIndexCnt +')').addClass('on').siblings('.tab_cnt').removeClass('on');
 				}
 			}
 		});
 	}
 
-	if($('#container').length > 0){
-		var swipeCnt = new Swiper('#container', {
-			slidesPerView :1 ,
-			autoHeight: true,
-			initialSlide:initSlide,
-			noSwipingClass: 'stop-swiping',
-			shortSwipes : false,
-			longSwipes : false,
-			threshold: 500,
-			thumbs: {
-				swiper: swipeMenu
-			},
-			on: {
-				init: function () {
-					tabCntNum = $('.content .tab_cnt').length;
-					var secWid = $(window).outerWidth();
-					$('#container .content').css({width : secWid * tabCntNum});
-					var thisHig = $(window).height() - $('#header').height();
-					$('.content').css({'min-height':thisHig});
-					$('.home').css({'min-height':thisHig});
-				},
-				slideChange: function () {
-					var $this = $('#header .swiper-slide-thumb-active');
-					var offset = $this.width()+$this.offset().left;
-					var tabIndex = $this.index();
-					if(gnbWidth < offset){
-						swipeMenu.slideTo(tabIndex);
-					} else {
-						swipeMenu.slideTo(tabIndex-1);
-					}
-				},
-				slideChangeTransitionStart: function(){
-					var $this = $('#header .swiper-slide-thumb-active');
-					if ($this.hasClass('stop-swiping')) {
-						swipeCnt.slideTo(1);
-					}
-				},
-				resize: function(){
-					var secWid = swipeCnt.el.parentElement.clientWidth;
-					$('#container .tab_cnt').css({'width':secWid});
-					$('#container .content').css({width : secWid * tabCntNum});
-				}
-			}
-		});
-	}
+	// if($('#container').length > 0){
+	// 	var swipeCnt = new Swiper('#container', {
+	// 		slidesPerView :1 ,
+	// 		autoHeight: true,
+	// 		initialSlide:initSlide,
+	// 		noSwipingClass: 'stop-swiping',
+	// 		//shortSwipes : false,
+	// 		//longSwipes : false,
+	// 		//threshold: 500,
+	// 		thumbs: {
+	// 			swiper: swipeMenu
+	// 		},
+	// 		on: {
+	// 			init: function () {
+	// 				tabCntNum = $('.content .tab_cnt').length;
+	// 				var secWid = $(window).outerWidth();
+	// 				$('#container .content').css({width : secWid * tabCntNum});
+	// 				var thisHig = $(window).height() - $('#header').height();
+	// 				$('.content').css({'min-height':thisHig});
+	// 				$('.home').css({'min-height':thisHig});
+	// 			},
+	// 			slideChange: function () {
+	// 				var $this = $('#header .swiper-slide-thumb-active');
+	// 				var offset = $this.width()+$this.offset().left;
+	// 				var tabIndex = $this.index();
+	// 				if(gnbWidth < offset){
+	// 					swipeMenu.slideTo(tabIndex);
+	// 				} else {
+	// 					swipeMenu.slideTo(tabIndex-1);
+	// 				}
+	// 			},
+	// 			slideChangeTransitionStart: function(){
+	// 				var $this = $('#header .swiper-slide-thumb-active');
+	// 				if ($this.hasClass('stop-swiping')) {
+	// 					swipeCnt.slideTo(1);
+	// 				}
+	// 			},
+	// 			resize: function(){
+	// 				var secWid = swipeCnt.el.parentElement.clientWidth;
+	// 				$('#container .tab_cnt').css({'width':secWid});
+	// 				$('#container .content').css({width : secWid * tabCntNum});
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	$(window).scroll(function(){
 		var $scroll = $(window).scrollTop();
