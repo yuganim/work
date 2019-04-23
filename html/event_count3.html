@@ -48,22 +48,29 @@
 <div class="day" style="font-size:20px;"></div>
 </div>
     <script type="text/javascript">
-       var countDownDate = new Date("April 22, 2019 10:00:00").getTime(); 
-      var x = setInterval(function() { 
-        var now = new Date(); 
-        var distance = countDownDate - now; 
-        var d = Math.floor(distance / (1000 * 60 * 60 * 24 )); 
-        var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
-        var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
-        var s = Math.floor((distance % (1000 * 60)) / 1000); 
-        var sumh = h + (d * 24);
-        if(sumh < 10) { sumh = "0" + sumh;}
-        if(m < 10) { m = "0" + m;}
-        if(s < 10) { s = "0" + s;}
-       $(".dHour").html(sumh);
-       $(".dMinute").html(m);
-       $(".dSecond").html(s);
-      });
+        var countDown = new Date("April 23, 2019 10:00:00");
+        var countDownDate = countDown.getTime(); 
+        setInterval(function() { 
+            var now = new Date(); 
+            var nowDate = now.getTime();
+            var distance = countDownDate - nowDate; 
+            var d = Math.floor(distance / (1000 * 60 * 60 * 24 )); 
+            var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+            var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
+            var s = Math.floor((distance % (1000 * 60)) / 1000); 
+            var sumh = h + (d * 24);
+            if(sumh < 10) { sumh = "0" + sumh;}
+            if(m < 10) { m = "0" + m;}
+            if(s < 10) { s = "0" + s;}
+            $(".dHour").html(sumh);
+            $(".dMinute").html(m);
+            $(".dSecond").html(s);
+            if (countDown < now) {
+                $(".dHour").html('00');
+                $(".dMinute").html('00');
+                $(".dSecond").html('00');
+            }
+        });
     </script>
 </body>
 </html>
