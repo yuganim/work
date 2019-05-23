@@ -53,41 +53,48 @@
 </table>
 <style>
 /* 뉴스티커 */
-.main_section.news_ticker {position:relative;/*height:60px;*/ height:116px; margin-bottom:-57px; z-index:0; background-color:#fff;padding:0;border-top:1px solid #d7d7d7;border-bottom:1px solid #d7d7d7;overflow:hidden;}
+.main_section.news_ticker {position:relative;height:60px;background-color:#fff;padding:0;border-top:1px solid #d7d7d7;border-bottom:1px solid #d7d7d7;overflow:hidden;}
 .main_section.news_ticker:before {content:'';position:absolute;top:15px;left:14px;display:block;width:30px;height:30px;background-color:#fff;background:url(//dev-contents-image.twayair.com/mobile/images/index/ico_news.png) center center no-repeat;background-size:30px;z-index:9;}
 .main_section.news_ticker .swiper-slide {padding:0 20px 0 53px;}
 .main_section.news_ticker a {display:inline-block;height:60px;line-height:60px;font-size:1.4rem;color:#1a1a1a; text-decoration:none;}
 .main_section.news_ticker .main_ticker {height:58px;}
-.main_section.news_ticker .ell {border-bottom:1px solid #ccc;}
 .ell{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;-moz-binding:url(ellipsis.xml#ellipsis)}
+
+.main_section.news_ticker .ell {width:80%;}
+
+	.btn_move {position:absolute; top:16px; right:10px; width:26px; height:26px; z-index:6}
+	.btn_move.pause {background:#fff url(//dev-contents-image.twayair.com/mobile/images/index/btn_pause.png) no-repeat 0 0; background-size:100%; font-size:0;}
+	.btn_move.play {background:#fff url(//dev-contents-image.twayair.com/mobile/images/index/btn_play.png) no-repeat 0 0; background-size:100%; font-size:0;}
 </style>
 <!-- 뉴스티커 -->
-	<div class="main_section news_ticker">
-		<div class="swiper_container">
-			<div class="main_ticker">
-				<div class="swiper-wrapper">
-					<!-- loop -->
-					<div class="swiper-slide ell">
-						<a href="#none">1. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-					</div>
-					<!-- /loop -->
-					<div class="swiper-slide ell">
-						<a href="#none">2. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-					</div>
-					<div class="swiper-slide ell">
-						<a href="#none">3. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-					</div>
-					<div class="swiper-slide ell">
-						<a href="#none">4. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-					</div>
-					<div class="swiper-slide ell">
-						<a href="#none">5. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+			<div class="main_section news_ticker">
+				<button class="btn_move pause">멈춤</button>
+				<div class="swiper_container">
+					<div class="main_ticker">
+						<div class="swiper-wrapper">
+							<!-- loop -->
+							<div class="swiper-slide ell">
+								<a href="#none">1. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+							</div>
+							<!-- /loop -->
+							<div class="swiper-slide ell">
+								<a href="#none">2. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+							</div>
+							<div class="swiper-slide ell">
+								<a href="#none">3. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+							</div>
+							<div class="swiper-slide ell">
+								<a href="#none">4. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+							</div>
+							<div class="swiper-slide ell">
+								<a href="#none">5. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<!-- /뉴스티커 -->
+			<!-- /뉴스티커 -->
+
 <script>
 	$.fn.mainSwiper = function() {
 		if ($('.main_section .main_ticker').length > 0) {
@@ -99,36 +106,19 @@
 					type: 'fraction',
 				},
 				autoplay: {
-					delay: 2000,
+					delay: 1000,
 					disableOnInteraction: false,
 				},
 			});
-
-			$('.main_section .main_ticker').on('click touchend focusin keypress keyup', function(e) {
-				alert('dd');
-				myIndex = $(e.target).parent().index();
-				dataIdx = $(e.target).parent().data('swiper-slide-index');
-				console.log('idx:'+myIndex+" // data idx:"+ (Number(dataIdx)));
-
-				// if(ticker.params.loop){
-				// 	ticker.params.loop = false;
-				// 	ticker.removeSlide([0, 6]);
-				// 	return ticker.params.loop;
-				// }
-				ticker.autoplay.stop();
-				ticker.slideTo(myIndex);
-				// ticker.slideToLoop(dataIdx);
-				// if ($(e.target).parent().hasClass('swiper-slide-duplicate')) {
-				// 	//console.log($(e.target.innerHTML));
-				// }
-
-				//.main_ticker 상,하 엘리먼트 focus 시 자동재생.
-				$('a').on('touchend focusin keypress keyup', function(e) {
-
-					if ($(e.target).parents().hasClass('service') || $(e.target).parents().hasClass('footer_info')) {
-						ticker.autoplay.start();
-					}
-				});
+			$('.main_section .btn_move').on('click', function(){
+				if ($(this).hasClass('pause')) {
+					ticker.autoplay.stop();
+					$(this).removeClass('pause').addClass('play').text('재생');
+				} else {
+					console.log('false')
+					ticker.autoplay.start();
+					$(this).removeClass('play').addClass('pause').text('멈춤');
+				}
 			});
 		}
 	};
