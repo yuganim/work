@@ -104,7 +104,7 @@
 				},
 			});
 
-			$('.main_section .main_ticker').on('focusin keypress keyup blur', function(e) {
+			$('.main_section .main_ticker').on('click touchend focusin keypress keyup', function(e) {
 				myIndex = $(e.target).parent().index();
 				dataIdx = $(e.target).parent().data('swiper-slide-index');
 				console.log('idx:'+myIndex+" // data idx:"+ (Number(dataIdx)));
@@ -122,7 +122,7 @@
 				// }
 
 				//.main_ticker 상,하 엘리먼트 focus 시 자동재생.
-				$('a').on('focusin keypress keyup blur', function(e) {
+				$('a').on('touchend focusin keypress keyup', function(e) {
 
 					if ($(e.target).parents().hasClass('service') || $(e.target).parents().hasClass('footer_info')) {
 						ticker.autoplay.start();
