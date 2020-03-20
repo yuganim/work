@@ -1,132 +1,642 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>티웨이항공 백오피스 HTML worksheet</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://dev-publishing.twayair.com/js/m/swiper.min.js"></script>
-	<style>
-		table {
-			width: 100%;
-			border-top: 1px solid #444444;
-			border-collapse: collapse;
-			border-left: 1px solid #444444;
-		}
-		table:last-child{margin-bottom: 100px;}
-		th {background:#eee;}
-		th, td {
-			border-bottom: 1px solid #444444;
-			border-right: 1px solid #444444;
-			padding: 10px;
-		}
-		td strong {
-			font-weight:normal;
-			color:#cf3232;
-		}
-		.txt_cnt {text-align:center;}
-	</style>
+	<title>퍼블리싱 UI가이드</title>
+	<!-- <link rel="stylesheet" href="../css/guide.css"> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCss.min.js"></script>
+	<link type="text/css" rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css"/>
+	<link type="text/css" rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreDefault.min.css"/>
+	<script>
+		SyntaxHighlighter.all();
+	</script>
+	<!-- <script src="../js/guide.js"></script> -->
 
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic");
+		html, body { border: none; font-family: "맑은 고딕","Malgun Gothic","돋움",Dotum,"굴림",Gulim,Helvetica,sans-serif; }
+		html, body, div, ul, li, dl, dt, dd, ol, p, h1, h2, h3, h4, h5, h6, form, fieldset { margin: 0; padding: 0; } html { -webkit-text-size-adjust: none; } ul, ol, dl { list-style: none; } img { border: 0; vertical-align: top; } fieldset { border: 0; } table { border-collapse: collapse; } button { border: none; background: none; cursor: pointer; outline: none; } a, a:active, a:link, a:visited, a:hover { text-decoration: none; } a { color: #333; } .blind { display: none; position: absolute !important; top: -2000em !important; left: -2000em; width: 0px !important; height: 0px !important; overflow: hidden; text-indent: -2000em; font-size: 0; } .color_point1 { color: #d32c26; } .color_point2 { color: #7aa54b; } body { font-family: 'Nanum Gothic', sans-serif; color: #333; line-height: 1.5; font-size: 15px; } a { color: #7aa54b; } header { box-sizing: border-box; position: fixed; top: 0; z-index: 1; width: 100%; min-height: 60px; padding: 0 50px; border-bottom: 1px solid #d32c26; overflow: hidden; line-height: 1.5; background: #fff; } header h1 { float: left; padding-top: 5px; display: inline-block; } header h1 img { vertical-align: middle; } header .gnb { float: left; margin-left: 30px; } header .gnb li { float: left; height: 60px; } header .gnb li a { display: block; height: 100%; padding: 0 15px; line-height: 60px; color: #333; } header .gnb li.on a { background-color: #d32c26; color: #fff; } .container { min-width: 900px; } .wrap_cnt { display: none; overflow: hidden; } .wrap_cnt .lnb { width: 250px; background-color: #eee; font-size: 14px; position: relative; position: fixed; bottom: 0; left: 0; } .wrap_cnt .lnb:after { display: block; content: ""; position: absolute; top: 0; right: 0; height: 100%; z-index: 1; border-right: 21px solid #fff; } .wrap_cnt .lnb ul { position: relative; z-index: 2; } .wrap_cnt .lnb ul li { position: relative; overflow: hidden; } .wrap_cnt .lnb ul li a { box-sizing: border-box; display: block; height: 40px; padding: 10px 20px; color: #333; background-color: #eee; cursor: pointer; } .wrap_cnt .lnb ul li a:after { display: block; content: ""; position: absolute; top: 0; right: 0; height: 100%; z-index: 1; border-right: 21px solid #fff; } .wrap_cnt .lnb ul li.on :after { display: block; content: ""; position: absolute; top: 0; right: 0; border: 0; border-top: 40px solid transparent; border-right: 23px solid #fff; } .wrap_cnt .lnb ul li.on :before { display: block; content: ""; position: absolute; top: -20px; right: 18px; width: 6px; height: 100px; background-color: #7aa54b; transform: rotate(30deg); } .wrap_cnt .lnb ul li.on a { color: #fff; background-color: #d32c26; } .wrap_cnt .lnb ul li.on ~ li :after { display: block; content: ""; position: absolute; top: 0; right: 0; height: 100%; border-right: 21px solid #fff; } .wrap_cnt .content { margin-top: 60px; padding: 20px 20px 20px 270px; } .wrap_cnt .content .bx_tit { width: 100%; margin-bottom: 20px; background-color: #eee; border-radius: 10px; padding: 30px; } .wrap_cnt .content .bx_tit .tit { margin-bottom: 20px; font-size: 50px; } .wrap_cnt .content .sec { margin-bottom: 50px; } .wrap_cnt .content .sec .tit { padding: 10px 0; margin-bottom: 20px; font-size: 30px; border-bottom: 1px solid #eee; } .wrap_cnt .content .sec .tit_desc { margin-bottom: 10px; font-size: 18px; } .wrap_cnt .content .sec .con_desc { margin-bottom: 20px; } .wrap_cnt.active { display: block; } .tbl { width: 100%; border: 1px solid #eee; } .tbl a { display: block; color: #7aa54b; text-decoration: underline; } .tbl a:hover { color: #7aa54b; } .tbl thead th { padding: 10px; border-bottom: 1px solid #eee; background-color: #eee; } .tbl tbody td { padding: 10px; border-top: 1px solid #eee; border-left: 1px solid #eee; font-size: 12px; } .tbl tbody td:first-child { border-left: 0; } .tbl tbody td.no { text-align: center; } .tbl tbody tr.line td { border-top: 3px solid #eee; } .dot { position: relative; padding-left: 10px; } .dot:before { display: block; content: ""; position: absolute; top: 9px; left: 0; width: 3px; height: 3px; border-radius: 50%; background: #333; }
+	</style>
 </head>
 <body>
-
-<table>
-	<colgroup>
-		<col width="200px;">
-		<col width="*"> 
-	</colgroup>
-	<tr>
-		<th>파일유형</th>
-		<th>파일디렉토리</th>
-	</tr>
-	<tr>
-		<th></th>
-		<td><a href="html/airplane_main.html">airplane_main</a></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td><a href="html/airplane.html">airplane</a></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td><a href="html/event_count3.html">test</a></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td><a href="html/TTW_landing_20190614.html">ttw url test</a></td>
-	</tr>
-</table>
-<style>
-/* 뉴스티커 */
-.main_section.news_ticker {position:relative;height:60px;background-color:#fff;padding:0;border-top:1px solid #d7d7d7;border-bottom:1px solid #d7d7d7;overflow:hidden;}
-.main_section.news_ticker:before {content:'';position:absolute;top:15px;left:14px;display:block;width:30px;height:30px;background-color:#fff;background:url(//dev-contents-image.twayair.com/mobile/images/index/ico_news.png) center center no-repeat;background-size:30px;z-index:9;}
-.main_section.news_ticker .swiper-slide {padding:0 20px 0 53px;}
-.main_section.news_ticker a {display:inline-block;height:60px;line-height:60px;font-size:1.4rem;color:#1a1a1a; text-decoration:none;}
-.main_section.news_ticker .main_ticker {height:58px;}
-.ell{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;-moz-binding:url(ellipsis.xml#ellipsis)}
-
-.main_section.news_ticker .ell {width:80%;}
-
-	.btn_move {position:absolute; top:16px; right:10px; width:26px; height:26px; z-index:6}
-	.btn_move.pause {background:#fff url(//dev-contents-image.twayair.com/mobile/images/index/btn_pause.png) no-repeat 0 0; background-size:100%; font-size:0;}
-	.btn_move.play {background:#fff url(//dev-contents-image.twayair.com/mobile/images/index/btn_play.png) no-repeat 0 0; background-size:100%; font-size:0;}
-</style>
-<!-- 뉴스티커 -->
-			<div class="main_section news_ticker">
-				<button class="btn_move pause">멈춤</button>
-				<div class="swiper_container">
-					<div class="main_ticker">
-						<div class="swiper-wrapper">
-							<!-- loop -->
-							<div class="swiper-slide ell">
-								<a href="#none">1. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-							</div>
-							<!-- /loop -->
-							<div class="swiper-slide ell">
-								<a href="#none">2. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-							</div>
-							<div class="swiper-slide ell">
-								<a href="#none">3. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-							</div>
-							<div class="swiper-slide ell">
-								<a href="#none">4. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-							</div>
-							<div class="swiper-slide ell">
-								<a href="#none">5. 8월 8일 태풍으로 인해 항공편이 지연되어 8월 8일 태풍으로 인해 항공편이 지연되어</a>
-							</div>
+	<div id="wrap">
+		<header>
+			<h1><img src="http://image-real.twayair.com/front/common/images/event/20160317/logo.png" alt="t'way"><span>kiosk</span></h1>
+			<nav class="gnb">
+				<ul>
+					<li class="on"><a href="#tab1">작업규칙</a></li>
+					<li><a href="#tab2">UI 가이드</a></li>
+					<li><a href="#tab3">산출물 리스트</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div class="container">
+			<div class="wrap_cnt active" id="tab1">
+				<nav class="lnb">
+					<ul>
+						<li class="on"><a>기본정책</a></li>
+						<li><a>HTML 코드 작성 규칙</a></li>
+						<li><a>네이밍 규칙</a></li>
+						<li><a>CSS 코드 작성 규칙</a></li>
+					</ul>
+				</nav>
+				<div class="content">
+					<div class="sec">
+						<h3 class="tit">기본정책</h3>
+						<h4 class="tit_desc">해상도</h4>
+						<div class="con_desc">1024 x 768</div>
+						<h4 class="tit_desc">크로스 브라우징</h4>
+						<div class="con_desc"><strong>IE8이상,</strong> Chrome, FF 등 표준브라우저. <br><span class="point">※키오스크 기기 특성 상 하위 IE8브라우저로 노출 되고 있어 하위 브라우저 필히 체크 필요.</span></div>
+						<h4 class="tit_desc">JQuery</h4>
+						<div class="con_desc">jquery-1.8.3.min.js</div>
+					</div>
+					<div class="sec">
+						<h3 class="tit">HTML 코드 작성 규칙</h3>
+						<h4 class="tit_desc">HTML4 Transitional</h4>
+						<div class="con_desc">
+							<ul>
+								<li class="dot">표준 DTD 문서 HTML4 관용모드(Transitional) 기본 골격 사용.</li>
+								<li class="dot">meta 태그 http-equiv="X-UA-Compatible" content="IE=edge" 사용으로 최신모드로 지정된 DOCTYPE에 상관없이 IE8 이상 버전에서 항상 최신 표준 모드로 렌더링되도록 노출방식 지정.</li>
+							</ul>
 						</div>
+						<pre class="brush: html;">
+							&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+							&lt;html lang="en"&gt;
+							&lt;head&gt;
+								&lt;meta http-equiv="Content-Type" content="text/html;charset=UTF-8"&gt;
+								&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+								&lt;title&gt;Document&lt;/title&gt;
+							&lt;/head&gt;
+							&lt;body&gt;
+								...
+							&lt;/body&gt;
+							&lt;/html&gt;</pre>
+					</div>
+					<div class="sec">
+						<h3 class="tit">네이밍 규칙</h3>
+						<div style="height:500px;">작성예정</div>
+					</div>
+					<div class="sec">
+						<h3 class="tit">CSS 코드 작성 규칙</h3>
+						<div style="height:500px;">작성예정</div>
 					</div>
 				</div>
 			</div>
-			<!-- /뉴스티커 -->
+			<div class="wrap_cnt" id="tab2">
+				<nav class="lnb">
+					<ul>
+						<li class="on"><a>LAYOUT</a></li>
+						<li><a>TEXT / LIST</a></li>
+						<li><a>FORM / BUTTON</a></li>
+						<li><a>TAB</a></li>
+						<li><a>TABLE</a></li>
+						<li><a>LAYER</a></li>
+					</ul>
+				</nav>
+				<div class="content">
+					<div class="bx_tit">
+						<h2 class="tit">업데이트 예정</h2>
+						<!-- <p>content UI 가이드content UI 가 <br>이드content UI 가이드</p> -->
+					</div>
 
-<script>
-	$.fn.mainSwiper = function() {
-		if ($('.main_section .main_ticker').length > 0) {
-			var ticker = new Swiper('.main_ticker', {
-				direction: 'vertical',
-				loop: true,
-				pagination: {
-					el: '.pagination',
-					type: 'fraction',
-				},
-				autoplay: {
-					delay: 1000,
-					disableOnInteraction: false,
-				},
-			});
-			$('.main_section .btn_move').on('click', function(){
-				if ($(this).hasClass('pause')) {
-					ticker.autoplay.stop();
-					$(this).removeClass('pause').addClass('play').text('재생');
-				} else {
-					console.log('false')
-					ticker.autoplay.start();
-					$(this).removeClass('play').addClass('pause').text('멈춤');
-				}
-			});
-		}
-	};
-	$.fn.mainSwiper();
-</script>
+					<div class="sec">
+						<h3 class="tit">LAYOUT</h3>
+						<pre class="brush: html;">
+							&lt;button&gt;dsd&lt;/button&gt;
+							&lt;p&gt;content UI 가이드content UI 가 &lt;br&gt;이드content UI 가이드&lt;/p&gt;</pre>
+					</div>
+				</div>
+			</div>
+			<div class="wrap_cnt" id="tab3">
+				<nav class="lnb">
+					<ul>
+						<li class="on"><a>CSS/Jquery 사용현황</a></li>
+						<li><a>산출물 현황</a></li>
+					</ul>
+				</nav>
+				<div class="content">
+					<div class="sec">
+						<h3 class="tit">CSS/Jquery 사용현황</h3>
+						<table class="tbl">
+							<colgroup>
+								<col style="width:3%">
+								<col style="width:37%">
+								<col style="width:10%">
+								<col style="width:10%">
+								<col style="width:10%">
+								<col style="width:10%">
+								<col style="width:20%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>디렉토리</th>
+									<th>구분</th>
+									<th>URL</th>
+									<th>완료일</th>
+									<th>수정일</th>
+									<th>비고</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="no">1</td>
+									<td>css/style.css</td>
+									<td>CSS</td>
+									<td><a href="../css/style.css" target="_blank">style.css</a></td>
+									<td>2019.02.15</td>
+									<td>2020.01.17</td>
+									<td>스타일CSS</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>css/style.css.map</td>
+									<td>sourcemap</td>
+									<td><a href="../css/style.css.map" target="_blank">style.css.map</a></td>
+									<td>2019.02.15</td>
+									<td>2020.01.17</td>
+									<td>SCSS 소스맵</td>
+								</tr>
+								<tr class="line">
+									<td>3</td>
+									<td>js/jquery-1.8.3.min.js</td>
+									<td>jQuery</td>
+									<td><a href="../js/jquery-1.8.3.min.js" target="_blank">jquery-1.8.3.min.js</a></td>
+									<td>2019.02.15</td>
+									<td></td>
+									<td>코어 jQuery 라이브러리</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>js/ui.js</td>
+									<td>jQuery</td>
+									<td><a href="../js/ui.js" target="_blank">ui.js</a></td>
+									<td>2019.02.15</td>
+									<td>2020.01.16</td>
+									<td>UI 인터렉션 및 가이드 js</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="sec">
+						<h3 class="tit">산출물 현황</h3>
+						<table class="tbl">
+							<colgroup>
+								<col style="width:3%">
+								<col style="width:10%">
+								<col style="width:13%">
+								<col style="width:5%">
+								<col style="width:5%">
+								<col style="width:15%">
+								<col style="width:7%">
+								<col style="width:7%">
+								<col style="width:45%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>화면명</th>
+									<th>2Depth</th>
+									<th>3Depth</th>
+									<th>구분</th>
+									<th>URL</th>
+									<th>완료일</th>
+									<th>수정일</th>
+									<th>비고</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="no">1</td>
+									<td>00_언어선택화면</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="00_main.html" target="_blank">00_main.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">2</td>
+									<td>01_이용제한승객</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="01_이용제한승객.html" target="_blank">01_이용제한승객.html</a></td>
+									<td>2019.02.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td class="no">3</td>
+									<td>02_예약조회방법선택</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="02_예약조회방법선택.html" target="_blank">02_예약조회방법선택.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.02.25</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">4</td>
+									<td></td>
+									<td>03_예약조회_QR</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="02_예약조회_QR.html" target="_blank">02_예약조회_QR.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">5</td>
+									<td></td>
+									<td>03_예약조회_키보드</td>
+									<td></td>
+									<td>page</td>
+									<td><a href="02_예약조회_키보드.html" target="_blank">02_예약조회_키보드.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">6</td>
+									<td></td>
+									<td>03_예약조회방법선택_pop</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="02_예약조회방법선택_pop.html" target="_blank">02_예약조회방법선택_pop.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">7</td>
+									<td></td>
+									<td>03_예약조회방법선택_pop_외국어</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="02_예약조회방법선택_pop_외국어.html" target="_blank">02_예약조회방법선택_pop_외국어.html</a></td>
+									<td>2019.02.18</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no" rowspan="7">8</td>
+									<td>04_탑승자선택</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="03_탑승자선택.html" target="_blank">03_탑승자선택.html</a></td>
+									<td>2019.02.15</td>
+									<td>2020.01.15</td>
+									<td>
+										- h1태그에 class 추가로 관리자 모드 ui변경.<br>
+										- 2020 키오스크 기능개선사항 추가.
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>04_탑승자선택_pop_단체수속</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="03_탑승자선택_pop_단체수속.html" target="_blank">03_탑승자선택_pop_단체수속.html</a></td>
+									<td>2020.01.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>04_탑승자선택_pop_수속중</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="03_탑승자선택_pop_수속중.html" target="_blank">03_탑승자선택_pop_수속중.html</a></td>
+									<td>2020.01.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>04_탑승자선택_pop_수속완료</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="03_탑승자선택_pop_수속완료.html" target="_blank">03_탑승자선택_pop_수속완료.html</a></td>
+									<td>2020.01.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td>04_탑승자선택_eng</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="03_탑승자선택_eng.html" target="_blank">03_탑승자선택_eng.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.03.04</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>04_탑승자선택_jp</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="03_탑승자선택_jp.html" target="_blank">03_탑승자선택_jp.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.03.04</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>04_탑승자선택_cn</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="03_탑승자선택_cn.html" target="_blank">03_탑승자선택_cn.html</a></td>
+									<td>2019.02.15</td>
+									<td>2019.03.04</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">9</td>
+									<td>04_탑승자선택_고객화면</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="03_탑승자선택_고객화면.html" target="_blank">03_탑승자선택_고객화면.html</a></td>
+									<td>2019.02.19</td>
+									<td>2019.02.26</td>
+									<td><p>시간2벌/4벌 따로 노출되는 경우 ui.js로 index값 체크하여 백그라운드 이미지 변경 함.</p></td>
+								</tr>
+								<tr>
+									<td class="no" rowspan="4">10</td>
+									<td>05_좌석선택</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="04_좌석선택.html" target="_blank">04_좌석선택.html</a></td>
+									<td>2019.02.19</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td>05_좌석선택_eng</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="04_좌석선택_eng.html" target="_blank">04_좌석선택_eng.html</a></td>
+									<td>2019.02.19</td>
+									<td>2019.03.13</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>05_좌석선택_jp</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="04_좌석선택_jp.html" target="_blank">04_좌석선택_jp.html</a></td>
+									<td>2019.02.19</td>
+									<td>2019.03.13</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>05_좌석선택_cn</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="04_좌석선택_cn.html" target="_blank">04_좌석선택_cn.html</a></td>
+									<td>2019.02.19</td>
+									<td>2019.03.13</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">11</td>
+									<td></td>
+									<td>05_좌석선택_pop</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="04_좌석선택_pop.html" target="_blank">04_좌석선택_pop.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">12</td>
+									<td>05_승객정보입력</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="05_승객정보입력.html" target="_blank">05_승객정보입력.html</a></td>
+									<td>2020.01.17</td>
+									<td class="color_point1">2020.01.30</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td class="no">13</td>
+									<td>06_탑승권발급</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="05_탑승권발급.html" target="_blank">05_탑승권발급.html</a></td>
+									<td>2019.02.21</td>
+									<td>2019.02.26</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">14</td>
+									<td>07_수하물안내</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="06_수하물안내.html" target="_blank">06_수하물안내.html</a></td>
+									<td>2019.02.19</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no" rowspan="4">15</td>
+									<td>08_위험물품안내</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="07_위험물품안내.html" target="_blank">07_위험물품안내.html</a></td>
+									<td>2019.02.20</td>
+									<td>2019.02.21</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>08_위험물품안내_eng</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="07_위험물품안내_eng.html" target="_blank">07_위험물품안내_eng.html</a></td>
+									<td>2019.02.26</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>08_위험물품안내_jp</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="07_위험물품안내_jp.html" target="_blank">07_위험물품안내_jp.html</a></td>
+									<td>2019.02.26</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>08_위험물품안내_cn</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="07_위험물품안내_cn.html" target="_blank">07_위험물품안내_cn.html</a></td>
+									<td>2019.02.26</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">16</td>
+									<td>00.로딩화면</td>
+									<td></td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.로딩화면.html" target="_blank">00.로딩화면.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">17</td>
+									<td rowspan="7">00.팝업형식</td>
+									<td>00.팝업형식_alert</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_alert.html" target="_blank">00.팝업형식_alert.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">18</td>
+									<td>00.팝업형식_confirm</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_confirm.html" target="_blank">00.팝업형식_confirm.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">19</td>
+									<td>00.팝업형식_notice</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_notice.html" target="_blank">00.팝업형식_notice.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">20</td>
+									<td>00.팝업형식_password</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_password.html" target="_blank">00.팝업형식_password.html</a></td>
+									<td>2019.02.21</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">21</td>
+									<td>00.팝업형식_search</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_search.html" target="_blank">00.팝업형식_search.html</a></td>
+									<td>2020.01.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td class="no">22</td>
+									<td>00.팝업형식_number</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_number.html" target="_blank">00.팝업형식_number.html</a></td>
+									<td>2020.01.15</td>
+									<td>2020.01.15</td>
+									<td>2020 키오스크 기능개선사항 추가.</td>
+								</tr>
+								<tr>
+									<td class="no">23</td>
+									<td>00.팝업형식_notice_유상좌석</td>
+									<td></td>
+									<td>layer</td>
+									<td><a href="00.팝업형식_notice_유상좌석.html" target="_blank">00.팝업형식_notice_유상좌석.html</a></td>
+									<td>2019.03.13</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="no">24</td>
+									<td>00.ERROR</td>
+									<td></td>
+									<td></td>
+									<td>page</td>
+									<td><a href="00.ERROR.html" target="_blank">00.ERROR.html</a></td>
+									<td>2019.02.25</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer></footer>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+	var hash = window.location.hash.slice(0);
+
+	//GNB, content 이동
+	if (!hash.length == 0) {
+		$(hash).addClass('active').siblings('.wrap_cnt').removeClass('active');
+		$('.gnb li a[href="'+hash+'"]').parent('li').addClass('on').siblings('li').removeClass('on');
+	}
+	$('.gnb a').on('click',function(){
+		var id = $(this).attr('href');
+		$(this).parent('li').addClass('on').siblings('li').removeClass('on');
+		$(id).addClass('active').siblings('.wrap_cnt').removeClass('active');
+		
+		//LNB on포커스 첫번째로 이동
+		$(id).find('.lnb li').eq(0).addClass('on').siblings('li').removeClass('on');
+	});
+
+	//LNB 높이값 설정
+	$(window).resize(function(){
+		var brwHei = $(window).height();
+		var hdrHei = $('header').outerHeight();
+		$('.lnb').height(brwHei - hdrHei);
+		console.log(brwHei - hdrHei);
+	}).resize();		
+
+	//LNB 이동
+	$('.lnb a').on('click',function(){
+		var thisidx = $(this).parent().index();
+		var offsetY = $(this).closest('.wrap_cnt').find('.sec').eq(thisidx).offset().top;
+		//$(document).scrollTop(offsetY - 60);
+		$('html, body').animate({scrollTop:offsetY - 60}, 500, 'swing');
+		//console.log(offsetY);
+		$(this).parent('li').addClass('on').siblings('li').removeClass('on');
+		return false;
+	});
+
+});
+	</script>
 </body>
 </html>
