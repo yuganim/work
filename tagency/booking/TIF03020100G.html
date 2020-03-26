@@ -1,0 +1,2198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 항공권 예매</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/reset.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/swiper.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/plugin.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/main.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/booking.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/kjh.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/pjy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jhy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lmy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lhb.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/rangeslider.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+
+<script>
+$(function(){
+
+	/* 스와이퍼 */
+	// 구간선택
+	var swiper = new Swiper('.service_section_wrap .swiper-container', {
+		//loop: true,
+		pagination: {
+			el: '.service_section_wrap .swiper-pagination',
+			clickable: true,
+		},
+		navigation: {
+			nextEl: '.service_section_wrap .btn_slide_next',
+			prevEl: '.service_section_wrap .btn_slide_prev',
+		},
+	});
+
+	//날짜선택
+	var swiper = new Swiper('.sel_date_wrap .swiper-container', {
+		//loop: true,
+		slidesPerView: 7,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		navigation: {
+			nextEl: '.sel_date_wrap .btn_slide_next',
+			prevEl: '.sel_date_wrap .btn_slide_prev',
+		},
+	});
+
+	//탑승자선택
+	var swiper = new Swiper('.sel_passenger_wrap .swiper-container', {
+		//loop: true,
+		slidesPerView: 5,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		navigation: {
+			nextEl: '.sel_passenger_wrap .btn_slide_next',
+			prevEl: '.sel_passenger_wrap .btn_slide_prev',
+		},
+	});
+
+	// Summary 구간
+	var swiper = new Swiper('.summary_top_cont .swiper-container', {
+		//loop: true,
+		direction: 'vertical',
+		navigation: {
+			nextEl: '.section_slide .btn_slide_next',
+			prevEl: '.section_slide .btn_slide_prev',
+		},
+	});
+
+	// Summary Open
+	var win_h = $(window).height() - sum_top_h,
+		sum_h = $('.summary_wrap').height(),
+		sum_top_h = $('.summary_top').height() + $('.btn_summary_open').height();
+	$('.summary_wrap').css({'bottom':0,'height':win_h});
+	$('.btn_summary_open').on('click', function(e) {
+		$('html,body').css({'overflow-y':'hidden'});
+		$('.summary_top').css({'bottom':'','top':'0'});
+		$('.summary_wrap').css({'bottom':'','top':'0','overflow-y':'auto'});
+		$('.btn_summary_open').hide();
+		$('.btn_summary_close').show();
+	});
+
+	// Summary Close
+	$('.btn_summary_close').on('click', function(e) {
+		$('html,body').css({'overflow-y':''});
+		$('.summary_top').css({'bottom':0,'top':'',});
+		$('.summary_wrap').css({'bottom':0,'top':'','overflow-y':'hidden'});
+		$('.btn_summary_close').hide();
+		$('.btn_summary_open').show();
+	});
+	
+	// 구간 리스트 아코디언
+	//$('.section_list li:first-child a.section_list_box').addClass('on');
+	$('.section_list').find('.detail_info').hide();
+	//$('.section_list').find('.detail_info:first').show();
+	$('.section_list li a.section_list_box').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.section_list a.section_list_box').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+	});
+
+	// Summary 탑승객
+	$('.passenger_list li:first-child a.title').addClass('on');
+	$('.passenger_list').find('.passenger_summary:first').show();
+	$('.passenger_list a.title').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.passenger_list a.title').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+	});
+
+	// 여정 재검색
+	$('button.refresh').on('click', function() {
+		$('.summary_wrap').css({'z-index': 15});
+		$('.dim02').fadeIn(150);
+		$('.layer_plan_research').fadeIn(250);
+	});
+	$('button.cancel').on('click', function() {
+		$('.summary_wrap').css({'z-index': ''});
+		$('.dim02').fadeOut(150);
+		$('.layer_plan_research').fadeOut(250);
+	});
+
+	//구간 더보기
+	$('.btn_section_more').on('click', function(e) {
+		$('.layer_section_list').slideDown(200);
+	});
+	$('.layer_section_list .btn_close').on('click', function(e) {
+		$('.layer_section_list').slideUp(200);
+	});
+
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 35});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 35});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+
+	$('#end').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 445});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 445});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		$('#datepicker_layer').css({'top': 350});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('.btn_del').on('click', function(){
+		$(this).hide(200);
+		$(this).parents('.add_service').find('.add_bundle').hide();
+	});
+
+	//수화물 선택 슬라이더바
+	$('.range_event').rangeslider({
+		polyfill: false,
+
+		// Callback function
+		onInit: function(){
+			$rangeEl = this.$range;
+			// get range index labels
+			var rangeLabels = this.$element.attr('data-labels');
+			var rangePrices = this.$element.attr('data-prices');
+			var label = '';
+			rangeLabels = rangeLabels.split(', ');
+			rangePrices = rangePrices.split(', ');
+			// add labels
+			$rangeEl.append('<div class="rangeslider__labels"></div>');
+			$(rangeLabels).each(function(index, value) {
+				if(index == 0){
+					label = '<span class="rangeslider__labels__label active" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}else{
+					label = '<span class="rangeslider__labels__label" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}
+				$rangeEl.find('.rangeslider__labels').append(label);
+			});
+			//reset label width
+			var labelW = 100 / (this.$element.attr('max') / this.$element.attr('step') + 1);
+			$rangeEl.find('.rangeslider__labels__label').css('width',labelW + '%');
+		},
+
+		// 합산
+		onSlide: function(position, value){
+			$rangeEl = this.$range;
+			//console.log('position: ' + position, 'value: ' + value);
+			var $weight = this.$element.parent().find('.range_slider_info').find('.weight  span');
+			$weight.text(value + 'KG');
+			var $price = this.$element.parent().find('.range_slider_info').find('.price dd span');
+			var rangeLabels = this.$element.attr('data-labels');
+			rangeLabels = rangeLabels.split(', ');
+			$rangeEl.find('.rangeslider__labels__label').removeClass('active');
+			var currentWeight = this.$element.parent().find('.range_slider_info').find('.weight dd span').text();
+			var currentPrice = 0;
+			$(rangeLabels).each(function(index, value) {
+				if(currentWeight == value){
+					$rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').addClass('active');
+					currentPrice = $rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').attr('data-price');
+				}
+			});
+			$price.text(Number(currentPrice).toLocaleString());
+		},
+
+		onSlideEnd: function(position, value){
+			//console.log('position: ' + position, 'value: ' + value);
+		}
+	});
+
+	//Scroll
+	$(".advance_seat_wrap .sel_seat").mCustomScrollbar({
+		scrollButtons:{enable:true,scrollType:"stepped"},
+		keyboard:{scrollType:"stepped"},
+		mouseWheel:{scrollAmount:300},
+		//theme:"rounded-dark",
+		autoExpandScrollbar:true,
+		snapAmount:30,
+		//snapOffset:20,
+		// 스크롤 콜백
+		callbacks:{
+			whileScrolling:function(){ 
+				if (this.mcs.draggerTop > 10) {
+					$('.seat_num').addClass('fixed');
+				} else {
+					$('.seat_num').removeClass('fixed');
+				}
+
+				if (this.mcs.draggerTop > 10) {
+					$('.seat_num').addClass('fixed');
+				} else {
+					$('.seat_num').removeClass('fixed');
+				}
+			},
+			alwaysTriggerOffsets:false
+		}
+	});
+
+});
+
+</script>
+
+
+</head>
+<body class="booking">
+
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+			<div class="tit_booking_wrap">
+				<h2 class="pg_tit">항공권 예매</h2>
+				<div class="step_booking">
+					<ol>
+						<li class="step01 on">
+							<span class="text_step">01</span>
+						</li>
+						<li class="step02 on">
+							<span class="text_step">02</span>
+						</li>
+						<li class="step03 on">
+							<span class="blind">현재페이지</span>
+							<span class="text_step">03 부가서비스</span>
+						</li>
+						<li class="step04">
+							<span class="text_step">04</span>
+						</li>
+						<li class="step05">
+							<span class="text_step">05</span>
+						</li>
+						<li class="step06">
+							<span class="text_step">06</span>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- Title & Step -->
+
+			<!-- 부가서비스 선택 -->
+			<div class="sel_service_section">
+
+				<div class="service_section_wrap">
+					
+					<!-- 구간선택 슬라이드 --> 
+					<div class="service_section_slide swiper-container">
+						<ul class="swiper-wrapper">
+							<!-- 01 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간1</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 01 -->
+							<!-- 02 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간2</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 02 -->
+							<!-- 03 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간3</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 03 -->
+						</ul>
+						<div class="swiper-pagination"></div>
+					</div>
+					<!--// 구간선택 슬라이드 -->
+
+
+					<!-- 여정 재검색 -->
+					<div class="btn_refresh">
+						<button class="sbtn_cont refresh">여정 재검색</button>
+					</div>
+					<!--// 여정 재검색 -->
+
+					<!-- 슬라이드 버튼 -->
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+					<!--// 슬라이드 버튼 -->
+				</div>
+				<!-- 구간 더보기 -->
+				<div class="btn_more_wrap">
+					<a href="#none" class="btn_section_more">더보기</a>
+				</div>
+				<!--// 구간 더보기 -->
+				
+				<!-- 구간 리스트 Layer -->
+				<div class="layer_section_list">
+					<ul>
+						<li>
+							<!-- 구간선택 박스 -->
+							<div class="service_section_box">
+								<!-- 구간 -->
+								<span class="bul_section">구간1</span>
+								<!--// 구간 -->
+								
+								<!-- 출발 -->
+								<div class="service_name first">
+									<strong class="tit">ICN</strong>
+									<span class="addition">서울/인천</span>
+								</div>
+								<!-- 출발 -->
+
+								<!-- 설명 -->
+								<div class="service_exp">
+									<p class="top">TW123</p>
+									<p class="bttm">2018-12-06(목)</p>
+								</div>
+								<!--// 설명 -->
+								
+								<!-- 도착 -->
+								<div class="service_name last">
+									<strong class="tit">BKK</strong>
+									<span class="addition">방콕/수완나폼</span>
+								</div>
+								<!-- 도착 -->
+
+							</div>
+							<!--// 구간선택 박스 -->
+						</li>
+						<li>
+							<!-- 구간선택 박스 -->
+							<div class="service_section_box">
+								<!-- 구간 -->
+								<span class="bul_section">구간2</span>
+								<!--// 구간 -->
+								
+								<!-- 출발 -->
+								<div class="service_name first">
+									<strong class="tit">ICN</strong>
+									<span class="addition">서울/인천</span>
+								</div>
+								<!-- 출발 -->
+
+								<!-- 설명 -->
+								<div class="service_exp">
+									<p class="top">TW123</p>
+									<p class="bttm">2018-12-06(목)</p>
+								</div>
+								<!--// 설명 -->
+								
+								<!-- 도착 -->
+								<div class="service_name last">
+									<strong class="tit">BKK</strong>
+									<span class="addition">방콕/수완나폼</span>
+								</div>
+								<!-- 도착 -->
+
+							</div>
+							<!--// 구간선택 박스 -->
+						</li>
+						<li>
+							<!-- 구간선택 박스 -->
+							<div class="service_section_box">
+								<!-- 구간 -->
+								<span class="bul_section">구간3</span>
+								<!--// 구간 -->
+								
+								<!-- 출발 -->
+								<div class="service_name first">
+									<strong class="tit">ICN</strong>
+									<span class="addition">서울/인천</span>
+								</div>
+								<!-- 출발 -->
+
+								<!-- 설명 -->
+								<div class="service_exp">
+									<p class="top">TW123</p>
+									<p class="bttm">2018-12-06(목)</p>
+								</div>
+								<!--// 설명 -->
+								
+								<!-- 도착 -->
+								<div class="service_name last">
+									<strong class="tit">BKK</strong>
+									<span class="addition">방콕/수완나폼</span>
+								</div>
+								<!-- 도착 -->
+
+							</div>
+							<!--// 구간선택 박스 -->
+						</li>
+						<li>
+							<!-- 구간선택 박스 -->
+							<div class="service_section_box">
+								<!-- 구간 -->
+								<span class="bul_section">구간4</span>
+								<!--// 구간 -->
+								
+								<!-- 출발 -->
+								<div class="service_name first">
+									<strong class="tit">ICN</strong>
+									<span class="addition">서울/인천</span>
+								</div>
+								<!-- 출발 -->
+
+								<!-- 설명 -->
+								<div class="service_exp">
+									<p class="top">TW123</p>
+									<p class="bttm">2018-12-06(목)</p>
+								</div>
+								<!--// 설명 -->
+								
+								<!-- 도착 -->
+								<div class="service_name last">
+									<strong class="tit">BKK</strong>
+									<span class="addition">방콕/수완나폼</span>
+								</div>
+								<!-- 도착 -->
+
+							</div>
+							<!--// 구간선택 박스 -->
+						</li>
+					</ul>
+
+					<a href="#none" class="btn_close">닫기</a>
+
+				</div>
+				<!-- 구간 리스트 Layer -->
+
+
+				<!-- 탑승자 선택 -->
+				<div class="sel_passenger_wrap">
+					<!-- 탑승자 선택 슬라이드 -->
+					<div class="sel_passenger_slide swiper-container">
+						<ul class="swiper-wrapper">
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">1</i>
+									<div class="name ADULT_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">2</i>
+									<div class="name ADULT_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">3</i>
+									<div class="name CHILD_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service_wrap">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">4</i>
+									<div class="name CHILD_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">5</i>
+									<div class="name INFANT_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">5</i>
+									<div class="name INFANT_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>							
+						</ul>
+					</div>
+					<!--// 탑승자 선택 슬라이드 -->
+					<!-- 슬라이드 버튼 -->
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+					<!--// 슬라이드 버튼 -->
+				</div>
+				<!--// 탑승자 선택 -->
+				<!-- 탑승자 더보기 -->
+				<div class="btn_more_wrap passenger">
+					<a href="#none" class="btn_passenger_more">더보기</a>
+				</div>
+				<!--// 탑승자 더보기 -->
+
+			</div>
+			<!--// 부가서비스 선택 -->
+
+			<!-- 타이틀 -->
+			<div class="con_tit_wrap mt70">
+				<h3 class="con_tit">사전 좌석 선택</h3>
+			</div>
+			<!--// 타이틀 -->
+			<p class="txt_guide type02">좌석을 선택할 수 있는 단계입니다. 좌석을 선택하지 않은 경우, 좌석번호가 임의로 배정됩니다.</p>
+
+			<div class="btn_wrap mt0 txt_right">
+				<button class="sbtn_cont">사전 좌석규정</button>
+			</div>
+
+			<!-- 사전 좌석 선택 -->
+			<div class="advance_seat_wrap">
+				
+				<div class="seat_info">
+					<dl class="seat_type premium">
+						<dt>프리미엄 좌석</dt>
+						<dd>KRW 100,000</dd>
+					</dl>
+					<dl class="seat_type front">
+						<dt>앞 좌석</dt>
+						<dd>KRW 70,000</dd>
+					</dl>
+					<dl class="seat_type normal">
+						<dt>일반 좌석</dt>
+						<dd>KRW 50,000</dd>
+					</dl>
+					<p class="seat_type disable">
+						<span>선택불가 좌석</span>
+					</p>
+				</div>
+
+				<!-- 좌석번호 -->
+				<div class="seat_num">
+					<ul class="col_num">
+						<li>A</li>
+						<li>B</li>
+						<li>C</li>
+						<li class="row_num"></li>
+						<li>D</li>
+						<li>E</li>
+						<li>F</li>
+					</ul>
+				</div>
+				<!-- 좌석번호 -->
+
+				<div class="sel_seat">
+					
+					<!-- 좌석 01 -->
+					<div class="seat_list">
+						<div class="seat">
+							<span class="row_num">1</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">A1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">B1</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">C1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">D1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">E1</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">F1</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="seat">
+							<span class="row_num">2</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B2</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F2</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">3</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B3</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F3</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">4</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A4</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B4</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C4</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D4</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E4</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F4</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">5</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A5</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B5</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C5</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D5</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E5</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F5</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">6</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A6</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B6</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C6</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D6</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E6</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F6</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">7</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A7</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B7</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C7</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D7</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E7</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F7</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">8</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A8</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B8</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C8</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D8</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E8</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F8</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!--// 좌석 01 -->
+
+						<!-- 좌석 02 -->
+						<div class="seat">
+							<span class="row_num">9</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">A9</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">B9</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">C9</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">D9</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">E9</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">F9</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">10</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A10</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B10</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C10</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D10</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E10</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F10</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">11</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A11</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B11</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C11</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D11</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E11</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F11</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">12</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">A12</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">B12</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">C12</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">D12</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">E12</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat front">
+										<span class="blind">F12</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">13</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A13</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B13</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C13</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D13</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E13</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F13</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">14</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A14</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B14</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C14</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D14</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E14</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F14</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">15</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">A15</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">B15</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">C15</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">D15</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">E15</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">F15</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">16</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">A16</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">B16</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">C16</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">D16</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">E16</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat premium">
+										<span class="blind">F16</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!--// 좌석 02 -->
+
+						<!-- 좌석 03 -->
+						<div class="seat">
+							<span class="row_num">17</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A17</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B17</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C17</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D17</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E17</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F17</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">18</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A18</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B18</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C18</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D18</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E18</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F18</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">19</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A19</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B19</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C19</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D19</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E19</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F19</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">20</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A20</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B20</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C20</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D20</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E20</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F20</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">21</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A21</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B21</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C21</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D21</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E21</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F21</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">22</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A22</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B22</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C22</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D22</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E22</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F22</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">23</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A23</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B23</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C23</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D23</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E23</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F23</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">24</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A24</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B24</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C24</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D24</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E24</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F24</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!--// 좌석 03 -->
+
+						<!-- 좌석 04 -->
+						<div class="seat">
+							<span class="row_num">25</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A25</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B25</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C25</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D25</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E25</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F25</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">26</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A26</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B26</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C26</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D26</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E26</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F26</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">27</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A27</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B27</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C27</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D27</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E27</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F27</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">28</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A28</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B28</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C28</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D28</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E28</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F28</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">29</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A29</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B29</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C29</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D29</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E29</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F29</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">30</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A30</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B30</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C30</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D30</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E30</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F30</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">31</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">A31</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">B31</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">C31</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">D31</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">E31</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat normal">
+										<span class="blind">F31</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="seat">
+							<span class="row_num">32</span>
+							<ul>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">A32</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">B32</span>
+									</a></li>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">C32</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">D32</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">E32</span>
+									</a>
+								</li>
+								<li>
+									<a href="#none" class="ico_seat disable">
+										<span class="blind">F32</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!-- 좌석 04 -->
+					</div>
+				</div>
+
+				<!-- 스크롤 영역 -->
+				<div class="seat_scroll_wrap">
+					<div class="seat_scroll">
+						<span class="scroll_bar"></span>
+					</div>
+					<!-- <a href="#none" class="scroll_top">스크롤 위</a>
+					<a href="#none" class="scroll_bttm">스크롤 아래</a> -->
+				</div>
+				<!--// 스크롤 영역 -->
+
+
+
+				
+
+			</div>
+			<!--// 사전 좌석선택 -->
+
+			<!-- 알아두세요 -->
+			<div class="notice_box">
+				<strong>알아두세요</strong>
+				<ul class="ul_dot">
+					<li>ABC 또는 DEF 좌석 당 1명의 유아만 배정 가능합니다.</li>
+					<li>프리미엄 좌석 : 1열, 15열, 16열</li>
+					<li>앞 좌석 : 2열~11열</li>
+					<li>일반 좌석 : 나머지 좌석</li>
+					<li>유아 동반 시 15열, 16열은 선택이 불가합니다.</li>
+					<li>비상구 좌석은 승무원을 도와 다른 승객의 탈출을 돕는 자리로 현장에서 직원의 확인 후 거절될 수 있습니다.</li>
+					<li>애완동물 동반 고객은 출발 당일 공항 현장에서만 좌석 배정이 가능합니다.</li>
+					<li>출발일이 임박한 경우(2일 이내) 좌석 구매가 불가합니다.</li>
+				</ul>
+			</div>
+			<!--// 알아두세요 -->
+
+			<!-- 구간이동 버튼 -->
+			<div class="btn_section_wrap">
+				<a href="#none" class="btn_section_prev">이전구간</a>
+				<a href="#none" class="btn_section_next">다음구간</a> 
+			</div>
+			<!--// 구간이동 버튼 -->
+
+			<!-- 버튼 -->
+			<div class="btn_wrap mt60 mb150">
+				<a href="#none" class="sbtn_txt prev">처음부터 다시 예약</a>
+				<button class="btn_large red">좌석 선택 단계로 이동</button>
+				<a href="#none" class="sbtn_txt skip">부가 서비스 번들 선택 건너뛰기</a>
+			</div>
+			<!--// 버튼 -->
+
+		</div>
+	</div>
+	<!--// Contnent -->
+</div>
+
+<!-- Summary -->
+<div class="summary_wrap">
+	<a href="#none" class="btn_summary_open">Summary 열기</a>
+	<div class="summary_top">
+		<div class="summary_top_cont">
+			<div class="section_slide swiper-container">
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 1</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 2</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 3</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+				</ul>
+				<div class="btn_slide_wrap">
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+				</div>
+			</div>
+
+			<!-- 가격 -->
+			<div class="price_wrap">
+				<span class="total">TOTAL</span>
+				<span class="unit">KRW</span>
+				<span class="price">9,900,000</span>
+			</div>
+			<!-- 가격 -->
+		</div>
+	</div>
+	<!--// Summary Top -->
+</div>
+<!--// Summary  -->
+
+<!-- 나이 계산기 Layer -->
+<div id="age_cal" class="layer type02 age_cal">
+	<div class="layer_header">
+		<h2>나이 계산기</h2>
+	</div>
+	<div class="layer_content">
+		
+		<p class="txt_notice">출발일과 생년월일을 입력하세요</p>
+
+		<div class="sel_wrap">
+			<label for="s_yyyy">출발일</label>
+			<span class="select">
+				<select id="s_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="sel_wrap">
+			<label for="b_yyyy">생년월일</label>
+			<span class="select">
+				<select id="b_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="btn_wrap">
+			<button class="btn_large red">계산하기</button>
+		</div>
+
+	</div>
+
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+
+</div>
+<!--// 나이 계산기 Layer -->
+
+</body>
+</html>

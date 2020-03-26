@@ -1,0 +1,1772 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 메인</title>
+<link rel="shortcut icon" type="image/x-icon" href="../../images/tagency/common/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/style.css">
+<script type="text/javascript" src="../../js/www/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../js/www/slick.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.main.js"></script>
+<script>
+	$(function(){
+		//단체 클릭
+		$('.sel_group').find("input[type='checkbox']").on('click', function() {
+			var chked = $(this).parent(".sel_group").hasClass("on");
+			if(chked){
+				$(this).parent(".sel_group").removeClass('on');	
+			}else{
+				$(this).parent(".sel_group").addClass('on');
+			}
+		});
+	});
+</script>
+<body>
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+	
+	<header id="main_header" class="main">
+
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<!-- date-id layer_main1 / layer_main2 -->
+								<!-- <a href="#none" class="log_on" date-type="layer" date-id="layer_main1">로그인</a> -->
+								<a class="log_account">
+									<em class="log_name">만수르</em>님 환영합니다.
+								</a>	
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1"><span>항공권예매</span></a>
+						</li>
+						<li>
+							<a href="#none" class="dep1"><span>예약관리</span></a>
+						</li>
+						<li>
+							<a href="#none" class="dep1"><span>업무요청</span></a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1"><span>수입관리</span></a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1"><span>공지사항</span></a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1"><span>마이페이지</span></a>   
+						</li>
+					</ul>
+					<div class="dep2">
+						<ul>
+			                <li class="dep2_2038">
+								<a href="#none" class="gnb2depth subDep2_2089 last_depth" id="gnb_2089" data-pmenuseq="2038" data-menuurl="/app/booking/searchItinerary" data-new-window-yn="N" data-del-yn="N">
+									<span>항공권 예매</span>
+								</a>
+							</li>
+			                <li class="dep2_2039"></li>
+			                <li class="dep2_2040">
+								<a href="#none" class="gnb2depth subDep2_2084 last_depth" id="gnb_2084" data-pmenuseq="2040" data-menuurl="/app/workRequest/list" data-new-window-yn="N" data-del-yn="N">
+									<span>업무요청 목록</span>
+								</a>
+							</li>
+			                <li class="dep2_2041">
+								<a href="#none" class="gnb2depth subDep2_2048 last_depth" id="gnb_2048" data-pmenuseq="2041" data-menuurl="/app/income/creditHistory" data-new-window-yn="N" data-del-yn="N">
+									<span>Credit History</span>
+								</a>
+								<a href="#none" class="gnb2depth subDep2_2049 last_depth" id="gnb_2049" data-pmenuseq="2041" data-menuurl="/app/income/refundReqMgmt" data-new-window-yn="N" data-del-yn="N">
+									<span>환불요청 관리</span>
+								</a>
+								<a href="#none" class="gnb2depth subDep2_2050 last_depth" id="gnb_2050" data-pmenuseq="2041" data-menuurl="/app/income/cashReceiptReqMgmt" data-new-window-yn="N" data-del-yn="N">
+									<span>현금영수증 관리</span>
+								</a>
+								<a href="#none" class="gnb2depth subDep2_2051" id="gnb_2051" data-pmenuseq="2041" data-menuurl="" data-new-window-yn="N" data-del-yn="N">
+									<span>실적조회</span>
+								</a>
+								<a href="javascript:gnbCall('/app/income/salesReport', 'N');" id="gnb_2086" data-pmenuseq="2051" class="gnb3depth" data-new-window-yn="N" data-del-yn="N">
+									<span>일자 별 발매조회</span>
+								</a>
+								<a href="javascript:gnbCall('/app/income/revenueReport', 'N');" id="gnb_2087" data-pmenuseq="2051" class="gnb3depth" data-new-window-yn="N" data-del-yn="N">
+									<span>운송실적조회</span>
+								</a>
+							</li>
+			                <li class="dep2_2042"></li>
+						</ul>
+					</div>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+
+	</header>
+	<!--// Header -->
+
+	<!-- Visual -->
+	<div id="visual" class="main_visual" style="background-image:url('../../images/tagency/main/main_visual.png')">
+
+		<!-- Main Booking -->		
+		<div class="main_booking">
+	        <!-- 박스 추가 main_booking_inside -->
+	        <div class="main_booking_inside">
+
+	            <a class="btn_layer_close" href="#none" onclick="closeBookingLayer()">닫기</a>
+	            <div class="sel_opt">
+	                <div class="service_section">
+	                    <div class="sel_section booking_option">
+	                        <ul class="btn_tab">
+	                            <li class="on">
+	                                <a class="setTripType" data-t="RT" href="#main_reser01">
+	                                    <input id="display_tripType_RT" name="tripTypeButton" type="radio" value="RT">
+	                                    <label for="display_tripType_RT">왕복</label>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a class="setTripType" data-t="OW" href="#main_reser02">
+	                                    <input id="display_tripType_OW" name="tripTypeButton" type="radio" value="OW">
+	                                    <label for="display_tripType_OW">편도</label>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a class="setTripType" data-t="MC" href="#main_reser03">
+	                                    <input id="display_tripType_MC" name="tripTypeButton" type="radio" value="MC">
+	                                    <label for="display_tripType_MC">다구간</label>
+	                                </a>
+	                            </li>
+	                        </ul>
+	                    </div>
+
+	                    <div class="sel_group">
+	                        <input class="bookingTypeGroup" id="group" name="bookingTypeGroup" type="checkbox" value="">
+	                        <label for="group"><span class="icon"></span>단체 (단체인 경우, 유아 선택은 탑승인원에 포함되지 않습니다.)</label>
+	                    </div>
+
+	                </div>
+	                <div class="util">
+	                    <a class="age_cal" href="#none" onclick="howOldAreYou();">
+	                        <span>+ 나이 계산기</span>
+	                    </a>
+	                    <div class="sale_code_wrap code">
+	                        <a class="btn_tooltip gray" href="#none">
+	                            <span class="blind">툴팁</span>
+	                            <div class="tooltip_layer" style="display:none;">
+	                                <div class="tooltip_tit no_bd">
+	                                    <h5>할인코드 란?</h5>
+	                                </div>
+	                                <div class="tooltip_cont">티웨이항공 탑승 고객을 대상으로 특정 기간 동안<br>추가 할인을 제공해 드리는 제도입니다.<br>예약 시 사전에 안내된 코드를 입력하시면,<br>할인 가격이 적용된 항공편을 선택하실 수 있습니다.</div>
+	                            </div>
+	                        </a>
+	                        <label for="sale_code">
+	                            할인코드
+	                        </label>
+	                        <span class="sale_code">
+	                            <input class="input_sale_code" id="sale_code" maxlength="20" name="promoCode" onkeyup="onlyEngNumToUpper(this);" type="text" placeholder="할인코드 입력" title="할인코드 입력">
+	                            </span>
+	                    </div>
+	                </div>
+	            </div>
+
+	            
+	            <div class="tab_booking_cont" id="main_reser01" style="display: block;">
+	                <!-- 왕복 편도 -->
+	                <div class="sel_booking">
+	                    <div class="booking_wrap">
+
+	                        
+	                        <div class="input_wrap start">
+	                            <input class="booking start" onblur="checkAirportPinStatus(this, 0);" onclick="gnbSelectAirport(this, 0,'search');" type="text" value="" placeholder="출발지">
+	                            <a class="btn_pin start" href="#none" onclick="gnbSelectAirport($(this).parent().find('input'), 0, 'region');">현재위치선택</a>
+
+	                            <!-- 선택지 레이어 -->
+	                            <div class="selected_area start" onclick="gnbSelectAirport($(this).parent().find('input'), 0,'search');">
+	                                <span class="eng">ICN</span>
+	                                <span class="area">서울/인천</span>
+	                            </div>
+	                            <!--// 선택지 레이어 -->
+	                        </div>
+
+	                        
+	                        <div class="input_wrap end">
+	                            <input class="booking end" onblur="checkAirportPinStatus(this, 0);" onclick="gnbSelectAirport(this, 0,'search');" type="text" value="" placeholder="도착지">
+	                            <a class="btn_pin end" href="#none" onclick="gnbSelectAirport($(this).parent().find('input'), 0, 'region');"></a>
+
+	                            <!-- 선택 레이어 -->
+	                            <div class="selected_area end" onclick="gnbSelectAirport($(this).parent().find('input'), 0,'search');">
+	                                <span class="eng">ICN</span>
+	                                <span class="area">서울/인천</span>
+	                            </div>
+	                            <!--// 선택 레이어 -->
+	                        </div>
+
+	                        
+	                        <div class="input_wrap days date">
+	                            <input class="booking date" id="lostFlightDate1_1" onclick="gnbCallBackArrivalAirportConfirm();" onfocus="blur();" placeholder="YYYY-MM-DD" type="text" value="">
+	                            <span>~</span>
+	                            <input class="booking date" id="lostFlightDate1_2" onclick="gnbCallBackArrivalAirportConfirm();" onfocus="blur();" placeholder="YYYY-MM-DD" type="text" value="">
+	                            <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm();"></a>
+	                        </div>
+
+	                    </div>
+
+
+	                    <div class="person_wrap pax">
+
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>성인</span>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('ADULT', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="ADULT" data-div="ADULT" title="인원수" type="text" value="1"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('ADULT', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>소아</span>
+	                                <a class="btn_tooltip gray" href="#none">
+	                                    <span class="blind">툴팁</span>
+	                                    <div class="tooltip_layer" style="display:none;">
+	                                        <div class="tooltip_tit">
+	                                            <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_kid.png" alt="소아">
+	                                            <h5>소아기준</h5>
+	                                        </div>
+	                                        <div class="tooltip_cont">
+	                                            <dl>
+	                                                <dt>국내선</dt>
+	                                                <dd>만 2세~<span class="red">13세</span> 미만</dd>
+	                                            </dl>
+	                                            <dl>
+	                                                <dt>국제선</dt>
+	                                                <dd>만 2세~<span class="red">12세</span> 미만</dd>
+	                                            </dl>
+	                                            <ul class="info">
+	                                            	<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	                                            	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+	                                            </ul>
+	                                        </div>
+	                                    </div>
+	                                </a>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('CHILD', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="CHILD" data-div="CHILD" title="인원수" type="text" value="0"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('CHILD', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>유아</span>
+	                                <a class="btn_tooltip gray" href="#none">
+	                                    <span class="blind">툴팁</span>
+	                                    <div class="tooltip_layer" style="display:none;">
+	                                        <div class="tooltip_tit">
+	                                            <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_baby.png" alt="유아">
+	                                            <h5>유아기준</h5>
+	                                        </div>
+	                                        <div class="tooltip_cont">
+	                                            <dl>
+	                                                <dt>국내선</dt>
+	                                                <dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                            </dl>
+	                                            <dl>
+	                                                <dt>국제선</dt>
+	                                                <dd>생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                            </dl>
+	                                            <ul class="info">
+	                                            	<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	                                            	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+	                                            </ul>
+	                                        </div>
+	                                    </div>
+	                                </a>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('INFANT', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="INFANT" data-div="INFANT" title="인원수" type="text" value="0"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('INFANT', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <!--// 왕복 편도 -->
+	            </div>
+	            
+
+
+
+	            
+	            <div class="tab_booking_cont" id="main_reser02" style="display: none;">
+	                <!-- 왕복 편도 -->
+	                <div class="sel_booking">
+	                    <div class="booking_wrap">
+
+	                        
+	                        <div class="input_wrap start">
+	                            <input class="booking start" onblur="checkAirportPinStatus(this, 0);" onclick="gnbSelectAirport(this, 0,'search');" type="text" value="" placeholder="출발지">
+	                            <a class="btn_pin start" href="#none" onclick="gnbSelectAirport($(this).parent().find('input'), 0, 'region');">현재위치선택</a>
+
+	                            <!-- 선택지 레이어 -->
+	                            <div class="selected_area start" onclick="gnbSelectAirport($(this).parent().find('input'), 0,'search');">
+	                                <span class="eng">ICN</span>
+	                                <span class="area">서울/인천</span>
+	                            </div>
+	                            <!--// 선택지 레이어 -->
+	                        </div>
+
+	                        
+	                        <div class="input_wrap end">
+	                            <input class="booking end" onblur="checkAirportPinStatus(this, 0);" onclick="gnbSelectAirport(this, 0,'search');" type="text" value="" placeholder="도착지">
+	                            <a class="btn_pin end" href="#none" onclick="gnbSelectAirport($(this).parent().find('input'), 0, 'region');"></a>
+
+	                            <!-- 선택 레이어 -->
+	                            <div class="selected_area end" onclick="gnbSelectAirport($(this).parent().find('input'), 0,'search');">
+	                                <span class="eng">ICN</span>
+	                                <span class="area">서울/인천</span>
+	                            </div>
+	                            <!--// 선택 레이어 -->
+	                        </div>
+
+	                        
+	                        <div class="input_wrap date">
+	                            <input class="booking date" id="lostFlightDate2_1" onclick="gnbCallBackArrivalAirportConfirm();" onfocus="blur();" type="text" value="" placeholder="탑승일">
+	                            <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm();"></a>
+	                        </div>
+
+	                    </div>
+
+
+	                    <div class="person_wrap pax">
+
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>성인</span>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('ADULT', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="ADULT" data-div="ADULT" onfocus="blur();" title="인원수" type="text" value="1"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('ADULT', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>소아</span>
+	                                <a class="btn_tooltip gray" href="#none">
+	                                    <span class="blind">툴팁</span>
+	                                    <div class="tooltip_layer" style="display:none;">
+	                                        <div class="tooltip_tit">
+	                                            <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_kid.png" alt="소아">
+	                                            <h5>소아기준</h5>
+	                                        </div>
+	                                        <div class="tooltip_cont">
+	                                            <dl>
+	                                                <dt>국내선</dt>
+	                                                <dd>만 2세~<span class="red">13세</span> 미만</dd>
+	                                            </dl>
+	                                            <dl>
+	                                                <dt>국제선</dt>
+	                                                <dd>만 2세~<span class="red">12세</span> 미만</dd>
+	                                            </dl>
+	                                            <ul class="info"><li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li></ul>
+	                                        </div>
+	                                    </div>
+	                                </a>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('CHILD', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="CHILD" data-div="CHILD" onfocus="blur();" title="인원수" type="text" value="0"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('CHILD', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+	                        <div class="input_person">
+	                            <div class="tit_person">
+	                                <span>유아</span>
+	                                <a class="btn_tooltip gray" href="#none">
+	                                    <span class="blind">툴팁</span>
+	                                    <div class="tooltip_layer" style="display:none;">
+	                                        <div class="tooltip_tit">
+	                                            <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_baby.png" alt="유아">
+	                                            <h5>유아기준</h5>
+	                                        </div>
+	                                        <div class="tooltip_cont">
+	                                            <dl>
+	                                                <dt>국내선</dt>
+	                                                <dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                            </dl>
+	                                            <dl>
+	                                                <dt>국제선</dt>
+	                                                <dd>생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                            </dl>
+	                                            <ul class="info"><li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li></ul>
+	                                        </div>
+	                                    </div>
+	                                </a>
+	                            </div>
+	                            <div class="input_wrap">
+	                                <span class="btn_minus" onclick="changePaxCount('INFANT', -1);" style="cursor: pointer;">decrease</span>
+	                                <span class="input"><input class="INFANT" data-div="INFANT" onfocus="blur();" title="인원수" type="text" value="0"></span>
+	                                <span class="btn_plus" onclick="changePaxCount('INFANT', 1);" style="cursor: pointer;">increase</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <!--// 왕복 편도 -->
+	            </div>
+	            
+
+
+
+	            
+	            <div class="tab_booking_cont multi_route" id="main_reser03" style="display: none;">
+
+
+	                
+	                
+
+	                    <div class="sel_booking" id="itinerary_multi_trip_1" style="display:;">
+	                        <dl class="input_route">
+	                            <dt>구간 <span class="red">1</span></dt>
+	                            <dd>
+	                                <div class="booking_wrap">
+
+	                                    
+	                                    <div class="input_wrap start">
+	                                        <input class="booking start" type="text" value="" onblur="checkAirportPinStatus(this,0);" onclick="selectMultiTripAirport(this, 1, 'dep', 'search');" placeholder="출발지">
+	                                        <a class="btn_pin start" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 1, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area start" onclick="selectMultiTripAirport($(this).parent().find('input'), 1, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap end">
+	                                        <input class="booking end" type="text" value="" onblur="checkAirportPinStatus(this,0);" onclick="selectMultiTripAirport(this, 1, 'arr', 'search');" placeholder="도착지">
+	                                        <a class="btn_pin end" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 1, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area end" onclick="selectMultiTripAirport($(this).parent().find('input'), 1, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap date">
+	                                        <input class="booking date" onfocus="blur();" type="text" value="" id="lostFlightDate3_1" onclick="gnbCallBackArrivalAirportConfirm(1);" placeholder="탑승일">
+	                                        <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm(1);"></a>
+	                                    </div>
+
+	                                </div>
+	                            </dd>
+	                        </dl>
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 2}" href="#none" class="btn_add_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="increaseItinerary();">구간</a> -->
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 3}" href="#none" class="btn_del_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="decreaseItinerary();">구간</a> -->
+
+	                    </div>
+
+	                
+
+
+	                
+	                
+
+	                    <div class="sel_booking" id="itinerary_multi_trip_2" style="display:;">
+	                        <dl class="input_route">
+	                            <dt>구간 <span class="red">2</span></dt>
+	                            <dd>
+	                                <div class="booking_wrap">
+
+	                                    
+	                                    <div class="input_wrap start">
+	                                        <input class="booking start" type="text" value="" onblur="checkAirportPinStatus(this,1);" onclick="selectMultiTripAirport(this, 2, 'dep', 'search');" placeholder="출발지">
+	                                        <a class="btn_pin start" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 2, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area start" onclick="selectMultiTripAirport($(this).parent().find('input'), 2, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap end">
+	                                        <input class="booking end" type="text" value="" onblur="checkAirportPinStatus(this,1);" onclick="selectMultiTripAirport(this, 2, 'arr', 'search');" placeholder="도착지">
+	                                        <a class="btn_pin end" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 2, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area end" onclick="selectMultiTripAirport($(this).parent().find('input'), 2, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap date">
+	                                        <input class="booking date" onfocus="blur();" type="text" value="" id="lostFlightDate3_2" onclick="gnbCallBackArrivalAirportConfirm(2);" placeholder="탑승일">
+	                                        <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm(2);"></a>
+	                                    </div>
+
+	                                </div>
+	                            </dd>
+	                        </dl>
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 2}" href="#none" class="btn_add_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="increaseItinerary();">구간</a> -->
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 3}" href="#none" class="btn_del_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="decreaseItinerary();">구간</a> -->
+
+	                    </div>
+
+	                
+
+
+	                
+	                
+
+	                    <div class="sel_booking" id="itinerary_multi_trip_3" style="display:none;">
+	                        <dl class="input_route">
+	                            <dt>구간 <span class="red">3</span></dt>
+	                            <dd>
+	                                <div class="booking_wrap">
+
+	                                    
+	                                    <div class="input_wrap start">
+	                                        <input class="booking start" type="text" value="" onblur="checkAirportPinStatus(this,2);" onclick="selectMultiTripAirport(this, 3, 'dep', 'search');" placeholder="출발지">
+	                                        <a class="btn_pin start" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 3, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area start" onclick="selectMultiTripAirport($(this).parent().find('input'), 3, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap end">
+	                                        <input class="booking end" type="text" value="" onblur="checkAirportPinStatus(this,2);" onclick="selectMultiTripAirport(this, 3, 'arr', 'search');" placeholder="도착지">
+	                                        <a class="btn_pin end" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 3, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area end" onclick="selectMultiTripAirport($(this).parent().find('input'), 3, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap date">
+	                                        <input class="booking date" onfocus="blur();" type="text" value="" id="lostFlightDate3_3" onclick="gnbCallBackArrivalAirportConfirm(3);" placeholder="탑승일">
+	                                        <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm(3);"></a>
+	                                    </div>
+
+	                                </div>
+	                            </dd>
+	                        </dl>
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 2}" href="#none" class="btn_add_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="increaseItinerary();">구간</a> -->
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 3}" href="#none" class="btn_del_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="decreaseItinerary();">구간</a> -->
+
+	                    </div>
+
+	                
+
+
+	                
+	                
+
+	                    <div class="sel_booking" id="itinerary_multi_trip_4" style="display:none;">
+	                        <dl class="input_route">
+	                            <dt>구간 <span class="red">4</span></dt>
+	                            <dd>
+	                                <div class="booking_wrap">
+
+	                                    
+	                                    <div class="input_wrap start">
+	                                        <input class="booking start" type="text" value="" onblur="checkAirportPinStatus(this,3);" onclick="selectMultiTripAirport(this, 4, 'dep', 'search');" placeholder="출발지">
+	                                        <a class="btn_pin start" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 4, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area start" onclick="selectMultiTripAirport($(this).parent().find('input'), 4, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap end">
+	                                        <input class="booking end" type="text" value="" onblur="checkAirportPinStatus(this,3);" onclick="selectMultiTripAirport(this, 4, 'arr', 'search');" placeholder="도착지">
+	                                        <a class="btn_pin end" href="#none" onclick="selectMultiTripAirport($(this).parent().find('input'), 4, 'arr', 'region');">현재위치선택</a>
+	                                        <!-- 선택 레이어 -->
+	                                        <div class="selected_area end" onclick="selectMultiTripAirport($(this).parent().find('input'), 4, 'arr', 'search');">
+	                                            <span class="eng">ICN</span>
+	                                            <span class="area">서울/인천</span>
+	                                        </div>
+	                                        <!--// 선택 레이어 -->
+	                                    </div>
+
+	                                    
+	                                    <div class="input_wrap date">
+	                                        <input class="booking date" onfocus="blur();" type="text" value="" id="lostFlightDate3_4" onclick="gnbCallBackArrivalAirportConfirm(4);" placeholder="탑승일">
+	                                        <a class="btn_date" href="#none" onclick="gnbCallBackArrivalAirportConfirm(4);"></a>
+	                                    </div>
+
+	                                </div>
+	                            </dd>
+	                        </dl>
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 2}" href="#none" class="btn_add_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="increaseItinerary();">구간</a> -->
+
+	                        
+	                        <!-- TODO 구간 + - 기능 버튼
+	                        <a th:if="${i eq 3}" href="#none" class="btn_del_route controlRouteCountButtonSection"
+	                           th:text="${@frontContents.id('hp.booking.itinerary.search-label.section')}"
+	                           onclick="decreaseItinerary();">구간</a> -->
+
+	                    </div>
+
+	                
+
+	                <div class="sel_booking passenger">
+	                    <dl class="input_passenger">
+	                        <dt>인원</dt>
+	                        <dd>
+	                            <div class="person_wrap">
+	                                <div class="person_wrap pax">
+
+	                                    <div class="input_person">
+	                                        <div class="tit_person">
+	                                            <span>성인</span>
+	                                        </div>
+	                                        <div class="input_wrap">
+	                                            <span class="btn_minus" onclick="changePaxCount('ADULT', -1);" style="cursor: pointer;">decrease</span>
+	                                            <span class="input"><input class="ADULT" data-div="ADULT" onfocus="blur();" title="인원수" type="text" value="1"></span>
+	                                            <span class="btn_plus" onclick="changePaxCount('ADULT', 1);" style="cursor: pointer;">increase</span>
+	                                        </div>
+	                                    </div>
+
+	                                    <div class="input_person">
+	                                        <div class="tit_person">
+	                                            <span>소아</span>
+	                                            <a class="btn_tooltip gray" href="#none">
+	                                                <span class="blind">툴팁</span>
+	                                                <div class="tooltip_layer" style="display:none;">
+	                                                    <div class="tooltip_tit">
+	                                                        <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_kid.png" alt="소아">
+	                                                        <h5>소아기준</h5>
+	                                                    </div>
+	                                                    <div class="tooltip_cont">
+	                                                        <dl>
+	                                                            <dt>국내선</dt>
+	                                                            <dd>만 2세~<span class="red">13세</span> 미만</dd>
+	                                                        </dl>
+	                                                        <dl>
+	                                                            <dt>국제선</dt>
+	                                                            <dd>만 2세~<span class="red">12세</span> 미만</dd>
+	                                                        </dl>
+	                                                        <ul class="info"><li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li></ul>
+	                                                    </div>
+	                                                </div>
+	                                            </a>
+	                                        </div>
+	                                        <div class="input_wrap">
+	                                            <span class="btn_minus" onclick="changePaxCount('CHILD', -1);" style="cursor: pointer;">decrease</span>
+	                                            <span class="input"><input class="CHILD" data-div="CHILD" onfocus="blur();" title="인원수" type="text" value="0"></span>
+	                                            <span class="btn_plus" onclick="changePaxCount('CHILD', 1);" style="cursor: pointer;">increase</span>
+	                                        </div>
+	                                    </div>
+	                                    <div class="input_person">
+	                                        <div class="tit_person">
+	                                            <span>유아</span>
+	                                            <a class="btn_tooltip gray" href="#none">
+	                                                <span class="blind">툴팁</span>
+	                                                <div class="tooltip_layer" style="display:none;">
+	                                                    <div class="tooltip_tit">
+	                                                        <img src="https://dev-contents-image.twayair.com/homepage/images/ico/ico_baby.png" alt="유아">
+	                                                        <h5>유아기준</h5>
+	                                                    </div>
+	                                                    <div class="tooltip_cont">
+	                                                        <dl>
+	                                                            <dt>국내선</dt>
+	                                                            <dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                                        </dl>
+	                                                        <dl>
+	                                                            <dt>국제선</dt>
+	                                                            <dd>생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+	                                                        </dl>
+	                                                        <ul class="info"><li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+	<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li></ul>
+	                                                    </div>
+	                                                </div>
+	                                            </a>
+	                                        </div>
+	                                        <div class="input_wrap">
+	                                            <span class="btn_minus" onclick="changePaxCount('INFANT', -1);" style="cursor: pointer;">decrease</span>
+	                                            <span class="input"><input class="INFANT" data-div="INFANT" onfocus="blur();" title="인원수" type="text" value="0"></span>
+	                                            <span class="btn_plus" onclick="changePaxCount('INFANT', 1);" style="cursor: pointer;">increase</span>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                            </div>
+	                        </dd>
+	                    </dl>
+
+	                </div>
+
+	            </div>
+	            
+
+	            <div class="btn_wrap">
+	                <button class="btn_large red wh" onclick="chooseItinerary();">예매하기</button>
+	            </div>
+
+	        </div>
+
+	    </div>
+
+
+
+        <!--// Main Booking -->
+
+
+		<!-- Main Booking -->
+		<!--div class="main_booking">
+			<a href="#none" class="btn_layer_close"></a>
+			<div class="sel_opt">
+				<div class="service_section">
+					<div class="sel_section">
+						<ul class="btn_tab">
+							<li>
+								<a href="#main_reser01">
+									<span>왕복</span>
+								</a>
+							</li>
+							<li>
+								<a href="#main_reser02">
+									<span>편도</span>
+								</a>
+							</li>
+							<li>
+								<a href="#main_reser03">
+									<span>다구간</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="sel_group">
+						<input type="checkbox" id="group">
+						<label for="group"><span class="icon"></span>단체(10명이상)</label>
+					</div>
+
+				</div>
+				<div class="util">
+					<a href="#none" class="age_cal">
+						<span>+ 나이계산기</span>
+					</a>
+					<div class="sale_code_wrap">
+						<a href="#none" class="btn_tooltip wh">
+							<span class="blind">툴팁</span>
+						</a>
+						<label for="sale_code">할인코드</label>
+						<span class="sale_code">     
+							<input type="text" id="sale_code" class="input_sale_code" title="할인코드 입력">
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab_booking_cont" id="main_reser01">
+				<!-- 왕복 편도 -->
+				<!--div class="sel_booking">
+					<div class="booking_wrap">
+						<div class="input_wrap">
+							<input type="text" value="" placeholder="출발지" class="booking start">
+							<a href="#none" class="btn_pin"></a>
+						</div>
+						<div class="input_wrap">
+							<input type="text" value="" placeholder="도착지" class="booking end">
+							<a href="#none" class="btn_pin"></a>
+						</div>
+						<div  class="input_wrap">                        
+							<input type="text" id="datepicker" value="" placeholder="탑승일" class="booking date">
+							<a href="#none" id="datepicker" class="btn_date"></a>
+						</div>
+					</div>
+					<div class="person_wrap">
+						<div class="input_person">
+							<div class="tit_person">
+								<span>성인</span>
+							</div>
+							<div class="input_wrap">
+								<a class="btn_plus">더하기</a>
+								<input type="text" id="" value="1" title="인원수">
+								<a class="btn_minus"></a>
+							</div>
+						</div>
+						<div class="input_person">
+							<div class="tit_person">
+								<span>소아</span>
+								<a href="#none" class="btn_tooltip gray">
+									<span class="blind">툴팁</span>
+									<div class="tooltip_layer">
+										<div class="tooltip_tit">
+											<img src="../../images/www/ico/ico_kid.png" alt="소아">
+											<h5>소아기준</h5>
+										</div>
+										<div class="tooltip_cont">
+											<dl>
+												<dt>국내선</dt>
+												<dd>만 2세~<span class="red">13세</span> 미만</dd>
+											</dl>
+											<dl>
+												<dt>국제선</dt>
+												<dd>만 2세~<span class="red">12세</span> 미만</dd>
+											</dl>
+											<ul class="info">
+												<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+												<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+											</ul>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="input_wrap">
+								<span class="btn_plus">더하기</span>
+								<span class="input">
+									<input type="text" id="" value="0" title="인원수">
+								</span>
+								<span class="btn_minus"></span>
+							</div>
+						</div>
+						<div class="input_person">
+							<div class="tit_person">
+								<span>유아</span>
+								<a href="#none" class="btn_tooltip gray">
+									<span class="blind">툴팁</span>
+									<div class="tooltip_layer">
+										<div class="tooltip_tit">
+											<img src="../../images/www/ico/ico_baby.png" alt="소아">
+											<h5>유아기준</h5>
+										</div>
+										<div class="tooltip_cont">
+											<dl>
+												<dt>국내선</dt>
+												<dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+											</dl>
+											<dl>
+												<dt>국제선</dt>
+												<dd생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+											</dl>
+											<ul class="info">
+												<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+												<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+											</ul>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="input_wrap">
+								<span class="btn_plus">더하기</span>
+								<span class="input">
+									<input type="text" id="" value="0" title="인원수">
+								</span>
+								<span class="btn_minus">빼기</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--// 왕복 편도 -->
+			<!--/div>
+
+			<div class="tab_booking_cont" id="main_reser02">
+				<!-- 왕복 편도 -->
+				<!--div class="sel_booking">
+					<div class="booking_wrap">
+						<div class="input_wrap">
+							<input type="text" value="" placeholder="출발지" class="booking start">
+							<a href="#none" class="btn_pin"></a>
+						</div>
+						<div class="input_wrap">
+							<input type="text" value="" placeholder="도착지" class="booking end">
+							<a href="#none" class="btn_pin"></a>
+						</div>
+						<div  class="input_wrap">                        
+							<input type="text" id="datepicker" value="" placeholder="탑승일" class="booking date">
+							<a href="#none" id="datepicker" class="btn_date"></a>
+						</div>
+					</div>
+					<div class="person_wrap">
+						<div class="input_person">
+							<div class="tit_person">
+								<span>성인</span>
+							</div>
+							<div class="input_wrap">
+								<a class="btn_plus">더하기</a>
+								<input type="text" id="" value="1" title="인원수">
+								<a class="btn_minus"></a>
+							</div>
+						</div>
+						<div class="input_person">
+							<div class="tit_person">
+								<span>소아</span>
+								<a href="#none" class="btn_tooltip gray">
+									<span class="blind">툴팁</span>
+									<div class="tooltip_layer">
+										<div class="tooltip_tit">
+											<img src="../../images/www/ico/ico_kid.png" alt="소아">
+											<h5>소아기준</h5>
+										</div>
+										<div class="tooltip_cont">
+											<dl>
+												<dt>국내선</dt>
+												<dd>만 2세~<span class="red">13세</span> 미만</dd>
+											</dl>
+											<dl>
+												<dt>국제선</dt>
+												<dd>만 2세~<span class="red">12세</span> 미만</dd>
+											</dl>
+											<ul class="info">
+												<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+												<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+											</ul>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="input_wrap">
+								<a class="btn_plus">더하기</a>
+								<input type="text" id="" value="1" title="인원수">
+								<a class="btn_minus">빼기</a>
+							</div>
+						</div>
+						<div class="input_person">
+							<div class="tit_person">
+								<span>유아</span>
+								<a href="#none" class="btn_tooltip gray">
+									<span class="blind">툴팁</span>
+									<div class="tooltip_layer">
+										<div class="tooltip_tit">
+											<img src="../../images/www/ico/ico_baby.png" alt="소아">
+											<h5>유아기준</h5>
+										</div>
+										<div class="tooltip_cont">
+											<dl>
+												<dt>국내선</dt>
+												<dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+											</dl>
+											<dl>
+												<dt>국제선</dt>
+												<dd생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+											</dl>
+											<ul class="info">
+												<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+												<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+											</ul>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="input_wrap">
+								<a class="btn_plus">더하기</a>
+								<input type="text" id="" value="1" title="인원수">
+								<a class="btn_minus">빼기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--// 왕복 편도 -->
+			<!--/div>
+
+			<div class="tab_booking_cont multi_route" id="main_reser03">
+				
+				<!-- 왕복 편도 -->
+				<!--div class="sel_booking">
+					
+					<dl class="input_route">
+						<dt>구간 <span class="red">1</span></dt>
+						<dd>
+							<div class="booking_wrap">
+								<div class="input_wrap">
+									<input type="text" value="" placeholder="출발지" class="booking start">
+									<a href="#none" class="btn_pin"></a>
+								</div>
+								<div class="input_wrap">
+									<input type="text" value="" placeholder="도착지" class="booking end">
+									<a href="#none" class="btn_pin"></a>
+								</div>
+								<div  class="input_wrap">                        
+									<input type="text" id="datepicker" value="" placeholder="탑승일" class="booking date">
+									<a href="#none" id="datepicker" class="btn_date"></a>
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="sel_booking">
+					<dl class="input_route">
+						<dt>구간 <span class="red">2</span></dt>
+						<dd>
+							<div class="booking_wrap">
+								<div class="input_wrap">
+									<input type="text" value="" placeholder="출발지" class="booking start">
+									<a href="#none" class="btn_pin"></a>
+								</div>
+								<div class="input_wrap">
+									<input type="text" value="" placeholder="도착지" class="booking end">
+									<a href="#none" class="btn_pin"></a>
+								</div>
+								<div  class="input_wrap">                        
+									<input type="text" id="datepicker" value="" placeholder="탑승일" class="booking date">
+									<a href="#none" id="datepicker" class="btn_date"></a>
+								</div>
+							</div>
+						</dd>
+					</dl>
+					<a href="#none" class="btn_add_route">구간</a>
+				</div>
+
+				<div class="sel_booking passenger">
+					<dl class="input_passenger">
+						<dt>인원</dt>
+						<dd>
+							<div class="person_wrap">
+								<div class="input_person">
+									<div class="tit_person">
+										<span>성인</span>
+									</div>
+									<div class="input_wrap">
+										<a class="btn_plus">더하기</a>
+										<input type="text" id="" value="1" title="인원수">
+										<a class="btn_minus">빼기</a>
+									</div>
+								</div>
+								
+								<div class="input_person">
+									<div class="tit_person">
+										<span>소아</span>
+										<a href="#none" class="btn_tooltip gray">
+											<span class="blind">툴팁</span>
+											<div class="tooltip_layer">
+												<div class="tooltip_tit">
+													<img src="../../images/www/ico/ico_kid.png" alt="소아">
+													<h5>소아기준</h5>
+												</div>
+												<div class="tooltip_cont">
+													<dl>
+														<dt>국내선</dt>
+														<dd>만 2세~<span class="red">13세</span> 미만</dd>
+													</dl>
+													<dl>
+														<dt>국제선</dt>
+														<dd>만 2세~<span class="red">12세</span> 미만</dd>
+													</dl>
+													<ul class="info">
+														<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+														<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+													</ul>
+												</div>
+											</div>
+										</a>
+									</div>
+									<div class="input_wrap">
+										<a class="btn_plus">더하기</a>
+										<input type="text" id="" value="1" title="인원수">
+										<a class="btn_minus">빼기</a>
+									</div>
+								</div>
+								
+								<div class="input_person">
+									<div class="tit_person">
+										<span>유아</span>
+										<a href="#none" class="btn_tooltip gray">
+											<span class="blind">툴팁</span>
+											<div class="tooltip_layer">
+												<div class="tooltip_tit">
+													<img src="../../images/www/ico/ico_baby.png" alt="소아">
+													<h5>유아기준</h5>
+												</div>
+												<div class="tooltip_cont">
+													<dl>
+														<dt>국내선</dt>
+														<dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+													</dl>
+													<dl>
+														<dt>국제선</dt>
+														<dd>생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+													</dl>
+													<ul class="info">
+														<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+														<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+													</ul>
+												</div>
+											</div>
+										</a>
+									</div>
+									<div class="input_wrap">
+										<a class="btn_plus">더하기</a>
+										<input type="text" id="" value="1" title="인원수">
+										<a class="btn_minus">빼기</a>
+									</div>
+								</div>
+
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<!--// 왕복 편도 -->
+
+			<!--/div>
+
+			<div class="btn_wrap">
+				<button class="btn_large red wh">예약하기</button>
+			</div>
+		</div-->
+		<!--// Main Booking -->
+
+		<!-- Quick Menu -->
+		<div class="main_qmenu">
+			<ul>
+				<li>
+					<a href="#none" class="btn_qmenu n01">
+						<span>예약조회</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="btn_qmenu n02">
+						<span>업무요청</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="btn_qmenu n03">
+						<span>Credit History</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="btn_qmenu n04">
+						<span>Credit 환불요청</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--// Quick Menu -->
+
+	</div>
+	<!--// Visual -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content main">
+
+			<!-- 메인 게시판 -->
+			<div class="section notice">
+				
+				<div class="notice_list_wrap">
+					<ul>
+						<li>
+							<div class="notice_list">
+								<div class="tit_notice">
+									<h5>공지사항</h5>
+									<a href="#none" class="btn_more">더보기</a>
+								</div>
+								<ul>
+									<li class="notice">
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject" date-type="layer" date-id="layer_main_pop"> 개인정보처리방침 개정(11/9~)</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject" date-type="layer" date-id="layer_main_pop"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<div class="notice_list">
+								<div class="tit_notice">
+									<h5>비정상운항 안내</h5>
+									<a href="#none" class="btn_more">더보기</a>
+								</div>
+								<!--ul>
+									<li class="notice">
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 개인정보처리방침 개정(11/9~)</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+								</ul-->
+
+								<!-- 20190402 : 추가 -->
+								<div class="no_list">
+									등록된 게시물이 없습니다.
+								</div>
+								<!--// 20190402 : 추가 -->
+
+							</div>
+
+						</li>
+						<li>
+							<div class="notice_list">
+								<div class="tit_notice">
+									<h5>유류 할증료 안내</h5>
+									<a href="#none" class="btn_more">더보기</a>
+								</div>
+								<ul>
+									<li class="notice">
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject" date-type="layer" date-id="layer_main_pop"> 개인정보처리방침 개정(11/9~)</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<div class="notice_list">
+								<div class="tit_notice">
+									<h5>서식 자료실</h5>
+									<a href="#none" class="btn_more">더보기</a>
+								</div>
+								<ul>
+									<li class="notice">
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 개인정보처리방침 개정(11/9~)</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>
+												<span class="cate">[공지사항]</span>
+												<span class="subject"> 부산~괌 노선 증편 운항 안내(12월 1일…</span>
+											</dt>
+											<dd>
+												<span>2018-11-27</span>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<!--// 메인 게시판 -->
+
+			<div class="section service_info">
+				
+				<!-- 메인 타이틀 -->
+				<div class="main_tit_wrap">
+					<h2 class="main_tit">서비스 안내</h2>
+				</div>
+				<!--// 메인 타이틀 -->
+
+				<!-- 서비스 리스트 -->
+				<div class="srv_list">
+					<ul>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv01.png" alt="">
+									</div>
+									<p class="srv_name">여행준비</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv02.png" alt="">
+									</div>
+									<p class="srv_name">항공편 및 공항정보</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv03.png" alt="">
+									</div>
+									<p class="srv_name">운임 및 수수료 안내</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv04.png" alt="">
+									</div>
+									<p class="srv_name">기내서비스</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv05.png" alt="">
+									</div>
+									<p class="srv_name">수화물 안내</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#none">
+								<div class="bg_srv"></div>
+								<div class="srv_cont">
+									<div class="img">
+										<img src="../../images/tagency/main/img_srv06.png" alt="">
+									</div>
+									<p class="srv_name">부가서비스</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!--// 서비스 리스트 -->
+
+			</div>			
+
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<div class="btn_wrap fr mt0">
+                <button class="sbtn_cont">개인정보 처리방침</button>
+                <button class="sbtn_cont">티웨이항공 바로가기</button>
+            </div>
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+</div>
+
+<!-- main : 메인 컨텐트형 -->
+<div class="dim"></div>
+<div id="layer_main1" class="layer main">
+	<div class="layer_header">
+		<h2>로그인</h2>
+	</div>
+	<div class="layer_main_cons">
+		<div class="log_section main">
+			<div class="mb20">
+				<form method="post" action="">
+					<fieldset>
+						<legend>로그인 필드</legend>
+						<div class="mb10">
+							<input type="text" name="" class="wp100" placeholder="아이디를 입력해 주세요">
+						</div>
+						<div class="mb20">
+							<input type="password" name="" class="wp100" placeholder="비밀번호를 입력해 주세요">
+						</div>
+						<div>
+							<span class="inline">
+								<input type="checkbox" name="log1" id="check-1" checked="checked">
+								<label for="check-1"><span class="icon"></span>아이디 저장</label>
+							</span>
+							<span class="inline">
+								<input type="checkbox" name="log1" id="check-2">
+								<label for="check-2"><span class="icon"></span>자동 로그인</label>
+							</span>
+						</div>
+						<div class="btn_wrap mb20">
+							<button class="btn_large red wp100">확인</button>
+						</div>
+						<ul class="log_util txt_center">
+							<li><a href="#none">회원가입</a></li>
+							<li><a href="#none">아이디 찾기</a></li>
+							<li><a href="#none">비밀번호 찾기</a></li>
+						</ul>
+					</fieldset>
+				</form>
+			</div>
+			<div class="btn_wrap mb0">
+                <button class="btn_small">가입안내 매뉴얼</button>
+            </div>
+		</div>
+	</div>
+	<!-- //layer_main_cons -->
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+
+<div id="layer_main2" class="layer main">
+	<div class="layer_header main">
+		<h2 class="blind">로그인</h2>
+	</div>
+	<div class="layer_main_cons fixed">
+		<div class="log_section main">
+			<div>
+				<div class="account txt_center">
+					<strong class="naming">홍길동 고객님</strong>
+					<p class="comment">티웨이항공 홈페이지를 방문해 주셔서<br>대단히 감사합니다.</p>
+				</div>
+				<div class="btn_wrap">
+					<button class="btn_large red mb10 wp100">로그아웃</button>
+					<div class="sequency clearfix"> <!-- 회원인 경우 노출 -->
+						<button class="btn_large wh">마이 페이지</button>
+						<button class="btn_large wh">예약관리</button>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div> 
+	<!-- //layer_main_cons -->
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--//main : 컨텐트형 -->
+
+<div class="dim"></div>
+<div id="layer_main_pop" class="layer">
+	<div class="layer_header main">
+		<h2>공지사항</h2>
+	</div>
+	<div class="layer_content">
+		<div class="wrap_bbs">
+			<div class="bbs_box">
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)</p>
+			</div>
+			<div class="bbs_box">
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+				<p>[공지사항] 부산~괌 노선 증편 운항 안내(12월 10일)2</p>
+			</div>
+		</div>
+	</div> 
+	<!-- //layer_main_cons -->
+	<div class="layer_footer today">
+		<span>
+			<input type="checkbox" id="check_d-day">
+			<label for="check_d-day"><span class="icon"></span>3일 동안 보지 않기</label>
+		</span>
+	</div>
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--//main : 컨텐트형 -->
+</body>
+</html>

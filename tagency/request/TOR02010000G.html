@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T‘agency 항공사 | 업무요청</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+</head>
+
+<body>
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+	<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+			<div class="pg_tit_wrap">
+				<h2 class="pg_tit">업무요청 조회</h2>
+			</div>
+
+			<div class="notice_box">
+				<ul class="ul_dot">
+					<li>요청하신 신청사항을 조회하실 수 있습니다.</li>
+					<li>해당 조건을 입력하시고 조회버튼을 클릭하시면 해당 신청사항을 조회하실 수 있습니다.</li>
+				</ul>
+			</div>
+
+			<div class="grid mt70">
+				<table class="tb_row">
+					<caption>예약 정보 - 예약번호, 신청일, 신청종류 순서의 정보 입력 표 입니다.</caption>
+					<colgroup>
+						<col style="width:240px">
+						<col style="width:auto"> 
+					</colgroup>
+					<tbody>
+					<tr>
+						<th scope="row">예약번호</th>
+						<td>
+							<div class="input_wrap">
+                                <input type="text" name class="240">
+                            </div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신청일</th>
+						<td>
+							<div class="input_wrap date">
+                                    <input type="text" name="" value="" placeholder="1주일 전 날짜" class="date w220">
+									<span class="mark">~</span>
+                                    <input type="text" name="" value="" placeholder="현재 날짜" class="date w220">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신청종류</th>
+						<td>
+							<div class="input_wrap">
+								<input type="checkbox" id="check-11">
+								<label for="check-11" class="mr15"><span class="icon"></span>탑승인원 증가신청</label>
+								<input type="checkbox" id="check-12">
+								<label for="check-12" class="mr15"><span class="icon"></span>여정변경 신청</label>
+								<input type="checkbox" id="check-13">
+								<label for="check-13" class="mr15"><span class="icon"></span>이름변경</label>
+								<input type="checkbox" id="check-14">
+								<label for="check-14" class="mr15"><span class="icon"></span>발권마감일(TL) 변경 신청</label>
+								<input type="checkbox" id="check-15">
+								<label for="check-15" class="mr15"><span class="icon"></span>발권 마감일(TL) 변경 신청 (DEPOSIT 입금)</label>
+								<input type="checkbox" id="check-16">
+								<label for="check-16" class="mr15"><span class="icon"></span>DEPOSIT 충전</label>
+								<input type="checkbox" id="check-17">
+								<label for="check-17" class="mr15"><span class="icon"></span>운임변경</label>
+								<input type="checkbox" id="check-18">
+								<label for="check-18" class="mr15"><span class="icon"></span>좌석요청</label>
+								<input type="checkbox" id="check-19">
+								<label for="check-19" class="mr15"><span class="icon"></span>기타요청(환불 및 수수료 Waiver요청)</label>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="btn_wrap">
+				<button class="btn_large type02 gray2">조회</button>
+			</div>
+
+			<div class="grid mt70">
+				<table class="tb_col notice">
+					<caption>번호, 예약번호, 신청종류, 신청일시, PNR 조회, 업무요청 취소</caption>
+					<colgroup>
+						<col style="width:70px">
+						<col style="width:100px">
+						<col style="width:auto">
+						<col style="width:215px">
+						<col style="width:130px">
+						<col style="width:160px">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="row">번호</th>
+							<th scope="row">예약번호</th>
+							<th scope="row">신청종류</th>
+							<th scope="row">신청일시</th>
+							<th scope="row">PNR 조회</th>
+							<th scope="row">업무요청 취소</th>
+						</tr>
+					</thead>
+					<tbody> 
+						<tr>
+							<td>4</td>
+							<td>R4K96</td>
+ 							<td>운임 변경</td>
+ 							<td>2018-12-06 14:37:27</td>
+							<td><button class="sbtn_cont">상세조회</button></td>
+							<td><button class="sbtn_cont">업무요청 취소</button></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>J89D48</td>
+ 							<td>기타 요청(환불 및 수수료 Waiver 요청)</td>
+ 							<td>2018-12-05 16:10:06</td>
+							<td><button class="sbtn_cont">상세조회</button></td>
+							<td><button class="sbtn_cont">업무요청 취소</button></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>R4K96</td>
+ 							<td>운임 변경</td>
+ 							<td>2018-12-06 14:37:27</td>
+							<td><button class="sbtn_cont">상세조회</button></td>
+							<td><button class="sbtn_cont">업무요청 취소</button></td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>J89D48</td>
+ 							<td>기타 요청(환불 및 수수료 Waiver 요청)</td>
+ 							<td>2018-12-05 16:10:06</td>
+							<td><button class="sbtn_cont">상세조회</button></td>
+							<td><button class="sbtn_cont">업무요청 취소</button></td>
+						</tr>
+						<tr>
+							<td colspan="6" class="result">
+								조회결과가 없습니다.
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="paginate">
+	            <a href="#none" class="bg prev first" title="맨 처음 페이지로 이동"><em>맨 처음으로</em></a>
+	            <a href="#none" class="bg prev" title="이전 페이지로 이동"><em>이전으로</em></a>
+	            <a href="#none" class="num" title="첫 페이지로 이동">1</a>
+	            <a href="#none" class="num" title="두번 째 페이지로 이동">2</a>
+	            <a href="#none" class="num" title="세번 째 페이지로 이동">3</a>
+	            <a href="#none" class="num on" title="네번 째 페이지로 이동">4</a>
+	            <a href="#none" class="num" title="다섯번 째 페이지로 이동">5</a>
+	            <a href="#none" class="num" title="여섯번 째 페이지로 이동">6</a>
+	            <a href="#none" class="num" title="일곱번 째 페이지로 이동">7</a>
+	            <a href="#none" class="num" title="여덟번 째 페이지로 이동">8</a>
+	            <a href="#none" class="num" title="아홉번 째 페이지로 이동">9</a>
+	            <a href="#none" class="num" title="열번 째 페이지로 이동">10</a>
+	            <a href="#none" class="bg next" title="다음 페이지로 이동"><em>다음으로</em></a>
+	            <a href="#none" class="bg next last" title="마지막 페이지로 이동"><em>마지막으로</em></a>
+	        </div>
+
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<div class="btn_wrap fr mt0">
+				<button class="sbtn_cont">개인정보 처리방침</button>
+				<button class="sbtn_cont">티웨이항공 바로가기</button>
+			</div>
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+	<!-- 전체 메뉴 -->
+	<!--div class="layer_allmenu">
+		
+		<div class="layer_cont">
+
+			<h2>전체메뉴</h2>
+
+			<div class="allmenu">
+				<ul>
+					<li>
+						<a href="#none" class="on">항공권예매</a>
+					</li>
+					<li>
+						<a href="#none">나의예약</a>
+					</li>
+					<li>
+						<a href="#none">서비스안내</a>
+					</li>
+					<li>
+						<a href="#none">이벤트/혜택</a>
+					</li>
+					<li>
+						<a href="#none">고객센터</a>
+					</li>
+					<li>
+						<a href="#none">회사소개</a>
+					</li>
+				</ul>            
+			</div>
+
+			<!-- 항공권 예매 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>항공권 예매</h3>
+					<dl>
+						<dt>항공권 예매</dt>
+					</dl>
+					<dl>
+						<dt>단체항공권 예매</dt>
+					</dl>
+				</div>
+			</div>
+			<!--// 항공권 예매 -->
+
+			<!-- 나의 예약 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>나의 예약</h3>
+					<dl>
+						<dt>정상예약</dt>
+					</dl>
+					<dl>
+						<dt>결제전&확인필요 예약</dt>
+					</dl>
+					<dl>
+						<dt>취소된 예약</dt>
+					</dl>
+					<dl>
+						<dt>웹 체크인</dt>
+						<dd>기내방송서비스 신청</dd>
+					</dl>
+				</div>
+			</div>
+			<!--// 나의 예약 -->
+
+			<!-- 서비스 안내 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>서비스 안내</h3>
+					<dl>
+						<dt>여행준비</dt>
+						<dd>항공권예매안내</dd>
+						<dd>단체항공권예매안내</dd>
+						<dd>웹 체크인 안내</dd>
+						<dd>가족동반여행</dd>
+						<dd>휠체어/도움이 필요한 고객</dd>
+						<dd>반려동물 동반 여행</dd>
+						<dd>T'Way 라운지</dd>
+						<dd>호텔</dd>
+						<dd>렌트카</dd>
+					</dl>
+					<dl>
+						<dt>항공편 및 공항정보</dt>
+						<dd>운항스케줄</dd>
+						<dd>출도착조회</dd>
+						<dd>도심공항 안내</dd>
+						<dd>셀프체크인 안내</dd>
+						<dd>탑승수속 안내</dd>
+						<dd>공항카운터 정보</dd>
+					</dl>
+					<dl>
+						<dt>운임 및 수수료 안내</dt>
+						<dd>운임안내</dd>
+						<dd>개인신분할인 안내</dd>
+						<dd>변경/취소 수수료</dd>
+						<dd>이름변경 수수료</dd>
+					</dl>
+					<dl>
+						<dt>기내서비스</dt>
+						<dd>기내제공서비스</dd>
+						<dd>t'shop</dd>
+						<dd>기내 면세품</dd>
+						<dd>channel't</dd>
+					</dl>
+					<dl>
+						<dt>수하물 안내</dt>
+						<dd>무료 수하물</dd>
+						<dd>특수 수하물</dd>
+						<dd>운송 제한 물품</dd>
+						<dd>수하물 배상</dd>
+					</dl>
+					<dl>
+						<dt>부가서비스</dt>
+						<dd>부가서비스 번들</dd>
+						<dd>사전좌석지정서비스</dd>
+						<dd>수하물 추가구매</dd>
+						<dd>기내식 사전 주문</dd>
+						<dd>옆좌석 구매 서비스</dd>
+						<dd>수하물/보관 배송 서비스</dd>
+						<dd>유료아이템</dd>
+						<dd>T'CARE 서비스</dd>
+					</dl>
+				</div>
+			</div>
+			<!--// 서비스 안내 -->
+
+		<!--/div>
+
+		<a href="#none" class="btn_allmenu_close">닫기</a>
+
+	</div>
+
+
+	<!-- 전체 메뉴 --> 
+
+
+
+
+</div>
+
+</body>
+</html>

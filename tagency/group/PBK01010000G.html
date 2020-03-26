@@ -1,0 +1,1526 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 항공권 예매</title>
+<link rel="stylesheet" type="text/css" href="../../css/www/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+<script>
+$(function(){
+	
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('#start1-2').hide();
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+			$('#start1-1').hide(200);
+			$('#start2').slideUp(200);
+			$('#datepicker_layer').slideUp(200);
+			$('#start1-2').slideDown(200);
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$('#start1-2').slideUp(200);
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start,#end').on('click', function(){
+		var $this= $(this),
+			thisTop = $this.offset().top + $this.height() +20,
+			thisLeft = $this.offset().left - 37;
+		$('#start1').css({'top': thisTop, 'left': thisLeft});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+		$('#datepicker_layer').slideUp(200)
+	});
+
+	$('').on('click', function(){
+		var $this= $(this),
+			thisTop = $this.offset().top + $this.height() +20,
+			thisLeft = $this.offset().left - 37;
+		$('#start1').css({'top': thisTop, 'left': thisLeft});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		var $this= $(this),
+			thisTop = $this.offset().top + $this.height() +20,
+			thisLeft = $this.offset().left - 37;
+		$('#start2').css({'top': thisTop, 'left': thisLeft});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		var $this= $(this),
+			thisTop = $this.offset().top + $this.height() +20,
+			thisLeft = $this.offset().left - 37;
+		$('#start2').css({'top': thisTop, 'left': thisLeft});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		var $this= $(this),
+			thisTop = $this.offset().top + $this.height() +20,
+			thisLeft = $this.offset().left - 37;
+		$('#datepicker_layer').css({'top': thisTop});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	// 레이어 스크롤
+	$(".layer_start1 .layer_cont, .layer_start2 .sel_area_list.scroll , .sel_route_list.type2 .scroll").mCustomScrollbar();
+});
+</script>
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+</head>
+
+<body class="booking">
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="header booking">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+					<!-- 유틸 메뉴 -->
+					<div class="util_menu">
+						<!-- 로그인 전 -->
+						<a href="#none" class="btn_login">로그인</a>
+						<a href="#none" class="btn_search">검색</a>
+						<a href="#none" class="btn_allmenu">전체메뉴</a>
+						<!--// 로그인 전 -->
+					</div>
+					<!-- 유틸 메뉴 -->
+				</div>
+				<!--// Header Menu -->
+			</div>    
+		</div>
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+			<div class="tit_booking_wrap">
+				<h2 class="pg_tit">항공권 예매</h2>
+				<div class="step_booking">
+					<ol>
+						<li class="step01 on">
+							<span class="blind">현재페이지</span>
+							<span class="text_step">01 여정검색</span>
+						</li>
+						<li class="step02">
+							<span class="text_step">02</span>
+						</li>
+						<li class="step06">
+							<span class="text_step">03</span>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- Title & Step -->
+
+			<!-- Input Booking -->
+			<div class="input_booking_wrap">
+				<!-- 예약 탭 -->
+				<div class="booking_option">
+					<ul class="sel_section">
+						<li>
+							<a href="#booking01">
+								<input type="radio" id="b01" name="radio1">
+								<label for="booking01">왕복</label>
+							</a>
+						</li>
+						<li>
+							<a href="#booking02">
+								<input type="radio" id="b02" name="radio1">
+								<label for="booking02">편도</label>
+							</a>
+						</li>
+						<li>
+							<a href="#booking03">
+								<input type="radio" id="b03" name="radio1">
+								<label for="booking03">다구간</label>
+							</a>
+						</li>
+					</ul>
+					<div class="sel_group on">
+						<input type="checkbox" id="group">
+						<label for="group"><span class="icon"></span>단체(10명이상)</label>
+					</div>
+				</div>
+				<!--// 예약 탭 -->
+
+				<!-- 왕복 -->
+				<div class="tab_cont" id="booking01">
+					<div class="booking_input">
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" id="btn_start" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" id="btn_end" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 왕복 -->
+
+				<!-- 편도 -->
+				<div class="tab_cont" id="booking02">
+					<div class="booking_input">
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 편도 -->
+
+				<!-- 다구간 -->
+				<div class="tab_cont mt60" id="booking03">
+					
+					<!-- 구간1 -->
+					<div class="booking_input section">
+						<div class="section_tit">
+							<h5>구간1</h5>
+						</div>
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--// 구간1 -->
+
+					<!-- 구간2 -->
+					<div class="booking_input section">
+						<div class="section_tit">
+							<h5>구간2</h5>
+						</div>
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--// 구간2 -->
+
+				</div>
+				<!-- 다구간 -->
+				<!--// Tab 컨텐츠 -->
+			
+				<!-- 인원수 입력 -->
+				<div class="booking_input section_passenger">
+					<ul class="booking_form">
+						<li>
+							<div class="input_wrap passenger">
+								<!-- 성인 -->
+								<dl>
+									<dt>
+										<label for="adult">성인</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="adult" value="10" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 성인 -->
+								<!-- 소아 -->
+								<dl>
+									<dt>
+										<label for="kid">
+											소아
+											<a href="#none" class="btn_tooltip gray">
+												<span class="blind">툴팁</span>
+												<div class="tooltip_layer">
+													<div class="tooltip_tit">
+														<img src="../../images/www/ico/ico_kid.png" alt="소아">
+														<h5>소아기준</h5>
+													</div>
+													<div class="tooltip_cont">
+														<dl>
+															<dt>국내선</dt>
+															<dd>만 2세~<span class="red">13세</span> 미만</dd>
+														</dl>
+														<dl>
+															<dt>국제선</dt>
+															<dd>만 2세~<span class="red">12세</span> 미만</dd>
+														</dl>
+														<ul class="info">
+															<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+															<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="kid" value="0" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 소아 -->
+								<!-- 유아 -->
+								<dl>
+									<dt>
+										<label for="baby">
+											유아
+											<a href="#none" class="btn_tooltip gray">
+												<span class="blind">툴팁</span>
+												<div class="tooltip_layer">
+													<div class="tooltip_tit">
+														<img src="../../images/www/ico/ico_baby.png" alt="소아">
+														<h5>유아기준</h5>
+													</div>
+													<div class="tooltip_cont">
+														<dl>
+															<dt>국내선</dt>
+															<dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+														</dl>
+														<dl>
+															<dt>국제선</dt>
+															<dd생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+														</dl>
+														<ul class="info">
+															<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+															<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="baby" value="0" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 유아 -->
+							</div>
+							<button class="sbtn_cont" date-type="layer" date-id="age_cal" title="레이어 팝업 열림">나이 계산기</button>
+						</li>
+					</ul>
+				</div>
+				<!--// 인원수 입력 -->
+			</div>
+			<!--// Input Booking -->
+			
+			<!-- Button -->
+			<div class="btn_wrap">
+				<button class="btn_large red">조회</button>
+			</div>
+			<!--// Button -->
+
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Footer Info -->
+		<div class="f_info">
+			<!-- Booking Info -->
+			<div class="booking_center">
+				<span class="booking_tit">티웨이항공 예약센터</span>
+				<span class="booking_time">KST 07:00 ~ KST 21:00</span>
+				<span class="booking_tel">1688 - 8686</span>
+			</div>
+			<!--// Booking Info -->
+			<!-- SNS Info -->
+			<div class="f_link_sns">
+				<a href="#none" class="link_fb">페이스북</a>
+				<a href="#none" class="link_ins">인스트그램</a>
+				<a href="#none" class="link_ut">유튜브</a>
+			</div>
+			<!-- SNS Info -->
+		</div>
+		<!--// Footer Info -->
+
+		<!-- Footer Link -->
+		<div class="f_menu_wrap">
+			<div class="f_menu">
+				<ul>
+					<li>
+						<strong>회사소개</strong>
+						<dl class="dep2">
+							<dd>티웨이항공 소개</dd>
+							<dd>투자정보</dd>
+							<dd>채용안내</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>광고홍보 영상</dd>
+							<dd>사회공헌</dd>
+							<dd>보도자료</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>규정 및 약관</strong>
+						<dl class="dep2">
+							<dd>여객운송약관</dd>
+							<dd>수수료약관</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>홈페이지이용약관</dd>
+							<dd>개인정보처리방침</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>기타</strong>
+						<dl class="dep2">
+							<dd>항공교통이용자 서비스 계획</dd>
+							<dd>피해구제계획</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>여행사/AGENT</strong>
+						<dl class="dep2">
+							<dd>T’Agency</dd>
+							<dd>Taiwan</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>Japan</dd>
+							<dd>Vietnam</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--// Footer Link -->
+
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<!-- Family Site Link -->
+			<div class="quick_flink">
+				<a href="#none">Family site</a>
+				<ul class="list_link">
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+				</ul>
+			</div>
+			<!--//  Family Site Link -->
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+
+<!-- 옵션 레이어 -->
+<!-- Input Hover 시 -->
+<div>
+<div id="start1" class="layer_start1" style="display:none">
+	
+	
+	<div id="start1-1" class="layer_cont scroll">
+		
+		<!-- 즐겨찾기 노선 -->
+		<div id="" class="sel_route_list like">
+			<div class="route_tit_wrap">
+				<h3 class="sel_route_tit">즐겨 찾는 노선</h3>
+				<button class="sbtn_cont">전체도시보기</button>
+			</div>	
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">오사카/간사이</span>
+						<span class="eng">KIX</span>
+					</a>
+					<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+					<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">도쿄/나리타</span>
+						<span class="eng">NRT</span>
+					</a>
+					<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+				</li>
+				<li class="no_date">조회 결과가 없습니다.</li>
+			</ul>
+		</div>
+
+		<!-- 노선 선택 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap">
+				<h3 class="sel_tit">현재위치</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li class="no_date">조회 결과가 없습니다.</li>
+			</ul>
+		</div>
+	</div>
+	<div id="start1-2" class="layer_cont search scroll">
+		<!-- 노선 검색후 리스트 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap blind">
+				<h3 class="sel_tit">검색 리스트</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+					<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+					<a href="#none" class="ico_bookmark">즐겨찾기</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 노선 검색후 리스트 -->
+	</div>
+</div>
+</div>
+<!--// Input Hover 시 -->
+
+<!-- Button 클릭시 -->
+<div>
+<div id="start2" class="layer_start2" style="display:none">
+	<div class="layer_cont">
+		<!-- 지역선택 -->
+		<h3 class="sel_tit">지역</h3>
+		<div class="sel_area_list scroll">
+			<ul>
+				<li>
+					<a href="#none" class="sel_area">즐겨찾기노선</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">현재위치</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area on">대한민국</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">일본</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동북아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">서남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">러시아/중앙아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">대양주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">미주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">유럽</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">중동/아프리카</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 지역선택 -->
+
+		<!-- 취향지 -->
+		<div class="sel_route_list type2">
+			
+			<h3 class="sel_tit">취향지</h3>
+			
+			<div class="scroll">
+				<ul>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+						<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city like">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+						<a href="#none" class="ico_bookmark on">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+						<a href="#none" class="ico_bookmark">즐겨찾기</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/ 취향지 -->
+	</div>
+</div>
+</div>
+<!--// Button 클릭시 -->
+
+<!-- Datepicker Layer -->
+<div>
+<div class="layer datepicker" id="datepicker_layer" style="display:none;">
+	<div class="layer_grid_datepicker_wrap">
+		<div class="grid_datepicker fl">
+			<div class="sel_yymm_wrap">
+				<span class="select datepicker">
+					<select title="년월선택">
+						<option selected>2018.09</option>
+						<option>2018.08</option>
+						<option>2018.07</option>
+						<option>2018.06</option>
+					</select>
+				</span>
+				<span class="unit">통화:KRW</span>  
+			</div>                                    
+			<table class="tbl_datepicker">
+				<caption>날짜선택 테이블</caption>
+				<colgroup>
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+					<col style="width:14.2%">
+				</colgroup>
+				<thead>
+					<th scope="row">일</th>
+					<th scope="row">월</th>
+					<th scope="row">화</th>
+					<th scope="row">수</th>
+					<th scope="row">목</th>
+					<th scope="row">금</th>
+					<th scope="row">토</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">1</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">2</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">3</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">4</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">5</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">6</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">7</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">8</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">9</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">10</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">11</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day today">12</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">13</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">14</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">15</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">16</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">17</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day start">18</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day on">19</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day on">20</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day end">21</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">22</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">23</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">24</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">25</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">26</a>
+							<span class="price">비운항</span>
+						</td>
+						<td>
+							<a href="#none" class="day">27</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">28</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">29</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">30</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="grid_datepicker fr">
+			<div class="sel_yymm_wrap">
+				<span class="select datepicker">
+					<select title="년월선택">
+						<option selected>2018.09</option>
+						<option>2018.08</option>
+						<option>2018.07</option>
+						<option>2018.06</option>
+					</select>
+				</span>
+				<span class="unit">통화:KRW</span>  
+			</div>                                    
+			<table class="tbl_datepicker">
+				<caption>날짜선택 테이블</caption>
+				<colgroup>
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+				</colgroup>
+				<thead>
+					<th scope="row">일</th>
+					<th scope="row">월</th>
+					<th scope="row">화</th>
+					<th scope="row">수</th>
+					<th scope="row">목</th>
+					<th scope="row">금</th>
+					<th scope="row">토</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">1</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">2</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">3</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">4</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">5</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">6</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">7</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">8</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">9</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">10</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">11</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">12</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">13</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">14</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">15</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">16</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">17</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">18</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">19</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">20</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">21</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">22</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">23</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">24</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">25</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">26</a>
+							<span class="price">비운항</span>
+						</td>
+						<td>
+							<a href="#none" class="day">27</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">28</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">29</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">30</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="btn_wrap">
+		<!-- 비활성 -->
+		<button class="btn_small gray">탑승일 선택</button>
+		<!--// 비활성 -->
+		<!-- 활성 -->
+		<button class="btn_small gray on">탑승일 선택</button>
+		<!--// 활성 -->
+	</div>
+
+	<!-- Datepicker Button -->
+	<a href="#none" class="btn_cal_prev">이전달</a>
+	<a href="#none" class="btn_cal_next">다음달</a>
+	<!--// Datepicker Button -->
+
+</div>
+</div>
+<!--// Datepicker Layer -->
+<!--// 옵션 레이어 -->
+
+<!-- Dim -->
+<div class="dim"></div>
+<!-- Dim -->
+
+<!-- 나이 계산기 Layer -->
+<div id="age_cal" class="layer type02 age_cal">
+	<div class="layer_header">
+		<h2>나이 계산기</h2>
+	</div>
+	<div class="layer_content scroll">
+		
+		<p class="txt_notice">출발일과 생년월일을 입력하세요</p>
+
+		<div class="sel_wrap">
+			<label for="s_yyyy">출발일</label>
+			<span class="select">
+				<select id="s_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="sel_wrap">
+			<label for="b_yyyy">생년월일</label>
+			<span class="select">
+				<select id="b_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="btn_wrap">
+			<button class="btn_large red">계산하기</button>
+		</div>
+
+		<div class="age_standard">
+			출발일 기준 <span class="red">소아</span> 입니다.
+		</div>
+
+	</div>
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--// 나이 계산기 Layer -->
+
+</div>
+
+</body>
+</html>

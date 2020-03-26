@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 항공권 예매</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/reset.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/swiper.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/plugin.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/main.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/booking.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/kjh.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/pjy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jhy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lmy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lhb.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+<script>
+$(function(){
+	
+	
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('#start1-2').hide();
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+			$('#start1-1').hide(200);
+			$('#start2').slideUp(200);
+			$('#datepicker_layer').slideUp(200);
+			$('#start1-2').slideDown(200);
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$('#start1-2').slideUp(200);
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 35});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 35});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+
+	$('#end').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 445});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 445});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		$('#datepicker_layer').css({'top': 350});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	// 레이어 스크롤
+	$(".layer_start1 .layer_cont, .layer_start2 .sel_area_list.scroll , .sel_route_list.type2 .scroll").mCustomScrollbar();
+});
+</script>
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+</head>
+
+<body class="booking">
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+			<div class="tit_booking_wrap mb60">
+				<h2 class="pg_tit">항공권 예매</h2>
+				<div class="step_booking">
+					<ol>
+						<li class="step01 on">
+							<span class="text_step">01</span>
+							<span class="blind">여정검색 (완료 단계)</span>
+							<!-- <span class="blind">여정선택 (완료 단계)</span> -->
+							<!-- <span class="blind">부가서비스 번들 구매 (완료 단계)</span> -->
+						</li>
+						<li class="step02 on">
+							<span class="text_step">02</span>
+							<span class="blind">탑승자 정보 입력 (완료 단계)</span>
+						</li>
+						<li class="step03 on">
+							<span class="text_step">03</span>
+							<span class="blind">부가서비스 선택 (완료 단계)</span>
+						</li>
+						<li class="step04 on">
+							<span class="text_step">04</span>
+							<span class="blind">선택내역 확인 및 규정 동의 (완료 단계)</span>
+						</li>
+						<li class="step05 on">
+							<span class="blind">현재페이지</span>
+							<span class="text_step">05 결제</span>
+						</li>
+						<li class="step06">
+							<span class="text_step">06</span>
+							<span class="blind">예매완료</span>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- Title & Step -->
+
+			<!-- 결제 정보 -->
+			<div class="con_tit_wrap mt60">
+				<h3 class="con_tit">결제 정보</h3>
+			</div>
+
+			<div class="total_pay_box">
+				<dl>
+					<dt>최종 결제 금액</dt>
+					<dd>
+						<span class="unit">KRW</span>
+						<strong class="total_price">9,900,000</strong>
+					</dd>
+				</dl>
+			</div>
+			<!-- //결제 정보 -->
+
+			<!-- 결제수단선택 -->
+			<div class="con_tit_wrap mt60">
+				<h3 class="con_tit">결제 수단</h3>
+				<input type="checkbox" id="check-1">
+				<label for="check-1" class="ml20">
+					<span class="icon"></span>
+					지금 선택한 결제수단을 다음에도 사용
+				</label>
+			</div>
+			<div class="payment_wrap fix mb40">
+				<ul>
+					<li>
+						<a href="#none" class="btn_payment agency_credit on">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/TWAG.png" alt="AgencyCredit">
+							<span>Agency Credit</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment credit_card">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/CCES.png" alt="신용카드">
+							<span>신용카드</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment visa_card">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/CCEB.png" alt="해외발행카드">
+							<span>해외발행카드</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment paypal">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/EPPP.png" alt="페이팔">
+							<span>페이팔</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment transfer">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/ETAT.png" alt="실시간 계좌이체">
+							<span>실시간 계좌이체</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment union_pay">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/EPUP.png" alt="유니온페이">
+							<span>유니온페이</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment kakao_pay">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/EPKP.png" alt="카카오페이">
+							<span>카카오페이</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment payco">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/EPPC.png" alt="페이코">
+							<span>페이코</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment toss">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/EPTS.png" alt="토스">
+							<span>토스</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="btn_payment jp_card">
+							<img src="http://dev-contents-image.twayair.com/homepage/images/payment_icon/CCEC.png" alt="일본 카드결제">
+							<span>일본 카드결제</span>
+						</a>
+					</li>
+				</ul>				
+			</div>
+			<!-- //결제수단선택 -->
+			<!-- 어드민 -->
+			<div class="txt_center mt40 mb40">
+				어드민에서 등록한 각 결제방법에 관련된 안내 문구 노출 영역
+			</div>
+			<!-- //어드민 -->
+			
+			<!-- Agency Credit -->
+			<div class="grid">
+				<table class="tb_col">
+					<caption>Agency Credit</caption>
+					<colgroup>
+						<col style="width:25%"/>
+						<col style="width:25%"/>
+						<col style="width:25%"/>
+						<col style="width:25%"/>
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">최종 결제 금액</th>
+							<th scope="col">Credit 잔액조회</th>
+							<th scope="col">결제 후 Credit 잔여금액</th>
+							<th scope="col">Credit Password</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>KRW 485,900</td>
+							<td>KRW 8,433,160</td>
+							<td>KRW 8,433,160</td>
+							<td>
+								<div class="input_wrap">
+									<input type="password" id="password">
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="table_txt mt20">Credit Password란 여행사 회원가입 후 이메일을 통해 받은 Password 정보입니다.</p>
+			<!--// Agency Credit -->
+
+
+			<div class="gray_input_box txt_center">
+				<span class="select w360">
+					<select name="" id="">
+						<option value="">카드를 선택하세요.</option>
+					</select>
+				</span>
+				<span class="select w360">
+					<select name="" id="">
+						<option value="">할부를 선택하세요.</option>
+					</select>
+				</span>
+				<button class="btn_small ml5">신용카드 무이자 할부 및 혜택 안내</button>
+            </div>
+			<ul class="ul_dot">
+				<li>예매 후 환불 및 변경 시, 선택하신 운임에 따라 수수료가 부과되오니 운임 규정 및 조건을 확인하시기 바랍니다.</li>
+				<li>환불을 원하시는 경우에는 결제하신 카드로 자동 환불됩니다.</li>
+			</ul>
+			<!-- //결제수단선택 -->	
+			<!-- 카드 정보 입력 -->
+			<div class="con_tit_wrap mt30">
+				<h3 class="con_tit">카드 정보 입력</h3>
+			</div>
+			<div class="gray_input_box number_input_wrap">
+				<dl class="number_input">
+					<dt>카드번호
+						<span class="ico_req">필수입력</span></dt>
+					<dd>
+						<input type="tel" title="카드번호 천번째 4자리">
+						<input type="tel" title="카드번호 두번째 4자리">
+						<input type="tel" title="카드번호 세번째 4자리">
+						<input type="tel" title="카드번호 네번째 4자리">
+					</dd>
+				</dl>
+				<dl class="number_input period_input">
+					<dt>유효기간
+						<span class="ico_req">필수입력</span></dt>
+					<dd>
+						<span class="select" title="유효기간 월">
+							<select name="" id="">
+								<option value="">월</option>
+							</select>
+						</span>
+						<span class="select">
+							<select name="" id="" title="유효기간 년도">
+								<option value="">년도</option>
+							</select>
+						</span>
+					</dd>
+				</dl>
+				<dl class="number_input cvc_input">
+					<dt>CVC
+						<span class="ico_req">필수입력</span>
+						<a href="#none" class="btn_tooltip gray">
+							<span class="blind">툴팁</span>
+							<div class="tooltip_layer">
+								<div class="tooltip_tit">
+									<h5>CVC란?</h5>
+								</div>
+								<div class="tooltip_cont">
+									카드 뒷면의 3자리 코드 입니다.
+								</div>
+							</div>
+						</a>
+					</dt>
+					<dd>
+						<input type="tel" title="CVC 입력">
+					</dd>
+				</dl>
+			</div>
+			<!-- //카드 정보 입력 -->
+
+			<!-- 실시간계좌이체 -->
+			<div class="con_tit_wrap mt40">
+				<h3 class="con_tit">현금영수증 발행 신청</h3>
+			</div>
+			<div class="gray_input_box">
+				<ul class="radio_tab">
+					<li><input type="radio" id="radio01" name="radios" checked="checked"><label for="radio01"><span class="icon_radio ico_radio01"></span>현금영수증 발행</label></li>
+					<li><input type="radio" id="radio02" name="radios"><label for="radio02"><span class="icon_radio ico_radio02"></span>현금영수증 미 발행</label></li>
+				</ul>
+				<p class="red mt20">※ 실시간 계좌이체를 처음 이용하시는 경우 플러그인을 설치 하시기 바랍니다. <button class="btn_cont">플러그인 설치하기</button></p>
+			</div>
+			<ul class="ul_dot mt10">
+				<li>매월 23:30~ 오전 01:30 사이에는 시스템 점검으로 서비스가 잠시 중단될 수 있습니다.</li>
+				<li>이용가능시간 : <span class="red">매일 오전 : 01:30~23:30</span></li>
+				<li>은행 증권 등에서 발급한 (상호 연동)공인인증서가 있는 고객만 계좌이체가 가능합니다.</li>
+				<li>은행 증권 등에서 발급한 (상호 연동)공인인증서가 있는 고객만 계좌이체가 가능합니다.</li>
+			</ul>
+			<!-- //실시간계좌이체 -->
+
+			<!-- 페이팔 페이코 카카오페이 -->
+			<div class="terms_bttm">
+				<input type="checkbox" id="check-5">
+				<label for="check-5" class="mr15"><span class="icon"></span>간편 결제 안내 를 확인하였으며, 이에 동의합니다.</label>
+			</div>
+			<!-- //페이팔 페이코 카카오페이 -->
+
+			<!-- Button -->
+			<div class="btn_wrap">
+				<button class="btn_large wh">처음부터 다시 예약</button>
+				<button class="btn_large red">다음단계</button> 
+			</div>
+			<!--// Button -->
+
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+
+
+		<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<div class="btn_wrap fr mt0">
+                <button class="sbtn_cont">개인정보 처리방침</button>
+                <button class="sbtn_cont">티웨이항공 바로가기</button>
+            </div>
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+
+<!-- 옵션 레이어 -->
+<!-- Input Hover 시 -->
+<div id="start1" class="layer_start1" style="display:none">
+	
+	
+	<div id="start1-1" class="layer_cont scroll">
+		
+		<!-- 즐겨찾기 노선 -->
+		<div id="" class="sel_route_list like">
+			<div class="route_tit_wrap">
+				<h3 class="sel_route_tit">즐겨 찾는 노선</h3>
+				<button class="sbtn_cont">전체도시보기</button>
+			</div>	
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">오사카/간사이</span>
+						<span class="eng">KIX</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">도쿄/나리타</span>
+						<span class="eng">NRT</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- 노선 선택 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap">
+				<h3 class="sel_tit">현재위치</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="start1-2" class="layer_cont search scroll">
+		<!-- 노선 검색후 리스트 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap blind">
+				<h3 class="sel_tit">검색 리스트</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 노선 검색후 리스트 -->
+	</div>
+</div>
+<!--// Input Hover 시 -->
+
+<!-- Button 클릭시 -->
+<div id="start2" class="layer_start2" style="display:none">
+	<div class="layer_cont">
+		<!-- 지역선택 -->
+		<h3 class="sel_tit">지역</h3>
+		<div class="sel_area_list scroll">
+			<ul>
+				<li>
+					<a href="#none" class="sel_area">즐겨찾기노선</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">현재위치</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area on">대한민국</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">일본</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동북아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">서남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">러시아/중앙아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">대양주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">미주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">유럽</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">중동/아프리카</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 지역선택 -->
+
+		<!-- 취향지 -->
+		<div class="sel_route_list type2">
+			
+			<h3 class="sel_tit">취향지</h3>
+			
+			<div class="scroll">
+				<ul>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city like">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/ 취향지 -->
+	</div>
+</div>
+<!--// Button 클릭시 -->
+
+
+<!--// 옵션 레이어 -->
+
+<!-- Dim -->
+<div class="dim"></div>
+<!-- Dim -->
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T‘agency 항공사 | 예약관리</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+</head>
+
+<body>
+
+
+    <div id="name_contact_input" class="layer type05" style="display:block">
+        <div class="layer_header">
+            <h2>이름/연락처 입력</h2>
+        </div>
+        <div class="layer_content pb0">
+	        <ul class="ul_dot">
+                <li>입력하신 연락처로 운항편 비정상 상황시 SMS가 발송됩니다.</li>
+                <li>소아/유아의 경우 생년월일 입력이 필수입니다.</li>
+                <li>개인신분할인 선택 시 할인율이 적용된 금액은 다음 단계에서 확인 가능합니다.</li>
+                <li>개인신분 할인 시 증빙서류를 꼭 지참해주시기 바랍니다.</li>
+                <li>경로우대를 선택하시면 생년월일 입력이 필수입니다.</li>
+                <li>괌 노선에서는 생년월일 입력이 필수입니다.</li>
+                <li>연락처 입력 시 국가번호 입력이 필수입니다.</li>
+            </ul>
+            <div class="tab_wrap mt60 mb0">
+                <ul class="tab n2">
+                    <li class="on"><a href="#tab1">엑셀업로드</a></li>
+                    <li><a href="#tab2">sellconnect 업로드</a></li>
+                </ul>
+
+                <!-- 엑셀업로드 -->
+                <div class="tab_cont" id="tab1">
+					<table class="tb_row mt50 mb40">
+						<caption>엑셀업로드 표 - 엑셀 업로드, 엑셀 양식 다운로드 순서의 표입니다.</caption>
+						<colgroup>
+							<col style="width:200px">
+							<col style="width:auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row" class="left">엑셀 업로드</th>
+								<td>
+									<input type="text" name="" value="" readonly="readonly" class="w430">
+									<button class="btn_small">찾아보기</button>
+									<button class="btn_small dark">업로드</button>
+									<p class="attach mt20">
+                                        <a href="#none" class="btn_del">지우기</a>
+                                        <span>하나투어_사업자등록증사본.jpg</span>
+                                    </p>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" class="left">엑셀 양식 다운로드</th>
+								<td>
+									<button class="btn_small">티웨이 양식</button>
+									<button class="btn_small">하나투어 양식</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- 탑승자 정보 리스트 -->
+					<div class="psg_info_list">
+						<p class="tb_sub_txt">
+			            	<span>탑승자 정보 총 <strong class="red">69</strong>명</span>
+			            	<span>+ 1 INF</span>
+			            </p>
+			            <button class="sbtn_cont fr" date-type="layer" date-id="name_list">Name list 확인</button>
+						<table class="tb_col st2 mt20">
+			                <caption>탑승자 정보 - 번호, 구분, 성별, 성, 이름, 생년월일, 개인신분할인, 국가번호, 연락처, 이메일 순서의 예약내역 정보 표입니다.</caption>
+			                <colgroup>
+			                    <col style="width:57px">
+			                    <col style="width:95px">
+			                    <col style="width:85px">
+			                    <col style="width:97px">
+			                    <col style="width:120px">
+			                    <col style="width:264px">
+			                    <col style="width:205px">
+			                    <col style="width:92px">
+			                    <col style="width:160px">
+			                    <col style="width:165px">
+			                </colgroup>
+			                <thead>
+			                    <tr>
+			                        <th scope="col">번호</th>
+			                        <th scope="col">구분</th>
+			                        <th scope="col">성별</th>
+			                        <th scope="col">성</th> 
+			                        <th scope="col">이름</th> 
+			                        <th scope="col">생년월일</th> 
+			                        <th scope="col">개인신분할인</th>
+			                        <th scope="col">국가번호</th>
+			                        <th scope="col">연락처</th>
+			                        <th scope="col">이메일</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                    <tr>
+			                        <td>1</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>2</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>3</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr class="none">
+			                        <td colspan="10">조회 내역이 없습니다.</td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			        </div>
+			        <!--// 탑승자 정보 리스트 -->
+                </div>
+                <!--// 엑셀업로드 -->
+                
+                
+                <!-- sellconnect 업로드 -->
+                <div class="tab_cont grid" id="tab2">
+                	<table class="tb_row mt50 mb40">
+						<caption>sellconnect 업로드 표 - 엑셀 업로드, 엑셀 양식 다운로드 순서의 표입니다.</caption>
+						<colgroup>
+							<col style="width:200px">
+							<col style="width:auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>티웨이 지원가능 ENTRY</th>
+								<td>
+									<dl class="fl">
+										<dt class="txt_bul">CASE: 성인 1 + 소아 1</dt>
+										<dd class="txt_dot">1) NM1HONG/GILDONG MR;NM1KANG/GILDONG MSTR(CHD/15MAY16)</dd>
+										<dd class="txt_dot">2) NM1HONG/GILDONG,MR;NM1KANG/GILDONG,MSTR(CHD/15MAY16)</dd>
+									</dl>
+									<dl class="fr">
+										<dt class="txt_bul">CASE: 성인 2</dt>
+										<dd class="txt_dot">1) NM1HONG/GILDONG MR;NM1KIM/GILDONG MS</dd>
+										<dd class="txt_dot">2) NM1HONG/GILDONG,MR;NM1KIM/GILDONG,MS</dd>
+									</dl>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" class="left">sellconnect 업로드</th>
+								<td>
+									<button class="btn_small">내용 입력</button>
+									<div class="input_wrap mt20 mb20">
+                                        <textarea></textarea>
+                                        <p class="placeholder">TW에서 지원하는 ENTRY로 이름을 입력하세요.</p>
+                                    </div>
+									<button class="btn_small dark">업로드</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- 탑승자 정보 리스트 -->
+					<div class="psg_info_list">
+						<p class="tb_sub_txt">
+			            	<span>탑승자 정보 총 <strong class="red">69</strong>명</span>
+			            	<span>+ 1 INF</span>
+			            </p>
+			            <button class="sbtn_cont fr" date-type="layer" date-id="name_list">Name list 확인</button>
+						<table class="tb_col st2 mt20">
+			                <caption>탑승자 정보 - 번호, 구분, 성별, 성, 이름, 생년월일, 개인신분할인, 국가번호, 연락처, 이메일 순서의 예약내역 정보 표입니다.</caption>
+			                <colgroup>
+			                    <col style="width:57px">
+			                    <col style="width:95px">
+			                    <col style="width:85px">
+			                    <col style="width:97px">
+			                    <col style="width:120px">
+			                    <col style="width:264px">
+			                    <col style="width:205px">
+			                    <col style="width:92px">
+			                    <col style="width:160px">
+			                    <col style="width:165px">
+			                </colgroup>
+			                <thead>
+			                    <tr>
+			                        <th scope="col">번호</th>
+			                        <th scope="col">구분</th>
+			                        <th scope="col">성별</th>
+			                        <th scope="col">성</th> 
+			                        <th scope="col">이름</th> 
+			                        <th scope="col">생년월일</th> 
+			                        <th scope="col">개인신분할인</th>
+			                        <th scope="col">국가번호</th>
+			                        <th scope="col">연락처</th>
+			                        <th scope="col">이메일</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                    <tr>
+			                        <td>1</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>2</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>3</td>
+			                        <td>성인
+			                        	<!-- <span class="select">
+	                                       <select id="select1" title="구분선택">
+	                                            <option selected="selected">성인</option>
+	                                            <option>소아</option>
+	                                        </select>
+	                                    </span> -->
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select2" title="성별선택">
+	                                            <option selected="selected">남</option>
+	                                            <option>여</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="성">
+			                        </td>
+			                        <td>
+			                        	<input type="text" name="" value="" placeholder="이름">
+			                        </td>
+			                        <td>
+			                        	<div class="input_wrap">
+				                        	<span class="select">
+		                                       <select id="select3" title="태어난 년도">
+		                                            <option selected="selected">년</option>
+		                                            <option>2019년</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select4" title="태어난 월">
+		                                            <option selected="selected">월</option>
+		                                            <option>1월</option>
+		                                        </select>
+		                                    </span>
+		                                    <span class="select">
+		                                       <select id="select5" title="태어난 일">
+		                                            <option selected="selected">일</option>
+		                                            <option>1일</option>
+		                                        </select>
+		                                    </span>
+		                                </div>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select6" title="개인신분할인 선택">
+	                                            <option selected="selected">해당자만 선택해주세요.</option>
+	                                            <option>개인</option>
+	                                            <option>단체</option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<span class="select">
+	                                       <select id="select7" title="국가번호 선택">
+	                                            <option selected="selected">선택</option>
+	                                            <option></option>
+	                                        </select>
+	                                    </span>
+			                        </td>
+			                        <td>
+			                        	<input type="tel" name="" value="" placeholder="010-1234-5678">
+			                        </td>
+									<td>
+			                        	<input type="email" name="" value="" placeholder="tway@tway.com">
+			                        </td>
+			                    </tr>
+			                    <tr class="none">
+			                        <td colspan="10">조회 내역이 없습니다.</td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			        </div>
+			        <!--// 탑승자 정보 리스트 -->
+                </div>
+                <!--// sellconnect 업로드 -->
+
+            </div>
+	    </div>
+	    <div class="layer_footer">
+            <button class="btn_large red">저장</button>
+            <button class="btn_large" onclick="self.close();">닫기</button>
+        </div>
+        <a href="#none" class="btn_layer_close" onclick="self.close();">레이어 닫기</a>
+    </div>
+    <!--//팝업 -->
+
+
+
+    <!-- name_list 팝업 -->
+    <div class="dim"></div>
+    <div id="name_list" class="layer type02">
+        <div class="layer_header">
+            <h2>Name list 확인</h2>
+        </div>
+        <div class="layer_content">
+	        <p class="info_txt_s">해당 단체의 승객 Name list 입니다. 업무에 참고하시기 바랍니다.</p>
+            <div class="bdr_box mt20">
+				<span class="pl0">NM1KWON/SOONGI MR;</span>
+				<span>NM1KIM/YEOJIN MS;</span>
+				<span>NM1EOM/HYOJEONG MS;</span>
+				<span>NM1KIM/NAMHYUN MS;</span>
+			</div>
+	    </div>
+	    <div class="layer_footer">
+            <button class="btn_large red">닫기</button>
+        </div>
+        <a href="#none" class="btn_layer_close">레이어 닫기</a>
+    </div>
+    <!--// name_list 팝업 -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3489 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 항공권 예매</title>
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="../js/rangeslider.js"></script>
+<script type="text/javascript" src="../js/slick.js"></script>
+<script type="text/javascript" src="../js/swiper.js"></script>
+<script type="text/javascript" src="../js/ui.common.js"></script>
+</head>
+
+<body class="booking">
+<script>
+$(function(){
+	/* 스와이퍼 */
+	// 구간선택
+	var swiper = new Swiper('.service_section_wrap .swiper-container', {
+		//loop: true,
+		pagination: {
+			el: '.service_section_wrap .swiper-pagination',
+			clickable: true,
+		},
+		navigation: {
+			nextEl: '.service_section_wrap .btn_slide_next',
+			prevEl: '.service_section_wrap .btn_slide_prev',
+		},
+	});
+
+	//날짜선택
+	var swiper = new Swiper('.sel_date_wrap .swiper-container', {
+		//loop: true,
+		slidesPerView: 7,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		navigation: {
+			nextEl: '.sel_date_wrap .btn_slide_next',
+			prevEl: '.sel_date_wrap .btn_slide_prev',
+		},
+	});
+
+	//좌석선택 타이틀
+	$(".seat ul>li").each(function(i, s){
+		if($(s).find(">a").hasClass("disable")){
+			$(s).find(">a").attr("title", "선택 불가 좌석");
+		}else{
+			$(s).find(">a").attr("title", "선택 가능 좌석");
+		}
+	});
+
+	//탑승자선택
+	var swiper = new Swiper('.sel_passenger_wrap .swiper-container', {
+		//loop: true,
+		slidesPerView: 5,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		navigation: {
+			nextEl: '.sel_passenger_wrap .btn_slide_next',
+			prevEl: '.sel_passenger_wrap .btn_slide_prev',
+		},
+	});
+	
+	// 구간 리스트 아코디언
+	//$('.section_list li:first-child a.section_list_box').addClass('on');
+	$('.section_list').find('.detail_info').hide();
+	//$('.section_list').find('.detail_info:first').show();
+	$('.section_list li a.section_list_box').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.section_list a.section_list_box').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+	});
+
+	// Summary 탑승객
+	$('.passenger_list li:first-child a.title').addClass('on');
+	$('.passenger_list').find('.passenger_summary:first').show();
+	$('.passenger_list a.title').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.passenger_list a.title').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+	});
+
+	// 여정 재검색
+	$('button.refresh').on('click', function() {
+		$('.summary_wrap').css({'z-index': 15});
+		$('.dim02').fadeIn(150);
+		$('.layer_plan_research').fadeIn(250);
+	});
+	$('button.cancel').on('click', function() {
+		$('.summary_wrap').css({'z-index': ''});
+		$('.dim02').fadeOut(150);
+		$('.layer_plan_research').fadeOut(250);
+	});
+
+	//구간 더보기
+	$('.btn_section_more').on('click', function(e) {
+		$('.layer_section_list').slideDown(200);
+	});
+	$('.layer_section_list .btn_close').on('click', function(e) {
+		$('.layer_section_list').slideUp(200);
+	});
+
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 35});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 35});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+
+	$('#end').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 445});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 445});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		$('#datepicker_layer').css({'top': 350});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('.btn_del').on('click', function(){
+		$(this).hide(200);
+		$(this).parents('.add_service').find('.add_bundle').hide();
+	});
+
+	//수화물 선택 슬라이더바
+	$('.range_event').rangeslider({
+		polyfill: false,
+
+		// Callback function
+		onInit: function(){
+			$rangeEl = this.$range;
+			// get range index labels
+			var rangeLabels = this.$element.attr('data-labels');
+			var rangePrices = this.$element.attr('data-prices');
+			var label = '';
+			rangeLabels = rangeLabels.split(', ');
+			rangePrices = rangePrices.split(', ');
+			// add labels
+			$rangeEl.append('<div class="rangeslider__labels"></div>');
+			$(rangeLabels).each(function(index, value) {
+				if(index == 0){
+					label = '<span class="rangeslider__labels__label active" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}else{
+					label = '<span class="rangeslider__labels__label" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}
+				$rangeEl.find('.rangeslider__labels').append(label);
+			});
+			//reset label width
+			var labelW = 100 / (this.$element.attr('max') / this.$element.attr('step') + 1);
+			$rangeEl.find('.rangeslider__labels__label').css('width',labelW + '%');
+		},
+
+		// 합산
+		onSlide: function(position, value){
+			$rangeEl = this.$range;
+			//console.log('position: ' + position, 'value: ' + value);
+			var $weight = this.$element.parent().find('.range_slider_info').find('.weight  span');
+			$weight.text(value + 'KG');
+			var $price = this.$element.parent().find('.range_slider_info').find('.price dd span');
+			var rangeLabels = this.$element.attr('data-labels');
+			rangeLabels = rangeLabels.split(', ');
+			$rangeEl.find('.rangeslider__labels__label').removeClass('active');
+			var currentWeight = this.$element.parent().find('.range_slider_info').find('.weight dd span').text();
+			var currentPrice = 0;
+			$(rangeLabels).each(function(index, value) {
+				if(currentWeight == value){
+					$rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').addClass('active');
+					currentPrice = $rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').attr('data-price');
+				}
+			});
+			$price.text(Number(currentPrice).toLocaleString());
+		},
+
+		onSlideEnd: function(position, value){
+			//console.log('position: ' + position, 'value: ' + value);
+		}
+	});
+
+	//수화물 선택 슬라이더바
+	$('.range_event').rangeslider({
+		polyfill: false,
+
+		// Callback function
+		onInit: function(){
+			$rangeEl = this.$range;
+			// get range index labels
+			var rangeLabels = this.$element.attr('data-labels');
+			var rangePrices = this.$element.attr('data-prices');
+			var label = '';
+			rangeLabels = rangeLabels.split(', ');
+			rangePrices = rangePrices.split(', ');
+			// add labels
+			$rangeEl.append('<div class="rangeslider__labels"></div>');
+			$(rangeLabels).each(function(index, value) {
+				if(index == 0){
+					label = '<span class="rangeslider__labels__label active" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}else{
+					label = '<span class="rangeslider__labels__label" data-price="' + rangePrices[index] + '">' + value + '</span>'
+				}
+				$rangeEl.find('.rangeslider__labels').append(label);
+			});
+			//reset label width
+			var labelW = 100 / (this.$element.attr('max') / this.$element.attr('step') + 1);
+			//$rangeEl.find('.rangeslider__labels__label').css('width',labelW + '%');			
+			//2019.03.25 추가
+			$rangeEl.each(function(){
+				var rangeNum = $rangeEl.find('.rangeslider__labels__label');				
+				if(rangeNum.length == 1){
+					rangeNum.parent($rangeEl).addClass("range_n1");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 2){
+					rangeNum.parent($rangeEl).addClass("range_n2");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 3){
+					rangeNum.parent($rangeEl).addClass("range_n3");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 4){
+					rangeNum.parent($rangeEl).addClass("range_n4");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 5){
+					rangeNum.parent($rangeEl).addClass("range_n5");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 6){
+					rangeNum.parent($rangeEl).addClass("range_n6");
+					rangeNum.css("width", labelW + "%");
+				}else if(rangeNum.length == 7){
+					rangeNum.parent($rangeEl).addClass("range_n7");
+					rangeNum.css("width", labelW + "%");
+				}else{}
+			});
+		},
+
+		// 합산
+		onSlide: function(position, value){
+			$rangeEl = this.$range;
+			//console.log('position: ' + position, 'value: ' + value);
+			var $weight = this.$element.parent().find('.range_slider_info').find('.weight  span');
+			$weight.text(value + 'KG');
+			var $price = this.$element.parent().find('.range_slider_info').find('.price dd span');
+			var rangeLabels = this.$element.attr('data-labels');
+			rangeLabels = rangeLabels.split(', ');
+			$rangeEl.find('.rangeslider__labels__label').removeClass('active');
+			var currentWeight = this.$element.parent().find('.range_slider_info').find('.weight dd span').text();
+			var currentPrice = 0;
+			$(rangeLabels).each(function(index, value) {
+				if(currentWeight == value){
+					$rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').addClass('active');
+					currentPrice = $rangeEl.find('.rangeslider__labels__label:eq(' + index + ')').attr('data-price');
+				}
+			});
+			$price.text(Number(currentPrice).toLocaleString());
+		},
+
+		onSlideEnd: function(position, value){
+			//console.log('position: ' + position, 'value: ' + value);
+		}
+	});
+	//Scroll
+	$(".advance_seat_wrap .sel_seat").mCustomScrollbar({
+		scrollButtons:{enable:true,scrollType:"stepped"},
+		keyboard:{scrollType:"stepped"},
+		mouseWheel:{scrollAmount:300},
+		//theme:"rounded-dark",
+		autoExpandScrollbar:true,
+		snapAmount:120,
+		//snapOffset:20,
+		// 스크롤 콜백
+		callbacks:{
+			whileScrolling:function(){ 
+				if (this.mcs.draggerTop > 10) {
+					$('.seat_num').addClass('fixed');
+				} else {
+					$('.seat_num').removeClass('fixed');
+				}
+
+				if (this.mcs.draggerTop > 10) {
+					$('.seat_num').addClass('fixed');
+				} else {
+					$('.seat_num').removeClass('fixed');
+				}
+			},
+			alwaysTriggerOffsets:false
+		}
+	});
+
+});
+</script>
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+			<div class="tit_booking_wrap">
+				<h2 class="pg_tit">항공권 예매</h2>
+				<div class="step_booking">
+					<ol>
+						<li class="step01 on">
+							<span class="text_step">01</span>
+						</li>
+						<li class="step02 on">
+							<span class="text_step">02</span>
+						</li>
+						<li class="step03 on">
+							<span class="blind">현재페이지</span>
+							<span class="text_step">03 부가서비스</span>
+						</li>
+						<li class="step04">
+							<span class="text_step">04</span>
+						</li>
+						<li class="step05">
+							<span class="text_step">05</span>
+						</li>
+						<li class="step06">
+							<span class="text_step">06</span>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- Title & Step -->
+
+			<!-- 부가서비스 선택 -->
+			<div class="sel_service_section">
+				<!-- 구간선택 -->
+				<div class="service_section_wrap">
+					<!-- 구간선택 슬라이드 --> 
+					<div class="service_section_slide swiper-container">
+						<ul class="swiper-wrapper">
+							<!-- 01 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간1</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 01 -->
+							<!-- 02 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간2</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 02 -->
+							<!-- 03 -->
+							<li class="swiper-slide">						
+								<!-- 구간선택 박스 -->
+								<div class="service_section_box">
+									<!-- 구간 -->
+									<span class="bul_section">구간3</span>
+									<!--// 구간 -->							
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">TW123</p>
+										<p class="bttm">2018-12-06(목)</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간선택 박스 -->
+							</li>
+							<!--// 03 -->
+						</ul>
+						<div class="swiper-pagination"></div>
+					</div>
+					<!--// 구간선택 슬라이드 -->
+
+
+					<!-- 여정 재검색 -->
+					<div class="btn_refresh">
+						<button class="sbtn_cont refresh">여정 재검색</button>
+					</div>
+					<!--// 여정 재검색 -->
+
+					<!-- 슬라이드 버튼 -->
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+					<!--// 슬라이드 버튼 -->
+
+
+					<!-- 구간 더보기 -->
+					<div class="btn_more_wrap">
+						<a href="#none" class="btn_section_more">더보기</a>
+					</div>
+					<!--// 구간 더보기 -->
+					
+					<!-- 구간 더보기 Layer -->
+					<div class="layer_section_list">
+						<ul>
+							<li>
+								<a href="#none">
+									<!-- 구간선택 박스 -->
+									<div class="service_section_box">
+										<!-- 구간 -->
+										<span class="bul_section">구간1</span>
+										<!--// 구간 -->
+										
+										<!-- 출발 -->
+										<div class="service_name first">
+											<strong class="tit">ICN</strong>
+											<span class="addition">서울/인천</span>
+										</div>
+										<!-- 출발 -->
+
+										<!-- 설명 -->
+										<div class="service_exp">
+											<p class="top">TW123</p>
+											<p class="bttm">2018-12-06(목)</p>
+										</div>
+										<!--// 설명 -->
+										
+										<!-- 도착 -->
+										<div class="service_name last">
+											<strong class="tit">BKK</strong>
+											<span class="addition">방콕/수완나폼</span>
+										</div>
+										<!-- 도착 -->
+
+									</div>
+									<!--// 구간선택 박스 -->
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<!-- 구간선택 박스 -->
+									<div class="service_section_box">
+										<!-- 구간 -->
+										<span class="bul_section">구간2</span>
+										<!--// 구간 -->
+										
+										<!-- 출발 -->
+										<div class="service_name first">
+											<strong class="tit">ICN</strong>
+											<span class="addition">서울/인천</span>
+										</div>
+										<!-- 출발 -->
+
+										<!-- 설명 -->
+										<div class="service_exp">
+											<p class="top">TW123</p>
+											<p class="bttm">2018-12-06(목)</p>
+										</div>
+										<!--// 설명 -->
+										
+										<!-- 도착 -->
+										<div class="service_name last">
+											<strong class="tit">BKK</strong>
+											<span class="addition">방콕/수완나폼</span>
+										</div>
+										<!-- 도착 -->
+
+									</div>
+									<!--// 구간선택 박스 -->
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<!-- 구간선택 박스 -->
+									<div class="service_section_box">
+										<!-- 구간 -->
+										<span class="bul_section">구간3</span>
+										<!--// 구간 -->
+										
+										<!-- 출발 -->
+										<div class="service_name first">
+											<strong class="tit">ICN</strong>
+											<span class="addition">서울/인천</span>
+										</div>
+										<!-- 출발 -->
+
+										<!-- 설명 -->
+										<div class="service_exp">
+											<p class="top">TW123</p>
+											<p class="bttm">2018-12-06(목)</p>
+										</div>
+										<!--// 설명 -->
+										
+										<!-- 도착 -->
+										<div class="service_name last">
+											<strong class="tit">BKK</strong>
+											<span class="addition">방콕/수완나폼</span>
+										</div>
+										<!-- 도착 -->
+
+									</div>
+									<!--// 구간선택 박스 -->
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<!-- 구간선택 박스 -->
+									<div class="service_section_box">
+										<!-- 구간 -->
+										<span class="bul_section">구간4</span>
+										<!--// 구간 -->
+										
+										<!-- 출발 -->
+										<div class="service_name first">
+											<strong class="tit">ICN</strong>
+											<span class="addition">서울/인천</span>
+										</div>
+										<!-- 출발 -->
+
+										<!-- 설명 -->
+										<div class="service_exp">
+											<p class="top">TW123</p>
+											<p class="bttm">2018-12-06(목)</p>
+										</div>
+										<!--// 설명 -->
+										
+										<!-- 도착 -->
+										<div class="service_name last">
+											<strong class="tit">BKK</strong>
+											<span class="addition">방콕/수완나폼</span>
+										</div>
+										<!-- 도착 -->
+
+									</div>
+									<!--// 구간선택 박스 -->
+								</a>
+							</li>
+						</ul>
+
+						<a href="#none" class="btn_close">닫기</a>
+
+					</div>
+					<!-- 구간 리스트 Layer -->
+				</div>
+				<!--// 구간선택 -->
+
+				<!-- 탑승자 선택 -->
+				<div class="sel_passenger_wrap">
+					<!-- 탑승자 선택 슬라이드 -->
+					<div class="sel_passenger_slide swiper-container">
+						<ul class="swiper-wrapper">
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">1</i>
+									<div class="name ADULT_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico_add_bundle"></span><!-- 2019-02-25 추가 -->
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">2</i>
+									<div class="name ADULT_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">3</i>
+									<div class="name CHILD_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service_wrap">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">4</i>
+									<div class="name CHILD_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">5</i>
+									<div class="name INFANT_M">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="sel_passenger_box">
+									<i class="num">5</i>
+									<div class="name INFANT_F">
+										<p class="first">박</p>
+										<p class="last">서준</p>
+									</div>
+									<div class="add_service">
+										<p class="add_service">
+											<span class="ico ">30KG</span>
+											<span class="add_bundle">+ 30KG</span>
+											<a href="#none" class="btn_del">삭제</a>
+										</p>
+										<p class="add_price">
+											<span>KRW</span>
+											<span>1000</span>
+										</p>
+									</div>
+								</div>
+							</li>							
+						</ul>
+					</div>
+					<!--// 탑승자 선택 슬라이드 -->
+					
+					<!-- 슬라이드 버튼 -->
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+					<!--// 슬라이드 버튼 -->
+
+					<!-- 탑승자 더보기 -->
+					<div class="btn_more_wrap passenger">
+						<a href="#none" date-type="layer" date-id="layer_passenger_list" class="btn_passenger_more">더보기</a>
+					</div>
+					<!--// 탑승자 더보기 -->
+
+					<!-- 탑승인원 전체보기 Layer -->
+					<div id="layer_passenger_list" class="layer type03 layer_passenger">
+						<div class="layer_header">
+							<h2>탑승인원 전체보기</h2>
+						</div>
+						<div class="layer_content">
+							
+							<div class="layer_passenger_list">
+								<ul>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>	
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">햄치즈샌드위치</span>
+														<!-- <span class="add_bundle">+ 30KG</span> -->
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name ADULT_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico">13A</span>
+														<!-- <span class="add_bundle">+ 30KG</span> -->
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>100,000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_M">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="layer_close">
+											<div class="sel_passenger_box">
+												<i class="num">1</i>
+												<div class="name CHILD_F">
+													<p class="first">박</p>
+													<p class="last">서준</p>
+												</div>
+												<div class="add_service">
+													<p class="add_service">
+														<span class="ico_add_bundle"></span>
+														<span class="ico ">30KG</span>
+														<span class="add_bundle">+ 30KG</span>
+													</p>
+													<p class="add_price">
+														<span>KRW</span>
+														<span>1000</span>
+													</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+						<a href="#none" class="btn_layer_close">레이어 닫기</a>
+
+					</div>
+					<!--// 탑승인원 전체보기 Layer -->
+
+				</div>
+				<!--// 탑승자 선택 -->
+			</div>
+			<!--// 부가서비스 선택 -->
+
+			<div class="tab_wrap mt70">
+				<ul class="tab">
+					<li><a href="#tab1">사전 좌석 선택</a></li>
+					<li><a href="#tab2">사전 수하물 선택</a></li>
+					<li><a href="#tab3">사전 기내식 선택</a></li>
+				</ul>
+
+				<!-- 사전 좌석 선택 -->
+				<div class="tab_cont" id="tab1">
+					<!-- 번들 선택 안내 -->
+					<div class="tbl_top_area">
+						<p class="txt_guide fl">좌석을 선택할 수 있는 단계입니다. 좌석을 선택하지 않은 경우, 좌석번호가 임의로 배정됩니다.</p>
+						<button class="sbtn_cont fr">사전 좌석규정</button>
+					</div>
+					<!--// 번들 선택 안내 -->
+
+					<!-- 사전 좌석 선택 -->
+					<div class="advance_seat_wrap">
+						<div class="seat_info">
+							<dl class="seat_type prst">
+								<dt>프리미엄 좌석</dt>
+								<dd>KRW 100,000</dd>
+							</dl>
+							<dl class="seat_type spst">
+								<dt>세미프리미엄 좌석</dt>
+								<dd>KRW 70,000</dd>
+							</dl>
+							<dl class="seat_type fnst">
+								<dt>앞 좌석</dt>
+								<dd>KRW 70,000</dd>
+							</dl>
+							<dl class="seat_type nmst">
+								<dt>일반 좌석</dt>
+								<dd>KRW 50,000</dd>
+							</dl>
+							<p class="seat_type disable">
+								<span>선택불가 좌석</span>
+							</p>
+						</div>
+
+						<!-- 좌석번호 -->
+						<div class="seat_num">
+							<ul class="col_num">
+								<li>A</li>
+								<li>B</li>
+								<li>C</li>
+								<li class="row_num"></li>
+								<li>D</li>
+								<li>E</li>
+								<li>F</li>
+							</ul>
+						</div>
+						<!-- 좌석번호 -->
+
+						<div class="sel_seat">
+							<!-- 좌석 -->
+							<div class="seat_list">
+								<div class="seat">
+									<span class="row_num">1</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat prst disable">
+												<span class="blind">A1</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst disable">
+												<span class="blind">B1</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat prst disable">
+												<span class="blind">C1</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">D1</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">E1</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">F1</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">2</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">A2</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">B2</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat spst on">
+												<span class="blind">C2</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">D2</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">E2</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">F2</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">3</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">A3</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">B3</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">C3</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">D3</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">E3</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">F3</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">4</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">A4</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">B4</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">C4</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">D4</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">E4</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">F4</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">5</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">A5</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">B5</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">C5</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">D5</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">E5</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat spst">
+												<span class="blind">F5</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">6</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A6</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B6</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C6</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D6</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst on">
+												<span class="blind">E6</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F6</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">7</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A7</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B7</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C7</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D7</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">E7</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F7</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">8</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A8</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B8</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C8</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D8</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">E8</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F8</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">9</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">A9</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst on">
+												<span class="blind">B9</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">C9</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">D9</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">E9</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">F9</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">10</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A10</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B10</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C10</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D10</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">E10</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F10</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">11</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A11</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B11</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C11</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D11</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">E11</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F11</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">12</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">A12</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">B12</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">C12</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">D12</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">E12</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat fnst">
+												<span class="blind">F12</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">13</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A13</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B13</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst on">
+												<span class="blind">C13</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D13</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E13</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F13</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">14</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A14</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B14</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C14</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D14</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E14</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F14</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">15</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">A15</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">B15</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">C15</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">D15</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">E15</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">F15</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">16</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">A16</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">B16</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">C16</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">D16</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">E16</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat prst">
+												<span class="blind">F16</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">17</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A17</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B17</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C17</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D17</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E17</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F17</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">18</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A18</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B18</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C18</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D18</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E18</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F18</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">19</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A19</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B19</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C19</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D19</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E19</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F19</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">20</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A20</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B20</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C20</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D20</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E20</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F20</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">21</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A21</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B21</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C21</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D21</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E21</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F21</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">22</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A22</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B22</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C22</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D22</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E22</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F22</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">23</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A23</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B23</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C23</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D23</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E23</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F23</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">24</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A24</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B24</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C24</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D24</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E24</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F24</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">25</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A25</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B25</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C25</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D25</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E25</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F25</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">26</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A26</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B26</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C26</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D26</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E26</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F26</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">27</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A27</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B27</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C27</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D27</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E27</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F27</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">28</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A28</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B28</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C28</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D28</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E28</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F28</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">29</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A29</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B29</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C29</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D29</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E29</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F29</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">30</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A30</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B30</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C30</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D30</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E30</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F30</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">31</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">A31</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">B31</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">C31</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">D31</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">E31</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat nmst">
+												<span class="blind">F31</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="seat">
+									<span class="row_num">32</span>
+									<ul>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">A32</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">B32</span>
+											</a></li>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">C32</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">D32</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">E32</span>
+											</a>
+										</li>
+										<li>
+											<a href="#none" class="ico_seat disable">
+												<span class="blind">F32</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- //좌석 -->
+						</div>
+
+						<!-- 스크롤 영역 -->
+						<div class="seat_scroll_wrap">
+							<div class="seat_scroll">
+								<span class="scroll_bar"></span>
+							</div>
+							<!-- <a href="#none" class="scroll_top">스크롤 위</a>
+							<a href="#none" class="scroll_bttm">스크롤 아래</a> -->
+						</div>
+						<!--// 스크롤 영역 -->
+					</div>
+					<!--// 사전 좌석선택 -->
+
+					<!-- 서비스 제공하지 않음 -->
+					<div class="non_service_wrap mt70 mb70">
+						<div class="con_box">
+							<p class="note">선택하신 노선은 해당 부가서비스를 제공하지 않습니다.</p>
+						</div>
+					</div>
+					<!-- 서비스 제공하지 않음-->
+
+					<!-- 알아두세요 -->
+					<div class="notice_box">
+						<strong>알아두세요</strong>
+						<ul class="ul_dot">
+							<li>ABC 또는 DEF 좌석 당 1명의 유아만 배정 가능합니다.</li>
+							<li>프리미엄 좌석 : 1열, 15열, 16열</li>
+							<li>앞 좌석 : 2열~11열</li>
+							<li>일반 좌석 : 나머지 좌석</li>
+							<li>유아 동반 시 15열, 16열은 선택이 불가합니다.</li>
+							<li>비상구 좌석은 승무원을 도와 다른 승객의 탈출을 돕는 자리로 현장에서 직원의 확인 후 거절될 수 있습니다.</li>
+							<li>애완동물 동반 고객은 출발 당일 공항 현장에서만 좌석 배정이 가능합니다.</li>
+							<li>출발일이 임박한 경우(2일 이내) 좌석 구매가 불가합니다.</li>
+						</ul>
+					</div>
+					<!--// 알아두세요 -->
+
+					<!-- 버튼 -->
+					<div class="btn_wrap mt60 mb150">
+						<a href="#none" class="btn_small fl mt10">처음부터 다시 예약</a>
+						<button class="btn_large">구간1 선택</button>
+						<button class="btn_large red">구간2 선택</button>
+						<button class="btn_large red">사전 수하물 단계로 이동</button>
+						<a href="#none" class="btn_small fr mt10">바로 결제하기</a>
+					</div>
+					<!--// 버튼 -->
+				</div>
+				<!-- //사전 좌석 선택 -->
+
+				<!-- 사전 수하물 선택 -->
+				<div class="tab_cont" id="tab2">
+
+					<div class="tbl_top_area">
+						<button class="sbtn_cont fr">위탁 수하물 규정</button>
+					</div>
+
+					<!-- 수화물 중량 선택 -->
+					<div class="sel_bag_weight_wrap">
+						<!-- 슬라이더 -->
+						<div class="range_slider">
+							<div class="range_slider_info">
+								<dl class="weight">
+									<dt><span class="blind">선택한 수하물 무게</span></dt>
+									<dd><span>0KG</span></dd>
+								</dl>
+								<dl class="price">
+									<dt><span>KRW</span></dt>
+									<dd><span>0</span></dd>
+								</dl>
+							</div>
+							<input class="range_event" type="range" min="15" max="35" step="5" value="15" data-labels="15KG, 20KG, 25KG, 30KG, 35KG" data-prices="0, 25000, 50000, 75000, 100000" title="수하물 무게 선택">
+						</div>
+						<!-- 슬라이더 -->
+					</div>
+					<!-- 수화물 중량 선택 -->
+                    <!-- 수하물 안내 문구 -->
+                    <ul class="ul_dot mt20">
+                        <li class="red">
+                        	기내 반입 수하물 규정을 초과하여 탑승 게이트에서 위탁하시는 경우, 추가 수수료가 발생됩니다.
+	                        <div class="tbl_top_area">
+							<button class="sbtn_cont fl">기내 반입 수하물 규정</button>
+						    </div>
+					    </li>
+                        <li>
+                        	탑승객 별 위탁수하물 무게를 확인하고, 수하물을 추가로 구매할 수 있습니다.
+	                        <div class="tbl_top_area">
+							<button class="sbtn_cont fl">위탁 수하물 규정</button>
+						    </div>
+					    </li>
+                        <li>부가서비스 번들을 구매한 승객은 예매완료 후 [마이페이지>나의예약]에서 위탁수하물 추가로 구매하실 수 있습니다.<br>(단, 출발일이 임박한 여정, 국내선, 공동운항편, 대양주노선 제외)</li>
+                    </ul>
+                    <!-- /수하물 안내 문구 -->
+
+					<!-- 대양주 번들 비구매자 -->
+					<div class="non_bundle_wrap n1">
+						<ul>
+							<li>
+								<div class="non_bundle_box">
+									<dl>
+										<dt>무료 위탁 수하물</dt>
+										<dd>
+											<span class="weight">23KG</span>
+											<span class="psc">1pcs</span>
+										</dd>
+									</dl>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="non_bundle_wrap n2">
+						<ul>
+							<li>
+								<div class="non_bundle_box oversea">
+									<dl>
+										<dt>기본 제공 위탁 수하물</dt>
+										<dd>
+											<span class="weight">23KG</span>
+											<span class="psc">1pcs</span>
+										</dd>
+									</dl>
+								</div>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="non_bundle_box oversea">
+										<dl>
+											<dt>
+												<input type="checkbox" id="check-1">
+												<label for="check-1" class="mr15"><span class="icon"></span>위탁 수하물 1PC추가</label>
+											</dt>
+											<dd>
+												<span class="weight">23KG</span>
+												<span class="psc">1pcs</span>
+												<span class="price_wrap">
+													<i class="unit">+KRW</i>
+													<i class="price">45,000</i>
+												</span>
+											</dd>
+										</dl>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="non_bundle_wrap n3">
+						<ul>
+							<li>
+								<div class="non_bundle_box oversea">
+									<dl>
+										<dt>기본 제공 위탁 수하물</dt>
+										<dd>
+											<span class="weight">23KG x 1pcs</span>
+										</dd>
+									</dl>
+								</div>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="non_bundle_box oversea">
+										<dl>
+											<dt>
+												<input type="checkbox" id="check-1">
+												<label for="check-1" class="mr15"><span class="icon"></span>위탁 수하물 1PC추가</label>
+											</dt>
+											<dd>
+												<span class="weight">23KG</span>
+												<span class="psc">1pcs</span>
+												<span class="price_wrap">
+													<i class="unit">+KRW</i>
+													<i class="price">+45,000</i>
+												</span>
+											</dd>
+										</dl>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#none">
+									<div class="non_bundle_box oversea">
+										<dl>
+											<dt>
+												<input type="checkbox" id="check-1">
+												<label for="check-1" class="mr15"><span class="icon"></span>위탁 수하물 1PC추가</label>
+											</dt>
+											<dd>
+												<span class="weight">23KG</span>
+												<span class="psc">1pcs</span>
+												<span class="price_wrap">
+													<i class="unit">+KRW</i>
+													<i class="price">+90,000</i>
+												</span>
+											</dd>
+										</dl>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!--// 대양주 번들 비구매자 -->
+
+					<!-- 서비스 제공하지 않음 -->
+					<div class="non_service_wrap mt10">
+						<div class="top_tit">무료 위탁 수하물</div>
+						<div class="con_box">
+							<span class="weight">15KG</span>
+							<p>선택하신 노선은 해당 부가서비스를 제공하지 않습니다.</p>
+						</div>
+					</div>
+					<!-- 서비스 제공하지 않음-->
+
+					<!-- 서비스 제공하지 않음 -->
+					<div class="non_service_wrap mt70 mb70">
+						<div class="con_box">
+							<p class="note">선택하신 노선은 해당 부가서비스를 제공하지 않습니다.</p>
+						</div>
+					</div>
+					<!-- 서비스 제공하지 않음-->
+
+					<!-- 버튼 -->
+					<div class="btn_wrap mt60 mb150">
+						<a href="#none" class="btn_small fl mt10">처음부터 다시 예약</a>
+						<button class="btn_large">구간1 선택</button>
+						<button class="btn_large red">구간2 선택</button>
+						<button class="btn_large red">사전 기내식 단계로 이동</button>
+						<a href="#none" class="btn_small fr mt10">바로 결제하기</a>
+					</div>
+					<!--// 버튼 -->
+				</div>
+				<!-- //사전 수하물 선택 -->
+
+				<!-- 사전 기내식 선택 -->
+				<div class="tab_cont" id="tab3">
+					<!-- 번들 선택 안내 -->
+					<div class="tbl_top_area">
+						<p class="txt_guide fl">기내식은 사전에 주문하여 기내에서 편안하게 드실 수 있는 서비스입니다.</p>
+						<button class="sbtn_cont fr">기내식 규정</button>
+					</div>
+					<!--// 번들 선택 안내 -->
+
+					<!-- 기내식 선택 -->
+					<div class="sel_food_wrap">
+						<div class="ico_guide">
+							<span class="ico_food cold">콜드밀</span>
+							<span class="ico_food hot">핫밀</span>
+							<span class="ico_food kid">어린이메뉴</span>
+							<span class="ico_food adult">성인메뉴</span>
+						</div>
+						<div class="food_list">
+							<ul>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food01.png" alt="">
+											<span class="ico_bul best">베스트상품</span>
+											<span class="ico_food cold">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel1" name="food_sel_check">
+												<label for="food_sel1"><span class="icon"></span>햄치즈샌드위치</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 5,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food02.png" alt="">
+											<span class="ico_food hot">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel2" name="food_sel_check">
+												<label for="food_sel2"><span class="icon"></span>더블함박스테이크</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 13,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food03.png" alt="">
+											<span class="ico_bul hot">HOT</span>
+											<span class="ico_food cold">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel3" name="food_sel_check">
+												<label for="food_sel3"><span class="icon"></span>닭가슴살샐러드&amp;소프트롤</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 9,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food04.png" alt="">
+											<span class="ico_bul hot">핫상품</span>
+											<span class="ico_food kid">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel4" name="food_sel_check">
+												<label for="food_sel4"><span class="icon"></span>키즈밀콤보</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 15,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food05.png" alt="">
+											<span class="ico_bul new">신상품</span>
+											<span class="ico_food adult">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel5" name="food_sel_check">
+												<label for="food_sel5" class="mr15"><span class="icon"></span>치맥세트 1 - 후라이드치킨</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 13,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+								<li>
+									<div class="sel_food_info">
+										<div class="img">
+											<img src="http://contents-image.twayair.com/homepage/images/booking/img_food01.png" alt="">
+											<span class="ico_food cold">콜드밀</span>
+											<span class="ico_zoom">확대보기</span>
+										</div>
+
+										<dl>
+											<dt>
+												<input type="checkbox" id="food_sel6" name="food_sel_check">
+												<label for="food_sel6"><span class="icon"></span>닭가슴살샐러드&소프트롤</label>
+											</dt>
+											<dd>
+												<span class="price">KRW 15,000</span>
+											</dd>
+										</dl>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!--// 기내식 선택 -->
+
+					<!-- 서비스 제공하지 않음 -->
+					<div class="non_service_wrap mt70 mb70">
+						<div class="con_box">
+							<p class="note">선택하신 노선은 해당 부가서비스를 제공하지 않습니다.</p>
+						</div>
+					</div>
+					<!-- 서비스 제공하지 않음-->
+
+					<!-- 버튼 -->
+					<div class="btn_wrap mt60 mb150">
+						<a href="#none" class="btn_small fl mt10">처음부터 다시 예약</a>
+						<button class="btn_large red">구간2 선택</button>
+						<button class="btn_large red">사전 수하물 단계로 이동</button>
+						<a href="#none" class="btn_small fr mt10">바로 결제하기</a>
+					</div>
+					<!--// 버튼 -->
+				</div>
+				<!-- //사전 기내식 선택 -->
+			</div>
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- Summary -->
+	<div class="summary_wrap">
+		<a href="#none" class="btn_summary_open">Summary 열기</a>
+		<div class="summary_top">
+			<div class="summary_top_cont">
+				<!-- 구간 -->
+				<div class="section_box">
+					<span class="num">구간1</span>
+					<div class="section_route start">
+						<span class="eng">ICN</span>
+						<span>서울/인천</span>
+					</div>
+					<div class="section_route end">
+						<span class="eng">BKK</span>
+						<span>방콕/수와나폼</span>
+					</div>
+					<!-- <div class="additional">
+						<span class="ico_add bundle">부가서비스 번들</span>
+						<span class="ico_add free_bag">무료위탁수화물</span>
+						<span class="ico_add carryon">기내수화물</span>
+						<span class="ico_add seat">사전좌석</span>
+						<span class="ico_add food">기내식</span>
+						<span class="ico_add baggage">수하물우선처리</span>
+						<span class="ico_add counter">전용카운터</span>
+					</div> -->
+				</div>
+				<!--// 구간 -->
+				<!-- 가격 -->
+				<div class="price_wrap">
+					<span class="total">항공운임 등 총액</span>
+					<span class="unit">KRW</span>
+					<span class="price">9,900,000</span>
+				</div>
+				<!-- 가격 -->
+			</div>
+		</div>
+		<!--// Summary Top -->
+
+		<!-- Summary 내용 -->
+		<div class="summary_cont_wrap">
+			<div class="summary_cont">
+				<!-- 닫기 버튼 -->
+				<a href="#none" class="btn_summary_close">Summary 접기</a>
+				<!--// 닫기 버튼 -->
+				<!-- 타이틀 -->
+				<div class="con_tit_wrap">
+					<h3 class="con_tit">예약정보</h3>
+					<span class="con_tit_decs">성인4, 소아2, 유아1</span>
+				</div>
+				<!--// 타이틀 -->
+				<!-- 구간 Tab -->
+				<div class="tab_wrap">
+					<ul class="tab n4">
+						<li><a href="#tab1">구간 1</a></li>
+						<li><a href="#tab2">구간 2 (ICN - KIX)</a></li>
+						<li><a href="#tab3">구간 3 (ICN - KIX)</a></li>
+						<li><a href="#tab4">구간 4 (ICN - KIX)</a></li>
+					</ul>
+					<div class="tab_cont" id="tab1">
+						<!-- 입력전 -->
+						<!-- 구간정보 -->
+						<div class="route_info">
+							<div class="route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="route end">
+								<span class="eng">KIX</span>
+								<span>오사카/간사이</span>
+							</div>
+						</div>
+						<!-- 구간정보 -->
+
+						<!-- 내역 리스트 -->
+						<div class="summary_list">
+							<dl class="fl">
+								<dt>날짜/편명</dt>
+								<dd>2018-01-07(월) / <span class="no_sel">운임을 선택하세요.</span></dd>
+								<dt>출발시간-도착시간/비행시간</dt>
+								<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+								<dt>운항 구분/실제 운항사</dt>
+								<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+							</dl>
+							<dl class="fr">
+								<dt>기내 수하물</dt>
+								<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+								<dt>무료위탁수하물</dt>
+								<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+								<dt>운임 종류</dt>
+								<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+							</dl>
+						</div>
+						<!--// 내역 리스트 -->
+
+						<!-- 탑승자 리스트 -->
+						<div class="passenger_list_wrap">
+							<div class="tit mt30">
+								<h3>탑승객별 상세정보</h3>
+							</div>
+
+							<div class="passenger_list">
+								<ul> 
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger">승객</span>
+											성인1 (유아동반)
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+												<span class="standard">(1인 편도 총액)</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<div class="no_data">
+												<span>운임을 선택하세요.</span>
+											</div>
+										</div>
+									</li>
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger">승객</span>
+											성인1 (유아동반)
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+												<span class="standard">(1인 편도 총액)</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<div class="no_data">
+												<span>운임을 선택하세요.</span>
+											</div>
+										</div>
+									</li>
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger">승객</span>
+											성인1 (유아동반)
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+												<span class="standard">(1인 편도 총액)</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<div class="no_data">
+												<span>운임을 선택하세요.</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+						<!--// 탑승자 리스트 -->
+
+						<!-- 금액 -->
+						<div class="sub_price">
+							<dl>
+								<dt>SUBTOTAL</dt>
+								<dd>
+									<span class="unit">KRW</span>
+									<span class="price">0</span>
+								</dd>
+							</dl>
+						</div>
+						<!-- 금액 --> 
+						<!--// 입력전 -->
+					</div>
+					<div class="tab_cont" id="tab2">
+						<!-- 부가서비스 구매자 -->
+						<!-- 구간정보 -->
+						<div class="route_info">
+							<div class="route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="route end">
+								<span class="eng">KIX</span>
+								<span>오사카/간사이</span>
+							</div>
+						</div>
+						<!-- 구간정보 -->
+
+						<!-- 내역 리스트 -->
+						<div class="summary_list">
+							<dl class="fl">
+								<dt>날짜/편명</dt>
+								<dd>2018-01-07(월) / TW101</dd>
+								<dt>출발시간-도착시간/비행시간</dt>
+								<dd>09:00 - 11:15 / 2h 15m</span></dd>
+								<dt>운항 구분/실제 운항사</dt>
+								<dd>경유 / T’way air</dd>
+							</dl>
+							<dl class="fr">
+								<dt>기내 수하물</dt>
+								<dd>10KG</dd>
+								<dt>무료위탁수하물</dt>
+								<dd>15KG</dd>
+								<dt>운임 종류</dt>
+								<dd>이벤트 운임</dd>
+							</dl>
+						</div>
+						<!--// 내역 리스트 -->
+
+						<!-- 탑승자 리스트 -->
+						<div class="passenger_list_wrap">
+							<div class="tit">
+								<h3>탑승객별 상세정보</h3>
+							</div>
+							<div class="passenger_list">
+								<ul> 
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_M">성인남자</span>
+											홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_F">성인여자</span>
+											홍길자 / 성인(여) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger CHILD_M">소아남자</span>
+											홍길남 / 소아(남) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+						<!--// 탑승자 리스트 -->
+
+						<!-- 금액 -->
+						<div class="sub_price">
+							<dl>
+								<dt>SUBTOTAL</dt>
+								<dd>
+									<span class="unit">KRW</span>
+									<span class="price red">9,900,000</span>
+								</dd>
+							</dl>
+						</div>
+						<!-- 금액 --> 
+						<!--// 부가서비스 구매자 -->
+					</div>
+					<div class="tab_cont" id="tab3">
+						<!-- 번들서비스 구매자 -->
+						<!-- 구간정보 -->
+						<div class="route_info">
+							<div class="route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="route end">
+								<span class="eng">KIX</span>
+								<span>오사카/간사이</span>
+							</div>
+						</div>
+						<!-- 구간정보 -->
+
+						<!-- 내역 리스트 -->
+						<div class="summary_list">
+							<dl class="fl">
+								<dt>날짜/편명</dt>
+								<dd>2018-01-07(월) / TW101</dd>
+								<dt>출발시간-도착시간/비행시간</dt>
+								<dd>09:00 - 11:15 / 2h 15m</span></dd>
+								<dt>운항 구분/실제 운항사</dt>
+								<dd>경유 / T’way air</dd>
+							</dl>
+							<dl class="fr">
+								<dt>기내 수하물</dt>
+								<dd>10KG</dd>
+								<dt>무료위탁수하물</dt>
+								<dd>15KG</dd>
+								<dt>운임 종류</dt>
+								<dd>이벤트 운임</dd>
+							</dl>
+						</div>
+						<!--// 내역 리스트 -->
+
+						<!-- 탑승자 리스트 -->
+						<div class="passenger_list_wrap">
+							<div class="tit">
+								<h3>탑승객별 상세정보</h3>
+							</div>
+							<div class="passenger_list">
+								<ul> 
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_M">성인남자</span>
+											홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt class="bundle_list">위탁수하물(15kg)</dt>
+													<dt class="bundle_list">사전 좌석(1B)</dt>
+													<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_F">성인여자</span>
+											홍길자 / 성인(여) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt class="bundle_list">위탁수하물(15kg)</dt>
+													<dt class="bundle_list">사전 좌석(1B)</dt>
+													<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger CHILD_M">소아남자</span>
+											홍길남 / 소아(남) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt class="bundle_list">위탁수하물(15kg)</dt>
+													<dt class="bundle_list">사전 좌석(1B)</dt>
+													<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+						<!--// 탑승자 리스트 -->
+
+						<!-- 금액 -->
+						<div class="sub_price">
+							<dl>
+								<dt>SUBTOTAL</dt>
+								<dd>
+									<span class="unit">KRW</span>
+									<span class="price red">9,900,000</span>
+								</dd>
+							</dl>
+						</div>
+						<!-- 금액 --> 
+						<!--// 번들서비스 구매자 -->
+					</div>
+					<div class="tab_cont" id="tab4">
+						<!-- 이원구간 -->
+						<div class="section_tit">
+							<h5>구간1</h5>
+						</div>
+						<!-- 구간정보 -->
+						<!-- 2019-02-21 수정 -->
+						<div class="box_dual route_info_wrap">
+							<div class="left">
+								<div class="route_info type2">
+									<div class="route start">
+										<span class="eng">ICN</span>
+										<span>서울/인천</span>
+									</div>
+									<div class="route end">
+										<span class="eng">KIX</span>
+										<span>오사카/간사이</span>
+									</div>
+								</div>
+								<div class="summary_list">
+									<dl class="">
+										<dt>날짜/편명</dt>
+										<dd>2018-01-07(월) / TW101</dd>
+										<dt>출발시간-도착시간/비행시간</dt>
+										<dd>09:00 - 11:15 / 2h 15m</span></dd>
+										<dt>운항 구분/실제 운항사</dt>
+										<dd>경유 / T’way air</dd>
+										<dt>기내 수하물</dt>
+										<dd>10KG</dd>
+										<dt>무료위탁수하물</dt>
+										<dd>15KG</dd>
+										<dt>운임 종류</dt>
+										<dd>이벤트 운임</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="right route_info_wrap">
+								<div class="route_info type2">
+									<div class="route start">
+										<span class="eng">ICN</span>
+										<span>서울/인천</span>
+									</div>
+									<div class="route end">
+										<span class="eng">KIX</span>
+										<span>오사카/간사이</span>
+									</div>
+								</div>
+								<div class="summary_list">
+									<dl class="">
+										<dt>날짜/편명</dt>
+										<dd>2018-01-07(월) / TW101</dd>
+										<dt>출발시간-도착시간/비행시간</dt>
+										<dd>09:00 - 11:15 / 2h 15m</span></dd>
+										<dt>운항 구분/실제 운항사</dt>
+										<dd>경유 / T’way air</dd>
+										<dt>기내 수하물</dt>
+										<dd>10KG</dd>
+										<dt>무료위탁수하물</dt>
+										<dd>15KG</dd>
+										<dt>운임 종류</dt>
+										<dd>이벤트 운임</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						<!-- //2019-02-21 수정 -->
+						<!-- //구간정보 -->
+						<!-- 구간정보 -->
+						<!-- <div class="route_info_wrap">
+							<div class="route_info type2 fl">
+								<div class="route start">
+									<span class="eng">ICN</span>
+									<span>서울/인천</span>
+								</div>
+								<div class="route end">
+									<span class="eng">KIX</span>
+									<span>오사카/간사이</span>
+								</div>
+							</div>
+							<div class="route_info type2 fr">
+								<div class="route start">
+									<span class="eng">ICN</span>
+									<span>서울/인천</span>
+								</div>
+								<div class="route end">
+									<span class="eng">KIX</span>
+									<span>오사카/간사이</span>
+								</div>
+							</div>
+						</div> -->
+						<!-- 구간정보 2019-02-21 삭제 -->
+
+						<!-- 내역 리스트 -->
+						<!-- <div class="summary_list">
+							<dl class="fl">
+								<dt>날짜/편명</dt>
+								<dd>2018-01-07(월) / TW101</dd>
+								<dt>출발시간-도착시간/비행시간</dt>
+								<dd>09:00 - 11:15 / 2h 15m</span></dd>
+								<dt>운항 구분/실제 운항사</dt>
+								<dd>경유 / T’way air</dd>
+								<dt>기내 수하물</dt>
+								<dd>10KG</dd>
+								<dt>무료위탁수하물</dt>
+								<dd>15KG</dd>
+								<dt>운임 종류</dt>
+								<dd>이벤트 운임</dd>
+							</dl>
+							<dl class="fr">
+								<dt>날짜/편명</dt>
+								<dd>2018-01-07(월) / TW101</dd>
+								<dt>출발시간-도착시간/비행시간</dt>
+								<dd>09:00 - 11:15 / 2h 15m</span></dd>
+								<dt>운항 구분/실제 운항사</dt>
+								<dd>경유 / T’way air</dd>
+								<dt>기내 수하물</dt>
+								<dd>10KG</dd>
+								<dt>무료위탁수하물</dt>
+								<dd>15KG</dd>
+								<dt>운임 종류</dt>
+								<dd>이벤트 운임</dd>
+							</dl>
+						</div> -->
+						<!--// 내역 리스트 2019-02-21 삭제 -->
+
+						<!-- 탑승자 리스트 -->
+						<div class="passenger_list_wrap">
+							<div class="tit">
+								<h3>탑승객별 상세정보</h3>
+							</div>
+							<div class="passenger_list">
+								<ul> 
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_M">성인남자</span>
+											홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li>
+										<a href="#none" class="title">
+											<span class="ico_passenger ADULT_W">성인여자</span>
+											홍길자 / 성인(여) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+									<li> 
+										<a href="#none" class="title">
+											<span class="ico_passenger CHILD_M">소아남자</span>
+											홍길남 / 소아(남) / 2010-01-01
+											<div class="price_wrap">
+												<span class="unit">KRW</span>
+												<span class="price">168,000</span>
+											</div>
+										</a>
+										<div class="passenger_summary">
+											<!-- 내역 리스트 -->
+											<div class="summary_list">
+												<dl class="fl">
+													<dt>항공운임</dt>
+													<dd>KRW 1,310,000</dd>
+													<dt>유류할증료</dt>
+													<dd>KRW 20,000</dd>
+													<dt>공항시설사용료 <a href="#none" date-type="layer" date-id="airport_pay" class="btn_tooltip alert layer_focus"><span class="blind">공항시설사용료 안내</span></a></dt>
+													<dd>KRW 10,000</dd>
+												</dl>
+												<dl class="fr">
+													<dt>부가서비스 번들(멀티팩)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>사전 좌석(1B)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>기내식(햄치즈샌드위치)</dt>
+													<dd>KRW 10,000</dd>
+													<dt>할인 내역</dt>
+													<dd>1~3급 장애인의 동반 보호자1명</dd>
+												</dl>
+											</div>
+											<!--// 내역 리스트 -->
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+						<!--// 탑승자 리스트 -->
+
+						<!-- 금액 -->
+						<div class="sub_price">
+							<dl>
+								<dt>SUBTOTAL</dt>
+								<dd>
+									<span class="unit">KRW</span>
+									<span class="price red">9,900,000</span>
+								</dd>
+							</dl>
+						</div>
+						<!-- 금액 --> 
+						<!--// 이원구간 -->
+
+					</div>
+				</div>
+				<!-- 구간 Tab -->
+			</div>
+		</div>
+		<!--// Summary 내용 -->
+	</div>
+
+	<script>
+		// Summary Open
+		var win_h = $(window).height() - sum_top_h,
+			sum_h = $('.summary_wrap').height(),
+			sum_top_h = $('.summary_top').height() + $('.btn_summary_open').height();
+		$('.summary_wrap').css({'bottom':0,'height':win_h});
+		$('.btn_summary_open').on('click', function(e) {
+			$('html,body').css({'overflow-y':'hidden'});
+			$('.summary_top').animate({'bottom':'','top':'20%'},500,function(){
+				$('.btn_summary_close').css({'top':'calc(20% + 54px)'}).show(250);
+			});
+			$('.summary_wrap').animate({'bottom':'','top':'20%'},500,function(){
+				$('.summary_wrap').css({'overflow-y':'auto'});
+			});
+			$('.dim02').fadeIn(150);
+			$('.btn_summary_open').hide();
+		});
+
+		// Summary Close
+		$('.btn_summary_close').on('click', function(e) {
+			$('html,body').css({'overflow-y':''});
+			$('.summary_top').css({'bottom':0,'top':'',});
+			$('.summary_wrap').css({'bottom':0,'top':'','overflow-y':'hidden'});
+			$('.dim02').fadeOut(150);
+			$('.btn_summary_close').hide();
+			$('.btn_summary_open').show();
+		});
+	</script>
+	<!--// Summary  -->	
+</div>
+
+</body>
+</html>

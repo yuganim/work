@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T‘agency 항공사 | 수입관리</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+</head>
+
+<body>
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+	<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+			<div class="pg_tit_wrap">
+            	<h2 class="pg_tit">Credit 환불요청 관리</h2>
+            </div>
+            <div class="btn_wrap">
+                 <button date-type="layer" date-id="rsv_search" title="레이어 팝업 열림" class="btn_large">예약번호 검색</button>
+            </div>
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- 팝업 -->
+    <div class="dim"></div>
+    <div id="rsv_search" class="layer type05">
+        <div class="layer_header">
+            <h2>예약번호 검색</h2>
+        </div>
+        
+        <div class="layer_content scroll">
+
+			<!-- 예약번호 경우 -->
+			<table class="mt10 tb_row">
+				<caption>예약번호 검색 - 검색 종류, 노선 선택, 승객명, 조회기간, 예약구분, 결제 상태 순서의 정보입력 표입니다.</caption>
+				<colgroup>
+					<col style="width:240px">
+					<col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="row" class="left">검색 종류</th>
+						<td>
+							<input type="radio" id="radio1-1" name="radio1"><label for="radio1-1"><span class="icon"></span>노선선택</label>
+							<input type="radio" id="radio1-2" name="radio1" checked=""><label for="radio1-2"><span class="icon"></span>예약번호</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">예약번호</th>
+						<td>
+							<input type="text" name="" value="" placeholder="예약번호" class="w200">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!--// 예약번호 경우 -->
+
+			<!-- 노선선택 경우 -->
+			<table class="mt10 tb_row">
+				<caption>노선선택 검색 - 검색 종류, 노선 선택, 승객명, 조회기간, 예약구분, 결제 상태 순서의 정보입력 표입니다.</caption>
+				<colgroup>
+					<col style="width:240px">
+					<col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="row" class="left">검색 종류</th>
+						<td>
+							<input type="radio" id="radio1-1" name="radio1" checked=""><label for="radio1-1"><span class="icon"></span>노선선택</label>
+							<input type="radio" id="radio1-2" name="radio1"><label for="radio1-2"><span class="icon"></span>예약번호</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">노선 선택</th>
+						<td>
+							<div>
+								<input type="checkbox" id="check-1"><label for="check-1"><span class="icon"></span>전체</label>
+								<input type="checkbox" id="check-2" checked=""><label for="check-2"><span class="icon"></span>출발편</label>
+								<input type="checkbox" id="check-3"><label for="check-3"><span class="icon"></span>도착편</label>
+							</div>
+
+							<!-- 여정선택 -->
+							<div class="box_srch">
+								<div class="input_wrap mt20">
+	                                <span class="ico_ipt start w200">
+	                                    <input type="text" name="" placeholder="출발지"><button class="btn_area"><span class="blind">출발지 선택</span></button>
+	                                </span>
+	                                <span class="mark">~</span>
+	                                <span class="ico_ipt end w200">
+	                                    <input type="text" name="" placeholder="도착지"><button class="btn_area"><span class="blind">도착지 선택</span></button>
+	                                </span>
+
+	                                <!-- Layer -->
+	                                <div class="layer datepicker single" id="datepicker_layer_s" style="display:none;">
+
+	                                </div>
+	                                <!--// Layer -->
+	                            </div>
+	                        </div>
+                            <!--// 여정선택 -->
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">승객명</th>
+						<td>
+							<input type="text" name="" value="" placeholder="홍" class="w200">
+							<input type="text" name="" value="" placeholder="길동" class="w200">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">조회기간</th>
+						<td>
+							<span class="select w200 mr5">
+							    <select id="select1" title="">
+							        <option selected="selected">탑승일</option>
+							        <option>예약일</option>
+							    </select>
+							</span>
+							<!-- 날짜선택 -->
+							<div class="box_srch">
+								<div class="input_wrap date">
+									<span class="ico_ipt w200">
+	                                    <input type="text" name="" value="" placeholder="접속일 한달 이전">
+	                                    <button class="btn_date"><span class="blind">시작일 선택</span></button>
+	                                </span>
+									<span class="mark">~</span>
+									<span class="ico_ipt w200">
+	                                    <input type="text" name="" value="" placeholder="접속일">
+	                                    <button class="btn_date"><span class="blind">종료일 선택</span></button>
+	                                </span>
+	                                <!-- Datepicker Layer -->
+		                            <div class="layer datepicker single" id="datepicker_layer_s" style="display: none;">
+		                                <div class="">
+		                                    <div class="grid_datepicker">
+		                                        <div class="sel_yymm_wrap">
+		                                            <span class="select datepicker">
+		                                                <select title="년월선택">
+		                                                    <option selected="">2018.09</option>
+		                                                    <option>2018.08</option>
+		                                                    <option>2018.07</option>
+		                                                    <option>2018.06</option>
+		                                                </select>
+		                                            </span>  
+		                                        </div>                                    
+		                                        <table class="tbl_datepicker">
+		                                            <caption>날짜선택 테이블</caption>
+		                                            <colgroup>
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                                <col style="width:73px">
+		                                            </colgroup>
+		                                            <thead>
+		                                                <tr><th scope="row">일</th>
+		                                                <th scope="row">월</th>
+		                                                <th scope="row">화</th>
+		                                                <th scope="row">수</th>
+		                                                <th scope="row">목</th>
+		                                                <th scope="row">금</th>
+		                                                <th scope="row">토</th>
+		                                            </tr></thead>
+		                                            <tbody>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">1</a>
+		                                                    </td>
+		                                                </tr>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day">2</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">3</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">4</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">5</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">6</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">7</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">8</a>
+		                                                    </td>
+		                                                </tr>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day">9</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">10</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">11</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day today">12</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">13</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">14</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">15</a>
+		                                                    </td>
+		                                                </tr>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day">16</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">17</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">18</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">19</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">20</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">21</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">22</a>
+		                                                    </td>
+		                                                </tr>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day">23</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">24</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">25</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">26</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">27</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">28</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day">29</a>
+		                                                    </td>
+		                                                </tr>
+		                                                <tr>
+		                                                    <td>
+		                                                        <a href="#none" class="day">30</a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                    <td>
+		                                                        <a href="#none" class="day"></a>
+		                                                    </td>
+		                                                </tr>
+		                                            </tbody>
+		                                        </table>
+		                                    </div>
+		                                </div>
+		                                <!-- Datepicker Button -->
+		                                <a href="#none" class="btn_cal_prev">이전달</a>
+		                                <a href="#none" class="btn_cal_next">다음달</a>
+		                                <!--// Datepicker Button -->
+		                            </div>
+		                            <!--// Datepicker Layer -->
+								</div>
+							</div>
+							<!--// 날짜선택 -->
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">예약구분</th>
+						<td>
+							<input type="checkbox" id="check-4" name="check1" checked=""><label for="check-4"><span class="icon"></span>단체</label>
+							<input type="checkbox" id="check-5" name="check1"><label for="check-5"><span class="icon"></span>개인</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="left">결제 상태</th>
+						<td>
+							<input type="checkbox" id="check-all" checked=""><label for="check-all"><span class="icon"></span>전체</label>
+							<input type="checkbox" id="check-6"><label for="check-6"><span class="icon"></span>미결제</label>
+							<input type="checkbox" id="check-7"><label for="check-7"><span class="icon"></span>완료</label>
+							<input type="checkbox" id="check-8"><label for="check-8"><span class="icon"></span>추가결제대기</label>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!--// 노선선택 경우 -->
+
+        	<div class="btn_wrap">
+                <button class="btn_cont2">초기화</button>
+                <button class="btn_cont2 dark">조회</button>
+            </div>
+
+        	<!-- 예약내역 -->
+        	<div class="tb_select pt20">
+	        	<strong>정렬</strong>
+	        	<span class="select">
+				    <select id="select1" title="">
+				        <option selected="selected">예약일시순</option>
+				        <option>예약일시역순</option>
+				        <option>출발일시순</option>
+				        <option>출발일시역순</option>
+				        <option>구매시한순</option>
+				        <option>구매시한역순</option>
+				        <option>탑승객수(많은순)</option>
+				        <option>탑승객수(적은순)</option>
+				    </select>
+				</span>
+			</div>
+	        <table class="tb_col">
+                <caption>예약내역 정보 - 선택, 구분, 예약번호, 출발일시, 편명, 구간, 탑승객수, 예약상태, 결제상태,  순서의 예약내역 정보 표입니다.</caption>
+                <colgroup>
+                    <col style="width:70px">
+                    <col style="width:70px">
+                    <col style="width:100px">
+                    <col style="width:195px">
+                    <col style="width:92px"> 
+                    <col style="width:auto">
+                    <col style="width:100px">
+                    <col style="width:100px">
+                    <col style="width:100px">
+                    <col style="width:200px"> 
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>선택</th>
+                        <th>구분</th>
+                        <th>예약번호</th>
+                        <th>출발일시</th> 
+                        <th>편명</th> 
+                        <th>구간</th> 
+                        <th>탑승객수</th>
+                        <th>예약상태</th>
+                        <th>결제상태</th>
+                        <th>구매시한</th>           
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" id="check-lst1"><label for="check-lst1" class="blind"><span class="icon"></span>선택</label></td>
+                        <td>단체</td>
+                        <td>FLMY25</td>
+                        <td>2018-12-29(토) 17:25</td>
+                        <td>TW293</td>
+                        <td>인천(ICN) → 후쿠오카(FUK)</td>
+                        <td>10명</td>
+                        <td>확약</td>
+                        <td>미결제</td>
+                        <td><strong class="red">2018-12-28 23:59:00</strong></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="check-lst2"><label for="check-lst2" class="blind"><span class="icon"></span>선택</label></td>
+                        <td>단체</td>
+                        <td>FLMY25</td>
+                        <td>2018-12-29(토) 17:25</td>
+                        <td>TW293</td>
+                        <td>인천(ICN) → 후쿠오카(FUK)</td>
+                        <td>10명</td>
+                        <td>확약</td>
+                        <td>미결제</td>
+                        <td><strong class="red">2018-12-28 23:59:00</strong></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="check-lst3"><label for="check-lst3" class="blind"><span class="icon"></span>선택</label></td>
+                        <td>단체</td>
+                        <td>FLMY25</td>
+                        <td>2018-12-29(토) 17:25</td>
+                        <td>TW293</td>
+                        <td>인천(ICN) → 후쿠오카(FUK)</td>
+                        <td>10명</td>
+                        <td>확약</td>
+                        <td>미결제</td>
+                        <td><strong class="red">2018-12-28 23:59:00</strong></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="check-lst4"><label for="check-lst4" class="blind"><span class="icon"></span>선택</label></td>
+                        <td>단체</td>
+                        <td>FLMY25</td>
+                        <td>2018-12-29(토) 17:25</td>
+                        <td>TW293</td>
+                        <td>인천(ICN) → 후쿠오카(FUK)</td>
+                        <td>10명</td>
+                        <td>확약</td>
+                        <td>미결제</td>
+                        <td><strong class="red">2018-12-28 23:59:00</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10">조회 내역이 없습니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--// 예약내역 -->
+            
+	    </div>
+	    <div class="layer_footer">
+	    	<button class="btn_large red">확인</button>
+	    	<button class="btn_large wh">취소</button>
+	    </div>
+	    <a href="#none" class="btn_layer_close">레이어 닫기</a>
+    </div>
+    <!--//팝업 -->
+
+	<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<div class="btn_wrap fr mt0">
+                <button class="sbtn_cont">개인정보 처리방침</button>
+                <button class="sbtn_cont">티웨이항공 바로가기</button>
+            </div>
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+	<!-- 전체 메뉴 -->
+	<!--div class="layer_allmenu">
+		
+		<div class="layer_cont">
+
+			<h2>전체메뉴</h2>
+
+			<div class="allmenu">
+				<ul>
+					<li>
+						<a href="#none" class="on">항공권예매</a>
+					</li>
+					<li>
+						<a href="#none">나의예약</a>
+					</li>
+					<li>
+						<a href="#none">서비스안내</a>
+					</li>
+					<li>
+						<a href="#none">이벤트/혜택</a>
+					</li>
+					<li>
+						<a href="#none">고객센터</a>
+					</li>
+					<li>
+						<a href="#none">회사소개</a>
+					</li>
+				</ul>            
+			</div>
+
+			<!-- 항공권 예매 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>항공권 예매</h3>
+					<dl>
+						<dt>항공권 예매</dt>
+					</dl>
+					<dl>
+						<dt>단체항공권 예매</dt>
+					</dl>
+				</div>
+			</div>
+			<!--// 항공권 예매 -->
+
+			<!-- 나의 예약 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>나의 예약</h3>
+					<dl>
+						<dt>정상예약</dt>
+					</dl>
+					<dl>
+						<dt>결제전&확인필요 예약</dt>
+					</dl>
+					<dl>
+						<dt>취소된 예약</dt>
+					</dl>
+					<dl>
+						<dt>웹 체크인</dt>
+						<dd>기내방송서비스 신청</dd>
+					</dl>
+				</div>
+			</div>
+			<!--// 나의 예약 -->
+
+			<!-- 서비스 안내 -->
+			<!--div class="section_menu">
+				<div class="menu_list">
+					<h3>서비스 안내</h3>
+					<dl>
+						<dt>여행준비</dt>
+						<dd>항공권예매안내</dd>
+						<dd>단체항공권예매안내</dd>
+						<dd>웹 체크인 안내</dd>
+						<dd>가족동반여행</dd>
+						<dd>휠체어/도움이 필요한 고객</dd>
+						<dd>반려동물 동반 여행</dd>
+						<dd>T'Way 라운지</dd>
+						<dd>호텔</dd>
+						<dd>렌트카</dd>
+					</dl>
+					<dl>
+						<dt>항공편 및 공항정보</dt>
+						<dd>운항스케줄</dd>
+						<dd>출도착조회</dd>
+						<dd>도심공항 안내</dd>
+						<dd>셀프체크인 안내</dd>
+						<dd>탑승수속 안내</dd>
+						<dd>공항카운터 정보</dd>
+					</dl>
+					<dl>
+						<dt>운임 및 수수료 안내</dt>
+						<dd>운임안내</dd>
+						<dd>개인신분할인 안내</dd>
+						<dd>변경/취소 수수료</dd>
+						<dd>이름변경 수수료</dd>
+					</dl>
+					<dl>
+						<dt>기내서비스</dt>
+						<dd>기내제공서비스</dd>
+						<dd>t'shop</dd>
+						<dd>기내 면세품</dd>
+						<dd>channel't</dd>
+					</dl>
+					<dl>
+						<dt>수하물 안내</dt>
+						<dd>무료 수하물</dd>
+						<dd>특수 수하물</dd>
+						<dd>운송 제한 물품</dd>
+						<dd>수하물 배상</dd>
+					</dl>
+					<dl>
+						<dt>부가서비스</dt>
+						<dd>부가서비스 번들</dd>
+						<dd>사전좌석지정서비스</dd>
+						<dd>수하물 추가구매</dd>
+						<dd>기내식 사전 주문</dd>
+						<dd>옆좌석 구매 서비스</dd>
+						<dd>수하물/보관 배송 서비스</dd>
+						<dd>유료아이템</dd>
+						<dd>T'CARE 서비스</dd>
+					</dl>
+				</div>
+			</div>
+			<!--// 서비스 안내 -->
+
+		<!--/div>
+
+		<a href="#none" class="btn_allmenu_close">닫기</a>
+
+	</div>
+
+
+	<!-- 전체 메뉴 --> 
+
+
+
+
+</div>
+
+</body>
+</html>

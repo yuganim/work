@@ -1,0 +1,4225 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 항공권 예매</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/reset.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/layout.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/slick.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/swiper.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/content.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/plugin.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/main.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/booking.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/kjh.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/pjy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/jhy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lmy.css">
+<link rel="stylesheet" type="text/css" href="../../css/tagency/lhb.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+<script>
+$(function(){
+	// Summary 구간
+	var swiper = new Swiper('.summary_top_cont .swiper-container', {
+		loop: true,
+		direction: 'vertical',
+		navigation: {
+			nextEl: '.section_slide .btn_slide_next',
+			prevEl: '.section_slide .btn_slide_prev',
+		},
+	});
+
+	// Summary Open
+	var win_h = $(window).height() - sum_top_h,
+		sum_h = $('.summary_wrap').height(),
+		sum_top_h = $('.summary_top').height() + $('.btn_summary_open').height();
+	$('.summary_wrap').css({'bottom':0,'height':win_h});
+	$('.btn_summary_open').on('click', function(e) {
+		$('html,body').css({'overflow-y':'hidden'});
+		$('.summary_top').css({'bottom':'','top':'0'});
+		$('.summary_wrap').css({'bottom':'','top':'0','overflow-y':'auto'});
+		$('.btn_summary_open').hide();
+		$('.btn_summary_close').show();
+	});
+
+	// Summary Close
+	$('.btn_summary_close').on('click', function(e) {
+		$('html,body').css({'overflow-y':''});
+		$('.summary_top').css({'bottom':0,'top':'',});
+		$('.summary_wrap').css({'bottom':0,'top':'','overflow-y':'hidden'});
+		$('.btn_summary_close').hide();
+		$('.btn_summary_open').show();
+	});
+	
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('#start1-2').hide();
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+			$('#start1-1').hide(200);
+			$('#start2').slideUp(200);
+			$('#datepicker_layer').slideUp(200);
+			$('#start1-2').slideDown(200);
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$('#start1-2').slideUp(200);
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 35});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 35});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+
+	$('#end').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 445});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 445});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		$('#datepicker_layer').css({'top': 350});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+		$('#start3').slideUp(200);
+	});
+
+	// 레이어 스크롤
+	$(".layer_start1 .layer_cont, .layer_start2 .sel_area_list.scroll , .sel_route_list.type2 .scroll").mCustomScrollbar();
+});
+</script>
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+</head>
+
+<body class="booking">
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+			<div class="tit_booking_wrap mb60">
+				<h2 class="pg_tit">항공권 예매</h2>
+				<div class="step_booking">
+					<ol>
+						<li class="step01 on">
+							<span class="text_step">01</span>
+							<span class="blind">여정검색 (완료 단계)</span>
+							<!-- <span class="blind">여정선택 (완료 단계)</span> -->
+							<!-- <span class="blind">부가서비스 번들 구매 (완료 단계)</span> -->
+						</li>
+						<li class="step02 on">
+							<span class="text_step">02</span>
+							<span class="blind">탑승자 정보 입력 (완료 단계)</span>
+						</li>
+						<li class="step03 on">
+							<span class="text_step">03</span>
+							<span class="blind">부가서비스 선택 (완료 단계)</span>
+						</li>
+						<li class="step04 on">
+							<span class="blind">현재페이지</span>
+							<span class="text_step">04 선택내역 확인 및 규정 동의</span>
+						</li>
+						<li class="step05">
+							<span class="text_step">05</span>
+							<span class="blind">결제</span>
+						</li>
+						<li class="step06">
+							<span class="text_step">06</span>
+							<span class="blind">예매완료</span>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- Title & Step -->
+			<!-- 정보 -->
+			<div class="reservation_section">
+				<ul>
+					<li>
+						<div class="section_tit">
+							<span class="num">구간1</span>
+						</div>
+						<dl class="reservation_detail">
+							<dt>
+								<span class="date">2019-10-10(목)</span>
+							</dt>
+							<dd>
+								
+								<!-- 구간정보 -->
+								<div class="service_section_box type02">
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">09:00 ~ 11:15/2h 30m</p>
+										<p class="bttm">
+											<span class="air_info">TW9898</span>
+											<span>경유</span>
+											<span>이벤트운임</span>
+										</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간정보 -->
+
+								<!-- 구간정보 -->
+								<div class="service_section_box type02">
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">09:00 ~ 11:15/2h 30m</p>
+										<p class="bttm">
+											<span class="air_info">TW9898</span>
+											<span>경유</span>
+											<span>이벤트운임</span>
+										</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간정보 -->
+
+
+							</dd>
+						</dl>	
+					</li>
+					<li>
+						<div class="section_tit">
+							<span class="num">구간2</span>
+						</div>
+						<dl class="reservation_detail">
+							<dt>
+								<span class="date">2019-10-10(목)</span>
+							</dt>
+							<dd>
+								
+								<!-- 구간정보 -->
+								<div class="service_section_box type02">
+									<!-- 출발 -->
+									<div class="service_name first">
+										<strong class="tit">ICN</strong>
+										<span class="addition">서울/인천</span>
+									</div>
+									<!-- 출발 -->
+									<!-- 설명 -->
+									<div class="service_exp">
+										<p class="top">09:00 ~ 11:15/2h 30m</p>
+										<p class="bttm">
+											<span class="air_info">TW9898</span>
+											<span>경유</span>
+											<span>이벤트운임</span>
+										</p>
+									</div>
+									<!--// 설명 -->							
+									<!-- 도착 -->
+									<div class="service_name last">
+										<strong class="tit">BKK</strong>
+										<span class="addition">방콕/수완나폼</span>
+									</div>
+									<!-- 도착 -->
+								</div>
+								<!--// 구간정보 -->
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+			<!-- //정보 -->
+
+			<!-- 운임정보 -->
+			<div class="con_tit_wrap mt60">
+				<h3 class="con_tit">운임정보</h3>
+				<span class="con_tit_decs">성인4, 소아2, 유아1</span>
+			</div>
+			<div class="table_round">
+				<table class="tb_col">
+					<caption>운임정보 - 구간, 항공 운임, 유류할증료, 공항시설사용료, 부가서비스, 총 금액 정보 표 입니다.</caption>
+					<colgroup>
+						<col style="width:16.6%"/>
+						<col style="width:16.6%"/>
+						<col style="width:16.6%"/>
+						<col style="width:16.6%"/>
+						<col style="width:16.6%"/>
+						<col style="width:16.6%"/>
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">구간</th>
+							<th scope="col">항공 운임</th>
+							<th scope="col">유류할증료</th>
+							<th scope="col">공항시설사용료</th>
+							<th scope="col">부가서비스</th>
+							<th scope="col">총 금액</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>구간 1</td>
+							<td>KRW 1,000,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+						</tr>
+						<tr>
+							<td>구간 2</td>
+							<td>KRW 1,000,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+						</tr>
+						<tr>
+							<td>구간 3</td>
+							<td>KRW 1,000,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+							<td>KRW 100,000</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- //운임정보 -->
+			
+			<!-- 항공운임 규정(필수) -->
+			<div class="con_tit_wrap mt60">
+				<h3 class="con_tit">항공운임 규정(필수)</h3>
+			</div>
+			<div class="tab_wrap">
+				<ul class="tab n4">
+					<li><a href="#cont_tab01" role="tab">구간 1</a></li>
+					<li><a href="#cont_tab02" role="tab">구간 2</a></li>
+					<li><a href="#cont_tab03" role="tab">구간 3</a></li>
+					<li><a href="#cont_tab04" role="tab">구간 4</a></li>
+				</ul>
+				<div class="tab_cont" id="cont_tab01">
+					<h4 class="blind">구간 1</h4>
+					<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+					<div class="stab_wrap ">
+						<ul class="stab n2 type02">
+	                        <li class="on"><a href="#stab1">온라인</a></li>
+	                        <li class=""><a href="#stab2">오프라인</a></li>
+	                    </ul>
+	                    <div class="stab_cont mt20" id="stab1">
+	                    	<h5 class="blind">온라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="stab_cont mt20" id="stab2">
+							<h5 class="blind">오프라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab_cont" id="cont_tab02">
+					<h4 class="blind">구간 2</h4>
+					<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+					<div class="stab_wrap ">
+						<ul class="stab n2 type02">
+	                        <li class="on"><a href="#stab3" role="tab">온라인</a></li>
+	                        <li class=""><a href="#stab4" role="tab">오프라인</a></li>
+	                    </ul>
+	                    <div class="stab_cont mt20" id="stab3">
+	                    	<h5 class="blind">온라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="stab_cont mt20" id="stab4">
+							<h5 class="blind">오프라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab_cont" id="cont_tab03">
+					<h4 class="blind">구간 3</h4>
+					<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+					<div class="stab_wrap ">
+						<ul class="stab n2 type02">
+	                        <li class="on"><a href="#stab5" role="tab">온라인</a></li>
+	                        <li class=""><a href="#stab6" role="tab">오프라인</a></li>
+	                    </ul>
+	                    <div class="stab_cont mt20" id="stab5">
+	                    	<h5 class="blind">온라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="stab_cont mt20" id="stab6">
+							<h5 class="blind">오프라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab_cont" id="cont_tab04">
+					<h4 class="blind">구간 4</h4>
+					<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+					<div class="stab_wrap ">
+						<ul class="stab n2 type02">
+	                        <li class="on"><a href="#stab7" role="tab">온라인</a></li>
+	                        <li class=""><a href="#stab8" role="tab">오프라인</a></li>
+	                    </ul>
+	                    <div class="stab_cont mt20" id="stab7">
+	                    	<h5 class="blind">온라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발전 50분 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="stab_cont mt20" id="stab8">
+							<h5 class="blind">오프라인</h5>
+							<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+							<div class="box_dual">
+								<div class="left">
+									<h3>취소 수수료</h3>
+									<table class="tb_col">
+										<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">기준일</th>
+												<th scope="col">수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="right">
+									<h3>변경 수수료</h3>
+									<table class="tb_col">
+										<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:50%">
+											<col style="width:50%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>기준일</th>
+												<th>수수료</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>출발 90일전 ~ 71일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 70일전 ~ 51일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 30일전 ~ 1일전</td>
+												<td>KRW 10,000</td>
+											</tr>
+											<tr>
+												<td>출발 후 ~</td>
+												<td>KRW 10,000</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="notice_box sub">
+					<strong>기타</strong>
+					<ul class="ul_dot">
+						<li>예매 후 당일 자정 전까지 취소 시 수수료가 면제 됩니다.</li>
+						<li>수수료는 1인 편도 기준입니다.</li>
+						<li>당결제 후 이름변경은 불가하며 변경 시에는 취소 환불 후 재 예약 하셔야 합니다. 단, 동일 발음에 한하여 철자 변경은 가능하나 수수료가 부과됩니다.</li>
+						<li>공항이용료와 유류할증료는 환불 가능합니다.(항공권 환불은 유효기간 만료 후 60일까지만 가능)
+						항공권의 유효기간은 발행일로부터 1년입니다.</li>
+						<li>항공기 출발시간 이전까지 취소통보를 하지 않고 탑승하지 않는 경우 1구간당 예약 부도 수수료(No show penalty) 12,000원을 징수합니다.</li>
+						<li>No show Penalty는 날짜변경 수수료 및 취소 수수료와는 별도로 적용되오니 이용에 착오 없으시기 바랍니다.</li>
+						<li>항공권은 명시된 여정 순서대로 사용해야 하며 왕복 여정 중 첫 구간 미 탑승 시 리턴 구간 사용은 불가합니다.</li>
+
+					</ul>
+				</div>
+				<div class="terms_bttm">
+					<input type="checkbox" id="check-1">
+					<label for="check-1" class="mr15"><span class="icon"></span>상기 운임 규정 내용을 확인하였으며 동의합니다.</label>
+				</div>
+			</div>
+			<!-- //항공운임 규정(필수) -->
+
+			<!-- 예약 규정(필수) -->
+			<div class="con_tit_wrap mt60">
+				<h3 class="con_tit">예약 규정(필수)</h3>
+			</div>
+			<div class="mb20">
+				<p class="">예약에 대한 통보된 규정사항을 정확히 확인하시기 바랍니다.</p>
+			</div>
+			<div class="passenger_info_list toggle_list list_tit_check">
+				<ul>
+					<!-- 항공운임 규정 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">항공운임 규정</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-1">
+							<label for="check-1"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+
+							<div class="pc_web">
+								<div class="tab_wrap mb0">
+									<ul class="tab n4">
+										<li><a href="#cont_tab01" role="tab">구간 1</a></li>
+										<li><a href="#cont_tab02" role="tab">구간 2</a></li>
+										<li><a href="#cont_tab03" role="tab">구간 3</a></li>
+										<li><a href="#cont_tab04" role="tab">구간 4</a></li>
+									</ul>
+									<div class="tab_cont" id="cont_tab01">
+										<h4 class="blind">구간 1</h4>
+										<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+										<div class="stab_wrap ">
+											<ul class="stab n2 type02">
+												<li class="on"><a href="#stab1">온라인</a></li>
+												<li class=""><a href="#stab2">오프라인</a></li>
+											</ul>
+											<div class="stab_cont mt20" id="stab1">
+												<h5 class="blind">온라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="stab_cont mt20" id="stab2">
+												<h5 class="blind">오프라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab_cont" id="cont_tab02">
+										<h4 class="blind">구간 2</h4>
+										<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+										<div class="stab_wrap ">
+											<ul class="stab n2 type02">
+												<li class="on"><a href="#stab3" role="tab">온라인</a></li>
+												<li class=""><a href="#stab4" role="tab">오프라인</a></li>
+											</ul>
+											<div class="stab_cont mt20" id="stab3">
+												<h5 class="blind">온라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="stab_cont mt20" id="stab4">
+												<h5 class="blind">오프라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab_cont" id="cont_tab03">
+										<h4 class="blind">구간 3</h4>
+										<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+										<div class="stab_wrap ">
+											<ul class="stab n2 type02">
+												<li class="on"><a href="#stab5" role="tab">온라인</a></li>
+												<li class=""><a href="#stab6" role="tab">오프라인</a></li>
+											</ul>
+											<div class="stab_cont mt20" id="stab5">
+												<h5 class="blind">온라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="stab_cont mt20" id="stab6">
+												<h5 class="blind">오프라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab_cont" id="cont_tab04">
+										<h4 class="blind">구간 4</h4>
+										<div class="s_txt mb20 f24">운임 종류 : 스마트 운임</div>
+										<div class="stab_wrap ">
+											<ul class="stab n2 type02">
+												<li class="on"><a href="#stab7" role="tab">온라인</a></li>
+												<li class=""><a href="#stab8" role="tab">오프라인</a></li>
+											</ul>
+											<div class="stab_cont mt20" id="stab7">
+												<h5 class="blind">온라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발전 50분 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="stab_cont mt20" id="stab8">
+												<h5 class="blind">오프라인</h5>
+												<div class="s_txt">온라인 : 홈페이지, 오프라인 : 예약센터/공항</div>
+
+												<div class="box_dual">
+													<div class="left">
+														<h3>취소 수수료</h3>
+														<table class="tb_col">
+															<caption>취소 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">기준일</th>
+																	<th scope="col">수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="right">
+														<h3>변경 수수료</h3>
+														<table class="tb_col">
+															<caption>변경 수수료 - 기준일, 수수료 정보 표 입니다.</caption>
+															<colgroup>
+																<col style="width:50%">
+																<col style="width:50%">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th>기준일</th>
+																	<th>수수료</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>출발 90일전 ~ 71일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 70일전 ~ 51일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 30일전 ~ 1일전</td>
+																	<td>KRW 10,000</td>
+																</tr>
+																<tr>
+																	<td>출발 후 ~</td>
+																	<td>KRW 10,000</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="notice_box sub">
+										<strong>기타</strong>
+										<ul class="ul_dot">
+											<li>예매 후 당일 자정 전까지 취소 시 수수료가 면제 됩니다.</li>
+											<li>수수료는 1인 편도 기준입니다.</li>
+											<li>당결제 후 이름변경은 불가하며 변경 시에는 취소 환불 후 재 예약 하셔야 합니다. 단, 동일 발음에 한하여 철자 변경은 가능하나 수수료가 부과됩니다.</li>
+											<li>공항이용료와 유류할증료는 환불 가능합니다.(항공권 환불은 유효기간 만료 후 60일까지만 가능)
+											항공권의 유효기간은 발행일로부터 1년입니다.</li>
+											<li>항공기 출발시간 이전까지 취소통보를 하지 않고 탑승하지 않는 경우 1구간당 예약 부도 수수료(No show penalty) 12,000원을 징수합니다.</li>
+											<li>No show Penalty는 날짜변경 수수료 및 취소 수수료와는 별도로 적용되오니 이용에 착오 없으시기 바랍니다.</li>
+											<li>항공권은 명시된 여정 순서대로 사용해야 하며 왕복 여정 중 첫 구간 미 탑승 시 리턴 구간 사용은 불가합니다.</li>
+
+										</ul>
+									</div>
+									<!-- <div class="terms_bttm">
+										<input type="checkbox" id="check-1">
+										<label for="check-1" class="mr15"><span class="icon"></span>상기 운임 규정 내용을 확인하였으며 동의합니다.</label>
+									</div> -->
+								</div>
+							</div>
+
+						</div>
+					</li>
+					<!-- //항공운임 규정 -->
+					<!-- 위험물 안내 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">위험물 안내 <!-- <span class="red">(디자인 필요)</span> --></span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+
+							<div class="pc_web">
+								<h4 class="terms_tit">위험물 안내</h4>
+								<p class="red">위험물로 분류된 폭발성 또는 연소성이 높은 물건 및 물질 등의 항공운송은 국제민간항공기구(ICAO) 및 국내 항공안전법에서 정한대로 위험물 포장, 표기, 신고, 및 접수 등의 절차에 따라 항공운송을 하여야 합니다. 또한 위험물을 기내 휴대 수하물 또는 위탁수하물에 넣거나 항공기내 반입은 법으로 금지되어 있습니다.</p>
+								<dl class="dl_list">
+									<dt>기내 반입 또는 위탁 수하물 운송 제한품목</dt>
+									<dd>본 약관에서 사용하는 각 용어의 정의는 다음과 같다.
+										<ul class="ul_dot">
+											<li>발화 인화성 물질<br/>(다량의 라이터 또는 성냥, 라이터용 연료, 페인트 시너), 고압가스 용기(휴대용 부탄가스통, 각종 스프레이, 수중 스쿠버 공기통, 압축산소통 등)</li>
+											<li>무기 및 폭발물류<br/>(총기 및 도검류, 폭죽, 탄약, 화약, 호신용 최루가스 분사기 등)</li>
+											<li>기타 위험물<br/>(독극물, 부식성 물질, 방사능 물질, 자기성 물질,리튬배터리가 내장된 휴대용 헤어고데기, 리튬배터리가 장착된 전동휠 등)</li>
+										</ul>
+									</dd>
+									<dt>기내 반입이 가능한 물품</dt>
+									<dd>
+										<ul class="ul_dot">
+											<li>1L이하 액체류</li>
+											<li>전자담배<br/>(휴대만 가능)</li>
+											<li>드라이 아이스<br/>(단독 반입 불가. 1인당 2.5kg)</li>
+											<li>가스라이터<br/>(휴대만 가능)</li>
+											<li>전자기기용 여부의 리튬전지<br/>(휴대용 배터리 포함/휴대만 가능)</li>
+											<li>드라이 아이스<br/>(단독 반입 불가. 1인당 2.5kg)</li>
+											<li>일회용리튬전지<br/>(휴대만 가능)
+												<ul class="ul_dot">
+													<li>
+														여분의 리튬 배터리는 기내 반입만 가능하며, 파손이나 단락을 방지하기 위한 적절한 포장이 되어 있어야 합니다. (위탁수하물 운송 금지)
+													</li>
+													<li>
+														액체류(개인 화장품, 향수, 헤어스프레이, 에어로졸 등)는 품목당 100ml 이하의 용기에 담겨져 있고 투명한 봉인 가능한 1리터 이하의 플라스틱 봉투에 담긴 경우에 1인당 1개에 한하여 기내 반입가능(국내선은 국내 법령을 따른다.)
+													</li>
+													<li>
+														항공 여행 중 필요한 의약품(처방전 소지권장), 유아식은 안전성 입증의 경우 기내 휴대 가능
+													</li>
+													<li>
+														라이터 및 성냥(개인용도 1개) 라이터, 성냥의 반입은 출발지 국가별 규정이 다를 수 있습니다.
+													</li>
+													<li>
+														전자담배는 기내반입만 가능하며, 대만 노선은 기내반입 및 위탁수하물 운송이 금지됩니다.
+													</li>
+													<li>
+														자세한 내용은 당사 웹사이트 [서비스안내>수하물보내기>운송제한물품] 페이지를 확인하시기 바랍니다. 
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //위험물 안내 -->
+					<!-- 국제여객운송 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">국제여객운송 약관</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-3">
+							<label for="check-3"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+							
+							<div class="pc_web">
+								<h4 class="terms_tit">국제여객운송 약관</h4>
+								<dl class="dl_list">
+									<dt>제 1 조 (정의)</dt>
+									<dd>본 약관에서 사용하는 각 용어의 정의는 다음과 같다.
+										<ul>
+											<li>
+												1. “수하물 ”이란 여객이 자신의 여행과 관련하여 착용 또는 사용하거나 안락 또는 편의를 위하여 필요하거나 적절한 여객의 물품, 용품 및 기타 휴대품을 의미하며, 별도로 명시되어 있지 않는 한 위탁 수하물 및 휴대 수하물을 공히 포함한다. 단, 동일한 품목을 다량 운송하는 경우에는 상업용 목적으로 간주하며 특별한 사유가 없는 한 수하물로 인정하지 않는다.
+											</li>
+											<li>
+												2. “수하물표 ”란 전적으로 위탁 수하물의 식별만을 위하여 운송인에 의하여 발행된 증표로서 위탁 수하물에 부착하는 수하물 확인표와 여객에게 인도되는 수하물 청구표로 구성된다.
+											</li>
+											<li>
+												3. “운송 ”이란 수송과 동의어로서 유상 또는 무상으로 행하는 여객 또는 수하물의 항공운송을 말한다.
+											</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //국제여객운송 -->
+					<!-- 국내여객운송 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">국내여객운송 약관</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+
+							<div class="pc_web">
+								<h4 class="terms_tit">국내여객운송약관</h4>
+								<dl class="dl_list">
+									<dt>제 1 장 총 칙</dt>
+									<dd>본 약관에서 사용하는 각 용어의 정의는 다음과 같다.
+										<ul>
+											<li>
+												1. "국내 항공여객운송(이하 '운송' 이라 한다) " 이라 함은 유상 또는 무상운송 여부에 관계없이 여객과의 운송계약상 그 출발지와 목적지 및 도중 착륙지가 대한민국 영토 내에 위치하는 항공운송을 말한다.
+											</li>
+											<li>
+												2. "항공권" 이라 함은 ㈜티웨이항공(이하 '항공사'라 한다) 또는 티웨이항공이 지정한 대리인(이하 '대리점'이라 한다)이 본 운송약관에 따라 국내항공운항 노선상의 여객운송을 위하여 발행한 항공사의 데이터베이스에 기록된 전자증표 또는 종이증표를 말한다.
+											</li>
+											<li>
+												3. "항공권 예약 발권 확인서" 라 함은 항공사가 전자항공권으로 여행하는 승객에게 발행하는 승객 성명, 항공편, 고지사항을 포함하는 문서를 말한다.
+											</li>
+											<li>
+												4. "일반운임" 이라 함은 국내선 구간의 항공운송을 위하여 항공사가 정한 비할인 정규 여객운임 을 말한다.
+											</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+
+
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //국내여객운송 -->
+					<!-- 노선별 주의사항 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">노선별 주의사항</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+							
+							<div class="pc_web">
+								<h4 class="terms_tit">인천 -오이타</h4>
+								<p>일본 노선 이용 고객 안내사항</p>
+								<dl class="dl_list">
+									<dt>1. 일본 체류기간 안내</dt>
+									<dd>무비자 한국 국적 탑승자 : 최대 90일</dd>
+									<dt>2. 기타</dt>
+									<dd>왕복항공권 또는 제3국으로 향하는 항공권을 소지하셔야 합니다.</dd>
+									<dt>3. 주의사항</dt>
+									<dd>여권 훼손의 경우 출입국 거부, 벌금부과, 강제 송환 등의 제재가 발생할 수 있으며 탑승수속이 거절 될 수 있습니다.<br/>예. 낙서, 기념도장 날인, 페이지(부분/전체) 훼손, 절취 및 이탈 등<br/>국가별 비자, 여권 만료일 등의 제한사항을 확인하시어 예약/발권 등 여행 준비를 마치시기 바랍니다.</dd>
+								</dl>
+								<h4 class="terms_tit mt60">구마모토-인천 </h4>
+								<p>일본 노선 이용 고객 안내사항</p>
+							</div>
+
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //노선별 주의사항 -->
+					<!-- 공동운항편 안내 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">공동운항편 안내</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap">
+							<h4 class="terms_tit">인천 -오이타</h4>
+							<p class="terms_tit">공동 운항편 안내</p>
+							<p class="red">선택하신 항공편은 공동운항편입니다. 실제 탑승은 공동운항사를 이용하시게 되며, 기내 서비스 또한 공동운항사 기준에 준하여 적용되오니 이 점 참고 부탁드립니다.</p>
+							<dl class="dl_list terms_txt">
+								<dt>항공운임 규정내용</dt>
+								<dd>
+									<table class="tb_row">
+										<caption>항공운임 규정내용 - 탑승항공사, 운임, 예약마감, 탑승수속위치, 수하물, 임산부고객(임신 32주이상), 기타 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:25%"/>
+											<col style="width:75%"/>
+										</colgroup>
+										<tbody>
+											<tr>
+												<th scope="row">탑승항공사</th>
+												<td>(주)이스타항공</td>
+											</tr>
+											<tr>
+												<th scope="row">운임</th>
+												<td>이스타항공에서 구입시와 운임이 다를 수 있습니다.</td>
+											</tr>
+											<tr>
+												<th scope="row">예약마감</th>
+												<td>출발시간 24시간 전 예약 마감</td>
+											</tr>
+											<tr>
+												<th scope="row">탑승수속위치</th>
+												<td>이스타항공 탑승수속(Check in)카운터</td>
+											</tr>
+											<tr>
+												<th scope="row">수하물</th>
+												<td>위탁가능 무료수하물 15kg <br/>기내반입 무료수하물 7kg <br/><p class="red">※정보 업데이트일 2017.02.12 <br/>(수하물 규정은 이스타항공 규정이 적용되므로 이스타항공 홈페이지에서 확인 바랍니다.)</p></td>
+											</tr>
+											<tr>
+												<th scope="row">임산부고객(임신 32주이상)</th>
+												<td>의료기관의 진단서 원본 2부, 서약서 2부 작성 (출발 72시간 이내 발급된 서류 한정)</td>
+											</tr>
+											<tr>
+												<th scope="row">기타</th>
+												<td>유아용 요람, 기내식 서비스 없음</td>
+											</tr>
+										</tbody>
+									</table>
+								</dd>
+								<dt>승객정보 제공  동의</dt>
+								<dd>
+									공동운항 항공권예약을 위해 아래와 같이 항공권 예약정보 일부가 공동운항사에 제공 됩니다. 
+									<table class="tb_row">
+										<caption>승객정보 제공  동의 - 제공 받는 자, 제공 목적, 제공 항목, 보유기간 정보 표 입니다.</caption>
+										<colgroup>
+											<col style="width:25%"/>
+											<col style="width:75%"/>
+										</colgroup>
+										<tbody>
+											<tr>
+												<th scope="row">제공 받는 자</th>
+												<td>(주)이스타항공</td>
+											</tr>
+											<tr>
+												<th scope="row">제공 목적</th>
+												<td>항공권 예약, 탑승</td>
+											</tr>
+											<tr>
+												<th scope="row">제공 항목</th>
+												<td>성명, 성별, 생년월일, 여권정보(여권번호, 여권 만료일, 발급 국가, 국적)</td>
+											</tr><tr>
+												<th scope="row">보유기간</th>
+												<td>제휴사 서비스 종료 시점까지</td>
+											</tr>
+										</tbody>
+									</table>
+								</dd>
+							</dl>
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //공동운항편 안내 -->
+					<!-- 부가서비스 규정 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">부가서비스 규정</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+							<dl class="dl_list">
+								<dt>변경규정</dt>
+								<dd>
+									<div class="box_dual">
+										<div class="left">
+											<h4>국내선</h4>
+											<table class="tb_row">
+												<caption>변경규정 - 국내선 - 출발 2일 전 까지, 출발 1일 전 ~ 출발 당일 정보 표 입니다.</caption>
+												<colgroup>
+													<col style="width:50%">
+													<col style="width:50%">
+												</colgroup>
+												<tbody>
+													<tr>
+														<th scope="row" >출발 2일 전 까지</th>
+														<td>변경 가능</td>
+													</tr>
+													<tr>
+														
+													</tr>
+													<tr>
+														<th scope="row">출발 1일 전 ~ 출발 당일</th>
+														<td>변경 불가</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="right">
+											<h4>국제선</h4>
+											<table class="tb_row">
+												<caption>변경규정 - 국제선 - 출발 4일 전 까지, 출발 3일 전 ~ 출발 당일 정보 표 입니다.</caption>
+												<colgroup>
+													<col style="width:50%">
+													<col style="width:50%">
+												</colgroup>
+												<tbody>
+													<tr>
+														<th>출발 4일 전 까지</th>
+														<td>변경 가능</td>
+													</tr>
+													<tr>
+														<th>출발 3일 전 ~ 출발 당일</th>
+														<td>변경 불가</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</dd>
+								<dt>환불규정</dt>
+								<dd>
+									<div class="box_dual">
+										<div class="left">
+											<h4>국내선</h4>
+											<table class="tb_row">
+												<caption>환불규정 - 국내선 - 출발 2일 전 까지, 출발 1일 전 ~ 출발 당일 정보 표 입니다.</caption>
+												<colgroup>
+													<col style="width:50%">
+													<col style="width:50%">
+												</colgroup>
+												<tbody>
+													<tr>
+														<th scope="row" >출발 2일 전 까지</th>
+														<td>환불 가능</td>
+													</tr>
+													<tr>
+														
+													</tr>
+													<tr>
+														<th scope="row">출발 1일 전 ~ 출발 당일</th>
+														<td>환불 불가</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="right">
+											<h4>국제선</h4>
+											<table class="tb_row">
+												<caption>환불규정 - 국제선 - 출발 4일 전 까지, 출발 3일 전 ~ 출발 당일 정보 표 입니다.</caption>
+												<colgroup>
+													<col style="width:50%">
+													<col style="width:50%">
+												</colgroup>
+												<tbody>
+													<tr>
+														<th>출발 4일 전 까지</th>
+														<td>환불 가능</td>
+													</tr>
+													<tr>
+														<th>출발 3일 전 ~ 출발 당일</th>
+														<td>환불 불가</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<ul class="ul_dot">
+								<li>항공권 변경 또는 취소 시 구매하신 번들 서비스는 자동 환불 처리됩니다.</li>
+								<li>단, 국내선 출발 1일 전, 국제선 출발 3일 전 항공편을 취소하는 경우 번들 서비스 금액은 환불되지 않습니다.</li>
+								<li>당사 사정에 의한 비정상 운항(지연/결항)으로 항공권 취소 또는 여정 변경하여, 번들 서비스를 제공받지 못한 경우 출발일자와 상관없이 환불이 가능합니다.</li>
+							</ul>
+							<dl class="dl_list">
+								<dt>부가서비스번들 사전 구매 제외 대상</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>공동 운항 편</li>
+										<li>출발이 임박한 항공편
+											<p class="s_txt_bul">국내선: 출발 1일 이내</p>
+											<p class="s_txt_bul">국제선: 출발 3일 이내</p>
+										</li>
+										<li>국제선 이벤트 운임이 포함된 여정</li>
+									</ul>
+								</dd>
+								<dt>유의사항</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>전용 카운터 및 수하물 우선 처리의 경우 추가 제공 사항으로 출발 당일 현장 상황에 따라 미 제공 될 수 있습니다.</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //부가서비스 규정 -->
+					<!-- 사전좌석 규정 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">사전좌석 규정</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+							<dl class="dl_list">
+								<dt>좌석 선택 시 유의 사항</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											기종에 따라 좌석 간격은 상이할 수 있습니다.
+										</li>
+										<li>
+											기종에 따라 일부 창가 좌석 (11,12열)에 창문이 없을 수 있습니다.
+										</li>
+										<li>
+											3열당 1명의 유아만 탑승할 수 있습니다.
+										</li>
+										<li>
+											탑승수속 마감 10분 전(국내선:출발 30분 전, 국제선:출발 50분 전)까지 수속을 마치시지 않았을 경우 사전 좌석지정은 자동 취소됩니다.
+										</li>
+										<li>
+											14번열과 32번열은 출발 당일 공항에서만 선택이 가능합니다.
+										</li>
+										<li>
+											항공기 조건에 따라, 등받이 고정좌석(14,15,16,32열)이 있습니다.
+										</li>
+										<li>
+											항공기 조건에 따라, 팔걸이 고정좌석(1,2,15,16열)이 있습니다.
+										</li>
+										<li>
+											코드쉐어편은 좌석지정이 불가합니다.
+										</li>
+										<li>
+											공항 수속 시 비행기 좌석 상황 또는 기재 변경에 따라 좌석이 변경될 수 있습니다.
+										</li>
+										<li>
+											홈페이지에서 할인받은 금액으로 좌석을 선택하신 후 현장에서 변경하시려는 경우 정상가격의 차액 지불 후 가능합니다
+										</li>
+										<li>
+											사전좌석지정 유료 서비스를 이용하시지 않을 경우, 출발 당일 공항에서 선착순으로 일반 좌석이 배정됩니다.
+										</li>
+									</ul>
+								</dd>
+								<dt>비상구열 좌석 배정에 대한 안내</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											항공기 안전운항을 위한 관련 법률에 의하여, 비상구 좌석에 착석한 손님들이 비상시에 비상구 개방 승무원의 지시에 따라 임무 수행 등 승무원을 돕도록 되어 있어 아래에 규정된 손님에게는 비상구열 , 좌석 배정을 제한하고 있습니다
+										</li>
+										<li>
+											활동성, 체력 또는 양팔이나 두 손 및 양다리의 민첩성이 승무원의 지시를 수행하기에 충분치 않은 승객
+										</li>
+										<li>
+											15세 미만이거나 동반자의 도움 없이 승무원의 지시를 수행하기 불충분한 승객
+										</li>
+										<li>
+											글 또는 그림의 형태로 제공된 비상탈출에 관한 지시를 읽고 이해하지 못하거나 승무원의 구두 지시를 이해하지 못하는 승객
+										</li>
+										<li>
+											콘택트 렌즈나 안경을 제외한 다른 시력 보조장비 없이는 위에 열거한 기능을 하나 이상 수행할 수 없는 승객
+										</li>
+										<li>
+											일반적 보청기를 제외한 다른 청력 보조장비 없이는 승무원의 탈출지시를 듣고 이해 할 수 없는 승객
+										</li>
+										<li>
+											다른 승객들에게 정보를 적절하게 전달 수 있는 능력이 부족한 승객
+										</li>
+										<li>
+											승객의 상태나 책임(유,소아 동반승객, 임산부, 노약자 등)으로 인하여 승무원의 지시를 수행하는데 방해가 되거나, 수행할 경우 해를 입게 되는 승객
+										</li>
+										<li>
+											상기 규정된 승객에게는 비상구열 좌석 배정을 제한하고 있사오니, 제한 사항 확인 후 구매를 부탁 드립니다
+										</li>
+									</ul>
+								</dd>
+								<dt>환불 규정</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											출발 2일 전: 환불 가능
+										</li>
+										<li>
+											출발 1일 전 ~ 출발 당일: 환불 불가
+										</li>
+										<li>
+											여정 취소/변경과 동시에 좌석지정 서비스는 모두 취소되며, 좌석지정 만 별도로 변경 또는 취소가 불가합니다.
+										</li>
+										<li>
+											비상구열 좌석 선택 시 탑승수속 과정에서 위 조건이 맞지 않는 경우, 좌석선택이 취소되며 환불 되지 않습니다.
+										</li>
+									</ul>
+								</dd>
+								<dt>이용안내</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											구매 후 메뉴 변경은 불가하며, 취소 후 재구매 하실 수 있습니다.
+										</li>
+										<li>
+											기내식 서비스는 출발일 기준 4일 전까지 주문이 가능하며, 1인당 1개만 주문 가능합니다.
+										</li>
+										<li>
+											기내식 서비스는 고객센터에서 사전 주문하실 수 있으며 공항, 기내에서는 주문할 수 없습니다. 단 컵라면, 음료수, 맥주 등은 기내에서 주문 가능합니다.
+										</li>
+										<li>
+											기내식 구매는 예약과 동시에 주문 가능하며, 예약 후 마이페이지에서도 주문이 가능합니다. 
+										</li>
+										<li>
+											항공기 탑승 후 사전 주문 기내식 신청 확인을 위해, 승무원이 요청 시 예약확인증을 제시하여 주시기 바랍니다.
+										</li>
+										<li>
+											노선 별, 수량이 조기 품절될 수 있으며, 사진과 제공되는 기내식이 다소 다를 수 있습니다.
+										</li>
+									</ul>
+								</dd>
+								<dt>환불 규정</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											- 기내식 사전 주문은 출발일 기준 4일 전까지 환불이 가능하며, 출발일 4일 이내의 경우는 환불, 변경이 불가합니다. 
+										</li>
+										<li>
+											- 항공권 취소 및 여정 변경 시 구매한 기내식은 자동 취소(환불) 되며, 마이페이지에서 재구매가 가능합니다. <br/>(단 출발일 4일 이내 환불 불가)
+										</li>
+									</ul>
+								</dd>
+								<dt>기내식 주의 사항</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											모든 메뉴에는 견과류, 글루텐, 달걀 또는 유제품이 포함될 수 있습니다.
+										</li>
+										<li>
+											특정 식품에 알레르기 또는 유사 증상이 있는 승객께서는 탑승 전 반드시 메뉴를 확인하여 주시기 바랍니다.
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //사전좌석 규정 -->
+					<!-- 수하물 규정 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">수하물 규정</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap terms_txt">
+							<h4 class="terms_tit"></h4>
+							<dl class="dl_list">
+								<dt>이용 안내</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>
+											<strong>[위탁 수하물 사전 구매]는 출발 2일 전까지</strong> 홈페이지,   모바일 웹/앱, 예약센터(1688-8686)를 통한 사전 수하물 구매 시 할인이 적용되는 부가 서비스입니다.(국제선 대상)
+										</li>
+										<li>
+											항공권 예매와 동시에 구매하실 수 있으며, 항공권 예약을 이미 완료한 경우 홈페이지, 모바일 웹/앱, 예약센터를 통해 항공권과 별도로 구매하실 수 있습니다.
+										</li>
+										<li>
+											여행사를 통해 항공권을 구매한 고객께서는 당사 예약센터로 문의하시기 바라며, 일부 여행사의 경우신청이 제한될 수도있습니다
+										</li>
+										<li>
+											<strong>안전한 비행을 위한 당사 영업 정책상 [위탁 수하물 사전 구매]는 탑승객 1인당 <span class="red">위탁 수하물 무게 최대 2회</span> 선택 가능합니다.</strong>
+											<p class="s_txt_bul">편도: 가는 여정 1회, 총 1회</p>
+											<p class="s_txt_bul">왕복: 가는 여정 1회, 오는 여정 1회, 총 2회</p>
+										</li>
+									</ul>
+								</dd>
+								<dd>
+									<strong>위탁 수하물 사전 구매 서비스 제외 대상</strong>
+									<ul class="ul_dot">
+										<li>
+											출발 1일 전부터 사전 구매 불가
+										</li>
+										<li>
+											티웨이항공과 타 항공사의 공동운항 편
+										</li>
+										<li>
+											괌/사이판 출발 및 도착 노선
+										</li>
+										<li>
+											좌석 미점유 유아 고객
+											<p>※ 위탁 수하물 1개의 무게는 32kg을 초과할 수 없으며, 초과 시 분리 포장해주셔야 합니다.</p>
+										</li>
+									</ul>
+								</dd>
+								<dt></dt>
+								<dd>
+									
+								</dd>
+								<dd>
+									사전 구매되지 않은 초과수하물은 공항 탑승수속 시 기본 요금이 부과되며 할인이 적용되지 않습니다.
+								</dd>
+								<dt>변경 및 취소 안내</dt>
+								<dd>
+									<ul class="ul_dot">
+										<li>선택하신 무게를 변경하실 경우 출발 2일 전까지 취소하신 후 재구매 하셔야 합니다.</li>
+										<li>항공권의 여정 변경 또는 취소 시, 구매하신 위탁 수하물은 자동 취소 및 환불됩니다. (단, 출발 1일 전부터 수하물 취소 및 환불이 불가합니다.)</li>
+										<li>당사 사정에 의한 결항으로 항공권 취소 및 여정 변경 시, 사전 구매된 위탁 수하물은 출발 시간과 관계없이 취소되며, 자세한 환불 방법은 예약센터에 문의하시기 바랍니다.</li>
+									</ul>
+								</dd>
+								<dt>유의 사항</dt>
+								<dd>
+									<ul>
+										<li>본 서비스는 구매 후 양도가 불가합니다.</li>
+										<li>사전 구매 시 할인이 적용되며, 현장에서 지불하는 위탁 수하물 요금은 할인이 적용되지 않습니다.</li>
+										<li>서비스안내 &gt; 부가서비스 &gt; 수하물 계산기에서 요금을 확인하실 수 있습니다.</li>
+									</ul>
+								</dd>
+							</dl>
+							
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //수하물 규정 -->
+					<!-- 기내식 규정 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">기내식 규정</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap">
+							<h4 class="terms_tit">국제여객운송 약관</h4>
+							<h5 class="terms_tit_sub">제 1 장 총칙</h5>
+							<dl class="dl_list terms_txt">
+								<dt>제 1 조 (정의)</dt>
+								<dd>본 약관에서 사용하는 각 용어의 정의는 다음과 같다.
+									<ul>
+										<li>
+											1. “수하물 ”이란 여객이 자신의 여행과 관련하여 착용 또는 사용하거나 안락 또는 편의를 위하여 필요하거나 적절한 여객의 물품, 용품 및 기타 휴대품을 의미하며, 별도로 명시되어 있지 않는 한 위탁 수하물 및 휴대 수하물을 공히 포함한다. 단, 동일한 품목을 다량 운송하는 경우에는 상업용 목적으로 간주하며 특별한 사유가 없는 한 수하물로 인정하지 않는다.
+										</li>
+										<li>
+											2. “수하물표 ”란 전적으로 위탁 수하물의 식별만을 위하여 운송인에 의하여 발행된 증표로서 위탁 수하물에 부착하는 수하물 확인표와 여객에게 인도되는 수하물 청구표로 구성된다.
+										</li>
+										<li>
+											3. “운송 ”이란 수송과 동의어로서 유상 또는 무상으로 행하는 여객 또는 수하물의 항공운송을 말한다.
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //기내식 규정 -->
+					<!-- 주의사항 -->
+					<li>
+						<a href="#none" class="type" role="button">
+							<span class="block">주의사항</span>
+						</a>
+						<div class="check_position">
+							<input type="checkbox" id="check-4">
+							<label for="check-4"><span class="icon"></span>동의</label>
+						</div>
+						<div class="passenger_info_wrap">
+							<ul class="ul_dot">
+								<li>
+									항공권은 명시된 여정 순서대로 사용해야 하며 왕복 여정 중 첫 구간 미탑승 시 리턴 구간 사용은 불가합니다.
+								</li>
+								<li>
+									여분의 휴대폰 보조배터리 및 보조배터리, 전자담배, 라이터는 부치는 짐(위탁수하물)으로 보낼 수 없으며, 호버보드, 세그웨이 등의 전동 이동장치는 운송이 금지되어 있습니다.
+								</li>
+								<li>
+									나이는 탑승일 기준이며, 왕복 여정일 경우에는 첫 출발일을 기준으로 합니다.
+								</li>
+								<li>
+									유아는 좌석이 제공되지 않으므로 좌석이 필요한 유아는 소아로 예매하여야 하며 소아 운임이 적용됩니다.
+								</li>
+								<li>
+									국제선의 유아의 경우 별도 운송 요금이 부과됩니다. (자세한 요금은 운임 안내 페이지를 참조하시기 바랍니다.)
+								</li>
+								<li>
+									비동반 소아[혼자 여행하는 어린이] 서비스를 제공하고 있지 않습니다.
+								</li>
+								<li>
+									임산부 승객은 탑승 기준을 반드시 확인하시기 바랍니다.
+								</li>
+								<li>
+									기내식/좌석지정 할인 쿠폰은 항공권 예매 후 마이페이지&gt;예약관리&gt;나의 예약번호 클릭&gt;기내식/좌석 구매 시 사용 가능합니다.
+								</li>
+								<li>
+									9명 이하 발권은 [항공권예매]에서, 10~20명의 단체 예약 및 발권은 [항공권예매&gt;단체항공권예매]에서 신청해 주시기 바랍니다.
+								</li>
+								<li>
+									20명 이상 단체 인원의 예약 및 발권은 가까운 여행사로 문의하여 주시기 바랍니다.
+								</li>
+								<li>
+									항공권 구매 후 결제수단 변경은 불가합니다.
+								</li>
+							</ul>
+						</div>
+						<!-- passenger_info_wrap -->
+					</li>
+					<!-- //주의사항 -->
+				</ul>
+			</div>
+			<!-- //예약 규정(필수) -->
+
+			<div class="txt_center fnt_b mt40">
+				<input type="checkbox" id="check-2">
+				<label for="check-2"><span class="icon"></span>위 내용을 모두 확인하였으며 전체 동의합니다.</label>
+			</div>
+
+			<!-- Button -->
+			<div class="btn_wrap">
+				<button class="btn_large red">확인</button>
+			</div>
+			<!--// Button -->
+
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+	<!-- Summary -->
+	<div class="summary_wrap">
+		<a href="#none" class="btn_summary_open">Summary 열기</a>
+		<div class="summary_top">
+			<div class="summary_top_cont">
+				<div class="section_slide swiper-container">
+					<ul class="swiper-wrapper">
+						<li class="swiper-slide">
+							<!-- 구간 -->
+							<div class="section_box">
+								<span class="num">구간 1</span>
+								<div class="section_route start">
+									<span class="eng">ICN</span>
+									<span>서울/인천</span>
+								</div>
+								<div class="section_route end">
+									<span class="eng">BKK</span>
+									<span>방콕/수와나폼</span>
+								</div>
+								<div class="additional">
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+									<span class="ico_add carryon">기내수화물</span>
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+								</div>
+							</div>
+							<!--// 구간 -->
+						</li>
+						<li class="swiper-slide">
+							<!-- 구간 -->
+							<div class="section_box">
+								<span class="num">구간 2</span>
+								<div class="section_route start">
+									<span class="eng">ICN</span>
+									<span>서울/인천</span>
+								</div>
+								<div class="section_route end">
+									<span class="eng">BKK</span>
+									<span>방콕/수와나폼</span>
+								</div>
+								<div class="additional">
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+									<span class="ico_add carryon">기내수화물</span>
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+								</div>
+							</div>
+							<!--// 구간 -->
+						</li>
+						<li class="swiper-slide">
+							<!-- 구간 -->
+							<div class="section_box">
+								<span class="num">구간 3</span>
+								<div class="section_route start">
+									<span class="eng">ICN</span>
+									<span>서울/인천</span>
+								</div>
+								<div class="section_route end">
+									<span class="eng">BKK</span>
+									<span>방콕/수와나폼</span>
+								</div>
+								<div class="additional">
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+									<span class="ico_add carryon">기내수화물</span>
+									<span class="ico_add bundle">부가서비스 번들</span>
+									<span class="ico_add free_bag">무료위탁수화물</span>
+								</div>
+							</div>
+							<!--// 구간 -->
+						</li>
+					</ul>
+					<div class="btn_slide_wrap">
+						<a href="#none" class="btn_slide_prev">이전</a>
+						<a href="#none" class="btn_slide_next">다음</a>
+					</div>
+				</div>
+
+				<!-- 가격 -->
+				<div class="price_wrap">
+					<span class="total">TOTAL</span>
+					<span class="unit">KRW</span>
+					<span class="price">9,900,000</span>
+				</div>
+				<!-- 가격 -->
+			</div>
+		</div>
+		<!--// Summary Top -->
+
+		<!-- Summary 내용 -->
+		<div class="summary_cont_wrap">
+			<div class="summary_cont">
+				<!-- 닫기 버튼 -->
+				<a href="#none" class="btn_summary_close">Summary 접기</a>
+				<!--// 닫기 버튼 -->
+				<!-- 타이틀 -->
+				<div class="con_tit_wrap">
+				    <h3 class="con_tit">예약정보</h3>
+				    <span class="con_tit_decs">성인4, 소아2, 유아1</span>
+				</div>
+				<!--// 타이틀 -->
+				<!-- 구간 Tab -->
+				<div class="tab_wrap">
+				    <ul class="tab n4">
+				        <li><a href="#tab1">구간 1</a></li>
+				        <li><a href="#tab2">구간 2 (ICN - KIX)</a></li>
+				        <li><a href="#tab3">구간 3 (ICN - KIX)</a></li>
+				        <li><a href="#tab4">구간 4 (ICN - KIX)</a></li>
+				    </ul>
+				    <div class="tab_cont" id="tab1">
+				    	<!-- 입력전 -->
+				    	<!-- 구간정보 -->
+				    	<div class="route_info">
+				    		<div class="route start">
+				    			<span class="eng">ICN</span>
+				    			<span>서울/인천</span>
+				    		</div>
+				    		<div class="route end">
+				    			<span class="eng">KIX</span>
+				    			<span>오사카/간사이</span>
+				    		</div>
+				    	</div>
+				    	<!-- 구간정보 -->
+
+				    	<!-- 내역 리스트 -->
+				    	<div class="summary_list">
+				    		<dl class="fl">
+				    			<dt>날짜/편명</dt>
+				    			<dd>2018-01-07(월) / <span class="no_sel">운임을 선택하세요.</span></dd>
+				    			<dt>출발시간-도착시간/비행시간</dt>
+				    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+				    			<dt>운항 구분/실제 운항사</dt>
+				    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+				    		</dl>
+				    		<dl class="fr">
+				    			<dt>기내 수하물</dt>
+				    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+				    			<dt>무료위탁수하물</dt>
+				    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+				    			<dt>운임 종류</dt>
+				    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+				    		</dl>
+				    	</div>
+				    	<!--// 내역 리스트 -->
+
+				    	<!-- 탑승자 리스트 -->
+				    	<div class="passenger_list_wrap">
+				    		<div class="tit">
+				    			<h3>탑승객별 상세정보</h3>
+				    		</div>
+
+				    		<div class="passenger_list">
+							    <ul> 
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger">승객</span>
+							                성인1 (유아동반)
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <div class="no_data">
+							                	<span>운임을 선택하세요.</span>
+							                </div>
+							            </div>
+							        </li>
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger">승객</span>
+							                성인1 (유아동반)
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <div class="no_data">
+							                	<span>운임을 선택하세요.</span>
+							                </div>
+							            </div>
+							        </li>
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger">승객</span>
+							                성인1 (유아동반)
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <div class="no_data">
+							                	<span>운임을 선택하세요.</span>
+							                </div>
+							            </div>
+							        </li>
+							    </ul>
+							</div>
+
+				    	</div>
+				    	<!--// 탑승자 리스트 -->
+
+				    	<!-- 금액 -->
+				    	<div class="sub_price">
+				    		<dl>
+				    			<dt>SUBTOTAL</dt>
+				    			<dd>
+				    				<span class="unit">KRW</span>
+				    				<span class="price">0</span>
+				    			</dd>
+				    		</dl>
+				    	</div>
+				    	<!-- 금액 --> 
+				    	<!--// 입력전 -->
+				    </div>
+				    <div class="tab_cont" id="tab2">
+				    	<!-- 부가서비스 구매자 -->
+				    	<!-- 구간정보 -->
+				    	<div class="route_info">
+				    		<div class="route start">
+				    			<span class="eng">ICN</span>
+				    			<span>서울/인천</span>
+				    		</div>
+				    		<div class="route end">
+				    			<span class="eng">KIX</span>
+				    			<span>오사카/간사이</span>
+				    		</div>
+				    	</div>
+				    	<!-- 구간정보 -->
+
+				    	<!-- 내역 리스트 -->
+				    	<div class="summary_list">
+				    		<dl class="fl">
+				    			<dt>날짜/편명</dt>
+				    			<dd>2018-01-07(월) / TW101</dd>
+				    			<dt>출발시간-도착시간/비행시간</dt>
+				    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+				    			<dt>운항 구분/실제 운항사</dt>
+				    			<dd>경유 / T’way air</dd>
+				    		</dl>
+				    		<dl class="fr">
+				    			<dt>기내 수하물</dt>
+				    			<dd>10KG</dd>
+				    			<dt>무료위탁수하물</dt>
+				    			<dd>15KG</dd>
+				    			<dt>운임 종류</dt>
+				    			<dd>이벤트 운임</dd>
+				    		</dl>
+				    	</div>
+				    	<!--// 내역 리스트 -->
+
+				    	<!-- 탑승자 리스트 -->
+				    	<div class="passenger_list_wrap">
+				    		<div class="tit">
+				    			<h3>탑승객별 상세정보</h3>
+				    		</div>
+				    		<div class="passenger_list">
+							    <ul> 
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_M">성인남자</span>
+							                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							               	<!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li>
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_F">성인여자</span>
+							                홍길자 / 성인(여) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger CHILD_M">소아남자</span>
+							                홍길남 / 소아(남) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							    </ul>
+							</div>
+
+				    	</div>
+				    	<!--// 탑승자 리스트 -->
+
+				    	<!-- 금액 -->
+				    	<div class="sub_price">
+				    		<dl>
+				    			<dt>SUBTOTAL</dt>
+				    			<dd>
+				    				<span class="unit">KRW</span>
+				    				<span class="price red">9,900,000</span>
+				    			</dd>
+				    		</dl>
+				    	</div>
+				    	<!-- 금액 --> 
+				    	<!--// 부가서비스 구매자 -->
+				    </div>
+				    <div class="tab_cont" id="tab3">
+				    	<!-- 번들서비스 구매자 -->
+				    	<!-- 구간정보 -->
+				    	<div class="route_info">
+				    		<div class="route start">
+				    			<span class="eng">ICN</span>
+				    			<span>서울/인천</span>
+				    		</div>
+				    		<div class="route end">
+				    			<span class="eng">KIX</span>
+				    			<span>오사카/간사이</span>
+				    		</div>
+				    	</div>
+				    	<!-- 구간정보 -->
+
+				    	<!-- 내역 리스트 -->
+				    	<div class="summary_list">
+				    		<dl class="fl">
+				    			<dt>날짜/편명</dt>
+				    			<dd>2018-01-07(월) / TW101</dd>
+				    			<dt>출발시간-도착시간/비행시간</dt>
+				    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+				    			<dt>운항 구분/실제 운항사</dt>
+				    			<dd>경유 / T’way air</dd>
+				    		</dl>
+				    		<dl class="fr">
+				    			<dt>기내 수하물</dt>
+				    			<dd>10KG</dd>
+				    			<dt>무료위탁수하물</dt>
+				    			<dd>15KG</dd>
+				    			<dt>운임 종류</dt>
+				    			<dd>이벤트 운임</dd>
+				    		</dl>
+				    	</div>
+				    	<!--// 내역 리스트 -->
+
+				    	<!-- 탑승자 리스트 -->
+				    	<div class="passenger_list_wrap">
+				    		<div class="tit">
+				    			<h3>탑승객별 상세정보</h3>
+				    		</div>
+				    		<div class="passenger_list">
+							    <ul> 
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_M">성인남자</span>
+							                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							               	<!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+									    			<dt class="bundle_list">사전 좌석(1B)</dt>
+									    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li>
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_F">성인여자</span>
+							                홍길자 / 성인(여) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+									    			<dt class="bundle_list">사전 좌석(1B)</dt>
+									    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger CHILD_F">소아남자</span>
+							                홍길남 / 소아(남) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+									    			<dt class="bundle_list">사전 좌석(1B)</dt>
+									    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							    </ul>
+							</div>
+
+				    	</div>
+				    	<!--// 탑승자 리스트 -->
+
+				    	<!-- 금액 -->
+				    	<div class="sub_price">
+				    		<dl>
+				    			<dt>SUBTOTAL</dt>
+				    			<dd>
+				    				<span class="unit">KRW</span>
+				    				<span class="price red">9,900,000</span>
+				    			</dd>
+				    		</dl>
+				    	</div>
+				    	<!-- 금액 --> 
+				    	<!--// 번들서비스 구매자 -->
+				    </div>
+				    <div class="tab_cont" id="tab4">
+				    	<!-- 이원구간 -->
+				    	<div class="section_tit">
+							<h5>구간1</h5>
+						</div>
+				    	<!-- 구간정보 -->
+				    	<div class="route_info_wrap">
+					    	<div class="route_info type2 fl">
+					    		<div class="route start">
+					    			<span class="eng">ICN</span>
+					    			<span>서울/인천</span>
+					    		</div>
+					    		<div class="route end">
+					    			<span class="eng">KIX</span>
+					    			<span>오사카/간사이</span>
+					    		</div>
+					    	</div>
+					    	<div class="route_info type2 fr">
+					    		<div class="route start">
+					    			<span class="eng">ICN</span>
+					    			<span>서울/인천</span>
+					    		</div>
+					    		<div class="route end">
+					    			<span class="eng">KIX</span>
+					    			<span>오사카/간사이</span>
+					    		</div>
+					    	</div>
+					    </div>
+				    	<!-- 구간정보 -->
+
+				    	<!-- 내역 리스트 -->
+				    	<div class="summary_list">
+				    		<dl class="fl">
+				    			<dt>날짜/편명</dt>
+				    			<dd>2018-01-07(월) / TW101</dd>
+				    			<dt>출발시간-도착시간/비행시간</dt>
+				    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+				    			<dt>운항 구분/실제 운항사</dt>
+				    			<dd>경유 / T’way air</dd>
+				    			<dt>기내 수하물</dt>
+				    			<dd>10KG</dd>
+				    			<dt>무료위탁수하물</dt>
+				    			<dd>15KG</dd>
+				    			<dt>운임 종류</dt>
+				    			<dd>이벤트 운임</dd>
+				    		</dl>
+				    		<dl class="fr">
+				    			<dt>날짜/편명</dt>
+				    			<dd>2018-01-07(월) / TW101</dd>
+				    			<dt>출발시간-도착시간/비행시간</dt>
+				    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+				    			<dt>운항 구분/실제 운항사</dt>
+				    			<dd>경유 / T’way air</dd>
+				    			<dt>기내 수하물</dt>
+				    			<dd>10KG</dd>
+				    			<dt>무료위탁수하물</dt>
+				    			<dd>15KG</dd>
+				    			<dt>운임 종류</dt>
+				    			<dd>이벤트 운임</dd>
+				    		</dl>
+				    	</div>
+				    	<!--// 내역 리스트 -->
+
+				    	<!-- 탑승자 리스트 -->
+				    	<div class="passenger_list_wrap">
+				    		<div class="tit">
+				    			<h3>탑승객별 상세정보</h3>
+				    		</div>
+				    		<div class="passenger_list">
+							    <ul> 
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_M">성인남자</span>
+							                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							               	<!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li>
+							            <a href="#none" class="title">
+							                <span class="ico_passenger ADULT_F">성인여자</span>
+							                홍길자 / 성인(여) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							        <li> 
+							            <a href="#none" class="title">
+							                <span class="ico_passenger CHILD_M">소아남자</span>
+							                홍길남 / 소아(남) / 2010-01-01
+							                <div class="price_wrap">
+							                	<span class="unit">KRW</span>
+							                	<span class="price">168,000</span>
+							                </div>
+							            </a>
+							            <div class="passenger_summary">
+							                <!-- 내역 리스트 -->
+									    	<div class="summary_list">
+									    		<dl class="fl">
+									    			<dt>항공운임</dt>
+									    			<dd>KRW 1,310,000</dd>
+									    			<dt>유류할증료</dt>
+									    			<dd>KRW 20,000</dd>
+									    			<dt>공항시설사용료</dt>
+									    			<dd>KRW 10,000</dd>
+									    		</dl>
+									    		<dl class="fr">
+									    			<dt>부가서비스 번들(멀티팩)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>사전 좌석(1B)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>기내식(햄치즈샌드위치)</dt>
+									    			<dd>KRW 10,000</dd>
+									    			<dt>할인 내역</dt>
+									    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+									    		</dl>
+									    	</div>
+									    	<!--// 내역 리스트 -->
+							            </div>
+							        </li>
+							    </ul>
+							</div>
+
+				    	</div>
+				    	<!--// 탑승자 리스트 -->
+
+				    	<!-- 금액 -->
+				    	<div class="sub_price">
+				    		<dl>
+				    			<dt>SUBTOTAL</dt>
+				    			<dd>
+				    				<span class="unit">KRW</span>
+				    				<span class="price red">9,900,000</span>
+				    			</dd>
+				    		</dl>
+				    	</div>
+				    	<!-- 금액 --> 
+				    	<!--// 이원구간 -->
+				    </div>
+				</div>
+				<!-- 구간 Tab -->
+			</div>
+		</div>
+		<!--// Summary 내용 -->
+	</div>
+	<!--// Summary  -->
+
+
+		<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<div class="btn_wrap fr mt0">
+                <button class="sbtn_cont">개인정보 처리방침</button>
+                <button class="sbtn_cont">티웨이항공 바로가기</button>
+            </div>
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+
+<!-- 옵션 레이어 -->
+<!-- Input Hover 시 -->
+<div id="start1" class="layer_start1" style="display:none">
+	
+	
+	<div id="start1-1" class="layer_cont scroll">
+		
+		<!-- 즐겨찾기 노선 -->
+		<div id="" class="sel_route_list like">
+			<div class="route_tit_wrap">
+				<h3 class="sel_route_tit">즐겨 찾는 노선</h3>
+				<button class="sbtn_cont">전체도시보기</button>
+			</div>	
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">오사카/간사이</span>
+						<span class="eng">KIX</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">도쿄/나리타</span>
+						<span class="eng">NRT</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- 노선 선택 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap">
+				<h3 class="sel_tit">현재위치</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="start1-2" class="layer_cont search scroll">
+		<!-- 노선 검색후 리스트 -->
+		<div class="sel_route_list">
+			<div class="route_tit_wrap blind">
+				<h3 class="sel_tit">검색 리스트</h3>
+			</div>
+			<ul>
+				<li>
+					<a href="#none" class="sel_city on">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/김포</span>
+						<span class="eng">GMP</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">서울/인천</span>
+						<span class="eng">ICN</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">대구</span>
+						<span class="eng">TAE</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">제주</span>
+						<span class="eng">CJU</span>
+					</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_city">
+						<span class="kor">광주</span>
+						<span class="eng">KWJ</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 노선 검색후 리스트 -->
+	</div>
+</div>
+<!--// Input Hover 시 -->
+
+<!-- Button 클릭시 -->
+<div id="start2" class="layer_start2" style="display:none">
+	<div class="layer_cont">
+		<!-- 지역선택 -->
+		<h3 class="sel_tit">지역</h3>
+		<div class="sel_area_list scroll">
+			<ul>
+				<li>
+					<a href="#none" class="sel_area">즐겨찾기노선</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">현재위치</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area on">대한민국</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">일본</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동북아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">동남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">서남아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">러시아/중앙아시아</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">대양주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">미주</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">유럽</a>
+				</li>
+				<li>
+					<a href="#none" class="sel_area">중동/아프리카</a>
+				</li>
+			</ul>
+		</div>
+		<!--// 지역선택 -->
+
+		<!-- 취향지 -->
+		<div class="sel_route_list type2">
+			
+			<h3 class="sel_tit">취향지</h3>
+			
+			<div class="scroll">
+				<ul>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city like">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city on">
+							<span class="kor">서울/김포</span>
+							<span class="eng">GMP</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">서울/인천</span>
+							<span class="eng">ICN</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">대구</span>
+							<span class="eng">TAE</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">제주</span>
+							<span class="eng">CJU</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">광주</span>
+							<span class="eng">KWJ</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">무안</span>
+							<span class="eng">MWX</span>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_city">
+							<span class="kor">부산</span>
+							<span class="eng">PUS</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--/ 취향지 -->
+	</div>
+</div>
+<!--// Button 클릭시 -->
+
+<!-- Datepicker Layer -->
+<div class="layer datepicker" id="datepicker_layer" style="display:none;">
+	<div class="layer_grid_datepicker_wrap">
+		<div class="grid_datepicker fl">
+			<div class="sel_yymm_wrap">
+				<span class="select datepicker">
+					<select title="년월선택">
+						<option selected>2018.09</option>
+						<option>2018.08</option>
+						<option>2018.07</option>
+						<option>2018.06</option>
+					</select>
+				</span>
+				<span class="unit">통화:KRW</span>  
+			</div>                                    
+			<table class="tbl_datepicker">
+				<caption>날짜선택 테이블</caption>
+				<colgroup>
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+				</colgroup>
+				<thead>
+					<th scope="row">일</th>
+					<th scope="row">월</th>
+					<th scope="row">화</th>
+					<th scope="row">수</th>
+					<th scope="row">목</th>
+					<th scope="row">금</th>
+					<th scope="row">토</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">1</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">2</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">3</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">4</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">5</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">6</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">7</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">8</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">9</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">10</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">11</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day today">12</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">13</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">14</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">15</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">16</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">17</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day start">18</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day on">19</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day on">20</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day end">21</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">22</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">23</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">24</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">25</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">26</a>
+							<span class="price">비운항</span>
+						</td>
+						<td>
+							<a href="#none" class="day">27</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">28</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">29</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">30</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="grid_datepicker fr">
+			<div class="sel_yymm_wrap">
+				<span class="select datepicker">
+					<select title="년월선택">
+						<option selected>2018.09</option>
+						<option>2018.08</option>
+						<option>2018.07</option>
+						<option>2018.06</option>
+					</select>
+				</span>
+				<span class="unit">통화:KRW</span>  
+			</div>                                    
+			<table class="tbl_datepicker">
+				<caption>날짜선택 테이블</caption>
+				<colgroup>
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+					<col style="width:73px">
+				</colgroup>
+				<thead>
+					<th scope="row">일</th>
+					<th scope="row">월</th>
+					<th scope="row">화</th>
+					<th scope="row">수</th>
+					<th scope="row">목</th>
+					<th scope="row">금</th>
+					<th scope="row">토</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">1</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">2</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">3</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">4</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">5</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">6</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">7</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">8</a>
+							<span class="price"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">9</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">10</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">11</a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day">12</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">13</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">14</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">15</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">16</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">17</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">18</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">19</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">20</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">21</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">22</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">23</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">24</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">25</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">26</a>
+							<span class="price">비운항</span>
+						</td>
+						<td>
+							<a href="#none" class="day">27</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">28</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day">29</a>
+							<span class="price">32,200</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#none" class="day">30</a>
+							<span class="price">32,200</span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+						<td>
+							<a href="#none" class="day"></a>
+							<span class="price"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="btn_wrap">
+		<!-- 비활성 -->
+		<button class="btn_small gray">탑승일 선택</button>
+		<!--// 비활성 -->
+		<!-- 활성 -->
+		<button class="btn_small gray on">탑승일 선택</button>
+		<!--// 활성 -->
+	</div>
+
+	<!-- Datepicker Button -->
+	<a href="#none" class="btn_cal_prev">이전달</a>
+	<a href="#none" class="btn_cal_next">다음달</a>
+	<!--// Datepicker Button -->
+
+</div>
+<!--// Datepicker Layer -->
+<!--// 옵션 레이어 -->
+
+<!-- Dim -->
+<div class="dim"></div>
+<!-- Dim -->
+
+<!-- 나이 계산기 Layer -->
+<div id="age_cal" class="layer type02 age_cal">
+	<div class="layer_header">
+		<h2>나이 계산기</h2>
+	</div>
+	<div class="layer_content">
+		
+		<p class="s_txt_notice">출발일과 생년월일을 입력하세요</p>
+
+		<div class="sel_wrap">
+			<label for="s_yyyy">출발일</label>
+			<span class="select">
+				<select id="s_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="s_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="sel_wrap">
+			<label for="b_yyyy">생년월일</label>
+			<span class="select">
+				<select id="b_yyyy" title="년">
+					<option>2019</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_mm" title="월">
+					<option>01</option>
+				</select>
+			</span>
+			<span class="select">
+				<select id="b_dd" title="일">
+					<option>01</option>
+				</select>
+			</span>
+		</div>
+
+		<div class="btn_wrap">
+			<button class="btn_large red">계산하기</button>
+		</div>
+
+		<div class="age_standard">
+			출발일 기준 <span class="red">소아</span> 입니다.
+		</div>
+
+	</div>
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--// 나이 계산기 Layer -->
+
+</div>
+
+</body>
+</html>

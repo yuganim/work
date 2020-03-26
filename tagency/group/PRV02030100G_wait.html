@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T-Way 항공사 | 나의예약</title>
+<link rel="stylesheet" type="text/css" href="../../css/www/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.booking.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.reservation.js"></script>
+</head>
+
+<body>
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+	<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">웹체크인</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">서비스안내</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">이벤트/혜택</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+					<!-- 유틸 메뉴 -->
+					<div class="util_menu">
+						<!-- 로그인 전 -->
+						<a href="#none" class="btn_login">로그인</a>
+						<a href="#none" class="btn_search">검색</a>
+						<a href="#none" class="btn_allmenu">전체메뉴</a>
+						<!--// 로그인 전 -->
+					</div>
+					<!-- 유틸 메뉴 -->
+				</div>
+				<!--// Header Menu -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- Title & Step -->
+	    	<div class="tit_booking_wrap mb60">
+	    		<h2 class="pg_tit">항공권 예매</h2>
+	    		<div class="step_booking">
+	    			<ol>
+	    				<li class="step01 on past">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">01 <em>여정검색</em></span>
+	    				</li>
+	    				<li class="step02 on past">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">02 <em>탑승자 정보 입력</em></span>
+	    				</li>
+	    				<!-- <li class="step03 on">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">03</span>
+	    				</li>
+	    				<li class="step04 on">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">04</span>
+	    				</li>
+	    				<li class="step05 on">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">05</span>
+	    				</li> -->
+	    				<li class="step06 on">
+	    					<span class="blind">현재페이지</span>
+	    					<span class="text_step">03 <em>예약신청 완료</em></span>
+	    				</li>
+	    			</ol>
+	    		</div>
+	    	</div>
+	    	<!-- Title & Step -->
+
+			<div class="reservation_waiting mb70">
+				<p class="text complete mb40">단체항공권 예약 신청접수가<br>완료되었습니다.</p>
+				<div class="present_waiting mb35">
+					<ul class="ul_dot">
+						<li>좌석 상황에 따라 예상 운임과 실제 결제 운임이 다를 수 있습니다.</li>
+						<li>탑승자 정보는 여권과 동일하게 입력하셔야 하며, 결제 후 양도 및 명의변경 불가합니다.</li>
+						<li>결제 후 탑승자명 변경은 동일 발음에 한하여 철자 변경이 가능하며 수수료가 부과됩니다.</li>
+						<li>단체항공권은 회원 전용 서비스입니다. 로그인 후 예약 신청을 진행하여 주시기 바랍니다.</li>
+						<li>[HOME &gt; 마이페이지 &gt; 개인정보 관리 &gt; 탑승자정보]에 탑승자를 미리 등록해 두시면 탑승자 정보입력 시 시간을 단축할 수 있습니다.</li>
+						<li>좌석 승인 후 다음날 23:59까지 결제하지 않으면 자동으로 취소됩니다.</li>
+						<li>환율 및 유류세 변동에 따라 결제 금액이 변경 될 수 있습니다.</li>
+					</ul>
+				</div>
+				<div class="approve_wrap mb15">
+					<ul>
+						<li class="step1">
+							<dl>
+								<dt>승인완료</dt>
+								<dd>고객님의 SMS/이메일 주소로 승인완료<br>여부를 발송해 드립니다.</dd>
+							</dl>
+						</li>
+						<li class="step2">
+							<dl>
+								<dt>결제</dt>
+								<dd>익일 23:59 까지 신청하신 금액을<br>결제해 주세요.</dd>
+							</dl>
+						</li>
+						<li class="step3">
+							<dl>
+								<dt>완료</dt>
+								<dd>결제를 완료 하시면<br>단체항공권 예매가 완료됩니다.</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<ul class="ul_dot txt_left">
+					<li class="note">단체항공권 예약은 2영업일 이내에 등록하신 휴대폰(SMS), 이메일 주소로 <em class="bold">예약 가능 여부</em>를 안내해 드립니다.</li>
+					<li>결제 방법 : 로그인 &gt; 나의 예약 &gt; 확인필요 &gt; 단체항공권 예약번호선택 &gt; 결제 및 완료</li>
+					<li>결제 시간 : 승인 후 익일 23:59 까지</li>
+				</ul>				
+				<div class="btn_wrap">
+					<button class="btn_large type02 gray2">나의 예약 이동</button>
+				</div>
+				<!-- <div class="btn_wrap">
+		        	<button class="btn_small gray2">결제 방법 보기</button>
+		        </div> -->
+			</div>
+
+			<div class="con_tit_wrap">
+			    <h3 class="con_tit">예약 정보</h3>
+			</div>
+
+			<div class="grid mt20 mb100">
+				<table class="tb_col">
+			    	<caption>단체항공 예약 정보 - 예약번호, 예약일자, 예약자, 휴대폰, 이메일 정보 표입니다.</caption>
+			    	<colgroup>
+			        	<col style="width:240px">				      
+			            <col style="width:240px">
+			            <col style="width:240px">
+			            <col style="width:240px">
+			            <col style="width:auto">
+			        </colgroup>
+			        <thead>
+			            <tr>
+			                <th scope="col">예약 번호</th>
+			                <th scope="col">예약 일자</th>
+			                <th scope="col">예약자</th>
+			                <th scope="col">휴대폰</th>
+			                <th scope="col">이메일</th>           
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr>
+			                <td><span class="red">R4Q0224</span></td>
+			                <td>2018-09-06(토)</td>
+			                <td>GILDONG/HONG</td>
+			                <td>010-****-1234</td>				                
+			                <td>tway****@twayair.com</td>
+			            </tr>
+			        </tbody>
+			    </table>
+			</div>
+			
+			<!-- 기존 여정(구간) 정보 -->
+			<div class="con_tit_wrap">
+				<h3 class="con_tit">구간별 여정 정보</h3>
+			</div>
+
+			<div class="grid">
+				<table class="tb_col">
+			         <caption>기존 여정(구간) 정보 - 예약번호, 탑승일, 노선, 출발 시간, 도착 시간, 총 탑승객, 상태로 구성</caption><colgroup>
+			            <col style="width:130px">				      
+			            <col style="width:auto">
+			            <col style="width:150px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			        </colgroup>
+			        <thead>
+			            <tr>
+			                <th scope="col">구간</th>
+			                <th scope="col">출/도착시간</th>
+			                <th scope="col">출발일</th>
+			                <th scope="col">직항 여부</th>
+			                <th scope="col">비행시간</th>
+			                <th scope="col">편명</th>
+			                <th scope="col">상태</th>             
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr>
+			                <td>구간1</td>		
+			                <td>
+			                	<div class="reservation_route">
+			                		<div class="route start">
+			                			<span class="eng">ICN</span>
+			                			<span>서울/인천</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                		<div class="route end">
+			                			<span class="eng">FUK</span>
+			                			<span>후쿠오카</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                	</div>
+			                </td>
+			                <td>2019-10-21 (토)</td>
+			                <td>직항</td>
+			                <td>1h10m</td>
+			                <td>
+			                	<span class="air_info">TW9898</span>
+			                </td>
+			                <td>정상</td>
+			            </tr>
+			            <tr>
+			                <td>구간2</td>		
+			                <td>
+			                	<div class="reservation_route">
+			                		<div class="route start">
+			                			<span class="eng">ICN</span>
+			                			<span>서울/인천</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                		<div class="route end">
+			                			<span class="eng">FUK</span>
+			                			<span>후쿠오카</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                	</div>
+			                </td>
+			                <td>2019-10-21 (토)</td>
+			                <td>직항</td>
+			                <td>1h10m</td>
+			                <td>
+			                	<span class="air_info">TW9898</span>
+			                </td>
+			                <td>정상</td>
+			            </tr>
+			        </tbody>
+			    </table>
+			</div>
+			<!--// 기존 여정(구간) 정보 -->
+
+			<div class="con_tit_wrap mt70">
+				<h3 class="con_tit">탑승객별 상세정보</h3>
+				 <span class="con_tit_decs type02">성인4, 소아2, 유아1</span>
+			</div>
+
+			<div class="passenger_list_wrap mb100">			
+				<div class="passenger_list">
+				    <ul> 
+				        <li> 
+				            <a href="#none" class="title on">
+				                <span class="ico_passenger ADULT_M">성인남자</span>
+				                <span class="name">홍길동</span>
+				                <span class="sex">성인(남)</span>
+				                <span class="date">1988-01-01</span>
+				                <div class="price_wrap">
+				                	<span class="unit">KRW</span>
+				                	<span class="price">168,000</span>
+				                </div>
+				            </a>
+				            <div class="passenger_cont" style="display: block;">
+				            	<!-- 내역 리스트 -->
+				            	<div class="section_tit">
+									<h5>구간1</h5>
+								</div>
+						    	<div class="summary_list">
+						    		<dl class="fl">
+						    			<dt>항공운임</dt>
+						    			<dd>KRW 1,310,000</dd>
+						    			<dt>유류할증료</dt>
+						    			<dd>KRW 20,000</dd>
+						    			<dt>공항시설사용료</dt>
+						    			<dd>KRW 10,000</dd>
+						    		</dl>
+						    		<dl class="fr">
+						    			<dt>부가서비스 번들(멀티팩)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>사전 좌석(1B)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>기내식(햄치즈샌드위치)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>할인 내역</dt>
+						    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+						    		</dl>
+						    	</div>
+						    	<!--// 내역 리스트 -->
+						    	<!-- 내역 리스트 -->
+				            	<div class="section_tit">
+									<h5>구간2</h5>
+								</div>
+						    	<div class="summary_list">
+						    		<dl class="fl">
+						    			<dt>항공운임</dt>
+						    			<dd>KRW 1,310,000</dd>
+						    			<dt>유류할증료</dt>
+						    			<dd>KRW 20,000</dd>
+						    			<dt>공항시설사용료</dt>
+						    			<dd>KRW 10,000</dd>
+						    		</dl>
+						    		<dl class="fr">
+						    			<dt>부가서비스 번들(멀티팩)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>사전 좌석(1B)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>기내식(햄치즈샌드위치)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>할인 내역</dt>
+						    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+						    		</dl>
+						    	</div>
+						    	<!--// 내역 리스트 -->
+				            </div>
+				        </li>
+				        <li>
+				            <a href="#none" class="title">
+				                <span class="ico_passenger ADULT_W">성인여자</span>
+				                <span class="name">홍길자</span>
+				                <span class="sex">성인(여)</span>
+				                <span class="date">1988-01-01</span>
+				                <div class="price_wrap">
+				                	<span class="unit">KRW</span>
+				                	<span class="price">168,000</span>
+				                </div>
+				            </a>
+				            <div class="passenger_cont" style="">
+				                <!-- 내역 리스트 -->
+						    	<div class="summary_list">
+						    		<dl class="fl">
+						    			<dt>항공운임</dt>
+						    			<dd>KRW 1,310,000</dd>
+						    			<dt>유류할증료</dt>
+						    			<dd>KRW 20,000</dd>
+						    			<dt>공항시설사용료</dt>
+						    			<dd>KRW 10,000</dd>
+						    		</dl>
+						    		<dl class="fr">
+						    			<dt>부가서비스 번들(멀티팩)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>사전 좌석(1B)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>기내식(햄치즈샌드위치)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>할인 내역</dt>
+						    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+						    		</dl>
+						    	</div>
+						    	<!--// 내역 리스트 -->
+				            </div>
+				        </li>
+				        <li> 
+				            <a href="#none" class="title">
+				                <span class="ico_passenger KID_M">소아남자</span>
+				                <span class="name">홍길남</span>
+				                <span class="sex">소아(남)</span>
+				                <span class="date">1988-01-01</span>
+				                <div class="price_wrap">
+				                	<span class="unit">KRW</span>
+				                	<span class="price">168,000</span>
+				                </div>
+				            </a>
+				            <div class="passenger_cont" style="">
+				                <!-- 내역 리스트 -->
+						    	<div class="summary_list">
+						    		<dl class="fl">
+						    			<dt>항공운임</dt>
+						    			<dd>KRW 1,310,000</dd>
+						    			<dt>유류할증료</dt>
+						    			<dd>KRW 20,000</dd>
+						    			<dt>공항시설사용료</dt>
+						    			<dd>KRW 10,000</dd>
+						    		</dl>
+						    		<dl class="fr">
+						    			<dt>부가서비스 번들(멀티팩)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>사전 좌석(1B)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>기내식(햄치즈샌드위치)</dt>
+						    			<dd>KRW 10,000</dd>
+						    			<dt>할인 내역</dt>
+						    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+						    		</dl>
+						    	</div>
+						    	<!--// 내역 리스트 -->
+				            </div>
+				        </li>
+				    </ul>
+				</div>
+			</div>
+			<!--// 탑승객별 상세정보 -->
+
+			<div class="con_tit_wrap mt70">
+				<h3 class="con_tit">기타 서비스 안내</h3>
+			</div>
+
+			<div class="etc_wrap mb70">
+				<p class="txt_guide">티웨이항공의 편리한 서비스를 확인 해보세요.</p>
+				<div class="etc_list">
+					<ul class="clearfix">
+						<li class="etc1">
+							<a href="#none" title="t`shop 이용 안내 바로 가기">
+								<span class="tit">t`shop 이용 안내</span>
+								<em class="txt">기내에서 판매 하는 상품을 확인 해보세요.</em>
+							</a>
+						</li>
+						<li class="etc2">
+							<a href="#none" title="기내 면세품 이용 안내 바로 가기">
+								<span class="tit">기내 면세품 이용 안내</span>
+								<em class="txt">원하는 면세품을 사전에 주문하세요.</em>
+							</a>
+						</li>
+						<li class="etc3">
+							<a href="#none" title="U'story EVENT 바로 가기">
+								<span class="tit">U'story EVENT</span>
+								<em class="txt">특별한 기념일을 티웨이와 함께 나누세요.</em>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="alliance_banner clearfix">
+				<div class="left_ban banner" style="height:270px;">
+					제휴 서비스 노출1
+				</div>
+				<div class="right_ban banner" style="height:270px;">
+					제휴 서비스 노출2
+				</div>
+			</div>
+
+			<!-- 버튼 -->
+			<!-- <div class="btn_wrap">
+				<button class="btn_large red">목록이동</button> 
+			</div> -->
+			<!--// 버튼 -->
+
+		</div>
+			
+			<!--// 컨텐츠 영역 -->
+		</div>
+	</div>
+	<!--// Contnent -->
+
+	<!-- Footer -->
+	<footer id="footer">
+			
+		<!-- Footer Info -->
+		<div class="f_info">
+			<!-- Booking Info -->
+			<div class="booking_center">
+				<span class="booking_tit">티웨이항공 예약센터</span>
+				<span class="booking_time">KST 07:00 ~ KST 21:00</span>
+				<span class="booking_tel">1688 - 8686</span>
+			</div>
+			<!--// Booking Info -->
+			<!-- SNS Info -->
+			<div class="f_link_sns">
+				<a href="#none" class="link_fb">페이스북</a>
+				<a href="#none" class="link_ins">인스트그램</a>
+				<a href="#none" class="link_ut">유튜브</a>
+			</div>
+			<!-- SNS Info -->
+		</div>
+		<!--// Footer Info -->
+
+		<!-- Footer Link -->
+		<div class="f_menu_wrap">
+			<div class="f_menu">
+				<ul>
+					<li>
+						<strong>회사소개</strong>
+						<dl class="dep2">
+							<dd>티웨이항공 소개</dd>
+							<dd>투자정보</dd>
+							<dd>채용안내</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>광고홍보 영상</dd>
+							<dd>사회공헌</dd>
+							<dd>보도자료</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>규정 및 약관</strong>
+						<dl class="dep2">
+							<dd>여객운송약관</dd>
+							<dd>수수료약관</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>홈페이지이용약관</dd>
+							<dd>개인정보처리방침</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>기타</strong>
+						<dl class="dep2">
+							<dd>항공교통이용자 서비스 계획</dd>
+							<dd>피해구제계획</dd>
+						</dl>
+					</li>
+					<li>
+						<strong>여행사/AGENT</strong>
+						<dl class="dep2">
+							<dd>T’Agency</dd>
+							<dd>Taiwan</dd>
+						</dl>
+						<dl class="dep2">
+							<dd>Japan</dd>
+							<dd>Vietnam</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--// Footer Link -->
+
+		<!-- Copyright -->
+		<div class="f_com_info">
+			<!-- Footer Logo -->
+			<div class="f_logo">
+				<a href="#none">
+					<img src="../../images/www/common/f_logo.png" alt="티웨이항공">
+				</a>
+			</div>
+			<!--// Footer Logo -->
+			<!-- Company Info -->
+			<div class="f_com_addr">
+				<p>
+					<span>대표이사. 정홍근</span>
+					<span>사업자등록번호. 101-81-94800</span>
+					<span>주소. 서울시 강서구 하늘길 210 국제화물청사 3층</span>
+				</p>
+				<p>
+					<span>통신판매업신고번호. 2013-서울성동-0169</span>
+					<span>개인정보 관리책임자. 경영본부장 김형이</span>
+				</p>
+				<copyright>COPYRIGHT ⓒ 2018 t'way AIR ALL RIGHTS RESERVED.</copyright>
+			</div>
+			<!--// Company Info -->
+			<!-- Family Site Link -->
+			<div class="quick_flink">
+				<a href="#none">Family site</a>
+				<ul class="list_link">
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+					<li>Family site1</li>
+				</ul>
+			</div>
+			<!--//  Family Site Link -->
+		</div>
+		<!--// Copyright -->
+
+	</footer>
+	<!-- Footer -->
+
+
+	<!-- Datepicker Layer -->
+	<div class="layer datepicker single" id="datepicker_layer_s" style="display:none;">
+		
+		<div class="grid_datepicker_wrap">
+
+			<div class="grid_datepicker">
+				<div class="sel_yymm_wrap">
+					<span class="select datepicker">
+						<select title="년월선택">
+							<option selected>2018.09</option>
+							<option>2018.08</option>
+							<option>2018.07</option>
+							<option>2018.06</option>
+						</select>
+					</span>  
+				</div>                                    
+				<table class="tbl_datepicker">
+					<caption>날짜선택 테이블</caption>
+					<colgroup>
+						<col style="width:px">
+						<col style="width:73px">
+						<col style="width:73px">
+						<col style="width:73px">
+						<col style="width:73px">
+						<col style="width:73px">
+						<col style="width:73px">
+					</colgroup>
+					<thead>
+						<th scope="row">일</th>
+						<th scope="row">월</th>
+						<th scope="row">화</th>
+						<th scope="row">수</th>
+						<th scope="row">목</th>
+						<th scope="row">금</th>
+						<th scope="row">토</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day">1</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#none" class="day">2</a>
+							</td>
+							<td>
+								<a href="#none" class="day">3</a>
+							</td>
+							<td>
+								<a href="#none" class="day">4</a>
+							</td>
+							<td>
+								<a href="#none" class="day">5</a>
+							</td>
+							<td>
+								<a href="#none" class="day">6</a>
+							</td>
+							<td>
+								<a href="#none" class="day">7</a>
+							</td>
+							<td>
+								<a href="#none" class="day">8</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#none" class="day">9</a>
+							</td>
+							<td>
+								<a href="#none" class="day">10</a>
+							</td>
+							<td>
+								<a href="#none" class="day">11</a>
+							</td>
+							<td>
+								<a href="#none" class="day">12</a>
+							</td>
+							<td>
+								<a href="#none" class="day">13</a>
+							</td>
+							<td>
+								<a href="#none" class="day">14</a>
+							</td>
+							<td>
+								<a href="#none" class="day">15</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#none" class="day">16</a>
+							</td>
+							<td>
+								<a href="#none" class="day">17</a>
+							</td>
+							<td>
+								<a href="#none" class="day">18</a>
+							</td>
+							<td>
+								<a href="#none" class="day">19</a>
+							</td>
+							<td>
+								<a href="#none" class="day">20</a>
+							</td>
+							<td>
+								<a href="#none" class="day">21</a>
+							</td>
+							<td>
+								<a href="#none" class="day">22</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#none" class="day">23</a>
+							</td>
+							<td>
+								<a href="#none" class="day">24</a>
+							</td>
+							<td>
+								<a href="#none" class="day">25</a>
+							</td>
+							<td>
+								<a href="#none" class="day">26</a>
+							</td>
+							<td>
+								<a href="#none" class="day">27</a>
+							</td>
+							<td>
+								<a href="#none" class="day">28</a>
+							</td>
+							<td>
+								<a href="#none" class="day">29</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#none" class="day">30</a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+							<td>
+								<a href="#none" class="day"></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- Datepicker Button -->
+		<a href="#none" class="btn_cal_prev">이전달</a>
+		<a href="#none" class="btn_cal_next">다음달</a>
+		<!--// Datepicker Button -->
+	</div>
+	<!--// Datepicker Layer -->
+
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1918 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>T‘agency 항공사 | 예약관리</title>
+<link rel="stylesheet" type="text/css" href="../../css/tagency/style.css">
+<script type="text/javascript" src="../../js/tagency/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript" src="../../js/tagency/swiper.js"></script>
+<script type="text/javascript" src="../../js/tagency/ui.common.js"></script>
+
+<script>
+$(function(){
+
+	/* 스와이퍼 */
+	// 구간선택
+	var swiper = new Swiper('.service_section_wrap .swiper-container', {
+		loop: true,
+		pagination: {
+			el: '.service_section_wrap .swiper-pagination',
+			clickable: true,
+		},
+		navigation: {
+			nextEl: '.service_section_wrap .btn_slide_next',
+			prevEl: '.service_section_wrap .btn_slide_prev',
+		},
+	});
+
+	//날짜선택
+	var swiper = new Swiper('.sel_date_wrap .swiper-container', {
+		loop: true,
+		slidesPerView: 7,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		navigation: {
+			nextEl: '.sel_date_wrap .btn_slide_next',
+			prevEl: '.sel_date_wrap .btn_slide_prev',
+		},
+	});
+
+	// Summary 구간
+	var swiper = new Swiper('.summary_top_cont .swiper-container', {
+		loop: true,
+		direction: 'vertical',
+		navigation: {
+			nextEl: '.section_slide .btn_slide_next',
+			prevEl: '.section_slide .btn_slide_prev',
+		},
+	});
+
+	// Summary Open
+	var win_h = $(window).height() - sum_top_h,
+		sum_h = $('.summary_wrap').height(),
+		sum_top_h = $('.summary_top').height() + $('.btn_summary_open').height();
+	$('.summary_wrap').css({'bottom':0,'height':win_h});
+	$('.btn_summary_open').on('click', function(e) {
+		$('html,body').css({'overflow-y':'hidden'});
+		$('.summary_top').css({'bottom':'','top':'0'});
+		$('.summary_wrap').css({'bottom':'','top':'0','overflow-y':'auto'});
+		$('.btn_summary_open').hide();
+		$('.btn_summary_close').show();
+	});
+
+	// Summary Close
+	$('.btn_summary_close').on('click', function(e) {
+		$('html,body').css({'overflow-y':''});
+		$('.summary_top').css({'bottom':0,'top':'',});
+		$('.summary_wrap').css({'bottom':0,'top':'','overflow-y':'hidden'});
+		$('.btn_summary_close').hide();
+		$('.btn_summary_open').show();
+	});
+	
+	// 구간 리스트 아코디언
+	//$('.section_list li:first-child a.section_list_box').addClass('on');
+	$('.section_list').find('.detail_info').hide();
+	//$('.section_list').find('.detail_info:first').show();
+	$('.section_list li a.section_list_box').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.section_list a.section_list_box').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+	});
+
+	// Summary 탑승객
+	$('.passenger_list li:first-child a.title').addClass('on');
+	$('.passenger_list').find('.passenger_summary:first').show();
+	$('.passenger_list a.title').on('click', function(e) {
+		e.preventDefault();
+		function slideDown(target) {
+			slideUp();
+			$(target).addClass('on').next().slideDown(100);
+		}
+		function slideUp() {
+			$('.passenger_list a.title').removeClass('on').next().slideUp(100);
+		}
+		$(this).hasClass('on') ? slideUp(100) : slideDown(this);
+	});
+
+	// 여정 재검색
+	$('button.refresh').on('click', function() {
+		$('.summary_wrap').css({'z-index': 15});
+		$('.dim02').fadeIn(150);
+		$('.layer_plan_research').fadeIn(250);
+	});
+	$('button.cancel').on('click', function() {
+		$('.summary_wrap').css({'z-index': ''});
+		$('.dim02').fadeOut(150);
+		$('.layer_plan_research').fadeOut(250);
+	});
+
+	//구간 더보기
+	$('.btn_section_more').on('click', function(e) {
+		$('.layer_section_list').slideDown(200);
+	});
+	$('.layer_section_list .btn_close').on('click', function(e) {
+		$('.layer_section_list').slideUp(200);
+	});
+
+	// 예약구간선택
+	$('.sel_section li:first').addClass('on');
+	$('.input_booking_wrap .tab_cont').hide();
+	$('.input_booking_wrap').find('.tab_cont:first').show();
+	$('.sel_section li a').click(function() {
+		$(this).parent().siblings().removeClass('on');
+		$(this).parent().addClass('on');
+		var currentTab = $(this).attr('href');
+		$(this).parents('.input_booking_wrap').find('.tab_cont').hide();
+		$(currentTab).show();
+		return false;
+	});
+	
+	//단체 클릭
+	$('.sel_group').on('click', function() {
+		$(this).toggleClass('on');
+	});
+
+	// Input Focus & Blur 
+	$('input.booking').on('focus', function() {
+		$(this).parent().addClass('focus');
+	});
+	$('input.booking, .sel_passenger').on('blur', function() {
+		$(this).parent().removeClass('focus');
+	});
+	// 인원선택시 Focus & Blur
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('focus', function() {
+		$('.input_wrap.passenger').addClass('focus');
+	});
+	$('.sel_passenger .btn_minus, .sel_passenger .btn_plus, .sel_passenger input').on('blur', function() {
+		$('.input_wrap.passenger').removeClass('focus');
+	});
+	
+	// 선택지 클릭시 이벤트
+	$('.selected_area').on('click', function() {
+		$(this).removeClass('on');
+		$(this).parents('.input_wrap').find('input').focus();
+	});
+
+	//입력값이 있을때 표시
+	$('.input_wrap input.booking').on('keydown keyup change', function(){
+		var Length = $(this).val().length;
+		if(Length > 0){
+			$(this).parents('.input_wrap').addClass('on');
+		}else{
+			$(this).parents('.input_wrap').removeClass('on');
+		}
+	});
+
+	$('#start').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 35});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_start').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 35});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+
+	$('#end').on('click', function(){
+		$('#start1').css({'top': 350, 'left': 445});
+		$('#start1').slideToggle(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('#btn_end').on('click', function(){
+		$('#start2').css({'top': 350, 'left': 445});
+		$('#start2').slideToggle(200);
+		$('#start1').slideUp(200);
+	});
+
+	$('input#date1, input#date2, .btn_date').on('click', function(){
+		$('#datepicker_layer').css({'top': 350});
+		$('#datepicker_layer').slideToggle(200);
+		$('#start1').slideUp(200);
+		$('#start2').slideUp(200);
+	});
+
+	$('.sel_passenger li a').click(function() {
+		$(this).toggleClass('on');
+
+		if ($(this).parent('.sel_passenger li').find('input:checkbox').prop('checked')){
+		   $(this).parent('.sel_passenger li').find('input:checkbox').prop('checked', false);
+		 }else{
+		   $(this).parent('.sel_passenger li').find('input:checkbox').prop('checked', true);
+		 }
+
+	});
+
+});
+</script>
+
+
+</head>
+
+<body class="booking">
+
+<!-- 본문 바로가기 --> 
+<div class="skip_nav" title="스킵메뉴">
+	<a href="#content">본문 바로가기</a>
+</div>
+<!--// 본문 바로가기 -->
+
+<div id="wrap">
+
+	<!-- Header -->
+	<header id="header">
+		<!-- GNB -->
+		<div class="header">
+			<div class="header_inner">
+				<!-- Logo -->
+				<a href="#none">
+					<h1 class="top_logo">티웨이 항공사</h1>
+				</a>
+				<!--// Logo -->
+				<!-- Header Menu -->
+				<div class="util_wrap">
+					<!-- 언어 선택 -->
+					<div class="sel_lang_wrap">
+						<ul>
+							<li>
+								<a href="#none">로그인</a>
+							</li>
+							<li>
+								<a href="#none">회원가입</a>
+							</li>
+							<li>
+								<a href="#none">대한민국</a>
+								<ul class="sel_list">
+									<li>미국</li>
+									<li>중국</li>
+									<li>일본</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none">한국어</a>
+								<ul class="sel_list">
+									<li>English</li>
+									<li>Chinese</li>
+									<li>Japanese</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- 언어 선택 -->
+				</div>
+				<!--// Header Menu -->
+				<!-- GNB -->
+				<div class="gnb">
+					<ul>
+						<li>
+							<a href="#none" class="dep1">항공권예매</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">예약관리</a>
+						</li>
+						<li>
+							<a href="#none" class="dep1">업무요청</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">수입관리</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">공지사항</a>   
+						</li>
+						<li>
+							<a href="#none" class="dep1">마이페이지</a>   
+						</li>
+					</ul>
+				</div>
+				<!--// GNB -->
+			</div>    
+		</div>
+		<!--// GNB -->
+	</header>
+	<!--// Header -->
+
+	<!-- Contnent -->
+	<div id="container">
+		<div id="content" class="content tagency_wrap">
+			<!-- 컨텐츠 영역 -->
+
+			<!-- 타이틀 -->
+			<div class="pg_tit_wrap">
+				<h2 class="pg_tit">탑승객 선택</h2>
+			</div>
+			<!--// 타이틀 -->
+
+			<div class="resevation_info_box">
+				<span class="num">예약번호 : R4Q224</span>
+				<span class="date">예약일자 : 2018-12-06(목)</span>
+				<span class="passenger">탑승객 : 5명 (성인 4, 소아 1, 유아 1)</span>
+			</div>			
+
+			<div class="con_tit_wrap">
+				<h3 class="con_tit">기존 여정(구간)</h3>
+			</div>
+
+			<div class="grid">
+				<table class="tb_col">
+			        <caption>기존 여정(구간) 정보 - 예약번호, 탑승일, 노선, 출발 시간, 도착 시간, 총 탑승객, 상태로 구성</caption>
+			        <colgroup>
+			            <col style="width:130px">				      
+			            <col style="width:auto">
+			            <col style="width:150px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			            <col style="width:130px">
+			        </colgroup>
+			        <thead>
+			            <tr>
+			                <th scope="col">구간</th>
+			                <th scope="col">출/도착시간</th>
+			                <th scope="col">출발일</th>
+			                <th scope="col">직항 여부</th>
+			                <th scope="col">비행시간</th>
+			                <th scope="col">편명</th>
+			                <th scope="col">상태</th>             
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr>
+			                <td>구간1</td>		
+			                <td>
+			                	<div class="reservation_route">
+			                		<div class="route start">
+			                			<span class="eng">ICN</span>
+			                			<span>서울/인천</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                		<div class="route end">
+			                			<span class="eng">FUK</span>
+			                			<span>후쿠오카</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                	</div>
+			                </td>
+			                <td>2019-10-21 (토)</td>
+			                <td>직항</td>
+			                <td>1h10m</td>
+			                <td>
+			                	<span class="air_info">TW9898</span>
+			                </td>
+			                <td>정상</td>
+			            </tr>
+			            <tr>
+			                <td>구간2</td>		
+			                <td>
+			                	<div class="reservation_route">
+			                		<div class="route start">
+			                			<span class="eng">ICN</span>
+			                			<span>서울/인천</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                		<div class="route end">
+			                			<span class="eng">FUK</span>
+			                			<span>후쿠오카</span>
+			                			<span class="time">10:00</span>
+			                		</div>
+			                	</div>
+			                </td>
+			                <td>2019-10-21 (토)</td>
+			                <td>직항</td>
+			                <td>1h10m</td>
+			                <td>
+			                	<span class="air_info">TW9898</span>
+			                </td>
+			                <td>정상</td>
+			            </tr>
+			        </tbody>
+			    </table>
+			</div>
+
+			<div class="con_tit_wrap mt70">
+				<h3 class="con_tit">탑승객 선택</h3>
+			</div>
+
+			<p class="txt_guide type02">변경이 필요하신 탑승객을 선택 하세요.<br>
+			일부 탑승객만 여정을 변경할 경우 기존 예약 번호에서 새로운 예약 번호로 분리되며, 탑승객 분리 시 한번에 최대 9명(유아 동반 고객 포함) 까지만 선택 가능합니다.</p>
+
+			<div class="sel_passenger">
+				<p class="check_all">
+					<input type="checkbox" id="check-1">
+						<label for="check-1" class="mr15">
+						<span class="icon"></span>
+						탑승객 전체 선택
+					</label>
+				</p>
+				<ul>
+					<li>
+						<a href="#none" class="sel_passenger_box">
+							<div class="input_wrap">
+								<input type="checkbox" id="check-21">
+								<label for="check-21">
+									<span class="icon"></span>
+								</label>
+							</div>
+							<div class="passenger_info ADULT_M">
+								<p class="name">홍/길동</p>
+								<p class="sex">성인(남)</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_passenger_box">
+							<div class="input_wrap">
+								<input type="checkbox" id="check-22">
+								<label for="check-22">
+									<span class="icon"></span>
+								</label>
+							</div>
+							<div class="passenger_info ADULT_F">
+								<p class="name">PARK/GILDONG(PARK/MUA)</p>
+								<p class="sex">Adult(Female)</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_passenger_box">
+							<div class="input_wrap">
+								<input type="checkbox" id="check-23">
+								<label for="check-23">
+									<span class="icon"></span>
+								</label>
+							</div>
+							<div class="passenger_info CHILD_M">
+								<p class="name">KIM/GILDONG</p>
+								<p class="sex">Adult(Male)</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#none" class="sel_passenger_box">
+							<div class="input_wrap">
+								<input type="checkbox" id="check-24">
+								<label for="check-24">
+									<span class="icon"></span>
+								</label>
+							</div>
+							<div class="passenger_info CHILD_F">
+								<p class="name">KIM/GILDONG</p>
+								<p class="sex">Adult(Man)</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 버튼 -->
+			<div class="btn_wrap booking">
+				<button class="btn_large wh">이전 단계</button>
+    			<button class="btn_large red">다음 단계</button>
+    			<!-- <a href="#none" class="sbtn_txt skip">부가 서비스 번들 선택 건너뛰기</a> -->
+    		</div>
+			<!--// 버튼 -->
+
+			<div class="notice_wrap mb150">
+				<a href="#none" class="tit on">알아두세요</a>
+				<div class="notice_cont">
+					<ul class="ul_dot">
+						<li>여정 변경은 동일한 구간 내에서 날짜, 시간 등의 변경만을 의미합니다. 여정 변경으로 인해 차액 및 수수료가 부과될 수 있습니다.</li>
+						<li>최초 예매 당일에는 취소/변경 수수료가 면제됩니다. (단, 첫 예매 당일 이후, 운임 변경/여정변경/취소 시에는 수수료가 발생 할 수 있습니다.)</li>
+						<li>추가 문의 사항은 T’way 예약 센터로 연락 주시기 바랍니다. (1688-8686)</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--// Contnent -->
+</div>
+
+<!-- Summary -->
+<div class="summary_wrap">
+	<a href="#none" class="btn_summary_open">Summary 열기</a>
+	<div class="summary_top">
+		<div class="summary_top_cont">
+			<div class="section_slide swiper-container">
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 1</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 2</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+					<li class="swiper-slide">
+						<!-- 구간 -->
+						<div class="section_box">
+							<span class="num">구간 3</span>
+							<div class="section_route start">
+								<span class="eng">ICN</span>
+								<span>서울/인천</span>
+							</div>
+							<div class="section_route end">
+								<span class="eng">BKK</span>
+								<span>방콕/수와나폼</span>
+							</div>
+							<div class="additional">
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+								<span class="ico_add carryon">기내수화물</span>
+								<span class="ico_add bundle">부가서비스 번들</span>
+								<span class="ico_add free_bag">무료위탁수화물</span>
+							</div>
+						</div>
+						<!--// 구간 -->
+					</li>
+				</ul>
+				<div class="btn_slide_wrap">
+					<a href="#none" class="btn_slide_prev">이전</a>
+					<a href="#none" class="btn_slide_next">다음</a>
+				</div>
+			</div>
+
+			<!-- 가격 -->
+			<div class="price_wrap">
+				<span class="total">TOTAL</span>
+				<span class="unit">KRW</span>
+				<span class="price">9,900,000</span>
+			</div>
+			<!-- 가격 -->
+		</div>
+	</div>
+	<!--// Summary Top -->
+
+	<!-- Summary 내용 -->
+	<div class="summary_cont_wrap">
+		<div class="summary_cont">
+			<!-- 닫기 버튼 -->
+			<a href="#none" class="btn_summary_close">Summary 접기</a>
+			<!--// 닫기 버튼 -->
+			<!-- 타이틀 -->
+			<div class="con_tit_wrap">
+			    <h3 class="con_tit">예약정보</h3>
+			    <span class="con_tit_decs">성인4, 소아2, 유아1</span>
+			</div>
+			<!--// 타이틀 -->
+			<!-- 구간 Tab -->
+			<div class="tab_wrap">
+			    <ul class="tab n4">
+			        <li><a href="#tab1">구간 1</a></li>
+			        <li><a href="#tab2">구간 2 (ICN - KIX)</a></li>
+			        <li><a href="#tab3">구간 3 (ICN - KIX)</a></li>
+			        <li><a href="#tab4">구간 4 (ICN - KIX)</a></li>
+			    </ul>
+			    <div class="tab_cont" id="tab1">
+			    	<!-- 입력전 -->
+			    	<!-- 구간정보 -->
+			    	<div class="route_info">
+			    		<div class="route start">
+			    			<span class="eng">ICN</span>
+			    			<span>서울/인천</span>
+			    		</div>
+			    		<div class="route end">
+			    			<span class="eng">KIX</span>
+			    			<span>오사카/간사이</span>
+			    		</div>
+			    	</div>
+			    	<!-- 구간정보 -->
+
+			    	<!-- 내역 리스트 -->
+			    	<div class="summary_list">
+			    		<dl class="fl">
+			    			<dt>날짜/편명</dt>
+			    			<dd>2018-01-07(월) / <span class="no_sel">운임을 선택하세요.</span></dd>
+			    			<dt>출발시간-도착시간/비행시간</dt>
+			    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+			    			<dt>운항 구분/실제 운항사</dt>
+			    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+			    		</dl>
+			    		<dl class="fr">
+			    			<dt>기내 수하물</dt>
+			    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+			    			<dt>무료위탁수하물</dt>
+			    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+			    			<dt>운임 종류</dt>
+			    			<dd><span class="no_sel">운임을 선택하세요.</span></dd>
+			    		</dl>
+			    	</div>
+			    	<!--// 내역 리스트 -->
+
+			    	<!-- 탑승자 리스트 -->
+			    	<div class="passenger_list_wrap">
+			    		<div class="tit">
+			    			<h3>탑승객별 상세정보</h3>
+			    		</div>
+
+			    		<div class="passenger_list">
+						    <ul> 
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_M">승객</span>
+						                성인1 (유아동반)
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <div class="no_data">
+						                	<span>운임을 선택하세요.</span>
+						                </div>
+						            </div>
+						        </li>
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_W">승객</span>
+						                성인1 (유아동반)
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <div class="no_data">
+						                	<span>운임을 선택하세요.</span>
+						                </div>
+						            </div>
+						        </li>
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger KID_M">승객</span>
+						                성인1 (유아동반)
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <div class="no_data">
+						                	<span>운임을 선택하세요.</span>
+						                </div>
+						            </div>
+						        </li>
+						    </ul>
+						</div>
+
+			    	</div>
+			    	<!--// 탑승자 리스트 -->
+
+			    	<!-- 금액 -->
+			    	<div class="sub_price">
+			    		<dl>
+			    			<dt>SUBTOTAL</dt>
+			    			<dd>
+			    				<span class="unit">KRW</span>
+			    				<span class="price">0</span>
+			    			</dd>
+			    		</dl>
+			    	</div>
+			    	<!-- 금액 --> 
+			    	<!--// 입력전 -->
+			    </div>
+			    <div class="tab_cont" id="tab2">
+			    	<!-- 부가서비스 구매자 -->
+			    	<!-- 구간정보 -->
+			    	<div class="route_info">
+			    		<div class="route start">
+			    			<span class="eng">ICN</span>
+			    			<span>서울/인천</span>
+			    		</div>
+			    		<div class="route end">
+			    			<span class="eng">KIX</span>
+			    			<span>오사카/간사이</span>
+			    		</div>
+			    	</div>
+			    	<!-- 구간정보 -->
+
+			    	<!-- 내역 리스트 -->
+			    	<div class="summary_list">
+			    		<dl class="fl">
+			    			<dt>날짜/편명</dt>
+			    			<dd>2018-01-07(월) / TW101</dd>
+			    			<dt>출발시간-도착시간/비행시간</dt>
+			    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+			    			<dt>운항 구분/실제 운항사</dt>
+			    			<dd>경유 / T’way air</dd>
+			    		</dl>
+			    		<dl class="fr">
+			    			<dt>기내 수하물</dt>
+			    			<dd>10KG</dd>
+			    			<dt>무료위탁수하물</dt>
+			    			<dd>15KG</dd>
+			    			<dt>운임 종류</dt>
+			    			<dd>이벤트 운임</dd>
+			    		</dl>
+			    	</div>
+			    	<!--// 내역 리스트 -->
+
+			    	<!-- 탑승자 리스트 -->
+			    	<div class="passenger_list_wrap">
+			    		<div class="tit">
+			    			<h3>탑승객별 상세정보</h3>
+			    		</div>
+			    		<div class="passenger_list">
+						    <ul> 
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_M">성인남자</span>
+						                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						               	<!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li>
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_W">성인여자</span>
+						                홍길자 / 성인(여) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger KID_M">소아남자</span>
+						                홍길남 / 소아(남) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						    </ul>
+						</div>
+
+			    	</div>
+			    	<!--// 탑승자 리스트 -->
+
+			    	<!-- 금액 -->
+			    	<div class="sub_price">
+			    		<dl>
+			    			<dt>SUBTOTAL</dt>
+			    			<dd>
+			    				<span class="unit">KRW</span>
+			    				<span class="price red">9,900,000</span>
+			    			</dd>
+			    		</dl>
+			    	</div>
+			    	<!-- 금액 --> 
+			    	<!--// 부가서비스 구매자 -->
+			    </div>
+			    <div class="tab_cont" id="tab3">
+			    	<!-- 번들서비스 구매자 -->
+			    	<!-- 구간정보 -->
+			    	<div class="route_info">
+			    		<div class="route start">
+			    			<span class="eng">ICN</span>
+			    			<span>서울/인천</span>
+			    		</div>
+			    		<div class="route end">
+			    			<span class="eng">KIX</span>
+			    			<span>오사카/간사이</span>
+			    		</div>
+			    	</div>
+			    	<!-- 구간정보 -->
+
+			    	<!-- 내역 리스트 -->
+			    	<div class="summary_list">
+			    		<dl class="fl">
+			    			<dt>날짜/편명</dt>
+			    			<dd>2018-01-07(월) / TW101</dd>
+			    			<dt>출발시간-도착시간/비행시간</dt>
+			    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+			    			<dt>운항 구분/실제 운항사</dt>
+			    			<dd>경유 / T’way air</dd>
+			    		</dl>
+			    		<dl class="fr">
+			    			<dt>기내 수하물</dt>
+			    			<dd>10KG</dd>
+			    			<dt>무료위탁수하물</dt>
+			    			<dd>15KG</dd>
+			    			<dt>운임 종류</dt>
+			    			<dd>이벤트 운임</dd>
+			    		</dl>
+			    	</div>
+			    	<!--// 내역 리스트 -->
+
+			    	<!-- 탑승자 리스트 -->
+			    	<div class="passenger_list_wrap">
+			    		<div class="tit">
+			    			<h3>탑승객별 상세정보</h3>
+			    		</div>
+			    		<div class="passenger_list">
+						    <ul> 
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_M">성인남자</span>
+						                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						               	<!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+								    			<dt class="bundle_list">사전 좌석(1B)</dt>
+								    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li>
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_ W">성인여자</span>
+						                홍길자 / 성인(여) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+								    			<dt class="bundle_list">사전 좌석(1B)</dt>
+								    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger KID_M">소아남자</span>
+						                홍길남 / 소아(남) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt class="bundle_list">위탁수하물(15kg)</dt>
+								    			<dt class="bundle_list">사전 좌석(1B)</dt>
+								    			<dt class="bundle_list">기내식(햄치즈샌드위치)</dt>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						    </ul>
+						</div>
+
+			    	</div>
+			    	<!--// 탑승자 리스트 -->
+
+			    	<!-- 금액 -->
+			    	<div class="sub_price">
+			    		<dl>
+			    			<dt>SUBTOTAL</dt>
+			    			<dd>
+			    				<span class="unit">KRW</span>
+			    				<span class="price red">9,900,000</span>
+			    			</dd>
+			    		</dl>
+			    	</div>
+			    	<!-- 금액 --> 
+			    	<!--// 번들서비스 구매자 -->
+			    </div>
+			    <div class="tab_cont" id="tab4">
+			    	<!-- 이원구간 -->
+			    	<div class="section_tit">
+						<h5>구간1</h5>
+					</div>
+			    	<!-- 구간정보 -->
+			    	<div class="route_info_wrap">
+				    	<div class="route_info type2 fl">
+				    		<div class="route start">
+				    			<span class="eng">ICN</span>
+				    			<span>서울/인천</span>
+				    		</div>
+				    		<div class="route end">
+				    			<span class="eng">KIX</span>
+				    			<span>오사카/간사이</span>
+				    		</div>
+				    	</div>
+				    	<div class="route_info type2 fr">
+				    		<div class="route start">
+				    			<span class="eng">ICN</span>
+				    			<span>서울/인천</span>
+				    		</div>
+				    		<div class="route end">
+				    			<span class="eng">KIX</span>
+				    			<span>오사카/간사이</span>
+				    		</div>
+				    	</div>
+				    </div>
+			    	<!-- 구간정보 -->
+
+			    	<!-- 내역 리스트 -->
+			    	<div class="summary_list">
+			    		<dl class="fl">
+			    			<dt>날짜/편명</dt>
+			    			<dd>2018-01-07(월) / TW101</dd>
+			    			<dt>출발시간-도착시간/비행시간</dt>
+			    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+			    			<dt>운항 구분/실제 운항사</dt>
+			    			<dd>경유 / T’way air</dd>
+			    			<dt>기내 수하물</dt>
+			    			<dd>10KG</dd>
+			    			<dt>무료위탁수하물</dt>
+			    			<dd>15KG</dd>
+			    			<dt>운임 종류</dt>
+			    			<dd>이벤트 운임</dd>
+			    		</dl>
+			    		<dl class="fr">
+			    			<dt>날짜/편명</dt>
+			    			<dd>2018-01-07(월) / TW101</dd>
+			    			<dt>출발시간-도착시간/비행시간</dt>
+			    			<dd>09:00 - 11:15 / 2h 15m</span></dd>
+			    			<dt>운항 구분/실제 운항사</dt>
+			    			<dd>경유 / T’way air</dd>
+			    			<dt>기내 수하물</dt>
+			    			<dd>10KG</dd>
+			    			<dt>무료위탁수하물</dt>
+			    			<dd>15KG</dd>
+			    			<dt>운임 종류</dt>
+			    			<dd>이벤트 운임</dd>
+			    		</dl>
+			    	</div>
+			    	<!--// 내역 리스트 -->
+
+			    	<!-- 탑승자 리스트 -->
+			    	<div class="passenger_list_wrap">
+			    		<div class="tit">
+			    			<h3>탑승객별 상세정보</h3>
+			    		</div>
+			    		<div class="passenger_list">
+						    <ul> 
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_M">성인남자</span>
+						                홍길동 (유아 홍길순) / 성인(남) / 1988-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						               	<!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li>
+						            <a href="#none" class="title">
+						                <span class="ico_passenger ADULT_W">성인여자</span>
+						                홍길자 / 성인(여) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						        <li> 
+						            <a href="#none" class="title">
+						                <span class="ico_passenger KID_M">소아남자</span>
+						                홍길남 / 소아(남) / 2010-01-01
+						                <div class="price_wrap">
+						                	<span class="unit">KRW</span>
+						                	<span class="price">168,000</span>
+						                </div>
+						            </a>
+						            <div class="passenger_summary">
+						                <!-- 내역 리스트 -->
+								    	<div class="summary_list">
+								    		<dl class="fl">
+								    			<dt>항공운임</dt>
+								    			<dd>KRW 1,310,000</dd>
+								    			<dt>유류할증료</dt>
+								    			<dd>KRW 20,000</dd>
+								    			<dt>공항시설사용료</dt>
+								    			<dd>KRW 10,000</dd>
+								    		</dl>
+								    		<dl class="fr">
+								    			<dt>부가서비스 번들(멀티팩)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>사전 좌석(1B)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>기내식(햄치즈샌드위치)</dt>
+								    			<dd>KRW 10,000</dd>
+								    			<dt>할인 내역</dt>
+								    			<dd>1~3급 장애인의 동반 보호자1명</dd>
+								    		</dl>
+								    	</div>
+								    	<!--// 내역 리스트 -->
+						            </div>
+						        </li>
+						    </ul>
+						</div>
+
+			    	</div>
+			    	<!--// 탑승자 리스트 -->
+
+			    	<!-- 금액 -->
+			    	<div class="sub_price">
+			    		<dl>
+			    			<dt>SUBTOTAL</dt>
+			    			<dd>
+			    				<span class="unit">KRW</span>
+			    				<span class="price red">9,900,000</span>
+			    			</dd>
+			    		</dl>
+			    	</div>
+			    	<!-- 금액 --> 
+			    	<!--// 이원구간 -->
+
+			    </div>
+			</div>
+			<!-- 구간 Tab -->
+
+
+
+
+		</div>
+	</div>
+	<!--// Summary 내용 -->
+
+</div>
+<!--// Summary  -->
+
+<div class="dim"></div>
+<div class="dim02"></div>
+
+<!-- 여정 재검색 레이어 -->
+<div class="layer_plan_research">
+	<div class="plan_research">
+		<!-- 여정 재검색 -->
+			
+			<!-- Title -->
+			<div class="tit_booking_wrap">
+				<h2 class="pg_tit">여정재검색</h2>
+			</div>
+			<!-- Title -->
+
+			<!-- Input Booking -->
+			<div class="input_booking_wrap">
+				<!-- 예약 탭 -->
+				<div class="booking_option">
+					<ul class="sel_section">
+						<li>
+							<a href="#booking01">
+								<input type="radio" id="b01" name="radio1">
+								<label for="booking01">왕복</label>
+							</a>
+						</li>
+						<li>
+							<a href="#booking02">
+								<input type="radio" id="b02" name="radio1">
+								<label for="booking02">편도</label>
+							</a>
+						</li>
+						<li>
+							<a href="#booking03">
+								<input type="radio" id="b03" name="radio1">
+								<label for="booking03">다구간</label>
+							</a>
+						</li>
+					</ul>
+					<div class="sel_group">
+						<input type="checkbox" id="group">
+						<label for="group"><span class="icon"></span>단체(10명이상)</label>
+					</div>
+				</div>
+				<!--// 예약 탭 -->
+
+				<!-- 왕복 -->
+				<div class="tab_cont" id="booking01">
+					<div class="booking_input">
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" id="btn_start" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" id="btn_end" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 왕복 -->
+
+				<!-- 편도 -->
+				<div class="tab_cont" id="booking02">
+					<div class="booking_input">
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 편도 -->
+
+				<!-- 다구간 -->
+				<div class="tab_cont" id="booking03">
+					
+					<!-- 구간1 -->
+					<div class="booking_input section">
+						<div class="section_tit">
+							<h5>구간1</h5>
+						</div>
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span> 
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--// 구간1 -->
+
+					<!-- 구간2 -->
+					<div class="booking_input section">
+						<div class="section_tit">
+							<h5>구간2</h5>
+						</div>
+						<ul class="booking_form">
+							<li>
+								<div class="sel_route">
+									<div class="input_wrap start">
+										<label for="start">출발지</label>
+										<input type="text" id="start" value="" placeholder="도시/공항" class="booking start">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+										<!-- 선택 레이어 -->
+										<div class="selected_area on">
+											<span class="eng">ICN</span>
+											<span class="area">서울/인천</span>
+										</div>
+										<!--// 선택 레이어 -->
+									</div>
+									<a href="#none" class="btn_change">출발지/도착지 바꾸기</a>
+									<div class="input_wrap end">
+										<label for="end">도착지</label>
+										<input type="text" id="end" value="" placeholder="도시/공항" class="booking end">
+										<a href="#none" class="btn_pin">현재위치선택</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="input_wrap date">
+									<label for="date">탑승일</label>
+									<input type="text" id="date1" value="" placeholder="2018-11-23" class="booking date">
+									<span class="space">~</span>
+									<input type="text" id="date2" value="" placeholder="2018-11-25" class="booking date">
+									<a href="#none" class="btn_date">날짜선택</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--// 구간2 -->
+
+					<!-- 구간 추가/삭제 -->
+					<div class="btn_section">
+						<button class="sbtn_cont section_minus">구간삭제</button>
+						<button class="sbtn_cont section_plus">구간추가</button>
+					</div>
+					<!--// 구간 추가/삭제 -->
+
+				</div>
+				<!-- 다구간 -->
+				<!--// Tab 컨텐츠 -->
+			
+				<!-- 인원수 입력 -->
+				<div class="booking_input section_passenger">
+					<ul class="booking_form">
+						<li>
+							<div class="input_wrap passenger">
+								<!-- 성인 -->
+								<dl>
+									<dt>
+										<label for="adult">성인</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="adult" value="0" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 성인 -->
+								<!-- 소아 -->
+								<dl>
+									<dt>
+										<label for="kid">
+											소아
+											<a href="#none" class="btn_tooltip gray">
+												<span class="blind">툴팁</span>
+												<div class="tooltip_layer">
+													<div class="tooltip_tit">
+														<img src="../../images/www/ico/ico_kid.png" alt="소아">
+														<h5>소아기준</h5>
+													</div>
+													<div class="tooltip_cont">
+														<dl>
+															<dt>국내선</dt>
+															<dd>만 2세~<span class="red">13세</span> 미만</dd>
+														</dl>
+														<dl>
+															<dt>국제선</dt>
+															<dd>만 2세~<span class="red">12세</span> 미만</dd>
+														</dl>
+														<ul class="info">
+															<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+															<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="kid" value="0" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 소아 -->
+								<!-- 유아 -->
+								<dl>
+									<dt>
+										<label for="baby">
+											유아
+											<a href="#none" class="btn_tooltip gray">
+												<span class="blind">툴팁</span>
+												<div class="tooltip_layer">
+													<div class="tooltip_tit">
+														<img src="../../images/www/ico/ico_baby.png" alt="소아">
+														<h5>유아기준</h5>
+													</div>
+													<div class="tooltip_cont">
+														<dl>
+															<dt>국내선</dt>
+															<dd>생후 <span class="red">7일</span>~ 만 2세(만 24개월) 미만</dd>
+														</dl>
+														<dl>
+															<dt>국제선</dt>
+															<dd생후 <span class="red">14일</span>~ 만 2세(만 24개월) 미만</dd>
+														</dl>
+														<ul class="info">
+															<li>※ 탑승일 기준(왕복:최초 탑승일 기준)</li>
+															<li>※ 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</label>
+									</dt>
+									<dd class="sel_passenger">
+										<a href="#none" class="btn_minus">빼기</a>
+										<input type="text" id="baby" value="0" class="booking passenger">
+										<a href="#none" class="btn_plus">더하기</a>
+									</dd>
+								</dl>
+								<!--// 유아 -->
+							</div>
+							<button class="sbtn_cont" date-type="layer" date-id="age_cal" title="레이어 팝업 열림">나이 계산기</button>
+						</li>
+						<li>
+							<div class="input_wrap salecode">
+								<label for="date">
+									할인코드
+									<a href="#none" class="btn_tooltip gray">
+										<span class="blind">툴팁</span>
+										<div class="tooltip_layer">
+											<div class="tooltip_tit no_bd">
+												<h5>할인코드 란?</h5>
+											</div>
+											<div class="tooltip_cont">
+												티웨이항공 탑승 고객을 대상으로 특정 기간 동안<br>
+												추가 할인을 제공해 드리는 제도입니다.<br>
+												예약 시 사전에 안내된 코드를 입력하시면,<br>
+												할인 가격이 적용된 항공편을 선택하실 수 있습니다.
+											</div>
+										</div>
+									</a>
+								</label>
+								<input type="text" id="salecode" value="" placeholder="할인코드를 입력하세요." class="booking salecode">
+							</div>
+							<a href="#none" class="txt_tooltip">
+								<span>할인코드규정</span>
+								<div class="tooltip_layer txt">
+									<div class="tooltip_tit no_bd">
+										<h5>할인코드 규정 안내</h5>
+									</div>
+									<div class="tooltip_cont">
+										오사카 1명당 왕복 2만원 할인 프로모션 코드입니다.
+										<ul class="ul_dot">
+											<li>발권 기간 : 2018. 10. 11 ~ 2018. 10. 31</li>
+											<li>출발 기간 : 2018. 10. 11 ~ 2018. 12. 20(출발일 기준)</li>
+											<li>할인 금액 : 20,000원 (공시운임 기준 할인 적용)</li>
+										</ul>
+										<p class="info">예약 변경/분리/부분 취소 불가능하며, 전체 취소 후 재 구매는<br>가능합니다.</p>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!--// 인원수 입력 -->
+			</div>
+			<!--// Input Booking -->
+			
+			<!-- Button -->
+			<div class="btn_wrap mb40">
+				<button class="btn_large cancel wh">취소</button>
+				<button class="btn_large red">조회</button>
+			</div>
+			<!--// Button -->
+
+		<!-- 여정 재검색 -->
+	</div>
+</div>
+<!-- 여정 재검색 레이어 -->
+
+<!-- 부가서비스 요금 Layer -->
+<div id="bundle_price" class="layer type02 bundle_price">
+	<div class="layer_header">
+		<h2>부가서비스 요금</h2>
+	</div>
+	<div class="layer_content scroll">
+		
+		<div class="bundle_msg">
+			<p>부가서비스를 별도 구매 시 보다<p>
+			<p><strong>멀티팩 KRW 95,000</strong> 구매 시 <strong class="unit">KRW</strong> <strong class="price">30,000</strong>절약하실 수 있습니다.
+		</div>
+
+		<div class="con_stit_wrap mt40 mb20">
+         	<h3 class="con_stit">부가서비스 별도 구매 요금</h3>
+         </div>
+
+		<div class="add_price_list">
+			<ul>
+				<li>
+					<dl>
+						<dt>
+							<div class="item n01">
+								<p class="name">위탁수하물</p>
+								<p class="desc">15kg</p>
+							</div>
+						</dt>
+						<dd>
+							<span class="unit">KRW</span>
+							<strong class="price">55,000</strong>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<div class="item n02">
+								<p class="name">사전좌석지정</p>
+								<p class="desc">프리미엄좌석</p>
+							</div>
+						</dt>
+						<dd>
+							<span class="unit">KRW</span>
+							<strong class="price">55,000</strong>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<div class="item n03">
+								<p class="name">기내식</p>
+								<p class="desc">제공</p>
+							</div>
+						</dt>
+						<dd>
+							<span class="unit">KRW</span>
+							<strong class="price">55,000</strong>
+						</dd>
+					</dl>
+				</li>
+				<li class="total_price">
+					<dl>
+						<dt>합계</dt>
+						<dd>
+							<span class="unit">KRW</span>
+							<strong class="price">55,000</strong>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="btn_wrap">
+		<button class="btn_large red">확인</button>
+	</div>
+
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--// 부가서비스 요금 Layer -->
+
+<!-- 부가서비스 번들 규정 Layer -->
+<div id="bundle_rule" class="layer type03 bundle_rule">
+	<div class="layer_header">
+		<h2>부가서비스 번들 규정</h2>
+	</div>
+	<div class="layer_content scroll">
+		<div class="layer_tab_wrap">
+			<ul class="layer_tab">
+				<li><a href="#layer_tab1">변경 규정</a></li>
+				<li><a href="#layer_tab2">환불 규정</a></li>
+			</ul>
+
+			<div class="layer_tab_cont" id="layer_tab1">
+				<div class="tbl_wrap">
+					<div class="left">
+						<h3>국내선</h3>
+						<div class="grid">
+							<table class="tb_col">
+								<caption>테이블명 - 테이블 컬럼 내용</caption>
+								<colgroup>
+									<col style="width:50%">
+									<col style="width:50%">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>구분</th>
+										<th>금액</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>출발 2일 전 까지</td>
+										<td>가능</td>
+									</tr>
+									<tr>
+										<td>출발 1일 전 ~ 출발 당일</td>
+										<td>불가</td>
+									</tr>									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="right">
+						<h3>국제선</h3>
+						<div class="grid">
+							<table class="tb_col">
+								<caption>테이블명 - 테이블 컬럼 내용</caption>
+								<colgroup>
+									<col style="width:50%">
+									<col style="width:50%">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>구분</th>
+										<th>금액</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>출발 4일 전 까지</td>
+										<td>가능</td>
+									</tr>
+									<tr>
+										<td>출발 3일 전 ~ 출발 당일</td>
+										<td>불가</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<ul class="ul_dot mt20">
+					<li>항공권 변경 또는 취소 시 구매하신 번들 서비스는 자동 환불 처리됩니다.</li>
+					<li>단, 국내선 출발 1일 전, 국제선 출발 3일 전 항공편을 취소하는 경우 번들 서비스 금액은 환불되지 않습니다.</li>
+					<li>당사 사정에 의한 비정상 운항(지연/결항)으로 항공권 취소 또는 여정 변경하여, 번들 서비스를 제공받지 못한 경우 출발일자와 상관없이 환불이 가능합니다.</li>
+				</ul>
+
+				<div class="con_stit_wrap mt40 mb20">
+		        	<h3 class="con_stit">부가서비스번들 사전 구매 제외 대상</h3>
+		        </div>
+		        <ul class="ul_dot">
+					<li>공동 운항 편</li>
+					<li>
+						출발이 임박한 항공편<br>
+ 						- 국내선: 출발 1일 이내<br>
+ 						- 국제선: 출발 3일 이내
+ 					</li>
+ 					<li>국제선 이벤트 운임이 포함된 여정</li>
+				</ul>
+
+				<div class="notice_box">
+					<strong>알아두세요</strong>
+					<ul class="ul_dot">
+						<li>전용 카운터 및 수하물 우선 처리의 경우 추가 제공 사항으로 출발 당일 현장 상황에 따라 미 제공 될 수 있습니다.</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div class="layer_tab_cont" id="layer_tab2">
+				
+				<div class="tbl_wrap">
+					<div class="left">
+						<h3>국내선</h3>
+						<div class="grid">
+							<table class="tb_col">
+								<caption>테이블명 - 테이블 컬럼 내용</caption>
+								<colgroup>
+									<col style="width:50%">
+									<col style="width:50%">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>구분</th>
+										<th>금액</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>출발 2일 전 까지</td>
+										<td>가능</td>
+									</tr>
+									<tr>
+										<td>출발 1일 전 ~ 출발 당일</td>
+										<td>불가</td>
+									</tr>									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="right">
+						<h3>국제선</h3>
+						<div class="grid">
+							<table class="tb_col">
+								<caption>테이블명 - 테이블 컬럼 내용</caption>
+								<colgroup>
+									<col style="width:50%">
+									<col style="width:50%">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>구분</th>
+										<th>금액</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>출발 4일 전 까지</td>
+										<td>가능</td>
+									</tr>
+									<tr>
+										<td>출발 3일 전 ~ 출발 당일</td>
+										<td>불가</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<ul class="ul_dot mt20">
+					<li>항공권 변경 또는 취소 시 구매하신 번들 서비스는 자동 환불 처리됩니다.</li>
+					<li>단, 국내선 출발 1일 전, 국제선 출발 3일 전 항공편을 취소하는 경우 번들 서비스 금액은 환불되지 않습니다.</li>
+					<li>당사 사정에 의한 비정상 운항(지연/결항)으로 항공권 취소 또는 여정 변경하여, 번들 서비스를 제공받지 못한 경우 출발일자와 상관없이 환불이 가능합니다.</li>
+				</ul>
+
+				<div class="con_stit_wrap mt40 mb20">
+		        	<h3 class="con_stit">부가서비스번들 사전 구매 제외 대상</h3>
+		        </div>
+		        <ul class="ul_dot">
+					<li>공동 운항 편</li>
+					<li>
+						출발이 임박한 항공편<br>
+ 						- 국내선: 출발 1일 이내<br>
+ 						- 국제선: 출발 3일 이내
+ 					</li>
+ 					<li>국제선 이벤트 운임이 포함된 여정</li>
+				</ul>
+
+				<div class="notice_box">
+					<strong>알아두세요</strong>
+					<ul class="ul_dot">
+						<li>전용 카운터 및 수하물 우선 처리의 경우 추가 제공 사항으로 출발 당일 현장 상황에 따라 미 제공 될 수 있습니다.</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="layer_footer">
+		<button class="btn_large red">확인</button>
+	</div>
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--// 부가서비스 번들 규정 Layer -->
+
+<!-- 부가서비스 번들 영상 Layer -->
+<div id="bundle_movie" class="layer type02 bundle_movie">
+	<div class="layer_header">
+		<h2>부가서비스 번들 영상</h2>
+	</div>
+	<div class="layer_content">
+		
+		<div class="bundle_movie_box">
+
+			<!-- 동영상 링크 영역 -->
+
+		</div>
+
+	</div>
+	<div class="btn_wrap">
+		<button class="btn_large red">확인</button>
+	</div>
+
+	<a href="#none" class="btn_layer_close">레이어 닫기</a>
+</div>
+<!--// 부가서비스 번들 영상 Layer -->
+
+</body>
+</html>
