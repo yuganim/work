@@ -1251,6 +1251,8 @@ input[type="range"]:focus + .rangeslider .rangeslider__handle {-moz-box-shadow:0
 .btn_wrap.booking .sbtn_txt.skip{position:absolute;top:20px;right:15px;}
 .btn_wrap.booking .sbtn_txt.prev{position:absolute;top:20px;left:15px;}
 
+.txt_notice {margin-top:30px;text-align:center;}
+.txt_notice:before {display:inline-block;content:'';width:30px;height:30px;vertical-align:middle;margin-right:10px;background:url('//contents-image.twayair.com/homepage/images/booking/ico_noti.png') no-repeat 0 0;}
 /* 부가서비스 요금 Layer */
 .layer.type02.bundle_price .bundle_msg{font-size:20px;color:#4d4d4d;text-align:center}
 .layer.type02.bundle_price .bundle_msg strong{color:#d22c26;}
