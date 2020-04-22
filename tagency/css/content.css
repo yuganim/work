@@ -2773,7 +2773,7 @@ td .ul_dot {padding-left:15px; padding-right:15px;}
 .tb_col.fare th, .tb_col.fare td{padding:20px 0;}
 .tb_col.fare th{line-height:28px;}
 .tb_col.fare tbody th{background-color:#fff; border-right:1px solid #e0e0e0;}
-.tb_col.fare tbody tr:nth-of-type(4n+1) td{font-weight:bold; background-color:#efede7;}
+.tb_col.fare tbody tr:nth-of-type(4n+4) td{font-weight:bold; background-color:#efede7;}
 .tb_col.fare .service_section_box .service_name{width:130px; margin-bottom:20px;}
 .tb_col.fare .service_section_box .service_name .tit{font-size:24px; line-height:30px;}
 .tb_col.fare .service_section_box .service_name .addition{color:#4d4d4d;}
